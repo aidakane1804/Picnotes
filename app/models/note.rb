@@ -3,6 +3,7 @@ class Note < ApplicationRecord
   has_many :references, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
+  has_many :favorites, as: :favorited
 
   belongs_to :user
 

@@ -26,6 +26,7 @@
   </p>
 
   <p>
+    Favorites: <%= @note.favorites.count %>
     <% if user_signed_in? && can?(:favorite, @note)%>
       <% unless current_user.favorited_notes.exists?(id: @note.id) %>
         <%= link_to 'Add to Favorite', favorite_notes_path(note_id: @note), method: :post %>
