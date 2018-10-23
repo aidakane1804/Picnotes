@@ -1,0 +1,10 @@
+<div class = "notes-container">
+  <% @notes.each do |note| %>
+    <div class = 'note-container'>
+      <%= image_tag note.image.url(:thumb) if note.image.present? %>
+      <div class = 'note-container-text'>
+        <h4><%= link_to truncate(note.title, length: 18), note_path(note) %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>

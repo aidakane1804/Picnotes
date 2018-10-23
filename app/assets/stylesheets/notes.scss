@@ -1,0 +1,51 @@
+// Place all the styles related to the notes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hello {
+  text-align: center;
+}
+
+.notes-container {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  flex-wrap: wrap;
+}
+
+.note-container{
+  flex-basis: 200px;
+  text-align: center;
+  border: thin solid #666666;
+}
+
+.note-container-text{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.creation_form{
+  text-align: center;
+}
+
+
+.note-page-container{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.note-page-title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-page-content{
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-page-content-text{
+  margin-left: 20px;
+}

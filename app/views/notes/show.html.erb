@@ -1,0 +1,43 @@
+<div class = "note-page-container">
+
+  <div class = "note-page-title">
+    <h1> <%= @note.title %> </h1>
+    <p> Created by: <%= @note.user.username %> </p>
+  </div>
+
+  <div class = "note-page-content">
+    <p> <%= image_tag @note.image.url(:large) if @note.image.present? %></p>
+    <p class = "note-page-content-text"> <%= @note.body %> </p>
+  </div>
+
+  <p>
+    Likes: <%= @note.likes.count %> Dislikes: <%= @note.dislikes.count %>
+
+    <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
+      <% if @like.present? %>
+        <%= link_to 'Cancel', like_path(@like), method: :delete %>
+      <% elsif @dislike.present? %>
+        <%= link_to 'Cancel', dislike_path(@dislike), method: :delete %>
+      <% else %>
+        <%= link_to 'Like', note_likes_path(@note), method: :post %>
+        <%= link_to 'Dislike', note_dislikes_path(@note), method: :post %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
+    <% if user_signed_in? && can?(:favorite, @note)%>
+      <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+        <%= link_to 'Add to Favorite', favorite_notes_path(note_id: @note), method: :post %>
+      <% else %>
+        <%= link_to 'Remove from Favorite', favorite_note_path(@note), method: :delete %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <% if user_signed_in? && can?(:crud, @note) %>
+    <%= link_to 'Edit', edit_note_path(@note) %>
+    <%= link_to('Delete', note_path(@note), data: {confirm: 'Are you sure?'}, method: :delete) %>
+  <% end %>
+
+</div>

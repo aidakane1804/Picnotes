@@ -1,0 +1,8 @@
+<div class = "creation_form">
+<%= simple_form_for @note do |form| %>
+  <%= form.input :title, label: 'Title ' %>
+  <%= form.input :body, label: "Description " %>
+  <%= form.file_field :image %>
+  <%= form.submit %>
+<% end %>
+</div>
