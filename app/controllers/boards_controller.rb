@@ -22,7 +22,7 @@ class BoardsController < ApplicationController
     @board.user = @user
 
     if @board.save
-      redirect_to root_path
+      redirect_to user_boards_path
     else
       render :new
     end

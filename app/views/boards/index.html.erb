@@ -1,10 +1,19 @@
 <div class = "notes-container">
   <div class = 'note-container'>
-    <p> <%= link_to 'Create New Board', new_user_board_path %> </p>
+    <p class = 'note-container-text'> <%= link_to 'Create New Board', new_user_board_path %> </p>
   </div>
   <% @boards.each do |board| %>
     <div class = 'note-container'>
-      <p> <%= link_to ("#{board.name}"), user_board_path(@user, board) %> </p>
+      <div class = 'image-container'>
+        <% board.notes.each_with_index do |note ,i| %>
+          <% if i < 4 %>
+            <div class = 'image-container-individual'>
+              <p> <%= image_tag note.image.url(:board_thumb) if note.image.present? %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <p class = 'note-container-text'> <%= link_to ("#{board.name}"), user_board_path(@user, board) %> </p>
     </div>
   <% end %>
 </div>
