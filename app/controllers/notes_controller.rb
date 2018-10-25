@@ -12,6 +12,8 @@ class NotesController < ApplicationController
     @like = @note.likes.find_by_user_id current_user
     @dislike = @note.dislikes.find_by_user_id current_user
     @user = current_user
+    @boards = Board.where(user: current_user)
+    @board = Board.find_by_id(params[:board_id])
   end
 
   def new
@@ -24,7 +26,7 @@ class NotesController < ApplicationController
     @note.user = current_user
     if @note.save
       flash[:notice] = "Note Saved"
-      redirect_to note_path(@note)
+      redirect_to notes_path
     else
       flash[:notice] = "Error"
       render :new

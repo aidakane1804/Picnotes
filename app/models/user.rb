@@ -10,5 +10,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_notes, through: :favorites, source: :favorited, source_type: 'Note'
 
+  has_many :boards, dependent: :destroy
+
 
 end

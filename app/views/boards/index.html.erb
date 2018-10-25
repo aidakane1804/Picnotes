@@ -1,0 +1,10 @@
+<div class = "notes-container">
+  <div class = 'note-container'>
+    <p> <%= link_to 'Create New Board', new_user_board_path %> </p>
+  </div>
+  <% @boards.each do |board| %>
+    <div class = 'note-container'>
+      <p> <%= link_to ("#{board.name}"), user_board_path(@user, board) %> </p>
+    </div>
+  <% end %>
+</div>

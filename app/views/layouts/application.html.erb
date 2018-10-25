@@ -53,7 +53,7 @@
       <div class = "profile-menu">
         <p> <%= link_to 'My Feed', root_path%> </p>
         <p> <%= link_to 'My Notes', session_path %> <span> (<%= @user.notes.count %>) </span> </p>
-        <p> My Boards </p>
+        <p> <%= link_to 'My Boards', user_boards_path(current_user) %> <span> (<%= @user.boards.count %>) </span> </p>
         <p> <%= link_to 'My Faves', favorites_path %> <span> (<%= @user.favorited_notes.count %>) </span> </p>
       </div>
     <% end %>

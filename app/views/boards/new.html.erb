@@ -1,0 +1,9 @@
+<h1 class = "hello"> Create New Board </h1>
+
+<div class = "creation_form">
+<%= form_for ([@user, @board]) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>
+</div>

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181022232332) do
+ActiveRecord::Schema.define(version: 20181023212550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boards", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
 
   create_table "dislikes", force: :cascade do |t|
     t.bigint "note_id"
@@ -50,6 +58,8 @@ ActiveRecord::Schema.define(version: 20181022232332) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.bigint "user_id"
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_notes_on_board_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -83,11 +93,13 @@ ActiveRecord::Schema.define(version: 20181022232332) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "boards", "users"
   add_foreign_key "dislikes", "notes"
   add_foreign_key "dislikes", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "likes", "notes"
   add_foreign_key "likes", "users"
+  add_foreign_key "notes", "boards"
   add_foreign_key "notes", "users"
   add_foreign_key "references", "notes"
   add_foreign_key "tags", "notes"
