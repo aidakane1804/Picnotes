@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_action :authorize_user!, except: [:index, :show, :new, :create]
 
   def index
-    @notes = Note.all
+    @notes = Note.order(created_at: :desc)
     @user = current_user
   end
 

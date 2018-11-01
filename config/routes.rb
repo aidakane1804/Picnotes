@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:create, :destroy]
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :dislikes, shallow: true, only: [:create, :destroy]
+    resources :references, shallow: true, only: [:create, :destroy]
   end
 
   resource :session, only: [:new, :create, :destroy, :show, :index]
@@ -17,6 +18,12 @@ Rails.application.routes.draw do
 
   resources :favorite_notes, only: [:create, :destroy]
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
+
+  namespace :api, defaults: { format: :json} do
+    namespace :v1 do
+      resources :notes
+    end
+  end
 
   root 'notes#index'
 end

@@ -4,6 +4,7 @@ class Note < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
   has_many :favorites, as: :favorited
+  has_many :references, dependent: :nullify
 
   belongs_to :user
 
