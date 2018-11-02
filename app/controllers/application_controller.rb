@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery except: :create
+  include Knock::Authenticable
 
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
