@@ -10,8 +10,6 @@ class Api::V1::NotesController < Api::BaseController
     render json: @note
   end
 
-
-
   def create
     note = Note.new note_params
     note.user = current_user
@@ -22,10 +20,20 @@ class Api::V1::NotesController < Api::BaseController
     end
   end
 
+  def destroy
+    note = Note.find_by_id params[:id]
+    if note
+      note.destroy
+      render json: { success: true }
+    else
+      render json: { errors: ['Note doesn\'t exist'] }
+    end
+  end
+
   private
 
   def note_params
-    params.require(:note).permit(:title, :body, :image)
+    params.require(:note).permit(:title, :body)
   end
 
 end
