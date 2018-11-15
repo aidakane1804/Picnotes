@@ -3,15 +3,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def favorite(note)
-    favorited.find_or_create_by(note: note)
-  end
-
-  def unfavorite(note)
-    favorite.where(note: note).destroy_all
-    note.reload
-  end
-
   def create
     @user = User.new user_params
 

@@ -16,3 +16,6 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
+$("#modal-window").modal();

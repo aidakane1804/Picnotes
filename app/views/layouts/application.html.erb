@@ -14,12 +14,40 @@
 
       <div>
         <% if user_signed_in? %>
+
           <span class = 'btn'> Welcome, <%=link_to current_user.username, session_path %> </span>
-          <%= link_to 'New Note', new_note_path, class: "btn" %>
+
+          <button
+            type = 'button'
+            class = 'btn btn-primary'
+            data-toggle = 'modal'
+            data-target = '#newNoteModal'
+            data-whatever = '@mdo'>
+            New Note
+          </button>
+
           <%= link_to 'Sign Out', session_path, method: :delete, class: "btn" %>
+
         <% else %>
-          <%= link_to 'Sign Up', new_user_path, class: "btn" %>
-          <%= link_to 'Sign In', new_session_path, class: "btn" %>
+
+          <button
+            type = 'button'
+            class = 'btn btn-primary'
+            data-toggle = 'modal'
+            data-target = '#newSessionModal'
+            data-whatever = '@mdo'>
+            Sign In
+          </button>
+
+          <button
+            type = 'button'
+            class = 'btn btn-primary'
+            data-toggle = 'modal'
+            data-target = '#newUserModal'
+            data-whatever = '@mdo'>
+            Sign Up
+          </button>
+
         <% end %>
       </div>
     </nav>
@@ -58,6 +86,9 @@
       </div>
     <% end %>
 
+    <%= render './modals/new_session_modal' %>
+    <%= render './modals/new_note_modal' %>
+    <%= render './modals/new_user_modal' %>
     <%= yield %>
   </body>
 </html>

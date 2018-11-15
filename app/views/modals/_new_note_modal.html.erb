@@ -1,0 +1,28 @@
+<div class = "modal fade" id = 'newNoteModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newNoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header'>
+        <h5 class = 'modal-title' id = 'newNoteModalLabel'> Create New Note </h5>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div class = 'modal-body'>
+        <%= simple_form_for @note do |f| %>
+          <div>
+            <%= f.input :title %>
+            <%= f.input :body %>
+            <div class = 'form-flex'>
+              <div class = 'form-spacer'> </div>
+              <%= f.file_field :image %>
+            </div>
+            <div class = 'form-btn-container'>
+              <%= f.button :submit, :class => 'btn-outline-dark form-btn' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

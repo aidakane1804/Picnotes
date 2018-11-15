@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :initiate_instance_variables
 
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
@@ -10,6 +11,14 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :user_signed_in?
+
+  def initiate_instance_variables
+    @note = Note.new
+    @notes = Note.all
+
+    @user = User.new
+  end
+  helper_method :initiate_instance_variables
 
   def current_user
     @currect_user ||= User.find_by(id: session[:user_id])

@@ -53,6 +53,63 @@
  .profile-menu{
    display: flex;
    justify-content: space-between;
-   margin-left: 30%;
-   margin-right: 30%;
+   margin-left: 5%;
+   margin-right: 5%;
  }
+
+.simple_form label{
+  width: 30%;
+  display: inline-block;
+}
+
+.simple_form input{
+  width: 70%;
+}
+
+.simple_form textarea{
+  width: 70%;
+}
+
+.form-flex{
+  display: flex;
+}
+
+.form-spacer{
+  flex-basis: 30%;
+  height: 2px;
+}
+
+.form-btn-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-btn{
+  width: 200px !important;
+}
+
+input#user_gender{
+  width: 30px;
+}
+
+label.collection_radio_buttons{
+  margin-top: 3px;
+  margin-bottom: 0px;
+}
+
+span.radio{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+label.radio_buttons.optional{
+  margin-top: 3px;
+  margin-bottom: 0;
+}
+
+div.input.radio_buttons{
+  display: flex;
+  flex-wrap: nowrap;
+}
