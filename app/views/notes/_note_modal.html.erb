@@ -58,6 +58,11 @@
                 <% end %>
               <% end %>
             </p>
+
+            <% if user_signed_in? && can?(:crud, @note) %>
+              <%= link_to 'Edit', edit_note_path(@note) %>
+              <%= link_to('Delete', note_path(@note), data: {confirm: 'Are you sure?'}, method: :delete) %>
+            <% end %>
           </div>
         </div>
       </div>

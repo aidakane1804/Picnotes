@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     @user = current_user
   end
 
-  def showFaves
+  def user_notes
     @user = current_user
   end
 

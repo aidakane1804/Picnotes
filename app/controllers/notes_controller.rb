@@ -7,23 +7,24 @@ class NotesController < ApplicationController
     @user = current_user
   end
 
-  # def show
-  #   @tags = @note.tags.order(created_ad: :desc)
-  #   @like = @note.likes.find_by_user_id current_user
-  #   @dislike = @note.dislikes.find_by_user_id current_user
-  #   @user = current_user
-  #   @boards = Board.where(user: current_user)
-  #   @board = Board.find_by_id(params[:board_id])
-  # end
-
   def show
-    @note = Note.find params[:id]
+    @tags = @note.tags.order(created_ad: :desc)
+    @like = @note.likes.find_by_user_id current_user
+    @dislike = @note.dislikes.find_by_user_id current_user
+    @user = current_user
     @boards = Board.where(user: current_user)
     @board = Board.find_by_id(params[:board_id])
-    respond_to do |format|
-      format.js
-    end
   end
+
+  # def show
+  #   @note = Note.find params[:id]
+  #   @boards = Board.where(user: current_user)
+  #   @board = Board.find_by_id(params[:board_id])
+  #   respond_to do |format|
+  #     format.js
+  #     format.html
+  #   end
+  # end
 
   def new
     @user = current_user
