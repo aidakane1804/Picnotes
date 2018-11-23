@@ -3,7 +3,11 @@ class NotesController < ApplicationController
   before_action :authorize_user!, except: [:index, :show, :new, :create]
 
   def index
-    @notes = Note.all
+    if params[:search]
+      @notes = Note.tagged_with(params[:search])
+    else
+      @notes = Note.all
+    end
     @user = current_user
   end
 
@@ -62,7 +66,7 @@ class NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :body, :likes, :dislikes, :image)
+    params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search)
   end
 
   def find_note

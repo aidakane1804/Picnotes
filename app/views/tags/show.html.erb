@@ -1,6 +1,6 @@
 <%= render './partials/user_dashboard' %>
 
-<div id='note-content'></div>
+<h1 class = 'text-center'>#<%= @tag.name %></h1>
 
 <div class = "notes-container">
   <% @notes.each do |note| %>

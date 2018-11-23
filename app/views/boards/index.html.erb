@@ -1,6 +1,19 @@
+<%= render './partials/user_dashboard' %>
+
+<%= render './modals/new_board_modal' %>
+
 <div class = "notes-container">
   <div class = 'note-container'>
-    <p class = 'note-container-text'> <%= link_to 'Create New Board', new_user_board_path %> </p>
+    <div class = 'board-spacer'>
+    </div>
+    <button
+      type = 'button'
+      class = 'btn btn-primary align-middle'
+      data-toggle = 'modal'
+      data-target = '#newBoardModal'
+      data-whatever = '@mdo'>
+      New Board
+    </button>
   </div>
   <% @boards.each do |board| %>
     <div class = 'note-container'>

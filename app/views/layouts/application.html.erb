@@ -12,6 +12,11 @@
     <nav class = "navbar">
       <%= link_to 'Picnotes', root_path, class: "navbar-brand" %>
 
+      <%= form_tag(notes_path, method: :get) do %>
+        <%= text_field_tag(:search, params[:search]) %>
+        <%= submit_tag ('Search') %>
+      <% end %>
+
       <div>
         <% if user_signed_in? %>
 
@@ -55,40 +60,18 @@
     <div class = "nav-spacing">
     </div>
 
-    <% if flash[:notice].present? %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-
-    <% if flash[:alert].present? %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <div class = "profile-header">
-        <h1><%= @user.username %></h1>
-      </div>
-
-      <div class = "profile-menu">
-        <p> <%= link_to 'My Feed', root_path%> </p>
-        <p> <%= link_to 'My Notes', user_notes_session_path %> <span> (<%= @user.notes.count %>) </span> </p>
-        <p> <%= link_to 'My Boards', user_boards_path(current_user) %> <span> (<%= @user.boards.count %>) </span> </p>
-        <p> <%= link_to 'My Faves', favorites_path %> <span> (<%= @user.favorited_notes.count %>) </span> </p>
-      </div>
-    <% end %>
-
     <%= render './modals/new_session_modal' %>
     <%= render './modals/new_note_modal' %>
     <%= render './modals/new_user_modal' %>
     <%= yield %>
   </body>
+
+  <script>
+    $(document).on('ready page:load', function () {
+      $('#post_tag_ids').chosen({
+        allow_single_deselect: true,
+        width: '100%'
+      })
+    });
+  </script>
 </html>

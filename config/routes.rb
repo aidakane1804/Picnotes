@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :dislikes, shallow: true, only: [:create, :destroy]
   end
 
+  resources :tags, only: [:index, :show]
+
   resource :session, only: [:new, :create, :destroy, :show, :index] do
     collection do
       get :user_notes

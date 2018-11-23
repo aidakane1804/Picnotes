@@ -1,9 +1,9 @@
 class Note < ApplicationRecord
-  has_many :tags, dependent: :destroy
-  has_many :references, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
   has_many :favorites, as: :favorited
+
+  acts_as_taggable_on :tags
 
   belongs_to :user
 
@@ -19,6 +19,19 @@ class Note < ApplicationRecord
   })
 
   after_initialize :set_defaults
+
+  def self.search(search)
+    if search
+      note = Note.find_by(title: search)
+      if note
+        self.where(note_id: note)
+      else
+        Note.all
+      end
+    else
+      Note.all
+    end
+  end
 
   private
   def set_defaults

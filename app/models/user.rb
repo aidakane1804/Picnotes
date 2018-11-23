@@ -12,5 +12,6 @@ class User < ApplicationRecord
 
   has_many :boards, dependent: :destroy
 
+  mount_uploader :avatar, ImageUploader
 
 end

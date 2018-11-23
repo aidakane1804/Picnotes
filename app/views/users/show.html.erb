@@ -1,9 +1,9 @@
-<%= render './partials/user_dashboard' %>
+<%= render './partials/other_user_dashboard' %>
 
 <div id='note-content'></div>
 
 <div class = "notes-container">
-  <% @notes.each do |note| %>
+  <% @user.notes.each do |note| %>
 
     <div class = 'note-container'>
       <%= image_tag note.image.url(:thumb) if note.image.present? %>

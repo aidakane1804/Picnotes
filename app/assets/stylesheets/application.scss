@@ -12,9 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require chosen
  */
 
  @import 'bootstrap';
+
+ p{
+   margin-bottom: 0;
+ }
 
  .navbar{
    background-color: #74a89f;
@@ -26,9 +31,9 @@
    color: white;
  }
 
- .btn{
-   color: #FFF;
- }
+ // .btn{
+ //   color: #FFF;
+ // }
 
  a:hover{
    color: #DDD;
@@ -47,73 +52,175 @@
  }
 
 .profile-header{
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
  .profile-menu{
    display: flex;
-   justify-content: space-between;
-   margin-left: 5%;
-   margin-right: 5%;
+   box-sizing: border-box;
+   justify-content: space-around;
+   padding-bottom: 5px;
+   border-bottom: thick #ebf2f3 solid;
  }
 
-.simple_form label{
-  width: 30%;
-  display: inline-block;
-}
-
-.simple_form input{
-  width: 70%;
-}
-
-.simple_form textarea{
-  width: 70%;
-}
-
-.form-flex{
-  display: flex;
-}
-
-.form-spacer{
-  flex-basis: 30%;
-  height: 2px;
-}
-
-.form-btn-container{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.form-btn{
-  width: 200px !important;
-}
-
-input#user_gender{
-  width: 30px;
-}
-
-label.collection_radio_buttons{
-  margin-top: 3px;
-  margin-bottom: 0px;
-}
-
-span.radio{
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-}
-
-label.radio_buttons.optional{
-  margin-top: 3px;
-  margin-bottom: 0;
-}
-
-div.input.radio_buttons{
-  display: flex;
-  flex-wrap: nowrap;
-}
+// .simple_form label{
+//   width: 30%;
+//   display: inline-block;
+// }
+//
+// .simple_form input{
+//   width: 70%;
+// }
+//
+// .simple_form textarea{
+//   width: 70%;
+// }
+//
+// .form-flex{
+//   display: flex;
+// }
+//
+// .form-spacer{
+//   flex-basis: 30%;
+//   height: 2px;
+// }
+//
+// .form-btn-container{
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 20px;
+// }
+//
+// .form-btn{
+//   width: 200px !important;
+// }
+//
+// input#user_gender{
+//   width: 30px;
+// }
+//
+// label.collection_radio_buttons{
+//   margin-top: 3px;
+//   margin-bottom: 0px;
+// }
+//
+// span.radio{
+//   display: flex;
+//   flex-wrap: nowrap;
+//   align-items: center;
+// }
+//
+// label.radio_buttons.optional{
+//   margin-top: 3px;
+//   margin-bottom: 0;
+// }
+//
+// div.input.radio_buttons{
+//   display: flex;
+//   flex-wrap: nowrap;
+// }
 
 .modal-lg{
   min-width: 90%;
+}
+
+label{
+  width: auto;
+}
+
+input{
+  width: auto;
+}
+
+input#search{
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+}
+
+input.form-control{
+}
+
+.user-name{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.avatar-image{
+  width: 50px;
+  height: 50px;
+  margin-left: 20px;
+  border-radius: 50%;
+}
+
+.profile-dashboard{
+  margin-bottom: 20px;
+}
+
+.profile-left{
+  flex-basis: 50%;
+  display: flex;
+}
+
+.profile-right{
+  display: flex;
+}
+
+a{
+  text-decoration: none;
+}
+
+a.profile-links:active{
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: thick #779892 solid;
+}
+
+a.profile-links:hover{
+  text-decoration: none;
+  padding-bottom: 8px;
+  border-bottom: thick #779892 solid;
+}
+
+.content-right{
+  text-align: right;
+}
+
+.margin-right{
+  margin-right: 20px;
+}
+
+.note-count{
+  color: #779892;
+}
+
+.board-spacer{
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+.picnotes-font{
+  font-weight: 700;
+  color: #779892;
+}
+
+.modal-header-information{
+  display: flex;
+  width: 100%;
+}
+
+.modal-header-information-title{
+  flex-basis: 50%;
+}
+
+.modal-header-information-content{
+  flex-basis: 50%;
+  justify-content: flex-end;
+  text-align: right;
+  display: flex;
 }

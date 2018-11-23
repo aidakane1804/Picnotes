@@ -1,0 +1,39 @@
+<div class = 'profile-dashboard'>
+  <div class = "profile-header">
+    <div class = 'profile-left'>
+      <div class = 'margin-right content-right'>
+        <p class = 'picnotes-font'> Followers </p>
+        <p> 0 </p>
+      </div>
+
+      <div class = 'margin-right content-right'>
+        <p class = 'picnotes-font'> Following </p>
+        <p> 0 </p>
+      </div>
+
+      <div class = 'content-right'>
+        <p class = 'picnotes-font'> Notes </p>
+        <p> <%= @user.notes.count %> </p>
+      </div>
+    </div>
+
+    <div class = 'profile-right'>
+      <div class = 'content-right'>
+        <p> <%= @user.gender %> </p>
+        <h1><%= @user.username %></h1>
+        <p> Follow </p>
+      </div>
+      <% if @user.avatar? %>
+        <%= image_tag @user.avatar.url, class: 'avatar-image' %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: 'avatar-image' %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class = "profile-menu">
+    <p> <%= link_to 'My Feed', root_path, class: 'profile-links'%> </p>
+    <p> <%= link_to 'Notes', user_path(@user), class: 'profile-links' %> <span> (<%= @user.notes.count %>) </span></p>
+  </div>
+</div>

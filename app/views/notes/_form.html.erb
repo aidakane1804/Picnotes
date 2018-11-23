@@ -1,8 +1,15 @@
 <div class = "creation_form">
 <%= simple_form_for @note do |form| %>
-  <%= form.input :title, label: 'Title ' %>
-  <%= form.input :body, label: "Description " %>
-  <%= form.file_field :image %>
-  <%= form.submit %>
+  <%= form.input :title %>
+  <%= form.input :body %>
+  <%= form.label :tag_list, 'Tags (Please separate with commas)' %>
+  <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false %>
+  <div class = 'form-flex'>
+    <div class = 'form-spacer'> </div>
+    <%= form.file_field :image %>
+  </div>
+  <div class = 'form-btn-container text-center'>
+    <%= form.button :submit, :class => 'btn-outline-dark form-btn' %>
+  </div>
 <% end %>
 </div>

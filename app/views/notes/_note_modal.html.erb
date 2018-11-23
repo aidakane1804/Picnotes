@@ -2,15 +2,9 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %> | <%= note.user.username %> </h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div>
-        <div class = "note-page-content">
-          <div>
-            <p> <%= image_tag @note.image.url(:large) if @note.image.present? %></p>
-
+        <div class = 'modal-header-information'>
+          <div class = 'modal-header-information-title'>
+            <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %> </h5>
             <p>
               Favorites: <%= @note.favorites.count %>
               <% if user_signed_in? && can?(:favorite, @note)%>
@@ -21,9 +15,36 @@
                 <% end %>
               <% end %>
             </p>
+          </div>
+
+          <div class = 'modal-header-information-content'>
+            <div>
+              <p> <%= link_to note.user.username, user_path(note.user) %> </p>
+              <p>
+                <%= note.created_at %>
+                <% if user_signed_in? && can?(:crud, @note) %>
+                  <%= link_to 'Edit', edit_note_path(@note) %>
+                  <%= link_to('Delete', note_path(@note), data: {confirm: 'Are you sure?'}, method: :delete) %>
+                <% end %>
+              </p>
+            </div>
+            <% if note.user.avatar? %>
+              <%= image_tag note.user.avatar.url, class: 'avatar-image' %>
+            <% else %>
+              <%= image_tag 'avatar.png', class: 'avatar-image' %>
+            <% end %>
+          </div>
+        </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div>
+        <div class = "note-page-content">
+          <div>
+            <p> <%= image_tag @note.image.url(:large) if @note.image.present? %></p>
 
             <div class="select-board">
-              <h3>Choose your board</h3>
+              <p>Choose your board</p>
               <%= form_tag(note_path(@note), {:method => 'get'}) do |f| %>
                   <select name="board_id" id="board_id">
 
@@ -42,27 +63,29 @@
           </div>
 
           <div>
-            <p class = "note-page-content-text"> <%= @note.body %> </p>
+            <div class = 'notes-overflow'>
+              <p class = "note-page-content-text"> <%= @note.body %> </p>
+            </div>
 
-            <p>
-              Likes: <%= @note.likes.count %> Dislikes: <%= @note.dislikes.count %>
+            <div class = 'like-container'>
+              <p>
+                Likes: <%= @note.likes.count %> Dislikes: <%= @note.dislikes.count %>
 
-              <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
-                <% if @like.present? %>
-                  <%= link_to 'Cancel', like_path(@like), method: :delete %>
-                <% elsif @dislike.present? %>
-                  <%= link_to 'Cancel', dislike_path(@dislike), method: :delete %>
-                <% else %>
-                  <%= link_to 'Like', note_likes_path(@note), method: :post %>
-                  <%= link_to 'Dislike', note_dislikes_path(@note), method: :post %>
+                <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
+                  <% if @like.present? %>
+                    <%= link_to 'Cancel', like_path(@like), method: :delete %>
+                  <% elsif @dislike.present? %>
+                    <%= link_to 'Cancel', dislike_path(@dislike), method: :delete %>
+                  <% else %>
+                    <%= link_to 'Like', note_likes_path(@note), method: :post %>
+                    <%= link_to 'Dislike', note_dislikes_path(@note), method: :post %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </p>
+              </p>
 
-            <% if user_signed_in? && can?(:crud, @note) %>
-              <%= link_to 'Edit', edit_note_path(@note) %>
-              <%= link_to('Delete', note_path(@note), data: {confirm: 'Are you sure?'}, method: :delete) %>
-            <% end %>
+              <p> Tags: <%= render @note.tags %></p>
+            </div>
+
           </div>
         </div>
       </div>
