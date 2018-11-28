@@ -4,14 +4,14 @@
 
 <div class = 'modal-body'>
   <div class = "creation_form">
-  <%= simple_form_for @user do |f| %>
+  <%= simple_form_for @user, remote: true do |f| %>
     <%= f.input :first_name, label: 'First Name' %>
     <%= f.input :last_name, label: 'Last Name' %>
     <%= f.input :username %>
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation, label: 'Password Confirmation' %>
-    <%= f.file_field :avatar %> 
+    <%= f.file_field :avatar %>
     <%= f.input :gender, as: :radio_buttons, collection:['Male', 'Female'] %>
     <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
     <%= f.submit  class: 'btn btn-primary'%>

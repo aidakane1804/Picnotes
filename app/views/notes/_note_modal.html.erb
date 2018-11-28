@@ -43,9 +43,10 @@
           <div>
             <p> <%= image_tag @note.image.url(:large) if @note.image.present? %></p>
 
+
             <div class="select-board">
               <p>Choose your board</p>
-              <%= form_tag(note_path(@note), {:method => 'get'}) do |f| %>
+              <%= form_tag(note_path(@note, remote: true), {:method => 'get'}) do |f| %>
                   <select name="board_id" id="board_id">
 
                       <!-- Select a board -->

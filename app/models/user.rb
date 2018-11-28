@@ -14,4 +14,7 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, ImageUploader
 
+  acts_as_followable
+  acts_as_follower
+
 end

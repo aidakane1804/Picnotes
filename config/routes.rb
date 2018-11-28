@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:new, :create, :show, :edit, :update] do
+  resources :users do
     resources :boards
   end
 
