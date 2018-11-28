@@ -29,7 +29,7 @@
               </p>
             </div>
             <% if note.user.avatar? %>
-              <%= image_tag note.user.avatar.url, class: 'avatar-image' %>
+              <%= image_tag note.user.avatar.url(:thumb), class: 'avatar-image' %>
             <% else %>
               <%= image_tag 'avatar.png', class: 'avatar-image' %>
             <% end %>
