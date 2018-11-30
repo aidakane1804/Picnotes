@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post '/boards/:id/toggle_note' => 'boards#toggle_note', as: :toggle_board_note
 
   resources :notes do
+    resources :references, shallow: true, only: [:create, :destroy]
     resources :tags, only: [:create, :destroy]
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :dislikes, shallow: true, only: [:create, :destroy]

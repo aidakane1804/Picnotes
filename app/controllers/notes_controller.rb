@@ -13,6 +13,8 @@ class NotesController < ApplicationController
 
   def show
     @tags = @note.tags.order(created_ad: :desc)
+    @references = Reference.where(note_id: @note.id)
+    @reference = Reference.new
     @like = @note.likes.find_by_user_id current_user
     @dislike = @note.dislikes.find_by_user_id current_user
     @user = current_user
