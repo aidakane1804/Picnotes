@@ -51,6 +51,8 @@ group :development, :test do
   gem 'interactive_editor'
   gem 'hirb'
   gem 'awesome_print', :require => 'ap'
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :development do
