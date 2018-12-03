@@ -24,6 +24,14 @@
 </script>
 
 <div id="note-modal" class="modal fade" role="dialog">
+  <div style = "display: flex; align-items: center;">
+    <div style = 'flex-basis: 10%; text-align: center;'>
+    <% if @previous_note %>
+      <!-- <%= link_to truncate(@previous_note.title, length: 18), note_path(@previous_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%> -->
+      <%= link_to fa_icon('arrow-left 3x'), note_path(@previous_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+
+    <% end %>
+    </div>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -97,13 +105,6 @@
               <div class = 'notes-overflow'>
                 <div id = 'information' class = 'tabcontent'>
                   <p class = "note-page-content-text"> <%= @note.body %> </p>
-                  <% if @previous_note %>
-                    <%= link_to truncate(@previous_note.title, length: 18), note_path(@previous_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
-                  <% end %>
-
-                  <% if @next_note %>
-                    <%= link_to truncate(@next_note.title, length: 18), note_path(@next_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
-                  <% end %>
                 </div>
 
                 <div id = 'references' class = 'tabcontent'>
@@ -111,14 +112,17 @@
                   <!-- <% @references.each do |reference| %>
                     <p> <%= reference.title %> | <%= reference.author %> | <a href = 'https://<%= reference.link %>'> <%= reference.link %> </a> </p>
                   <% end %> -->
-
-                  <%= simple_form_for([@note, @reference], remote: true) do |f| %>
-                    <div>
-                      <%= f.input :title %>
-                      <%= f.input :author %>
-                      <%= f.input :link %>
-                    </div>
-                    <%= f.submit %>
+                  <% if current_user %>
+                    <% if current_user.username == @note.user.username %>
+                      <%= simple_form_for([@note, @reference], remote: true) do |f| %>
+                        <div>
+                          <%= f.input :title %>
+                          <%= f.input :author %>
+                          <%= f.input :link %>
+                        </div>
+                        <%= f.submit %>
+                      <% end %>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
@@ -161,6 +165,12 @@
             </div> -->
         </div>
       </div>
+    </div>
+  </div>
+    <div style = 'flex-basis: 10%; text-align: center;'>
+      <% if @next_note %>
+        <%= link_to fa_icon('arrow-right 3x'), note_path(@next_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+        <% end %>
     </div>
   </div>
 </div>
