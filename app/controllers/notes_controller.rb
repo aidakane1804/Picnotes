@@ -20,6 +20,12 @@ class NotesController < ApplicationController
     @user = current_user
     @boards = Board.where(user: current_user)
     @board = Board.find_by_id(params[:board_id])
+    @previous_note = @note.next
+    @next_note = @note.previous
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # def show

@@ -4,10 +4,13 @@ class ReferencesController < ApplicationController
 
   def create
     @reference = @note.references.build(reference_params)
-    if @reference.save
-      redirect_to note_path(@note)
-    else
-      render 'notes/show'
+    respond_to do |format|
+      if @reference.save
+        format.html {redirect_to note_path(@note)}
+        format.js
+      else
+        render @note
+      end
     end
   end
 

@@ -97,14 +97,22 @@
               <div class = 'notes-overflow'>
                 <div id = 'information' class = 'tabcontent'>
                   <p class = "note-page-content-text"> <%= @note.body %> </p>
+                  <% if @previous_note %>
+                    <%= link_to truncate(@previous_note.title, length: 18), note_path(@previous_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+                  <% end %>
+
+                  <% if @next_note %>
+                    <%= link_to truncate(@next_note.title, length: 18), note_path(@next_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+                  <% end %>
                 </div>
 
                 <div id = 'references' class = 'tabcontent'>
-                  <% @references.each do |reference| %>
+                  <%= render @note.references %>
+                  <!-- <% @references.each do |reference| %>
                     <p> <%= reference.title %> | <%= reference.author %> | <a href = 'https://<%= reference.link %>'> <%= reference.link %> </a> </p>
-                  <% end %>
+                  <% end %> -->
 
-                  <%= simple_form_for [@note, @reference], remote: true do |f| %>
+                  <%= simple_form_for([@note, @reference], remote: true) do |f| %>
                     <div>
                       <%= f.input :title %>
                       <%= f.input :author %>

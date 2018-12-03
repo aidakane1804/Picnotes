@@ -35,6 +35,14 @@ class Note < ApplicationRecord
     end
   end
 
+  def next
+    self.class.where('id > ?', id).first
+  end
+
+  def previous
+    self.class.where('id < ?', id).last
+  end 
+
   private
   def set_defaults
     self.likes ||= 0
