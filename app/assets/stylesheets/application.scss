@@ -225,3 +225,14 @@ a.profile-links:hover{
   text-align: right;
   display: flex;
 }
+
+.no-look-btn{
+  background-color: transparent;
+  border: 0;
+  color: rgba(116, 168, 159, 1);
+}
+
+.no-look-btn:hover{
+  color: rgba(116, 168, 159, 0.5);
+  text-decoration: none;
+}

@@ -39,25 +39,34 @@
           <div class = 'modal-header-information-title'>
             <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %> </h5>
             <p>
-              Favorites: <%= @note.favorites.count %>
               <% if user_signed_in? && can?(:favorite, @note)%>
                 <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-                  <%= link_to 'Add to Favorite', favorite_notes_path(note_id: @note), method: :post %>
+                  <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), method: :post %> <%= @note.favorites.count %>
                 <% else %>
-                  <%= link_to 'Remove from Favorite', favorite_note_path(@note), method: :delete %>
+                  <%= link_to fa_icon('heart'), favorite_note_path(@note), method: :delete %> <%= @note.favorites.count %>
                 <% end %>
+              <% else %>
+                <%= fa_icon('heart') %> <%= @note.favorites.count %>
               <% end %>
             </p>
           </div>
 
           <div class = 'modal-header-information-content'>
             <div>
-              <p> <%= link_to note.user.username, user_path(note.user) %> </p>
+              <p> <%= link_to note.user.username, user_path(note.user), class: 'no-look-btn' %> </p>
               <p>
                 <%= note.created_at %>
                 <% if user_signed_in? && can?(:crud, @note) %>
-                  <%= link_to 'Edit', edit_note_path(@note) %>
-                  <%= link_to('Delete', note_path(@note), data: {confirm: 'Are you sure?'}, method: :delete) %>
+                  <button
+                    type = 'button'
+                    class = 'no-look-btn'
+                    data-toggle = 'modal'
+                    data-target = '#editNoteModal'
+                    data-whatever = '@mdo'
+                    data-dismiss="modal">
+                    Edit
+                  </button>
+                  <%= link_to('Delete', note_path(@note), class: 'no-look-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
                 <% end %>
               </p>
             </div>
@@ -174,3 +183,5 @@
     </div>
   </div>
 </div>
+
+<%= render './modals/edit_note_modal' %>
