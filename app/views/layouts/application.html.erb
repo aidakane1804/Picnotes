@@ -20,18 +20,23 @@
       <div>
         <% if user_signed_in? %>
 
-          <span class = 'btn'> Welcome, <%=link_to current_user.username, session_path %> </span>
-
           <button
             type = 'button'
-            class = 'btn btn-primary'
+            class = 'white-btn'
             data-toggle = 'modal'
             data-target = '#newNoteModal'
             data-whatever = '@mdo'>
-            New Note
+            <%= fa_icon('pencil') %>
           </button>
 
-          <%= link_to 'Sign Out', session_path, method: :delete, class: "btn" %>
+          <button
+            type = 'button'
+            class = 'white-btn'
+            data-toggle = 'modal'
+            data-target = '#sessionModal'
+            data-whatever = '@mdo'>
+            <%= fa_icon('user-circle') %>
+          </button>
 
         <% else %>
 
@@ -63,6 +68,10 @@
     <%= render './modals/new_session_modal' %>
     <%= render './modals/new_note_modal' %>
     <%= render './modals/new_user_modal' %>
+    <% if user_signed_in? %>
+      <%= render './modals/session_modal' %>
+      <%= render './modals/edit_session_modal' %>
+    <% end %>
     <%= yield %>
   </body>
 

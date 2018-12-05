@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote]
+
 
   def index
     if params[:search]
@@ -61,7 +62,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update note_params
-      redirect_to @note
+      redirect_to user_notes_session_path
     else
       render :edit
     end
@@ -70,6 +71,24 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     redirect_to notes_path
+  end
+
+  def upvote
+    @note = Note.find(params[:id])
+    @note.upvote_by current_user
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+  def downvote
+    @note = Note.find(params[:id])
+    @note.downvote_by current_user
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private

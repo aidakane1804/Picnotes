@@ -4,12 +4,12 @@
       <div class = 'profile-left'>
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Followers </p>
-          <p> 0 </p>
+          <p> <%= @user.followers.count %> </p>
         </div>
 
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Following </p>
-          <p> 0 </p>
+          <p> <%= @user.following.count %> </p>
         </div>
 
         <div class = 'content-right'>
@@ -20,7 +20,7 @@
 
       <div class = 'profile-right'>
         <div class = 'content-right'>
-          <p> <%= @user.gender %> </p>
+          <p> <%= @user.city %> </p>
           <h1><%= @user.username %></h1>
         </div>
         <% if @user.avatar? %>
@@ -33,10 +33,10 @@
 
 
     <div class = "profile-menu">
-      <p> <%= link_to 'My Feed', root_path, class: 'profile-links'%> </p>
-      <p> <%= link_to 'My Notes', user_notes_session_path, class: 'profile-links' %> <span class = 'note-count'> <%= @user.notes.count %> </span> </p>
-      <p> <%= link_to 'My Boards', user_boards_path(current_user), class: 'profile-links' %> <span class = 'note-count'> <%= @user.boards.count %> </span> </p>
-      <p> <%= link_to 'My Faves', favorites_path, class: 'profile-links' %> <span class = 'note-count'> <%= @user.favorited_notes.count %> </span> </p>
+      <p> <%= link_to 'My Feed', root_path, class: "#{cp(root_path)} profile-links"%> </p>
+      <p> <%= link_to 'My Notes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span> </p>
+      <p> <%= link_to 'My Boards', user_boards_path(current_user), class: "#{cp(user_boards_path(current_user))}.profile-links" %> <span class = 'note-count'> <%= @user.boards.count %> </span> </p>
+      <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %> <span class = 'note-count'> <%= @user.favorited_notes.count %> </span> </p>
     </div>
   </div>
 <% end %>

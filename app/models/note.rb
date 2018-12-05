@@ -6,6 +6,7 @@ class Note < ApplicationRecord
   has_many :references
 
   acts_as_taggable_on :tags
+  acts_as_votable
 
   belongs_to :user
 
@@ -41,7 +42,7 @@ class Note < ApplicationRecord
 
   def previous
     self.class.where('id < ?', id).last
-  end 
+  end
 
   private
   def set_defaults

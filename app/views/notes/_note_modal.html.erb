@@ -41,9 +41,9 @@
             <p>
               <% if user_signed_in? && can?(:favorite, @note)%>
                 <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-                  <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), method: :post %> <%= @note.favorites.count %>
+                  <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
                 <% else %>
-                  <%= link_to fa_icon('heart'), favorite_note_path(@note), method: :delete %> <%= @note.favorites.count %>
+                  <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
                 <% end %>
               <% else %>
                 <%= fa_icon('heart') %> <%= @note.favorites.count %>
@@ -137,19 +137,28 @@
               </div>
 
               <div class = 'like-container'>
+                <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
                 <p>
-                  Likes: <%= @note.likes.count %> Dislikes: <%= @note.dislikes.count %>
 
-                  <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
-                    <% if @like.present? %>
-                      <%= link_to 'Cancel', like_path(@like), method: :delete %>
-                    <% elsif @dislike.present? %>
-                      <%= link_to 'Cancel', dislike_path(@dislike), method: :delete %>
-                    <% else %>
-                      <%= link_to 'Like', note_likes_path(@note), method: :post %>
-                      <%= link_to 'Dislike', note_dislikes_path(@note), method: :post %>
-                    <% end %>
+                  <%= link_to like_note_path(@note), remote: true, method: :put do %>
+                    Upvote <span class = 'upvotes-count'><%= @note.get_upvotes.size %> </span>
                   <% end %>
+
+                  <%= link_to dislike_note_path(@note), remote: true, method: :put do %>
+                    Downvote <span class = 'downvotes-count'><%= @note.get_downvotes.size %> </span>
+                  <% end %>
+                <% end %>
+
+                  <!-- <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
+                    <% if @like.present? %>
+                      <%= link_to 'Cancel', like_path(@like), remote: true, method: :delete %>
+                    <% elsif @dislike.present? %>
+                      <%= link_to 'Cancel', dislike_path(@dislike), remote: true, method: :delete %>
+                    <% else %>
+                      <%= link_to 'Like', note_likes_path(@note), remote: true, method: :post %>
+                      <%= link_to 'Dislike', note_dislikes_path(@note), remote: true, method: :post %>
+                    <% end %>
+                  <% end %> -->
                 </p>
 
                 <p> Tags: <%= render @note.tags %></p>

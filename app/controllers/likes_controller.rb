@@ -5,7 +5,10 @@ class LikesController < ApplicationController
     if !can? :like, note
       head :unauthorized
     elsif like.save
-      redirect_to note, notice: 'Thank you for liking!'
+      respond_to do |format|
+        format.js
+        format.html
+      end
     else
       redirect_to note, alert: 'You already liked the note.'
     end
@@ -15,7 +18,10 @@ class LikesController < ApplicationController
     like = Like.find params[:id]
     if can? :destroy, like
       like.destroy
-      redirect_to like.note, notice: 'Like removed'
+      respond_to do |format|
+        format.js
+        format.html
+      end
     else
       head :unauthorized
     end

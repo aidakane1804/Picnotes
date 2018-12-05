@@ -19,7 +19,7 @@
 
       <%= f.file_field :avatar %>
       <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
-      <%= f.input :gender %>
+      <%= f.input :city %>
 
       <div class = 'form-btn-container text-center'>
         <%= f.button :submit, :class => 'btn-outline-dark form-btn' %>

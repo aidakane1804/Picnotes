@@ -13,7 +13,7 @@
           <div>
             <%= f.input :title %>
             <%= f.input :body %>
-            <%= f.label :tag_list, 'Tags (Please separate with commas)' %>
+            <%= f.label :tag_list, 'Tags' %>
             <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
             <div class = 'form-flex'>
               <div class = 'form-spacer'> </div>

@@ -8,7 +8,10 @@ class FavoriteNotesController < ApplicationController
 
   def create
     if Favorite.create(favorited: @note, user: current_user)
-      redirect_to @note, notice: 'Note has been favorited'
+      respond_to do |format|
+        format.js
+        format.html
+      end
     else
       redirect_to @note, alert: 'Something went wrong'
     end
@@ -16,7 +19,10 @@ class FavoriteNotesController < ApplicationController
 
   def destroy
     Favorite.where(favorited_id: @note.id, user_id: current_user.id).first.destroy
-    redirect_to @note, notice: 'Note is no longer in favorites'
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private

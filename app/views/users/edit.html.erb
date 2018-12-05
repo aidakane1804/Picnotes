@@ -5,14 +5,25 @@
 <div class = 'modal-body'>
   <div class = "creation_form">
   <%= simple_form_for @user do |f| %>
-    <%= f.input :first_name, label: 'First Name' %>
-    <%= f.input :last_name, label: 'Last Name' %>
+
+    <div class = 'user-name'>
+      <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
+      <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
+    </div>
+
+    <%= f.input :username %>
     <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation, label: 'Password Confirmation' %>
-    <%= f.input :gender, as: :radio_buttons, collection:['Male', 'Female'] %>
-    <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
-    <%= f.submit  class: 'btn btn-primary'%>
+    <div class = 'user-name'>
+      <%= f.input :password %>
+      <%= f.input :password_confirmation, label: 'Password Confirmation' %>
+    </div>
+
+    <%= f.file_field :avatar %>
+    <%= f.input :city %>
+
+    <div class = 'form-btn-container text-center'>
+      <%= f.button :submit, :class => 'btn-outline-dark form-btn' %>
+    </div>
   <% end %>
   </div>
 </div>

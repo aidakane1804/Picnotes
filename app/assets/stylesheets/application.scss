@@ -98,7 +98,7 @@
 //   width: 200px !important;
 // }
 //
-// input#user_gender{
+// input#user_city{
 //   width: 30px;
 // }
 //
@@ -180,6 +180,12 @@ a.profile-links:active{
   border-bottom: thick #779892 solid;
 }
 
+.current{
+  text-decoration: none;
+  padding-bottom: 8px;
+  border-bottom: thick #779892 solid;
+}
+
 a.profile-links:hover{
   text-decoration: none;
   padding-bottom: 8px;
@@ -235,4 +241,15 @@ a.profile-links:hover{
 .no-look-btn:hover{
   color: rgba(116, 168, 159, 0.5);
   text-decoration: none;
+}
+
+.white-btn{
+  background-color: transparent;
+  border: 0;
+  color: white;
+}
+
+.white-btn:hover{
+ color: rgba(255, 255, 255, 0.5);
+ text-decoration: none;
 }

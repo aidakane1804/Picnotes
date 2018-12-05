@@ -3,12 +3,12 @@
     <div class = 'profile-left'>
       <div class = 'margin-right content-right'>
         <p class = 'picnotes-font'> Followers </p>
-        <p> 0 </p>
+        <p> <%= @user.followers.count %> </p>
       </div>
 
       <div class = 'margin-right content-right'>
         <p class = 'picnotes-font'> Following </p>
-        <p> 0 </p>
+        <p> <%= @user.following.count %> </p>
       </div>
 
       <div class = 'content-right'>
@@ -18,8 +18,9 @@
     </div>
 
     <div class = 'profile-right'>
+      <%= render '/components/follow_button', :user => @user %>
       <div class = 'content-right'>
-        <p> <%= @user.gender %> </p>
+        <p> <%= @user.city %> </p>
         <h1><%= @user.username %></h1>
       </div>
       <% if @user.avatar? %>
