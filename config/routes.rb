@@ -35,4 +35,6 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
 
   root 'notes#index'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 end
