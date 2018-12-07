@@ -3,7 +3,7 @@ class Note < ApplicationRecord
   has_many :dislikes, dependent: :destroy
   has_many :favorites, as: :favorited
 
-  has_many :references
+  has_many :references, dependent: :destroy
 
   acts_as_taggable_on :tags
   acts_as_votable

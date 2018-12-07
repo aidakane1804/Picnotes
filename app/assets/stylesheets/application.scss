@@ -253,3 +253,53 @@ a.profile-links:hover{
  color: rgba(255, 255, 255, 0.5);
  text-decoration: none;
 }
+
+input#search{
+  width: 400px;
+  border-radius: 25px;
+}
+
+.profile-center{
+  display: none;
+}
+
+@media only screen and (max-width: 1000px){
+  input#search{
+    width: 300px;
+    border-radius: 25px;
+  }
+
+  .profile-header{
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  input#search{
+    width: 100px;
+    border-radius: 25px;
+  }
+
+  .profile-right{
+    display: none;
+  }
+
+  .profile-center{
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-links{
+    font-size: 10px;
+  }
+
+  .note-count{
+    font-size: 10px;
+  }
+
+  .current{
+    padding-bottom: 10px;
+  }
+}

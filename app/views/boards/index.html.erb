@@ -8,7 +8,7 @@
     </div>
     <button
       type = 'button'
-      class = 'btn btn-primary align-middle'
+      class = 'no-look-btn'
       data-toggle = 'modal'
       data-target = '#newBoardModal'
       data-whatever = '@mdo'>
@@ -21,7 +21,7 @@
         <% board.notes.each_with_index do |note ,i| %>
           <% if i < 4 %>
             <div class = 'image-container-individual'>
-              <p> <%= image_tag note.image.url(:board_thumb) if note.image.present? %></p>
+              <%= image_tag note.image.url(:board_thumb), class: 'board-image' if note.image.present? %>
             </div>
           <% end %>
         <% end %>

@@ -27,13 +27,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
       if @user.update(user_params)
-        format.html {redirect_to session_path, notice: 'User successfully updated'}
+        redirect_to root_path
       else
-        format.html {render :edit}
+        redirect_to root_path
       end
-    end
   end
 
   private

@@ -6,7 +6,7 @@ class Reference < ApplicationRecord
 
   def smart_add_url_protocol
     unless self.link[/\Ahttp:\/\//] || self.link[/\Ahttps:\/\//]
-      self.link = "http://#{self.link}"
+      self.link = "https://#{self.link}"
     end
   end
 end

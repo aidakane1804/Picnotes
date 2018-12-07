@@ -3,6 +3,7 @@
   <head>
     <title>PicnotesServer</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -14,7 +15,9 @@
 
       <%= form_tag(notes_path, method: :get) do %>
         <%= text_field_tag(:search, params[:search]) %>
-        <%= submit_tag ('Search') %>
+        <%= button_tag(type: "submit", class: 'white-btn') do %>
+            <%= fa_icon('search') %>
+        <% end %>
       <% end %>
 
       <div>
