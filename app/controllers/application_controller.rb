@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :initiate_instance_variables
+  skip_before_action :verify_authenticity_token
 
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
