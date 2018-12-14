@@ -2,28 +2,54 @@
 
 <%= render './modals/new_board_modal' %>
 
-<div class = "notes-container">
-  <div class = 'note-container'>
-    <div class = 'board-spacer'>
-    </div>
+<div class = "boards-container">
+  <div class = 'board-container'>
     <button
       type = 'button'
-      class = 'no-look-btn'
+      class = 'no-look-btn remove-padding'
       data-toggle = 'modal'
       data-target = '#newBoardModal'
       data-whatever = '@mdo'>
+      <%= image_tag 'add.png', class: 'add-board-btn' %>
       New Board
     </button>
   </div>
+
   <% @boards.each do |board| %>
-    <div class = 'note-container'>
-      <div class = 'image-container'>
+    <div class = 'board-container'>
+      <div class = 'board-test'>
         <% board.notes.each_with_index do |note ,i| %>
           <% if i < 4 %>
-            <div class = 'image-container-individual'>
-              <%= image_tag note.image.url(:board_thumb), class: 'board-image' if note.image.present? %>
+            <div class = 'board-test-image'>
+              <% if note.image.url.length > 0 %>
+                <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+              <% else %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              <% end %>
             </div>
           <% end %>
+        <% end %>
+        <% if board.notes.length == 1 %>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+        <% elsif board.notes.length == 2 %>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+        <% elsif board.notes.length == 3 %>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
         <% end %>
       </div>
       <p class = 'no-look-btn'> <%= link_to ("#{board.name}"), user_board_path(@user, board), class: 'no-look-btn' %> </p>

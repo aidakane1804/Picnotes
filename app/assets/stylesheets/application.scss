@@ -285,7 +285,7 @@ input#search{
 
 @media only screen and (max-width: 600px){
   input#search{
-    width: 100px;
+    width: 50px;
     border-radius: 25px;
   }
 
@@ -389,4 +389,57 @@ input#search{
 .modal-header{
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+}
+
+#searchtest{
+  background-color: white;
+  height: 26px;
+  margin-left: -25px;
+  border: none;
+  border-radius: 25px;
+}
+
+.remove-padding{
+  padding: 0;
+}
+
+.boards-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+}
+
+.board-container{
+  flex-basis: 200px;
+  text-align: center;
+  border: thin #74a89f solid
+}
+
+.add-board-btn{
+  width: 100%;
+}
+
+.board-test{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.board-test-image{
+  flex-basis: 50%;
+}
+
+.image-size{
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 600px){
+  .board-container{
+    flex-basis: 33%;
+  }
+
+  .board-container > a > img {
+    width: 100%;
+  }
 }

@@ -7,6 +7,6 @@
 <% end %>
 
 <% if reference.link.length > 8 %>
-<p> <a href = '<%= reference.link %>'> <%= reference.link %> </a> </p>
+<p> <a href = '<%= reference.link %>'> <%= truncate(reference.link, length: 40) %></a> </p>
 <% end %>
 <hr/>

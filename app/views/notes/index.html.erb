@@ -3,23 +3,42 @@
 
 <div id='note-content'></div>
 
-<% if @test %>
-  <div style = 'text-align: center; margin-bottom: 20px;'>
-    <p> Results for #<%= @test %> </p>
-  </div>
-<% end %>
-
-<div class = "notes-container">
-  <% @notes.each do |note| %>
-
-    <div class = 'note-container'>
-      <%= link_to(note_path(note), remote: true) do %>
-        <%= image_tag note.image.url(:thumb) if note.image.present? %>
-        <div class = 'note-container-text'>
-          <p class = "no-look-btn"> <%= truncate(note.title, length: 18) %> </p>
-        </div>
-      <% end %>
+  <% if @searchresult %>
+    <div style = 'text-align: center; margin-bottom: 20px;'>
+      <p> Results for #<%= @searchresult %> </p>
     </div>
   <% end %>
-</div>
+
+  <div class = "notes-container">
+    <% if @searchmodel != '2' %>
+      <% @notes.each do |note| %>
+
+        <div class = 'note-container'>
+          <%= link_to(note_path(note), remote: true) do %>
+            <%= image_tag note.image.url(:thumb) if note.image.present? %>
+            <div class = 'note-container-text'>
+              <p class = "no-look-btn"> <%= truncate(note.title, length: 18) %> </p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+    <div class = 'follows-container'>
+      <% @users.each do |user| %>
+        <%= link_to user_path(user) do %>
+        <div class = 'follow-container'>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url, class: 'follow-image' %>
+          <% else %>
+            <%= image_tag 'avatar.png', class: 'follow-image' %>
+          <% end %>
+
+          <p class = 'no-look-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
+          <p class = 'no-look-btn'> Notes: <%= user.notes.count %> </p>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
 </div>

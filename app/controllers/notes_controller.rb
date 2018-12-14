@@ -5,8 +5,16 @@ class NotesController < ApplicationController
 
   def index
     if params[:search]
-      @notes = Note.tagged_with(params[:search])
-      @test = params[:search]
+      if params[:searchtest] == '1'
+        # @notes = Note.tagged_with(params[:search])
+        @notes = Note.tagged_with(params[:search], wild: true, any: true)
+      elsif params[:searchtest] == '2'
+        @users = User.where("username ILIKE ?", "%#{params[:search]}%")
+      elsif params[:searchtest] == '3'
+        @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
+      end
+      @searchresult = params[:search]
+      @searchmodel = params[:searchtest]
     else
       @notes = Note.all
     end
@@ -102,7 +110,7 @@ class NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search)
+    params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest)
   end
 
   def find_note

@@ -17,6 +17,7 @@
 
       <%= form_tag(notes_path, method: :get) do %>
         <%= text_field_tag(:search, params[:search]) %>
+        <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['User', 2], ['Title', 3]])) %>
         <%= button_tag(type: "submit", class: 'white-btn') do %>
             <%= fa_icon('search') %>
         <% end %>
