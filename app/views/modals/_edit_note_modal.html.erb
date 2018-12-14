@@ -1,16 +1,16 @@
 <div class = "modal fade" id = 'editNoteModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editNoteModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
-      <div class = 'modal-header'>
-        <h5 class = 'modal-title' id = 'newNoteModalLabel'> Edit Note </h5>
-        <button type = 'button' class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'newNoteModalLabel' style = 'color: white;'> Edit Note </h5>
+        <button type = 'button' class = 'close' style = 'color: white;' data-dismiss = 'modal' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
       </div>
 
-      <div class = 'modal-body'>
+      <div>
         <%= simple_form_for @note do |f| %>
-          <div>
+          <div class = 'modal-body'>
             <%= f.input :title %>
             <%= f.input :body %>
             <%= f.label :tag_list, 'Tags (Please separate with commas)' %>
@@ -19,9 +19,9 @@
               <div class = 'form-spacer'> </div>
               <%= f.file_field :image %>
             </div>
-            <div class = 'form-btn-container text-center'>
-              <%= f.button :submit, remote:true, :class => 'no-look-btn' %>
-            </div>
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn'>
+            <%= f.button :submit, :class => 'white-btn btn-width' %>
           </div>
         <% end %>
       </div>

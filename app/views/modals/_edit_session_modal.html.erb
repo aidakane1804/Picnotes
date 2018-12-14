@@ -1,32 +1,36 @@
 <div class = "modal fade" id = 'editSessionModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editSessionModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
-      <div class = 'modal-header'>
-        <h5 class = 'modal-title' id = 'editSessionModalLabel'> Edit Account </h5>
-        <button type = 'button' class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'editSessionModalLabel' style = 'color:white;'> Edit Account </h5>
+        <button type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
       </div>
 
-      <div class = 'modal-body'>
+      <div>
         <%= simple_form_for @user do |f| %>
 
-          <div class = 'user-name'>
-            <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
-            <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
+          <div class = 'modal-body'>
+
+            <div class = 'user-name'>
+              <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
+              <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
+            </div>
+
+            <%= f.input :email %>
+            <div class = 'user-name'>
+              <%= f.input :password %>
+              <%= f.input :password_confirmation, label: 'Password Confirmation' %>
+            </div>
+
+            <%= f.file_field :avatar %>
+            <%= f.input :city %>
+
           </div>
 
-          <%= f.input :email %>
-          <div class = 'user-name'>
-            <%= f.input :password %>
-            <%= f.input :password_confirmation, label: 'Password Confirmation' %>
-          </div>
-
-          <%= f.file_field :avatar %>
-          <%= f.input :city %>
-
-          <div class = 'form-btn-container text-center'>
-            <%= f.button :submit, :class => 'no-look-btn'%>
+          <div class = 'form-btn-container text-center new-note-btn'>
+            <%= f.button :submit, :class => 'white-btn btn-width' %>
           </div>
         <% end %>
       </div>

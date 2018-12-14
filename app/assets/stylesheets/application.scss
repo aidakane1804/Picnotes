@@ -314,8 +314,6 @@ input#search{
 }
 
 .modal-backdrop {
-  z-index: -1;
-  opacity: 0;
 }
 
 .modal-backdrop .show{
@@ -366,4 +364,29 @@ input#search{
 
 .follow-image{
   width: 200px;
+}
+
+.modal-content{
+  border-radius: 25px;
+  border: thin #74a89f solid;
+}
+
+.new-modal-header{
+  background-color: #74a89f;
+}
+
+.new-note-btn{
+  color: white;
+  background-color: #74a89f;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.btn-width{
+  width: 100%;
+}
+
+.modal-header{
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }

@@ -21,6 +21,10 @@ class Note < ApplicationRecord
     length: {minimum: 5, maximum: 2000}
   })
 
+  validates(:image, {
+    presence: {message: 'Must have a Image'}
+    })
+
   after_initialize :set_defaults
 
   def self.search(search)

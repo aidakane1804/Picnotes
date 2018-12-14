@@ -1,22 +1,19 @@
-<div class = 'modal-header'>
-  <h1 class = "hello"> Sign Up </h1>
+<div class = 'modal-header' style = 'justify-content: center;'>
+  <h1 class = "hello"> Edit </h1>
 </div>
 
 <div class = 'modal-body'>
   <div class = "creation_form">
   <%= simple_form_for @user do |f| %>
 
-    <div class = 'user-name'>
-      <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
-      <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
-    </div>
+    <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
+    <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
 
     <%= f.input :username %>
     <%= f.input :email %>
-    <div class = 'user-name'>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation, label: 'Password Confirmation' %>
-    </div>
+    
+    <%= f.input :password %>
+    <%= f.input :password_confirmation, label: 'Password Confirmation' %>
 
     <%= f.file_field :avatar %>
     <%= f.input :city %>

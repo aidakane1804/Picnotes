@@ -16,17 +16,29 @@
       <div class = 'profile-left'>
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Followers </p>
-          <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'no-look-btn'%></p>
+          <% if @user.followers.count > 0 %>
+            <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'no-look-btn'%></p>
+          <% else %>
+            <p> <%= @user.followers.count %> </p>
+          <% end %>
         </div>
 
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Following </p>
-          <p> <%= link_to @user.following.count, following_user_path(@user), class: 'no-look-btn'%></p>
+          <% if @user.following.count > 0 %>
+            <p> <%= link_to @user.following.count, following_user_path(@user), class: 'no-look-btn'%></p>
+          <% else %>
+            <p> <%= @user.following.count %> </p>
+          <% end %>
         </div>
 
         <div class = 'content-right'>
           <p class = 'picnotes-font'> Notes </p>
-          <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'no-look-btn'%> </p>
+          <% if @user.notes.count > 0 %>
+            <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'no-look-btn'%> </p>
+          <% else %>
+            <p> <%= @user.notes.count %> </p>
+          <% end %>
         </div>
       </div>
 
