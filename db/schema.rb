@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_234532) do
     t.string "title"
     t.string "author"
     t.string "link"
+    t.string "file_type"
     t.bigint "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

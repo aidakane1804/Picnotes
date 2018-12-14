@@ -2,6 +2,20 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :current_user
 
+  def index
+    @users = current_user.followers
+  end
+
+  def followers
+    @user = current_user
+    @follower = current_user.followers
+  end
+
+  def following
+    @user = current_user
+    @following = current_user.following
+  end
+
   def new
     @user = User.new
   end

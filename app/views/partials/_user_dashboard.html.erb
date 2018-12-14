@@ -16,17 +16,17 @@
       <div class = 'profile-left'>
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Followers </p>
-          <p> <%= @user.followers.count %> </p>
+          <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'no-look-btn'%></p>
         </div>
 
         <div class = 'margin-right content-right'>
           <p class = 'picnotes-font'> Following </p>
-          <p> <%= @user.following.count %> </p>
+          <p> <%= link_to @user.following.count, following_user_path(@user), class: 'no-look-btn'%></p>
         </div>
 
         <div class = 'content-right'>
           <p class = 'picnotes-font'> Notes </p>
-          <p> <%= @user.notes.count %> </p>
+          <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'no-look-btn'%> </p>
         </div>
       </div>
 

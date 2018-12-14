@@ -47,7 +47,6 @@ gem 'rails_12factor', group: :production
 gem 'font-awesome-rails'
 gem 'acts_as_votable', '~> 0.12.0'
 gem 'omniauth-facebook'
-gem 'devise'
 gem 'thin'
 
 group :development, :test do

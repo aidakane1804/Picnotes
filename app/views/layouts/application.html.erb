@@ -11,7 +11,9 @@
 
   <body>
     <nav class = "navbar">
-      <%= link_to 'Picnotes', root_path, class: "navbar-brand" %>
+      <%= link_to root_path do %>
+        <%= image_tag 'logo-clean.png', class: 'logo-image' %>
+      <% end %>
 
       <%= form_tag(notes_path, method: :get) do %>
         <%= text_field_tag(:search, params[:search]) %>
@@ -29,7 +31,7 @@
             data-toggle = 'modal'
             data-target = '#newNoteModal'
             data-whatever = '@mdo'>
-            <%= fa_icon('pencil') %>
+            <%= fa_icon('pencil 2x') %>
           </button>
 
           <button
@@ -38,14 +40,14 @@
             data-toggle = 'modal'
             data-target = '#sessionModal'
             data-whatever = '@mdo'>
-            <%= fa_icon('user-circle') %>
+            <%= fa_icon('user-circle 2x') %>
           </button>
 
         <% else %>
 
           <button
             type = 'button'
-            class = 'btn btn-primary'
+            class = 'white-btn'
             data-toggle = 'modal'
             data-target = '#newSessionModal'
             data-whatever = '@mdo'>
@@ -54,7 +56,7 @@
 
           <button
             type = 'button'
-            class = 'btn btn-primary'
+            class = 'white-btn'
             data-toggle = 'modal'
             data-target = '#newUserModal'
             data-whatever = '@mdo'>

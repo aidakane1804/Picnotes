@@ -1,15 +1,15 @@
-<%= render './partials/user_dashboard' %>
-
-<h1 class = 'text-center'>#<%= @tag.name %></h1>
+<h1 class = 'text-center' style = 'margin-top: 30px;'>#<%= @tag.name %></h1>
 
 <div class = "notes-container">
   <% @notes.each do |note| %>
 
-    <div class = 'note-container'>
+  <div class = 'note-container'>
+    <%= link_to(note_path(note), remote: true) do %>
       <%= image_tag note.image.url(:thumb) if note.image.present? %>
       <div class = 'note-container-text'>
-        <%= link_to truncate(note.title, length: 18), note_path(note), remote: true %>
+        <p class = "no-look-btn"> <%= truncate(note.title, length: 18) %> </p>
       </div>
-    </div>
+    <% end %>
+  </div>
   <% end %>
 </div>

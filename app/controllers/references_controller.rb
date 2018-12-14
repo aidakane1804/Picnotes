@@ -4,6 +4,10 @@ class ReferencesController < ApplicationController
 
   def create
     @reference = @note.references.build(reference_params)
+    @references_unordered = Reference.where(note_id: @note.id)
+    @textbooks = @references_unordered.where(:file_type => 't')
+    @videos = @references_unordered.where(:file_type => 'v')
+    @papers = @references_unordered.where(:file_type => 'p')
     respond_to do |format|
       if @reference.save
         format.html {redirect_to note_path(@note)}
@@ -30,6 +34,6 @@ class ReferencesController < ApplicationController
   end
 
   def reference_params
-    params.require(:reference).permit(:title, :author, :link)
+    params.require(:reference).permit(:title, :author, :link, :file_type)
   end
 end

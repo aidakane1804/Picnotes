@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/rch'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/boards/:id/toggle_note' => 'boards#toggle_note', as: :toggle_board_note
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :tags, only: [:index, :show]
 
+  get 'search/index'
+
   resource :session, only: [:new, :create, :destroy, :show, :index] do
     collection do
       get :user_notes
@@ -26,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :follwers
+      get :following, :followers
     end
     resources :boards
   end
@@ -36,5 +39,5 @@ Rails.application.routes.draw do
 
   root 'notes#index'
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 end

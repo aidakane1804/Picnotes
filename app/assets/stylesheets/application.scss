@@ -41,7 +41,7 @@
  }
 
  .nav-spacing{
-   height: 100px;
+   height: 50px;
  }
 
  h1{
@@ -157,7 +157,12 @@ input.form-control{
   border-radius: 50%;
 }
 
+.logo-image{
+  width: 100px;
+}
+
 .profile-dashboard{
+  padding-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -172,6 +177,10 @@ input.form-control{
 
 a{
   text-decoration: none;
+}
+
+.profile-links{
+  color: #779892;
 }
 
 a.profile-links:active{
@@ -302,4 +311,59 @@ input#search{
   .current{
     padding-bottom: 10px;
   }
+}
+
+.modal-backdrop {
+  z-index: -1;
+  opacity: 0;
+}
+
+.modal-backdrop .show{
+  background-color: white;
+  opacity: 0;
+}
+
+.profile-dashboard{
+  background-color: white;
+}
+
+.notes-container{
+  background-color: white;
+}
+
+.similar-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.similar-note-container{
+  flex-basis: 33%;
+  border: thin #74a89f solid;
+  text-align: center;
+}
+
+.similar-note-container > a > img {
+  width: 100%;
+}
+
+.form-control{
+  border-color: #74a89f;
+}
+
+.follows-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.follow-container{
+  flex-basis: 200px;
+  text-align: center;
+  border: thin #74a89f solid;
+}
+
+.follow-image{
+  width: 200px;
 }

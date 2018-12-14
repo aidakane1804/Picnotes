@@ -6,6 +6,7 @@ class NotesController < ApplicationController
   def index
     if params[:search]
       @notes = Note.tagged_with(params[:search])
+      @test = params[:search]
     else
       @notes = Note.all
     end
@@ -14,7 +15,14 @@ class NotesController < ApplicationController
 
   def show
     @tags = @note.tags.order(created_ad: :desc)
-    @references = Reference.where(note_id: @note.id)
+    @references_unordered = Reference.where(note_id: @note.id)
+    # @references = @references_unordered.sort_by &:file_type
+    @references = @references_unordered.where(:file_type => 't')
+
+    @textbooks = @references_unordered.where(:file_type => 't')
+    @videos = @references_unordered.where(:file_type => 'v')
+    @papers = @references_unordered.where(:file_type => 'p')
+
     @reference = Reference.new
     @like = @note.likes.find_by_user_id current_user
     @dislike = @note.dislikes.find_by_user_id current_user
@@ -23,6 +31,7 @@ class NotesController < ApplicationController
     @board = Board.find_by_id(params[:board_id])
     @previous_note = @note.next
     @next_note = @note.previous
+    @similar = Note.tagged_with(@note.tags, :any => true)
     respond_to do |format|
       format.js
       format.html

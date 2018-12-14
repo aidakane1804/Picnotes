@@ -1,12 +1,5 @@
-<% if reference.title.length > 0 %>
 <p> Title: <%= reference.title %> </p>
-<% end %>
-
-<% if reference.author.length > 0 %>
 <p> Author: <%= reference.author %> </p>
-<% end %>
-
-<% if reference.link.length > 8 %>
 <p> <a href = '<%= reference.link %>'> <%= reference.link %> </a> </p>
-<% end %>
+<p> Type: <%= Reference::TYPE.find {|item| item[1] == reference.file_type }[0] %> </p>
 <hr/>

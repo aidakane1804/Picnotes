@@ -1,6 +1,13 @@
+<div style = 'background-color: white; z-index: 0; height: 100vw;'>
 <%= render './partials/user_dashboard' %>
 
 <div id='note-content'></div>
+
+<% if @test %>
+  <div style = 'text-align: center; margin-bottom: 20px;'>
+    <p> Results for #<%= @test %> </p>
+  </div>
+<% end %>
 
 <div class = "notes-container">
   <% @notes.each do |note| %>
@@ -14,4 +21,5 @@
       <% end %>
     </div>
   <% end %>
+</div>
 </div>

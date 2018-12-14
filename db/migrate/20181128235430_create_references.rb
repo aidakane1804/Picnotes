@@ -4,6 +4,7 @@ class CreateReferences < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :author
       t.string :link
+      t.string :file_type
       t.references :note, foreign_key: true, index: true
 
       t.timestamps

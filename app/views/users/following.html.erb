@@ -1,0 +1,18 @@
+<%= render './partials/user_dashboard' %>
+
+<div class = 'follows-container'>
+  <% @following.each do |user| %>
+    <%= link_to user_path(user) do %>
+    <div class = 'follow-container'>
+      <% if user.avatar? %>
+        <%= image_tag user.avatar.url, class: 'follow-image' %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: 'follow-image' %>
+      <% end %>
+
+      <p class = 'no-look-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
+      <p class = 'no-look-btn'> Notes: <%= user.notes.count %> </p>
+    </div>
+    <% end %>
+  <% end %>
+</div>

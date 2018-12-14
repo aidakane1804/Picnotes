@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   acts_as_voter
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  # devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :notes, dependent: :destroy
   has_many :likes, dependent: :destroy

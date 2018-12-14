@@ -4,6 +4,12 @@ class Reference < ApplicationRecord
 
   before_validation :smart_add_url_protocol
 
+  TYPE = [
+    ['Textbook', 't'],
+    ['Video', 'v'],
+    ['Paper', 'p']
+  ]
+
   def smart_add_url_protocol
     unless self.link[/\Ahttp:\/\//] || self.link[/\Ahttps:\/\//]
       self.link = "https://#{self.link}"
