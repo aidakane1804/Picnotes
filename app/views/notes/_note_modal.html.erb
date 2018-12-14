@@ -103,7 +103,9 @@
                 <button class = 'tablinks' onclick = 'openTab(event, "information")' id = 'defaultOpen'> Note </button>
                 <button class = 'tablinks' onclick = 'openTab(event, "references")'> Research </button>
                 <button class = 'tablinks' onclick = 'openTab(event, "similar")'> Similar </button>
+                <% if user_signed_in? %>
                 <button class = 'tablinks' onclick = 'openTab(event, "extra")'> Extra </button>
+                <% end %>
               </div>
 
               <div class = 'notes-overflow'>
@@ -129,6 +131,7 @@
                   </div>
                 </div>
 
+                <% if user_signed_in? %>
                 <div id = 'extra' class = 'tabcontent'>
                   <div class="select-board">
                     <p>Choose your board</p>
@@ -146,7 +149,7 @@
                         <%= submit_tag('Update', :name => nil, :class => 'no-look-btn') %>
                     <% end %>
                   </div>
-                  
+
                   <% if @board %>
                     <p> Add to <%= @board.name %>? </p>
                     <%= form_tag(toggle_board_note_url(@user, @board), remote: true) do |f| %>
@@ -163,6 +166,7 @@
                     <button> Report Note </button>
                   </div>
                 </div>
+              <% end %>
 
                 <%= render './references/create_reference' %>
               </div>

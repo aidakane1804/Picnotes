@@ -3,14 +3,14 @@
 
 <div id='note-content'></div>
 
-  <% if @searchresult %>
-    <div style = 'text-align: center; margin-bottom: 20px;'>
-      <p> Results for #<%= @searchresult %> </p>
-    </div>
-  <% end %>
-
   <div class = "notes-container">
     <% if @searchmodel != '2' %>
+
+      <% if @searchresult %>
+        <div style = 'text-align: center; margin-bottom: 20px;'>
+          <p> Results for #<%= @searchresult %> </p>
+        </div>
+      <% end %>
       <% @notes.each do |note| %>
 
         <div class = 'note-container'>
@@ -23,12 +23,16 @@
         </div>
       <% end %>
     <% else %>
+
     <div class = 'follows-container'>
+      <div style = 'text-align: center; margin-bottom: 20px;'>
+        <p> Results for #<%= @searchresult %> </p>
+      </div>
       <% @users.each do |user| %>
         <%= link_to user_path(user) do %>
         <div class = 'follow-container'>
           <% if user.avatar? %>
-            <%= image_tag user.avatar.url, class: 'follow-image' %>
+            <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
           <% else %>
             <%= image_tag 'avatar.png', class: 'follow-image' %>
           <% end %>

@@ -19,8 +19,7 @@ class SessionsController < ApplicationController
       flash[:notice] = 'Thank you for signing in!'
       redirect_to root_path
     else
-      flash.now[:alert] = 'Wrong email or password!'
-      render :new
+      redirect_to new_session_path
     end
   end
 

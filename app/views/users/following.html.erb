@@ -5,7 +5,7 @@
     <%= link_to user_path(user) do %>
     <div class = 'follow-container'>
       <% if user.avatar? %>
-        <%= image_tag user.avatar.url, class: 'follow-image' %>
+        <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
       <% else %>
         <%= image_tag 'avatar.png', class: 'follow-image' %>
       <% end %>
