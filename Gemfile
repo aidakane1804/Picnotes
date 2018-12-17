@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem "fog", "1.25"
 gem 'acts-as-taggable-on'
 
 # Use Capistrano for deployment

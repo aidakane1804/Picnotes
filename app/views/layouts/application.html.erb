@@ -15,7 +15,7 @@
         <%= image_tag 'logo-clean.png', class: 'logo-image' %>
       <% end %>
 
-      <div class = 'search-bar'>
+      <div class = 'search-bar non-mobile'>
 
         <%= form_tag(notes_path, method: :get) do %>
           <%= text_field_tag(:search, params[:search]) %>
