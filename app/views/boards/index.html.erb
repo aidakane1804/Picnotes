@@ -29,7 +29,20 @@
             </div>
           <% end %>
         <% end %>
-        <% if board.notes.length == 1 %>
+        <% if board.notes.length == 0 %>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+          <div class = 'board-test-image'>
+            <%= image_tag 'empty.png', class: 'image-size' %>
+          </div>
+        <% elsif board.notes.length == 1 %>
           <div class = 'board-test-image'>
             <%= image_tag 'empty.png', class: 'image-size' %>
           </div>

@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
   <div class = 'profile-dashboard'>
-    <div class = "profile-header">
+    <div class = "profile-header" style = 'margin-top: 20px;'>
       <div class = 'profile-center'>
         <div class = 'content-right'>
+          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
           <p> <%= @user.city %> </p>
-          <h1><%= @user.username %></h1>
         </div>
         <% if @user.avatar? %>
           <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
@@ -44,22 +44,36 @@
 
       <div class = 'profile-right'>
         <div class = 'content-right'>
+          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
           <p> <%= @user.city %> </p>
-          <h1><%= @user.username %></h1>
         </div>
         <% if @user.avatar? %>
-          <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+          <button
+            type = 'button'
+            class = 'no-look-btn'
+            data-toggle = 'modal'
+            data-target = '#sessionModal'
+            data-whatever = '@mdo'>
+            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+          </button>
         <% else %>
-          <%= image_tag 'avatar.png', class: 'avatar-image' %>
+          <button
+            type = 'button'
+            class = 'no-look-btn'
+            data-toggle = 'modal'
+            data-target = '#sessionModal'
+            data-whatever = '@mdo'>
+            <%= image_tag 'avatar.png', class: 'avatar-image' %>
+          </button>
         <% end %>
       </div>
     </div>
 
 
     <div class = "profile-menu">
-      <p> <%= link_to 'My Feed', root_path, class: "#{cp(root_path)} profile-links"%> </p>
-      <p> <%= link_to 'My Notes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span> </p>
-      <p> <%= link_to 'My Boards', user_boards_path(current_user), class: "#{cp(user_boards_path(current_user))} profile-links" %> <span class = 'note-count'> <%= @user.boards.count %> </span> </p>
+      <p> <%= link_to 'My Feed', feed_index_path, class: "#{cp(feed_index_path)} profile-links"%> </p>
+      <p> <%= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span> </p>
+      <p> <%= link_to 'My Folders', user_boards_path(current_user), class: "#{cp(user_boards_path(current_user))} profile-links" %> <span class = 'note-count'> <%= @user.boards.count %> </span> </p>
       <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %> <span class = 'note-count'> <%= @user.favorited_notes.count %> </span> </p>
     </div>
   </div>

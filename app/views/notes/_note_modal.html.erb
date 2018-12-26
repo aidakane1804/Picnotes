@@ -32,6 +32,10 @@
     document.getElementById(tab).style.display = 'block';
   }
 
+  $('#hamburger-menu').click(function(){
+    $('#note_menu').toggle('.hidden')
+  })
+
 </script>
 
 <div id="note-modal" class="modal fade" role="dialog">
@@ -48,22 +52,37 @@
         <div class = 'modal-header-information'>
           <div class = 'modal-header-information-title'>
             <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %> </h5>
-            <p>
-              <% if user_signed_in? && can?(:favorite, @note)%>
-                <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-                  <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
+            <div style = 'display: flex;'>
+              <button id = 'hamburger-menu' class = 'no-look-btn'>
+                  <%= fa_icon('bars') %>
+              </button>
+              <div id = 'note_menu' class = 'hidden'>
+                <p> <%= link_to 'Share', "https://www.facebook.com/sharer/sharer.php?u=http://picnotes.herokuapp.com/notes/#{note.id}", target: :_blank, class: 'no-look-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
+                <p> <button class = 'no-look-btn'> Report </button> </p>
+                <p> <%= render '/components/follow_button', :user => note.user %> </p>
+              </div>
+              <p style = 'flex-basis: 10%;'>
+                <% if user_signed_in? && can?(:favorite, @note)%>
+                  <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+                    <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
+                  <% else %>
+                    <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
+                  <% end %>
                 <% else %>
-                  <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
+                  <%= fa_icon('heart') %> <%= @note.favorites.count %>
                 <% end %>
-              <% else %>
-                <%= fa_icon('heart') %> <%= @note.favorites.count %>
-              <% end %>
-            </p>
+              </p>
+            </div>
+
           </div>
 
           <div class = 'modal-header-information-content'>
             <div>
+              <% if current_user == note.user %>
+              <p> <%= link_to note.user.username, feed_index_path, class: 'no-look-btn' %> </p>
+              <% else %>
               <p> <%= link_to note.user.username, user_path(note.user), class: 'no-look-btn' %> </p>
+              <% end %>
               <p>
                 <%= note.created_at.strftime("%m/%d/%Y") %>
                 <% if user_signed_in? && can?(:crud, @note) %>
@@ -81,9 +100,9 @@
               </p>
             </div>
             <% if note.user.avatar? %>
-              <%= image_tag note.user.avatar.url(:thumb), class: 'avatar-image' %>
+              <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
             <% else %>
-              <%= image_tag 'avatar.png', class: 'avatar-image' %>
+              <%= image_tag 'avatar.png', class: 'note-avatar-image' %>
             <% end %>
           </div>
         </div>
@@ -100,9 +119,9 @@
 
             <div class = 'note-page-text' style = "width: 100%">
               <div class = 'tab'>
-                <button class = 'tablinks' onclick = 'openTab(event, "information")' id = 'defaultOpen'> Note </button>
-                <button class = 'tablinks' onclick = 'openTab(event, "references")'> Research </button>
-                <button class = 'tablinks' onclick = 'openTab(event, "similar")'> Similar </button>
+                <button class = 'tablinks' onclick = 'openTab(event, "information")' id = 'defaultOpen'> Notes </button>
+                <button class = 'tablinks' onclick = 'openTab(event, "references")'> Resources </button>
+                <button class = 'tablinks' onclick = 'openTab(event, "similar")'> Related </button>
                 <% if user_signed_in? %>
                 <button class = 'tablinks' onclick = 'openTab(event, "extra")'> Extra </button>
                 <% end %>
@@ -160,11 +179,6 @@
                         <%= button_tag(@board.has_note?(@note)? "Remove from Board" : "Add to Board", :class => 'no-look-btn') %>
                     <% end %>
                   <% end %>
-                  <hr />
-
-                  <div style = 'text-align: center;'>
-                    <button> Report Note </button>
-                  </div>
                 </div>
               <% end %>
 

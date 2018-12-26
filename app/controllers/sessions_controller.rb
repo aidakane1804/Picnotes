@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
 
+  def index
+    @notes = current_user.following_by_type('Notes').order("created_at DESC")
+  end
+
   def show
     @user = current_user
   end
@@ -17,7 +21,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
 
       flash[:notice] = 'Thank you for signing in!'
-      redirect_to root_path
+      redirect_to feed_index_path
     else
       redirect_to new_session_path
     end

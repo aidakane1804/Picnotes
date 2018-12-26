@@ -1,12 +1,12 @@
 <% if reference.title.length > 0 %>
-<p> Title: <%= reference.title %> </p>
+  <p> Title: <%= reference.title %> </p>
 <% end %>
 
 <% if reference.author.length > 0 %>
-<p> Author: <%= reference.author %> </p>
+  <p> Author: <%= reference.author %> </p>
 <% end %>
 
 <% if reference.link.length > 8 %>
-<p> <a href = '<%= reference.link %>'> <%= truncate(reference.link, length: 40) %></a> </p>
+  <%= link_to truncate(reference.link, length: 40), reference.link, target: :_blank %>
 <% end %>
 <hr/>

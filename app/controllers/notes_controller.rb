@@ -110,7 +110,7 @@ class NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest)
+    params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)
   end
 
   def find_note

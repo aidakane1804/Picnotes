@@ -19,7 +19,9 @@ Rails.application.routes.draw do
 
   get 'search/index'
 
-  resource :session, only: [:new, :create, :destroy, :show, :index] do
+  resources :feed, only: [:index]
+
+  resource :session, only: [:index, :new, :create, :destroy, :show] do
     collection do
       get :user_notes
     end

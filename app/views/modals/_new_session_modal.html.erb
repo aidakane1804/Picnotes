@@ -11,11 +11,14 @@
       <div class = 'modal-body'>
         <%= simple_form_for :session, url: session_path do |f| %>
 
-          <%= f.input :email %>
-          <%= f.input :password %>
+          <%= f.label 'Email' %>
+          <%= f.input :email, label: false %>
+
+          <%= f.label 'Password' %>
+          <%= f.input :password, label: false %>
 
           <div class = 'form-btn-container'>
-            <%= f.button :submit, :class => 'no-look-btn' %>
+            <%= f.button :submit, 'Sign In', :class => 'no-look-btn' %>
           </div>
 
         <% end %>

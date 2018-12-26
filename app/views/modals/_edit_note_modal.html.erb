@@ -11,14 +11,21 @@
       <div>
         <%= simple_form_for @note do |f| %>
           <div class = 'modal-body'>
-            <%= f.input :title %>
-            <%= f.input :body %>
-            <%= f.label :tag_list, 'Tags (Please separate with commas)' %>
-            <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
-            <div class = 'form-flex'>
-              <div class = 'form-spacer'> </div>
-              <%= f.file_field :image %>
+            <%= f.label :title, 'Title (Required)' %>
+            <%= f.input :title, label: false %>
+            <div style = 'border: thin #74a89f solid; padding: 10px; padding-bottom: 0; border-radius: 5px;'>
+              <%= f.label :image, 'File Upload' %>
+              <div class = 'form-flex' style = 'padding-bottom: 10px;'>
+                <div class = 'form-spacer'> </div>
+                <%= f.file_field :image, :class => 'file-input-btn' %>
+              </div>
+              <%= f.label :remote_image_url, 'or Image URL' %>
+              <%= f.input :remote_image_url, label: false %>
             </div>
+            <%= f.label :body, 'Notes (Required)' %>
+            <%= f.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+            <%= f.label :tag_list, 'Tags' %>
+            <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
           </div>
           <div class = 'form-btn-container text-center new-note-btn'>
             <%= f.button :submit, :class => 'white-btn btn-width' %>

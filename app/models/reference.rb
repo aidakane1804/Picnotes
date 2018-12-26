@@ -5,7 +5,7 @@ class Reference < ApplicationRecord
   before_validation :smart_add_url_protocol
 
   TYPE = [
-    ['Textbook', 't'],
+    ['Book', 't'],
     ['Video', 'v'],
     ['Paper', 'p']
   ]

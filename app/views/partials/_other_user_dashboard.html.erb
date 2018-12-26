@@ -31,10 +31,10 @@
     </div>
 
     <div class = 'profile-right'>
-      <%= render '/components/follow_button', :user => @user %>
       <div class = 'content-right'>
-        <h1><%= @user.username %></h1>
+        <h1 style = 'margin-bottom: 0;'><%= @user.username %></h1>
         <p> <%= @user.city %> </p>
+        <%= render '/components/follow_button', :user => @user %>
       </div>
       <% if @user.avatar? %>
         <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
@@ -45,7 +45,7 @@
   </div>
 
   <div class = "profile-menu">
-    <p> <%= link_to 'My Feed', root_path, class: "#{cp(root_path)} profile-links"%> </p>
-    <p> <%= link_to 'Notes', user_path(@user), class: "profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span></p>
+    <!-- <p> <%= link_to 'My Feed', root_path, class: "#{cp(root_path)} profile-links"%> </p> -->
+    <p> <%= link_to 'Picnotes', user_path(@user), class: "#{cp(user_path)} profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span></p>
   </div>
 </div>

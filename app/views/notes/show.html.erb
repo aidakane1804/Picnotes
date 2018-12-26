@@ -2,17 +2,27 @@
   <div class = 'show-page-tab'>
     <div class = 'show-page-tab-left'>
       <h5 class = 'modal-title'> <%= @note.title %> </h5>
-      <p>
-        <% if user_signed_in? && can?(:favorite, @note)%>
-          <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-            <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
+      <div style = 'display: flex;'>
+        <button id = 'hamburger-menu' class = 'no-look-btn'>
+            <%= fa_icon('bars') %>
+        </button>
+        <div id = 'note_menu' class = 'hidden'>
+          <p> <%= link_to 'Share', "https://www.facebook.com/sharer/sharer.php?u=http://picnotes.herokuapp.com/notes/#{@note.id}", target: :_blank, class: 'no-look-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
+          <p> <button class = 'no-look-btn'> Report </button> </p>
+          <p> <%= render '/components/follow_button', :user => @note.user %> </p>
+        </div>
+        <p style = 'flex-basis: 10%;'>
+          <% if user_signed_in? && can?(:favorite, @note)%>
+            <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+              <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
+            <% else %>
+              <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
+            <% end %>
           <% else %>
-            <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
+            <%= fa_icon('heart') %> <%= @note.favorites.count %>
           <% end %>
-        <% else %>
-          <%= fa_icon('heart') %> <%= @note.favorites.count %>
-        <% end %>
-      </p>
+        </p>
+      </div>
     </div>
 
     <div class = 'show-page-tab-right'>
@@ -36,9 +46,9 @@
       </div>
       <div>
         <% if @note.user.avatar? %>
-          <%= image_tag @note.user.avatar.url(:thumb), class: 'avatar-image' %>
+          <%= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
         <% else %>
-          <%= image_tag 'avatar.png', class: 'avatar-image' %>
+          <%= image_tag 'avatar.png', class: 'note-avatar-image' %>
         <% end %>
       </div>
     </div>
@@ -194,10 +204,6 @@
             <% end %>
           </div>
           <hr />
-
-          <div style = 'text-align: center;'>
-            <button class = 'no-look-btn'> Report Note </button>
-          </div>
         </div>
 
         <%= render './references/create_reference' %>
@@ -254,6 +260,10 @@
       evt.currentTarget.className += " active";
       console.log('hi');
   }
+
+  $('#hamburger-menu').click(function(){
+    $('#note_menu').toggle('.hidden')
+  })
 </script>
 
 <%= render './modals/edit_note_modal' %>

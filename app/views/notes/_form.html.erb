@@ -1,13 +1,16 @@
 <div class = "creation_form">
 <%= simple_form_for @note do |form| %>
   <%= form.input :title %>
+  <div class = 'form-flex'>
+    <div class = 'form-spacer'> </div>
+    <%= form.label :image, 'File Upload' %>
+    <%= form.file_field :image, :class => 'file-input-btn' %>
+  </div>
+  <%= form.label :remote_image_url, 'Image URL' %>
+  <%= form.input :remote_image_url, label: false %>
   <%= form.input :body %>
   <%= form.label :tag_list, 'Tags (Please separate with commas)' %>
   <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false %>
-  <div class = 'form-flex'>
-    <div class = 'form-spacer'> </div>
-    <%= form.file_field :image %>
-  </div>
   <div class = 'form-btn-container text-center'>
     <%= form.button :submit, :class => 'no-look-btn' %>
   </div>

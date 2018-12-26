@@ -19,7 +19,20 @@
 
         <%= form_tag(notes_path, method: :get) do %>
           <%= text_field_tag(:search, params[:search]) %>
-          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['User', 2], ['Title', 3]])) %>
+
+
+          <% if @searchmodel %>
+            <% if @searchmodel == '3' %>
+              <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
+            <% elsif @searchmodel == '2' %>
+              <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
+            <% else %>
+              <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+            <% end %>
+          <% else %>
+          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+          <% end %>
+
           <%= button_tag(type: "submit", class: 'no-look-btn') do %>
               <%= fa_icon('search') %>
           <% end %>
@@ -39,20 +52,15 @@
             <%= fa_icon('pencil 2x') %>
           </button>
 
-          <button
-            type = 'button'
-            class = 'white-btn'
-            data-toggle = 'modal'
-            data-target = '#sessionModal'
-            data-whatever = '@mdo'>
+          <%= link_to feed_index_path, class: 'white-btn' do %>
             <%= fa_icon('user-circle 2x') %>
-          </button>
+          <% end %>
 
         <% else %>
 
           <button
             type = 'button'
-            class = 'white-btn'
+            class = 'white-btn entrance-btn'
             data-toggle = 'modal'
             data-target = '#newSessionModal'
             data-whatever = '@mdo'>
@@ -61,7 +69,7 @@
 
           <button
             type = 'button'
-            class = 'white-btn'
+            class = 'white-btn entrance-btn'
             data-toggle = 'modal'
             data-target = '#newUserModal'
             data-whatever = '@mdo'>
