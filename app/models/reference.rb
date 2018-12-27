@@ -7,7 +7,7 @@ class Reference < ApplicationRecord
   TYPE = [
     ['Book', 't'],
     ['Video', 'v'],
-    ['Paper', 'p']
+    ['Article', 'p']
   ]
 
   def smart_add_url_protocol
