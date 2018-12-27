@@ -17,7 +17,7 @@
 // .note-container{
 //   flex-basis: 200px;
 //   text-align: center;
-//   border: thin solid #74a89f;
+//   border: thin solid #EAB38B;
 // }
 
 .notes-outer-container{
@@ -32,7 +32,7 @@
 
 .note-container{
   text-align: center;
-  border: thin solid #74a89f;
+  border: thin solid #EAB38B;
 }
 
 .add-note-btn{
@@ -143,7 +143,7 @@
     overflow: hidden;
     display: flex;
     border: 1px solid #ccc;
-    background-color: #74a89f;
+    background-color: #EAB38B;
     justify-content: space-between;
 }
 
@@ -164,12 +164,12 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #98d1c7;
+    background-color: #EACCB5;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #98d1c7;
+    background-color: #EACCB5;
 }
 
 /* Style the tab content */
@@ -270,5 +270,5 @@
 }
 
 .reference-tab:hover{
-  border-bottom: thick #74a89f solid;
+  border-bottom: thick #EAB38B solid;
 }

@@ -24,7 +24,7 @@
  }
 
  .navbar{
-   background-color: #74a89f;
+   background-color: #EAB38B;
    width: 100%;
    position: fixed;
    z-index: 10;
@@ -196,27 +196,27 @@ a{
 }
 
 .profile-links{
-  color: #779892;
+  color: #EAB38B;
 }
 
 a.profile-links:active{
   text-decoration: none;
   padding-bottom: 5px;
-  border-bottom: thick #779892 solid;
+  border-bottom: thick #EAB38B solid;
 }
 
 .current{
   text-decoration: none;
   padding-bottom: 8px;
-  border-bottom: thick #779892 solid;
+  border-bottom: thick #EAB38B solid;
 }
 
 a.profile-links:hover{
-  color: #779892;
+  color: #EAB38B;
   font-weight: 700;
   text-decoration: none;
   padding-bottom: 8px;
-  border-bottom: thick #779892 solid;
+  border-bottom: thick #EAB38B solid;
 }
 
 .content-right{
@@ -228,7 +228,7 @@ a.profile-links:hover{
 }
 
 .note-count{
-  color: #779892;
+  color: #EAB38B;
 }
 
 .board-spacer{
@@ -241,7 +241,7 @@ a.profile-links:hover{
 .picnotes-font{
   font-size: 20px;
   font-weight: 700;
-  color: #779892;
+  color: #EAB38B;
 }
 
 .modal-header-information{
@@ -263,11 +263,11 @@ a.profile-links:hover{
 .no-look-btn{
   background-color: transparent;
   border: 0;
-  color: rgba(116, 168, 159, 1);
+  color: rgba(234, 204, 181, 1);
 }
 
 .no-look-btn:hover{
-  color: rgba(116, 168, 159, 0.5);
+  color: rgba(234, 204, 181, 0.5);
   text-decoration: none;
 }
 
@@ -359,7 +359,7 @@ input#search{
 
 .similar-note-container{
   flex-basis: 33%;
-  border: thin #74a89f solid;
+  border: thin #EAB38B solid;
   text-align: center;
 }
 
@@ -368,7 +368,7 @@ input#search{
 }
 
 .form-control{
-  border-color: #74a89f;
+  border-color: #EAB38B;
 }
 
 .follows-container{
@@ -382,7 +382,7 @@ input#search{
 .follow-container{
   flex-basis: 200px;
   text-align: center;
-  border: thin #74a89f solid;
+  border: thin #EAB38B solid;
 }
 
 .follow-image{
@@ -391,16 +391,16 @@ input#search{
 
 .modal-content{
   border-radius: 25px;
-  border: thin #74a89f solid;
+  border: thin #EAB38B solid;
 }
 
 .new-modal-header{
-  background-color: #74a89f;
+  background-color: #EAB38B;
 }
 
 .new-note-btn{
   color: white;
-  background-color: #74a89f;
+  background-color: #EAB38B;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -437,7 +437,7 @@ input#search{
 .board-container{
   flex-basis: 200px;
   text-align: center;
-  border: thin #74a89f solid
+  border: thin #EAB38B solid
 }
 
 .add-board-btn{
@@ -503,7 +503,7 @@ input#search{
 
 .entrance-btn:hover{
   background-color: white;
-  color: #74a89f;
+  color: #EAB38B;
   transition: 1.2s;
 }
 
@@ -519,7 +519,7 @@ input#search{
 
 .note-image{
   border-bottom-left-radius: 10px;
-  border-right: thin #74a89f solid
+  border-right: thin #EAB38B solid
 }
 
 .dislike-color{
@@ -536,7 +536,7 @@ input#search{
   background-color: white;
   width: 150px;
   z-index: 99;
-  border: thin #74a89f solid;
+  border: thin #EAB38B solid;
 }
 
 .hidden{

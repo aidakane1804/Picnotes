@@ -5,7 +5,7 @@ function openReference(tab){
   var x = document.getElementsByClassName('click-reference');
   for (i = 0; i < x.length; i++) {
     x[i].style.display = 'none';
-    x[i].style.borderBottom = 'thick #FFF solid';
+    x[i].style.borderBottom = 'thick #fff solid';
   }
   document.getElementById(tab).style.display = 'block';
 }
@@ -36,7 +36,7 @@ function openReference(tab){
     <% if current_user %>
       <% if current_user.username == @note.user.username %>
         <div id = 'Add' class = 'click-reference' style = 'display: none;'>
-          <div id = 'Added-Reference' style = 'text-align: center; color: #74a89f;'>
+          <div id = 'Added-Reference' style = 'text-align: center; color: #EAB38B;'>
           </div>
           <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
             <div>
