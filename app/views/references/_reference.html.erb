@@ -9,4 +9,14 @@
 <% if reference.link.length > 8 %>
   <%= link_to truncate(reference.link, length: 40), reference.link, target: :_blank %>
 <% end %>
+
+<p>
+  <%= link_to(
+    'Delete',
+    reference_path(reference),
+    data: {confirm: 'Are you sure?'},
+    method: :delete,
+    class: 'no-look-btn'
+  ) %>
+</p>
 <hr/>

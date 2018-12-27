@@ -27,6 +27,7 @@
    background-color: #74a89f;
    width: 100%;
    position: fixed;
+   z-index: 10;
  }
 
  .avatar-image:hover{
@@ -540,4 +541,12 @@ input#search{
 
 .hidden{
   display: none;
+}
+
+@media only screen and (max-width: 590px){
+  .modal-lg{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }

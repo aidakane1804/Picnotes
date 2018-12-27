@@ -1,0 +1,34 @@
+<div id = 'introModal' style = 'position: absolute; width: 100vw; height: 100vh; background-color: rgba( 70, 70, 70, 0.7);'>
+  <div style = 'min-width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #74a89f; border-radius: 10px;'>
+    <button id = 'closeModal' class = 'white-btn' style = 'float: right'>
+        <span aria-hidden = 'true'> &times; </span>
+    </button>
+    <div style = "padding: 20px; text-align: center;">
+      <h1> Share your Knowledge </h1>
+      <p style = 'padding-bottom: 20px;'> Join Picnotes, a platform full of knowledge essentials. </p>
+      <button
+        type = 'button'
+        class = 'white-btn entrance-btn'
+        data-toggle = 'modal'
+        data-target = '#newSessionModal'
+        data-whatever = '@mdo'>
+        Sign In
+      </button>
+
+      <button
+        type = 'button'
+        class = 'white-btn entrance-btn'
+        data-toggle = 'modal'
+        data-target = '#newUserModal'
+        data-whatever = '@mdo'>
+        Sign Up
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#closeModal').click(function(){
+  $('#introModal').toggle('.hidden')
+})
+</script>

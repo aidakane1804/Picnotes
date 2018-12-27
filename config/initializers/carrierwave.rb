@@ -5,5 +5,5 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] || '',
     region: 'us-west-1'
   }
-  config.fog_directory  = "picnotes"
+  config.fog_directory  = "picnotes-2019"
 end

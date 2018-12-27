@@ -1,15 +1,19 @@
 <div class = "creation_form">
 <%= simple_form_for @note do |form| %>
-  <%= form.input :title %>
+  <%= form.label :title, 'Title (Required)' %>
+  <%= form.input :title, label: false %>
   <div class = 'form-flex'>
+    <p style = 'color: red;'> Must include an image either through uploading or by link </p>
     <div class = 'form-spacer'> </div>
+
     <%= form.label :image, 'File Upload' %>
     <%= form.file_field :image, :class => 'file-input-btn' %>
   </div>
   <%= form.label :remote_image_url, 'Image URL' %>
   <%= form.input :remote_image_url, label: false %>
-  <%= form.input :body %>
-  <%= form.label :tag_list, 'Tags (Please separate with commas)' %>
+  <%= form.label :body, 'Notes (Required)' %>
+  <%= form.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+  <%= form.label :tag_list, 'Tags' %>
   <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false %>
   <div class = 'form-btn-container text-center'>
     <%= form.button :submit, :class => 'no-look-btn' %>

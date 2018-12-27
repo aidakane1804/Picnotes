@@ -1,4 +1,17 @@
+<script>
+  $(window).on('load', function(){
+    $('myModal').modal('show');
+    console.log('hi');
+  })
+</script>
+
 <div id='note-content'></div>
+
+<% if user_signed_in? %>
+
+<% else %>
+  <%= render './modals/intro_modal' %>
+<% end %>
 
 <% if @searchmodel != '2' %>
 

@@ -61,7 +61,7 @@
                 <p> <button class = 'no-look-btn'> Report </button> </p>
                 <p> <%= render '/components/follow_button', :user => note.user %> </p>
               </div>
-              <p style = 'flex-basis: 10%;'>
+              <p>
                 <% if user_signed_in? && can?(:favorite, @note)%>
                   <% unless current_user.favorited_notes.exists?(id: @note.id) %>
                     <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
