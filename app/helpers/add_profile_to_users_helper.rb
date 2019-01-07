@@ -1,0 +1,2 @@
+module AddProfileToUsersHelper
+end

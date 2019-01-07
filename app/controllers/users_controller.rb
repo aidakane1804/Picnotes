@@ -7,13 +7,13 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @user = current_user
-    @follower = current_user.followers
+    @user = User.find params[:id]
+    @follower = @user.followers
   end
 
   def following
-    @user = current_user
-    @following = current_user.following
+    @user = User.find params[:id]
+    @following = @user.following
   end
 
   def new
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
 
     if @user.save
+      SignupMailer.signup_email(@user).deliver
       session[:user_id] = @user.id
 
       flash[:notice] = 'Thank you for signing up!'
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
 
   def update
       if @user.update(user_params)
-        redirect_to root_path
+        redirect_to feed_index_path
       else
         redirect_to edit_user_path(@user)
       end
@@ -54,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :city, :date_of_birth, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :city, :date_of_birth, :avatar, :message)
   end
 end

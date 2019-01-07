@@ -13,7 +13,21 @@
           <div style = 'flex-basis: 50%;'>
             <p> Name: <%= @user.first_name %> <%= @user.last_name %> </p>
             <p> Username: <%= @user.username %> </p>
-            <p> City: <%= @user.city %> </p>
+            <p style = 'padding-bottom: 20px;'> City: <%= @user.city %> </p>
+            <%= simple_form_for @user do |f| %>
+              <style>
+                .form-group{
+                  margin-bottom: 0;
+                }
+                .form-control-label{
+                  margin-bottom: 0;
+                }
+              </style>
+              <%= f.input :message, maxlength: 20, label: 'Profile Message', style: 'margin-bottom: 0px;' %>
+              <div class = 'form-btn-container'>
+                <%= f.button :submit, 'Update Message', :class => 'blue-appearance-btn', :style => 'padding: 0; margin-bottom: 10px;' %>
+              </div>
+            <% end %>
           </div>
 
           <div style = "flex-basis: 50%; display: flex; justify-content: center;">
@@ -27,15 +41,16 @@
 
         <button
           type = 'button'
-          class = 'no-look-btn'
+          class = 'blue-appearance-btn'
           data-toggle = 'modal'
           data-target = '#editSessionModal'
           data-whatever = '@mdo'
-          data-dismiss="modal">
+          data-dismiss="modal"
+          style = 'padding: 0;'>
           Edit
         </button>
 
-        <%= link_to 'Sign Out', session_path, method: :delete, class: 'no-look-btn' %>
+        <%= link_to 'Sign Out', session_path, method: :delete, class: 'blue-appearance-btn' %>
       </div>
     </div>
   </div>

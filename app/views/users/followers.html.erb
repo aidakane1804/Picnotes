@@ -1,18 +1,20 @@
 <%= render './partials/user_dashboard' %>
 
-<div class = 'follows-container'>
+<div class = 'flex-center'>
+  <div class = "notes-container" style = 'margin-top: 20px;'>
   <% @follower.each do |user| %>
     <%= link_to user_path(user) do %>
-    <div class = 'follow-container'>
+    <div class = 'text-center'>
       <% if user.avatar? %>
         <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
       <% else %>
         <%= image_tag 'avatar.png', class: 'follow-image' %>
       <% end %>
 
-      <p class = 'no-look-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
-      <p class = 'no-look-btn'> Notes: <%= user.notes.count %> </p>
+      <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
+      <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
     </div>
     <% end %>
   <% end %>
+  </div>
 </div>

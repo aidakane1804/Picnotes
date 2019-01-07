@@ -13,41 +13,33 @@
  *= require_tree .
  *= require_self
  *= require chosen
+ *= require dropzone/dropzone
  */
 
  @import 'bootstrap';
  @import 'font-awesome';
+
+ .image-upload > input{
+   display: none;
+ }
+
+ .image-upload > label{
+   cursor: pointer;
+   text-align: center;
+   padding-right: 0;
+ }
 
  p{
    margin-bottom: 0;
    // word-break: break-all;
  }
 
- .navbar{
-   background-color: #EAB38B;
-   width: 100%;
-   position: fixed;
-   z-index: 10;
- }
-
  .avatar-image:hover{
    opacity: 0.5;
  }
 
- .navbar-brand{
-   color: white;
- }
-
- // .btn{
- //   color: #FFF;
- // }
-
  a:hover{
    color: #DDD;
- }
-
- .nav-spacing{
-   height: 50px;
  }
 
  h1{
@@ -72,68 +64,6 @@
    padding-bottom: 5px;
    border-bottom: thick #ebf2f3 solid;
  }
-
-// .simple_form label{
-//   width: 30%;
-//   display: inline-block;
-// }
-//
-// .simple_form input{
-//   width: 70%;
-// }
-//
-// .simple_form textarea{
-//   width: 70%;
-// }
-//
-// .form-flex{
-//   display: flex;
-// }
-//
-// .form-spacer{
-//   flex-basis: 30%;
-//   height: 2px;
-// }
-//
-// .form-btn-container{
-//   display: flex;
-//   justify-content: center;
-//   margin-top: 20px;
-// }
-//
-// .form-btn{
-//   width: 200px !important;
-// }
-//
-// input#user_city{
-//   width: 30px;
-// }
-//
-// label.collection_radio_buttons{
-//   margin-top: 3px;
-//   margin-bottom: 0px;
-// }
-//
-// span.radio{
-//   display: flex;
-//   flex-wrap: nowrap;
-//   align-items: center;
-// }
-//
-// label.radio_buttons.optional{
-//   margin-top: 3px;
-//   margin-bottom: 0;
-// }
-//
-// div.input.radio_buttons{
-//   display: flex;
-//   flex-wrap: nowrap;
-// }
-
-.modal-lg{
-  max-width: 1200px;
-  width: 80%;
-}
 
 label{
   width: auto;
@@ -195,42 +125,6 @@ a{
   text-decoration: none;
 }
 
-.profile-links{
-  color: #EAB38B;
-}
-
-a.profile-links:active{
-  text-decoration: none;
-  padding-bottom: 5px;
-  border-bottom: thick #EAB38B solid;
-}
-
-.current{
-  text-decoration: none;
-  padding-bottom: 8px;
-  border-bottom: thick #EAB38B solid;
-}
-
-a.profile-links:hover{
-  color: #EAB38B;
-  font-weight: 700;
-  text-decoration: none;
-  padding-bottom: 8px;
-  border-bottom: thick #EAB38B solid;
-}
-
-.content-right{
-  text-align: right;
-}
-
-.margin-right{
-  margin-right: 20px;
-}
-
-.note-count{
-  color: #EAB38B;
-}
-
 .board-spacer{
   width: 200px;
   height: 200px;
@@ -260,28 +154,6 @@ a.profile-links:hover{
   display: flex;
 }
 
-.no-look-btn{
-  background-color: transparent;
-  border: 0;
-  color: rgba(234, 204, 181, 1);
-}
-
-.no-look-btn:hover{
-  color: rgba(234, 204, 181, 0.5);
-  text-decoration: none;
-}
-
-.white-btn{
-  background-color: transparent;
-  border: 0;
-  color: white;
-}
-
-.white-btn:hover{
- color: rgba(255, 255, 255, 0.5);
- text-decoration: none;
-}
-
 input#search{
   width: 400px;
   border-radius: 25px;
@@ -291,7 +163,7 @@ input#search{
   display: none;
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1075px){
   input#search{
     width: 300px;
     border-radius: 25px;
@@ -324,6 +196,7 @@ input#search{
     flex-basis: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
   }
 
@@ -352,61 +225,8 @@ input#search{
   background-color: white;
 }
 
-.similar-container{
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.similar-note-container{
-  flex-basis: 33%;
-  border: thin #EAB38B solid;
-  text-align: center;
-}
-
-.similar-note-container > a > img {
-  width: 100%;
-}
-
-.form-control{
-  border-color: #EAB38B;
-}
-
-.follows-container{
-  display: flex;
-  flex-wrap: wrap;
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-.follow-container{
-  flex-basis: 200px;
-  text-align: center;
-  border: thin #EAB38B solid;
-}
-
 .follow-image{
   width: 200px;
-}
-
-.modal-content{
-  border-radius: 25px;
-  border: thin #EAB38B solid;
-}
-
-.new-modal-header{
-  background-color: #EAB38B;
-}
-
-.new-note-btn{
-  color: white;
-  background-color: #EAB38B;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.btn-width{
-  width: 100%;
 }
 
 .modal-header{
@@ -466,14 +286,6 @@ input#search{
     width: 100%;
   }
 
-  .follows-container{
-    flex-basis: 33%;
-  }
-
-  .follow-container{
-    flex-basis: 33%;
-  }
-
   .follow-image{
     width: 100%;
   }
@@ -485,26 +297,6 @@ input#search{
   .mobile-font{
     font-size: 12px;
   }
-}
-
-.search-bar{
-  border-radius: 25px;
-  background-color: white;
-}
-
-.entrance-btn{
-  font-size: 15px;
-  text-transform: uppercase;
-  border: thin white solid;
-  border-radius: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.entrance-btn:hover{
-  background-color: white;
-  color: #EAB38B;
-  transition: 1.2s;
 }
 
 .modal-header{
@@ -519,7 +311,6 @@ input#search{
 
 .note-image{
   border-bottom-left-radius: 10px;
-  border-right: thin #EAB38B solid
 }
 
 .dislike-color{
@@ -530,23 +321,269 @@ input#search{
   font-size: 15px;
 }
 
-#note_menu{
-  position: absolute;
-  margin-top: 28px;
-  background-color: white;
-  width: 150px;
-  z-index: 99;
-  border: thin #EAB38B solid;
-}
-
-.hidden{
-  display: none;
-}
-
 @media only screen and (max-width: 590px){
   .modal-lg{
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
   }
+}
+
+.user_first_name{
+  flex-basis: 45%;
+}
+
+.user_last_name{
+  flex-basis: 45%;
+}
+
+.password{
+  flex-basis: 45%;
+}
+
+/* ---------------------------------------------------- Colors ---------------------------------------------------- */
+
+ $color-blue: #3b5998;
+ $color-white: white;
+ $color-grey: #666;
+ $color-red: #bc181d;
+ $color-light-blue: #8b9dc3;
+
+/* ---------------------------------------------------- Text Style ---------------------------------------------------- */
+
+/* Alignment */
+.text-center{
+  text-align: center;
+}
+
+.text-right{
+  text-align: right;
+}
+
+/* Text Color */
+.text-white{
+  color: $color-white;
+}
+
+.text-grey{
+  color: $color-grey;
+}
+
+/* ---------------------------------------------------- Alignment ---------------------------------------------------- */
+
+/* Float */
+
+.float-right{
+  float: right;
+}
+
+/* Padding */
+
+.remove-padding{
+  padding: 0;
+}
+
+.padding-20{
+  padding: 20px;
+}
+
+.padding-bottom-20{
+  padding-bottom: 20px;
+}
+
+/* Margin */
+
+.margin-right-20{
+  margin-right: 20px;
+}
+
+/* Flex */
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------------------------------------------------- Buttons ---------------------------------------------------- */
+
+.blue-btn{
+  color: $color-white;
+  background-color: $color-blue;
+  border: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: thin $color-blue solid;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.blue-btn:hover{
+  color: $color-white;
+  background-color: $color-light-blue;
+  border: thin $color-blue solid;
+}
+
+.inverse-blue-btn{
+  color: $color-blue;
+  background-color: $color-white;
+  border: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: thin $color-blue solid;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.inverse-blue-btn:hover{
+  color: $color-white;
+  background-color: $color-light-blue;
+  border: thin $color-blue solid;
+}
+
+.white-btn{
+  background-color: transparent;
+  border: 0;
+  color: $color-white;
+}
+
+.white-btn:hover{
+ color: rgba(255, 255, 255, 0.5);
+ text-decoration: none;
+}
+
+.blue-appearance-btn{
+  background-color: transparent;
+  border: 0;
+  color: $color-blue;
+}
+
+.blue-appearance-btn:hover{
+  color: $color-light-blue;
+  text-decoration: none;
+}
+
+.new-note-btn{
+  color: white;
+  background-color: $color-blue;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btn-width{
+  width: 100%;
+}
+
+/* ---------------------------------------------------- Nav Bar ---------------------------------------------------- */
+
+.navbar{
+  background-color: $color-white;
+  -webkit-box-shadow: 0 8px 6px -6px $color-grey;
+  -moz-box-shadow: 0 8px 6px -6px $color-grey;
+  box-shadow: 0 8px 6px -6px $color-grey;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+}
+
+.navbar-brand{
+  color: $color-white;
+}
+
+.nav-spacing{
+  height: 50px;
+}
+
+.search-bar{
+  border-radius: 25px;
+  background-color: $color-white;
+  border: thin $color-blue solid;
+}
+
+/* ---------------------------------------------------- Profile Links ---------------------------------------------------- */
+
+.profile-links{
+  color: $color-blue;
+}
+
+a.profile-links:active{
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: thick $color-blue solid;
+}
+
+.current{
+  text-decoration: none;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: thick $color-blue solid;
+}
+
+a.profile-links:hover{
+  color: $color-blue;
+  font-weight: 700;
+  text-decoration: none;
+  padding-bottom: 8px;
+  border-bottom: thick $color-blue solid;
+}
+
+.note-count{
+  color: $color-blue;
+}
+
+/* ---------------------------------------------------- Intro Modal ---------------------------------------------------- */
+
+#introModal{
+  position: fixed;
+  width: 100vw;
+  height: 95vh;
+  background-color: rgba( 70, 70, 70, 0.7);
+  z-index: 9;
+}
+
+.introModalStyle{
+  width: 800px;
+  min-width: 250px;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: thin $color-white solid ;
+  border-radius: 10px;
+}
+
+.intro-image{
+  width: 300px;
+  padding-bottom: 20px;
+  border-bottom: 1px $color-red solid;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 800px){
+  .introModalStyle{
+    width: 600px;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .introModalStyle{
+    width: 300px;
+  }
+}
+
+/* Forms */
+
+.form-control{
+  border-color: $color-blue;
+}
+
+.image-upload-box{
+  border: thin $color-blue solid;
+  padding: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }

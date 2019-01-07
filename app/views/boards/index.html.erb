@@ -6,12 +6,12 @@
   <div class = 'board-container'>
     <button
       type = 'button'
-      class = 'no-look-btn remove-padding'
+      class = 'blue-appearance-btn remove-padding'
       data-toggle = 'modal'
       data-target = '#newBoardModal'
       data-whatever = '@mdo'>
       <%= image_tag 'add.png', class: 'add-board-btn' %>
-      New Board
+      New Folder
     </button>
   </div>
 
@@ -65,7 +65,7 @@
           </div>
         <% end %>
       </div>
-      <p class = 'no-look-btn'> <%= link_to ("#{board.name}"), user_board_path(@user, board), class: 'no-look-btn' %> </p>
+      <p class = 'blue-appearance-btn'> <%= link_to ("#{board.name}"), user_board_path(@user, board), class: 'blue-appearance-btn' %> </p>
     </div>
   <% end %>
 </div>

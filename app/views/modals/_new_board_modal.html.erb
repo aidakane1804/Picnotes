@@ -2,7 +2,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'newBoardModalLabel' style = 'color: white;'> Create New Board </h5>
+        <h5 class = 'modal-title' id = 'newBoardModalLabel' style = 'color: white;'> Create New Folder </h5>
         <button type = 'button' class = 'close' style = 'color: white;' data-dismiss = 'modal' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
@@ -14,7 +14,7 @@
             <%= form.input :name %>
           </div>
           <div class = 'form-btn-container text-center new-note-btn'>
-            <%= form.button :submit, :class => 'white-btn btn-width' %>
+            <%= form.button :submit, 'New Folder', :class => 'white-btn btn-width' %>
           </div>
         <% end %>
       </div>

@@ -21,14 +21,14 @@
     </div>
   <% end %>
 
-  <div class = 'notes-outer-container'>
+  <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
       <% @notes.each do |note| %>
-        <div class = 'note-container'>
+        <div class = 'text-center'>
           <%= link_to(note_path(note), remote: true) do %>
           <%= image_tag note.image.url(:thumb) if note.image.present? %>
           <div class = 'note-container-text'>
-            <p class = "no-look-btn mobile-font note-btn-font"> <%= truncate(note.title, length: 25) %> </p>
+            <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 40) %> </p>
           </div>
           <% end %>
         </div>
@@ -42,19 +42,18 @@
     <p> User with the name: <%= @searchresult %> </p>
   </div>
 
-  <div class = 'notes-outer-container'>
+  <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
-      <div class = 'follows-container'>
         <% @users.each do |user| %>
           <%= link_to user_path(user) do %>
-            <div class = 'follow-container'>
+            <div class = 'text-center'>
               <% if user.avatar? %>
                 <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
               <% else %>
                 <%= image_tag 'avatar.png', class: 'follow-image' %>
               <% end %>
-              <p class = 'no-look-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
-              <p class = 'no-look-btn'> Notes: <%= user.notes.count %> </p>
+              <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
+              <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
             </div>
           <% end %>
         <% end %>

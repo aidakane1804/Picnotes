@@ -2,76 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.hello {
-  text-align: center;
-}
-
-// .notes-container {
-//   display: flex;
-//   width: 90%;
-//   margin-left: 5%;
-//   margin-right: 5%;
-//   flex-wrap: wrap;
-// }
-//
-// .note-container{
-//   flex-basis: 200px;
-//   text-align: center;
-//   border: thin solid #EAB38B;
-// }
-
-.notes-outer-container{
-  display: flex;
-  justify-content: center;
-}
-
-.notes-container{
-  display: grid;
-  grid-template-columns: 202px 202px 202px 202px 202px;
-}
-
-.note-container{
-  text-align: center;
-  border: thin solid #EAB38B;
-}
-
 .add-note-btn{
   width: 100%;
 }
 
 .note-btn-font{
   font-size: 14px;
-}
-
-.note-page-content-text{
-  word-wrap: break-word;
-}
-
-@media only screen and (max-width: 1100px){
-  .notes-container{
-    grid-template-columns: 202px 202px 202px 202px;
-  }
-}
-
-@media only screen and (max-width: 890px){
-  .notes-container{
-    grid-template-columns: 202px 202px 202px;
-  }
-}
-
-@media only screen and (max-width: 670px){
-  .notes-container{
-    width: 90%;
-    grid-template-columns: 33% 33% 33%;
-  }
-}
-
-.note-container-text{
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  word-wrap: break-word;
 }
 
 .creation_form{
@@ -95,14 +31,6 @@
 .note-page-content{
   display: flex;
   justify-content: space-between;
-}
-
-.notes-overflow{
-  height: 402px;
-  overflow: scroll;
-  border-bottom: thin #ddd solid;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .like-container{
@@ -138,17 +66,110 @@
   text-align: center;
 }
 
+.note-arrow{
+  flex-basis: 10%;
+  text-align: center;
+}
+
+/* ---------------------------------------------------- Colors ---------------------------------------------------- */
+
+ $color-blue: #3b5998;
+ $color-white: white;
+ $color-grey: #666;
+ $color-red: #bc181d;
+ $color-light-blue: #8b9dc3;
+
+/* ---------------------------------------------------- Grid ---------------------------------------------------- */
+
+/* Note Display */
+
+.notes-container{
+  display: grid;
+  grid-template-columns: 202px 202px 202px 202px 202px;
+  grid-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+@media only screen and (max-width: 1100px){
+  .notes-container{
+    grid-template-columns: 202px 202px 202px 202px;
+  }
+}
+
+@media only screen and (max-width: 890px){
+  .notes-container{
+    grid-template-columns: 202px 202px 202px;
+  }
+}
+
+@media only screen and (max-width: 670px){
+  .notes-container{
+    width: 90%;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 5%;
+    grid-row-gap: 10px;
+  }
+}
+
+/* Similar Display */
+
+.similar-notes-container{
+  display: grid;
+  grid-template-columns: 90px 90px 90px;
+  grid-gap: 3px;
+}
+
+.similar-note-image{
+  width: 100%;
+}
+
+@media only screen and (max-width: 1250px){
+  .similar-notes-container{
+    grid-template-columns: 100px 100px 100px;
+  }
+}
+
+@media only screen and (max-width: 1075px){
+  .similar-notes-container{
+    grid-template-columns: 200px 200px 200px;
+  }
+}
+
+@media only screen and (max-width: 825px){
+  .similar-notes-container{
+    grid-template-columns: 150px 150px 150px;
+  }
+}
+
+@media only screen and (max-width: 630px){
+  .similar-notes-container{
+    grid-template-columns: 125px 125px;
+  }
+}
+
+.similar-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tabcontent{
+  padding: 0;
+}
+
+/* Tab Display */
+
 /* Style the tab */
 .tab{
     overflow: hidden;
     display: flex;
-    border: 1px solid #ccc;
-    background-color: #EAB38B;
+    border: 1px solid $color-grey;
+    background-color: $color-blue;
     justify-content: space-between;
 }
 
 .tablinks{
-  flex-basis: 25%;
+  flex-basis: 33%;
+  color: $color-white;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -164,24 +185,106 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #EACCB5;
+    background-color: $color-light-blue;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #EACCB5;
+    background-color: $color-light-blue;
 }
 
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
     border-top: none;
 }
 
-.note-arrow{
-  flex-basis: 10%;
+/* Reference Display */
+
+.reference-tabs{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 10px;
+  border-bottom: thick $color-light-blue solid;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.reference-tab{
+  flex-basis: 33%;
+  background-color: $color-white;
+  border: 0;
+  border-bottom: thick $color-light-blue solid;
+  margin-bottom: -4px;
+}
+
+.reference-tab:hover{
+  border-bottom: thick $color-blue solid;
+}
+
+/* Notes Overflow */
+
+.notes-overflow{
+  height: 402px;
+  overflow: scroll;
+  border-bottom: thin $color-grey solid;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.note-page-text{
+  width: 300px;
+}
+
+.note-page-content-text{
+  margin-top: 20px;
+}
+
+/* Individual Note Title */
+
+.note-container-text{
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  word-wrap: break-word;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  height: 2.4em;
+  text-align: left;
+  color: $color-grey;
+}
+
+.note-container-text-center{
+  margin-top: 0.4em;
+  // word-wrap: break-word;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  height: 2.4em;
   text-align: center;
+  color: $color-grey;
+}
+
+/* Note Menu */
+
+#note_menu{
+  position: absolute;
+  margin-top: 28px;
+  background-color: $color-white;
+  width: 150px;
+  z-index: 99;
+  border: thin $color-blue solid;
+}
+
+.hidden{
+  display: none;
+}
+
+/* Modal Header */
+
+.new-modal-header{
+  background-color: $color-blue;
 }
 
 /* Show Page */
@@ -190,7 +293,7 @@
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
-  border: thin #DDDDDD solid;
+  border: thin $color-grey solid;
 }
 
 .show-page-tab{
@@ -212,7 +315,7 @@
   justify-content: flex-end;
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1075px){
   .note-page-content{
     flex-wrap: wrap;
   }
@@ -237,11 +340,11 @@
 }
 
 @media only screen and (max-width: 675px){
-  // .note-container{
+  // .text-center{
   //   flex-basis: 33%;
   // }
 
-  .note-container > a > img {
+  .text-center > a > img {
     width: 100%;
   }
 
@@ -250,25 +353,4 @@
     margin-left: 5%;
     margin-right: 5%;
   }
-}
-
-.reference-tabs{
-  display: flex;
-  width: 100%;
-  height: 50px;
-  border-bottom: thick #ebf2f3 solid;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.reference-tab{
-  flex-basis: 24%;
-  background-color: #fff;
-  border: 0;
-  border-bottom: thick #ebf2f3 solid;
-  margin-bottom: -4px;
-}
-
-.reference-tab:hover{
-  border-bottom: thick #EAB38B solid;
 }

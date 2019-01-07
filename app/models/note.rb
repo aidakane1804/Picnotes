@@ -25,6 +25,10 @@ class Note < ApplicationRecord
     presence: {message: 'Must have a Image'}
     })
 
+    validates(:tag_list, {
+      presence: {message: 'Must have a tag'}
+      })
+
   after_initialize :set_defaults
 
   def self.search(search)

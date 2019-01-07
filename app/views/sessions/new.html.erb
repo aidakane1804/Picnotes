@@ -1,13 +1,17 @@
-<h1 class = "hello" style = 'margin-top: 20px;'> Sign In </h1>
+<h1 class = "text-center" style = 'margin-top: 20px;'> Sign In </h1>
 
 <div class = "creation_form">
-<%= form_for :session, remote: true, url: session_path do |f| %>
+  <%= simple_form_for :session, url: session_path do |f| %>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%=f.label :password %>
-  <%= f.password_field :password %>
+    <%= f.label 'Email (required)' %>
+    <%= f.input :email, label: false %>
 
-  <%= f.submit class: 'no-look-btn'%>
-<% end %>
+    <%= f.label 'Password (required)' %>
+    <%= f.input :password, label: false %>
+
+    <div class = 'form-btn-container'>
+      <%= f.button :submit, 'Sign In', :class => 'blue-appearance-btn' %>
+    </div>
+
+  <% end %>
 </div>

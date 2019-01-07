@@ -3,12 +3,12 @@
     <% if !current_user.follow?(user) %>
       <%= form_for(current_user.active_relationships.build) do |f| %>
         <%= hidden_field_tag :followed_id, user.id %>
-        <%= f.submit 'Follow', class: 'no-look-btn' %>
+        <%= f.submit 'Follow', class: 'blue-appearance-btn' %>
       <% end %>
     <% else %>
       <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
         html: {method: :delete}) do |f| %>
-        <%= f.submit 'Unfollow', class: "no-look-btn" %>
+        <%= f.submit 'Unfollow', class: "blue-appearance-btn" %>
       <% end %>
     <% end %>
   <% end %>

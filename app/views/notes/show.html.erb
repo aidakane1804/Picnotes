@@ -3,12 +3,12 @@
     <div class = 'show-page-tab-left'>
       <h5 class = 'modal-title'> <%= @note.title %> </h5>
       <div style = 'display: flex;'>
-        <button id = 'hamburger-menu' class = 'no-look-btn'>
+        <button id = 'hamburger-menu' class = 'blue-appearance-btn'>
             <%= fa_icon('bars') %>
         </button>
         <div id = 'note_menu' class = 'hidden'>
-          <p> <%= link_to 'Share', "https://www.facebook.com/sharer/sharer.php?u=http://picnotes.herokuapp.com/notes/#{@note.id}", target: :_blank, class: 'no-look-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
-          <p> <button class = 'no-look-btn'> Report </button> </p>
+          <p> <%= link_to 'Share', "https://www.facebook.com/sharer/sharer.php?u=http://picnotes.herokuapp.com/notes/#{@note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
+          <p> <button class = 'blue-appearance-btn'> Report </button> </p>
           <p> <%= render '/components/follow_button', :user => @note.user %> </p>
         </div>
         <p style = 'flex-basis: 10%;'>
@@ -27,20 +27,20 @@
 
     <div class = 'show-page-tab-right'>
       <div>
-        <p> <%= link_to @note.user.username, user_path(@note.user), class: 'no-look-btn' %> </p>
+        <p> <%= link_to @note.user.username, user_path(@note.user), class: 'blue-appearance-btn' %> </p>
         <p>
           <%= @note.created_at.strftime("%m/%d/%Y") %>
           <% if user_signed_in? && can?(:crud, @note) %>
             <button
               type = 'button'
-              class = 'no-look-btn'
+              class = 'blue-appearance-btn'
               data-toggle = 'modal'
               data-target = '#editNoteModal'
               data-whatever = '@mdo'
               data-dismiss="modal">
               Edit
             </button>
-            <%= link_to('Delete', note_path(@note), class: 'no-look-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+            <%= link_to('Delete', note_path(@note), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
           <% end %>
         </p>
       </div>
@@ -61,87 +61,6 @@
       <% end %>
     </div>
 
-    <!-- <div class = 'note-page-text' style = "width: 100%">
-      <div class = 'tab'>
-        <button class = 'tablinks' onclick = 'openTab(event, "show-information")' id = 'defaultingOpen'> Note </button>
-        <button class = 'tablinks' onclick = 'openTab(event, "show-references")'> Study Guide </button>
-        <button class = 'tablinks' onclick = 'openTab(event, "show-similar")'> Simiar </button>
-      </div>
-
-      <div class = 'notes-overflow'>
-        <div id = 'show-information' class = 'tabcontent'>
-          <p class = "note-page-content-text"> <%= @note.body %> </p>
-          <p> Tags: <%= render @note.tags %></p>
-          <div class="select-board">
-            <p>Choose your board</p>
-            <%= form_tag(note_path(@note, remote: true), {:method => 'get'}) do |f| %>
-                <select name="board_id" id="board_id">
-                    <option value="" <%= !@board ? "selected" : "" %>>SELECT A board</option>
-
-                    <% @boards.each do |w| %>
-                        <option value="<%=w.id %>" <%= "#{w.id}" === @board ? "selected" : "" %>><%=w.name%></option>
-                    <% end %>
-                </select>
-
-                <%= submit_tag('Update', :name => nil, :class => 'no-look-btn') %>
-            <% end %>
-          </div>
-        </div>
-
-        <div id = 'show-similar' class = 'tabcontent'>
-          <div class = 'similar-container'>
-            <% @similar.each do |note| %>
-
-              <div class = 'similar-note-container'>
-                <%= link_to(note_path(note), remote: true) do %>
-                  <%= image_tag note.image.url(:thumb) if note.image.present? %>
-                  <div class = 'note-container-text'>
-                    <p class = "no-look-btn"> <%= truncate(note.title, length: 18) %> </p>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <div id = 'show-references' class = 'tabcontent'>
-          <%= render @note.references %>
-          <% if current_user %>
-            <% if current_user.username == @note.user.username %>
-              <%= simple_form_for([@note, @reference], remote: true) do |f| %>
-                <div>
-                  <%= f.input :title %>
-                  <%= f.input :author %>
-                  <%= f.input :link %>
-                </div>
-                <%= f.submit class: 'no-look-btn' %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class = 'like-container'>
-        <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
-
-          <%= link_to like_note_path(@note), remote: true, class: 'white-btn like-tab like-color', method: :put do %>
-            <%= fa_icon('check') %> <span class = 'upvotes-count'><%= @note.get_upvotes.size %> </span>
-          <% end %>
-
-          <%= link_to dislike_note_path(@note), remote: true, class: 'white-btn like-tab dislike-color', method: :put do %>
-            <%= fa_icon('times') %> <span class = 'downvotes-count'><%= @note.get_downvotes.size %> </span>
-          <% end %>
-        <% else %>
-          <div class = 'like-tab like-color'>
-            <%= fa_icon('check') %> <%= @note.get_upvotes.size %>
-          </div>
-          <div class = 'like-tab dislike-color'>
-            <%= fa_icon('times') %> <%= @note.get_downvotes.size %>
-          </div>
-        <% end %>
-      </div>
-    </div> -->
-
     <div class = 'note-page-text' style = "width: 100%">
       <div class = 'tab'>
         <button class = 'tablinks' onclick = 'openTab(event, "show-information")'> Note </button>
@@ -161,11 +80,11 @@
           <div class = 'similar-container'>
             <% @similar.each do |note| %>
 
-              <div class = 'similar-note-container'>
+              <div class = 'similar-text-center'>
                 <%= link_to(note_path(note), remote: true) do %>
                   <%= image_tag note.image.url(:thumb) if note.image.present? %>
                   <div class = 'note-container-text'>
-                    <p class = "no-look-btn"> <%= truncate(note.title, length: 18) %> </p>
+                    <p class = "blue-appearance-btn"> <%= truncate(note.title, length: 18) %> </p>
                   </div>
                 <% end %>
               </div>
@@ -187,7 +106,7 @@
                     <% end %>
                 </select>
 
-                <%= submit_tag('Update', :name => nil, :class => 'no-look-btn') %>
+                <%= submit_tag('Update', :name => nil, :class => 'blue-appearance-btn') %>
             <% end %>
           </div>
 
@@ -199,7 +118,7 @@
                   <%= hidden_field_tag :note_id, @note.id %>
 
                   <!-- Button: Add or Remove item from list -->
-                  <%= button_tag(@board.has_note?(@note)? "Remove from Board" : "Add to Board", :class => 'no-look-btn') %>
+                  <%= button_tag(@board.has_note?(@note)? "Remove from Board" : "Add to Board", :class => 'blue-appearance-btn') %>
               <% end %>
             <% end %>
           </div>

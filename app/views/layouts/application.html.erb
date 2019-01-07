@@ -33,7 +33,7 @@
           <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
           <% end %>
 
-          <%= button_tag(type: "submit", class: 'no-look-btn') do %>
+          <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
               <%= fa_icon('search') %>
           <% end %>
         <% end %>
@@ -45,14 +45,14 @@
 
           <button
             type = 'button'
-            class = 'white-btn'
+            class = 'blue-appearance-btn'
             data-toggle = 'modal'
             data-target = '#newNoteModal'
             data-whatever = '@mdo'>
             <%= fa_icon('pencil 2x') %>
           </button>
 
-          <%= link_to feed_index_path, class: 'white-btn' do %>
+          <%= link_to feed_index_path, class: 'blue-appearance-btn' do %>
             <%= fa_icon('user-circle 2x') %>
           <% end %>
 
@@ -60,7 +60,7 @@
 
           <button
             type = 'button'
-            class = 'white-btn entrance-btn'
+            class = 'blue-btn'
             data-toggle = 'modal'
             data-target = '#newSessionModal'
             data-whatever = '@mdo'>
@@ -69,7 +69,7 @@
 
           <button
             type = 'button'
-            class = 'white-btn entrance-btn'
+            class = 'blue-btn'
             data-toggle = 'modal'
             data-target = '#newUserModal'
             data-whatever = '@mdo'>

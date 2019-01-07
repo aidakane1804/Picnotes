@@ -50,6 +50,8 @@ gem 'font-awesome-rails'
 gem 'acts_as_votable', '~> 0.12.0'
 gem 'omniauth-facebook'
 gem 'thin'
+gem 'mail_form'
+gem 'dropzonejs-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

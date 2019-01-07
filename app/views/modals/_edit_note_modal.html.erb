@@ -13,17 +13,37 @@
           <div class = 'modal-body'>
             <%= f.label :title, 'Title (Required)' %>
             <%= f.input :title, label: false %>
-            <div style = 'border: thin #EAB38B solid; padding: 10px; padding-bottom: 0; border-radius: 5px;'>
+            <div class = 'image-upload-box'>
               <%= f.label :image, 'File Upload' %>
-              <div class = 'form-flex' style = 'padding-bottom: 10px;'>
-                <div class = 'form-spacer'> </div>
-                <%= f.file_field :image, :class => 'file-input-btn' %>
+              <div class = 'image-upload text-center'>
+                <label for="file-input">
+                  <%= image_tag 'file-upload.png', class: 'logo-image', id: 'img_prev' %>
+                  <p>Click to Upload Image </p>
+                </label>
+                <%= f.file_field :image, :class => 'dropzone', id: 'file-input', :onchange => 'readURL(this)' %>
+                <script>
+                  function readURL(input) {
+                    if (input.files && input.files[0]) {
+                      var reader = new FileReader();
+
+                      reader.onload = function (e) {
+                        $('#img_prev')
+                          .attr('src', e.target.result)
+                          .width(200)
+                          .height(200)
+                          .style.objectFit = 'contain';
+                      };
+
+                      reader.readAsDataURL(input.files[0]);
+                    }
+                  }
+                </script>
               </div>
               <%= f.label :remote_image_url, 'or Image URL' %>
               <%= f.input :remote_image_url, label: false %>
             </div>
             <%= f.label :body, 'Notes (Required)' %>
-            <%= f.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+            <%= f.input :body, maxlength: 650, label: false %>
             <%= f.label :tag_list, 'Tags' %>
             <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
           </div>

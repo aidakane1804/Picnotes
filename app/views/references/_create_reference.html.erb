@@ -17,7 +17,11 @@ function openReference(tab){
     <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Books <%= @textbooks.count%> </button>
     <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Videos <%= @videos.count%>  </button>
     <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Articles <%= @papers.count%>  </button>
-    <button class = 'reference-tab Add' onclick='openReference("Add")'> Add </button>
+    <% if current_user %>
+      <% if current_user.username == @note.user.username %>
+      <button class = 'reference-tab Add' onclick='openReference("Add")'> Add </button>
+      <% end %>
+    <% end %>
   </div>
 
   <div id = 'reference'>
@@ -46,7 +50,7 @@ function openReference(tab){
               <%= f.input :link %>
             </div>
             <div class = 'form-btn-container text-center'>
-              <%= f.button :submit, :class => 'no-look-btn' %>
+              <%= f.button :submit, :class => 'blue-appearance-btn' %>
             </div>
           <% end %>
         </div>

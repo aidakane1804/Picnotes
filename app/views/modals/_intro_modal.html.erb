@@ -1,14 +1,15 @@
-<div id = 'introModal' style = 'position: absolute; width: 100vw; height: 100vh; background-color: rgba( 70, 70, 70, 0.7);'>
-  <div style = 'min-width: 250px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #EAB38B; border-radius: 10px;'>
-    <button id = 'closeModal' class = 'white-btn' style = 'float: right'>
+<div id = 'introModal'>
+  <div class = 'introModalStyle'>
+    <button id = 'closeModal' class = 'blue-appearance-btn float-right'>
         <span aria-hidden = 'true'> &times; </span>
     </button>
-    <div style = "padding: 20px; text-align: center;">
-      <h1> Share your Knowledge </h1>
-      <p style = 'padding-bottom: 20px;'> Join Picnotes, a platform full of knowledge essentials. </p>
+    <div class = 'padding-20 text-center'>
+      <%= image_tag 'logo-clean.png', class: 'intro-image' %>
+      <h1 class = 'text-grey'> Share your Knowledge </h1>
+      <p class = 'text-grey padding-bottom-20'> Join Picnotes, a platform full of knowledge essentials. </p>
       <button
         type = 'button'
-        class = 'white-btn entrance-btn'
+        class = 'inverse-blue-btn'
         data-toggle = 'modal'
         data-target = '#newSessionModal'
         data-whatever = '@mdo'>
@@ -17,7 +18,7 @@
 
       <button
         type = 'button'
-        class = 'white-btn entrance-btn'
+        class = 'blue-btn'
         data-toggle = 'modal'
         data-target = '#newUserModal'
         data-whatever = '@mdo'>

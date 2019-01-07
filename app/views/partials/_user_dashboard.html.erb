@@ -2,55 +2,19 @@
   <div class = 'profile-dashboard'>
     <div class = "profile-header" style = 'margin-top: 20px;'>
       <div class = 'profile-center'>
-        <div class = 'content-right'>
+        <div class = 'text-right'>
           <h1><%= @user.first_name %> <%= @user.last_name %></h1>
           <p> <%= @user.city %> </p>
-        </div>
-        <% if @user.avatar? %>
-          <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
-        <% else %>
-          <%= image_tag 'avatar.png', class: 'avatar-image' %>
-        <% end %>
-      </div>
-
-      <div class = 'profile-left'>
-        <div class = 'margin-right content-right'>
-          <p class = 'picnotes-font'> Followers </p>
-          <% if @user.followers.count > 0 %>
-            <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'no-look-btn'%></p>
-          <% else %>
-            <p> <%= @user.followers.count %> </p>
+          <% if @user.message %>
+            <% if @user.message.length > 0 %>
+              <p> <i> <%= @user.message %> </i> </p>
+            <% end %>
           <% end %>
-        </div>
-
-        <div class = 'margin-right content-right'>
-          <p class = 'picnotes-font'> Following </p>
-          <% if @user.following.count > 0 %>
-            <p> <%= link_to @user.following.count, following_user_path(@user), class: 'no-look-btn'%></p>
-          <% else %>
-            <p> <%= @user.following.count %> </p>
-          <% end %>
-        </div>
-
-        <div class = 'content-right'>
-          <p class = 'picnotes-font'> Notes </p>
-          <% if @user.notes.count > 0 %>
-            <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'no-look-btn'%> </p>
-          <% else %>
-            <p> <%= @user.notes.count %> </p>
-          <% end %>
-        </div>
-      </div>
-
-      <div class = 'profile-right'>
-        <div class = 'content-right'>
-          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-          <p> <%= @user.city %> </p>
         </div>
         <% if @user.avatar? %>
           <button
             type = 'button'
-            class = 'no-look-btn'
+            class = 'blue-appearance-btn'
             data-toggle = 'modal'
             data-target = '#sessionModal'
             data-whatever = '@mdo'>
@@ -59,7 +23,67 @@
         <% else %>
           <button
             type = 'button'
-            class = 'no-look-btn'
+            class = 'blue-appearance-btn'
+            data-toggle = 'modal'
+            data-target = '#sessionModal'
+            data-whatever = '@mdo'>
+            <%= image_tag 'avatar.png', class: 'avatar-image' %>
+          </button>
+        <% end %>
+      </div>
+
+      <div class = 'profile-left'>
+        <div class = 'margin-right-20 text-right'>
+          <p class = 'picnotes-font'> Followers </p>
+          <% if @user.followers.count > 0 %>
+            <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'blue-appearance-btn'%></p>
+          <% else %>
+            <p> <%= @user.followers.count %> </p>
+          <% end %>
+        </div>
+
+        <div class = 'margin-right-20 text-right'>
+          <p class = 'picnotes-font'> Following </p>
+          <% if @user.following.count > 0 %>
+            <p> <%= link_to @user.following.count, following_user_path(@user), class: 'blue-appearance-btn'%></p>
+          <% else %>
+            <p> <%= @user.following.count %> </p>
+          <% end %>
+        </div>
+
+        <div class = 'text-right'>
+          <p class = 'picnotes-font'> Notes </p>
+          <% if @user.notes.count > 0 %>
+            <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'blue-appearance-btn'%> </p>
+          <% else %>
+            <p> <%= @user.notes.count %> </p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class = 'profile-right'>
+        <div class = 'text-right'>
+          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+          <p> <%= @user.city %> </p>
+          <% if @user.message %>
+            <% if @user.message.length > 0 %>
+              <p> <i> <%= @user.message %> </i> </p>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @user.avatar? %>
+          <button
+            type = 'button'
+            class = 'blue-appearance-btn'
+            data-toggle = 'modal'
+            data-target = '#sessionModal'
+            data-whatever = '@mdo'>
+            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+          </button>
+        <% else %>
+          <button
+            type = 'button'
+            class = 'blue-appearance-btn'
             data-toggle = 'modal'
             data-target = '#sessionModal'
             data-whatever = '@mdo'>
