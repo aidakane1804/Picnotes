@@ -6,7 +6,7 @@
   <div class = "notes-container">
     <% @user.notes.each do |note| %>
 
-    <div class = 'text-center'>
+    <div class = 'note-container'>
       <%= link_to(note_path(note), remote: true) do %>
         <%= image_tag note.image.url(:thumb) if note.image.present? %>
         <div class = 'note-container-text'>

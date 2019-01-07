@@ -24,7 +24,7 @@
   <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
       <% @notes.each do |note| %>
-        <div class = 'text-center note-container'>
+        <div class = 'note-container'>
           <%= link_to(note_path(note), remote: true) do %>
           <%= image_tag note.image.url(:thumb) if note.image.present? %>
           <div class = 'note-container-text'>
@@ -45,17 +45,17 @@
   <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
         <% @users.each do |user| %>
-          <%= link_to user_path(user) do %>
-            <div class = 'text-center note-container'>
+            <div class = 'note-container'>
+              <%= link_to user_path(user) do %>
               <% if user.avatar? %>
-                <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
+                <%= image_tag user.avatar.url(:thumb) %>
               <% else %>
-                <%= image_tag 'avatar.png', class: 'follow-image' %>
+                <%= image_tag 'avatar.png' %>
               <% end %>
               <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
               <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
+              <% end %>
             </div>
-          <% end %>
         <% end %>
       </div>
     </div>

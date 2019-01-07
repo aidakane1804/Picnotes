@@ -3,8 +3,8 @@
 <div class = 'flex-center'>
   <div class = "notes-container" style = 'margin-top: 20px;'>
     <% @following.each do |user| %>
-      <%= link_to user_path(user) do %>
-      <div class = 'text-center'>
+      <div class = 'text-center note-container'>
+        <%= link_to user_path(user) do %>
         <% if user.avatar? %>
           <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
         <% else %>
@@ -13,8 +13,8 @@
 
         <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
         <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
+        <% end %>
       </div>
-      <% end %>
     <% end %>
   </div>
 </div>
