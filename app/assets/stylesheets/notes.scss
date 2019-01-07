@@ -84,6 +84,7 @@
 /* Note Display */
 
 .notes-container{
+  display: -ms-grid;
   display: grid;
   grid-template-columns: 202px 202px 202px 202px 202px;
   grid-gap: 10px;
@@ -114,6 +115,7 @@
 /* Similar Display */
 
 .similar-notes-container{
+  display: -ms-grid;
   display: grid;
   grid-template-columns: 90px 90px 90px;
   grid-gap: 3px;

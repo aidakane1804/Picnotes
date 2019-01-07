@@ -1,14 +1,18 @@
 <div class = "modal fade" id = 'newSessionModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newSessionModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
-      <div class = 'modal-header'>
-        <h5 class = 'modal-title' id = 'newSessionModalLabel'> Sign In </h5>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'newSessionModalLabel' style = 'color: white'> Sign In </h5>
         <button type = 'button' class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
       </div>
 
       <div class = 'modal-body'>
+        <div class = 'text-center'>
+          <%= image_tag 'logo-clean.png', class: 'intro-image' %>
+        </div>
+
         <%= simple_form_for :session, url: session_path do |f| %>
 
           <%= f.label 'Email' %>
