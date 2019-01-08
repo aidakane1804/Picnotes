@@ -10,6 +10,12 @@ class Note < ApplicationRecord
 
   belongs_to :user
 
+  has_many :board_members, foreign_key: :member_id
+  has_many :boards, through: :board_notes
+
+  has_and_belongs_to_many :folders
+
+
   mount_uploader :image, ImageUploader
 
   validates(:title, {

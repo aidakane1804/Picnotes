@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   # devise :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :folders, dependent: :destroy
+
   has_many :notes, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_notes, through: :likes, source: :note

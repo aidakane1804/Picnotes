@@ -1,6 +1,8 @@
 class Board < ApplicationRecord
   belongs_to :user
-  has_many :notes
+  
+  has_many :board_members
+  has_many :members, through: :board_members
 
   def toggle_note(note)
     if has_note?(note)
@@ -8,6 +10,10 @@ class Board < ApplicationRecord
     else
       self.notes.push(note)
     end
+  end
+
+  def board_name
+    "#{board.name}"
   end
 
   def has_note?(note)

@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     resources :tags, only: [:create, :destroy]
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :dislikes, shallow: true, only: [:create, :destroy]
+    post '/addfolder', to: 'notes#addfolder'
   end
+
+  resources :folders
 
   resources :tags, only: [:index, :show]
 

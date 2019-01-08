@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote, :addfolder]
 
 
   def index
@@ -36,6 +36,7 @@ class NotesController < ApplicationController
     @dislike = @note.dislikes.find_by_user_id current_user
     @user = current_user
     @boards = Board.where(user: current_user)
+    @folders = Folder.where(user: current_user)
     @board = Board.find_by_id(params[:board_id])
     @previous_note = @note.next
     @next_note = @note.previous
@@ -106,6 +107,12 @@ class NotesController < ApplicationController
       format.js
       format.html
     end
+  end
+
+  def addfolder
+    @note = Note.find params[:note_id]
+    @folder = Folder.find params[:folder_id]
+    @note.folders.push(@folder)
   end
 
   private

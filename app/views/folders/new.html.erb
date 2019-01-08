@@ -1,0 +1,7 @@
+<%= simple_form_for @folder do |form| %>
+  <%= form.label :name, 'Title (Required)' %>
+  <%= form.input :name, label: false %>
+  <div class = 'form-btn-container text-center'>
+    <%= form.button :submit, :class => 'blue-appearance-btn' %>
+  </div>
+<% end %>

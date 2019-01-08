@@ -1,0 +1,23 @@
+<div class = "modal fade" id = 'newFolderModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newFolderModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'newFolderModalLabel' style = 'color: white;'> Create New Folder </h5>
+        <button type = 'button' class = 'close' style = 'color: white;' data-dismiss = 'modal' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Folder.new do |form| %>
+          <div class = 'modal-body'>
+            <%= form.input :name %>
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn'>
+            <%= form.button :submit, 'New Folder', :class => 'white-btn btn-width' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
