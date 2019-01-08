@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
 
   def user_notes
     @user = current_user
+    @notes = Note.where(user: @user)
   end
 
   def new
