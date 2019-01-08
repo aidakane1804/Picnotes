@@ -1,5 +1,6 @@
 class FoldersController < ApplicationController
   def index
+    @user = current_user
     @folders = Folder.where(user: current_user)
   end
 

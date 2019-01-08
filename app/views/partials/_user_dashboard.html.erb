@@ -97,7 +97,7 @@
     <div class = "profile-menu">
       <p> <%= link_to 'My Feed', feed_index_path, class: "#{cp(feed_index_path)} profile-links"%> </p>
       <p> <%= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %> <span class = 'note-count'> <%= @user.notes.count %> </span> </p>
-      <p> <%= link_to 'My Folders', folders_path(current_user), class: "#{cp(user_boards_path(current_user))} profile-links" %> <span class = 'note-count'> <%= @user.boards.count %> </span> </p>
+      <p> <%= link_to 'My Folders', folders_path(current_user), class: "#{cp(folders_path(current_user))} profile-links" %> <span class = 'note-count'> <%= @user.folders.count %> </span> </p>
       <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %> <span class = 'note-count'> <%= @user.favorited_notes.count %> </span> </p>
     </div>
   </div>
