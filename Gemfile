@@ -28,29 +28,48 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
+# Password
 gem 'bcrypt', '~> 3.1.7'
 
+# Forms
 gem 'simple_form'
+
+# CarrierWave image-upload
 gem 'carrierwave', '~> 1.0'
+# Compressing and resizing photos
 gem 'mini_magick'
+
+# Storing on Amazon
 gem "fog-aws"
 gem 'fog'
+
+# Tags in notes
 gem 'acts-as-taggable-on'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# user privilledges
 gem 'cancancan'
+
+#front end
 gem 'bootstrap'
 gem 'jquery-rails'
-
 gem 'chosen-rails'
 gem 'rails_12factor', group: :production
 gem 'font-awesome-rails'
+
+# Voting (like / dislike)
 gem 'acts_as_votable', '~> 0.12.0'
+
+# Facebook
 gem 'omniauth-facebook'
 gem 'thin'
+
+# Mailers
 gem 'mail_form'
+
+# Droppings files into box for upload * not used
 gem 'dropzonejs-rails'
 
 group :development, :test do
