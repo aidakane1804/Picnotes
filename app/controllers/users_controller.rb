@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
 
     if @user.save
-      SignupMailer.signup_email(@user).deliver
+      # SignupMailer.signup_email(@user).deliver
       session[:user_id] = @user.id
 
       flash[:notice] = 'Thank you for signing up!'
