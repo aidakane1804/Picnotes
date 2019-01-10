@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  validates :password, length: {minimum: 8}, allow_nil: true
+
   acts_as_voter
 
   # devise :omniauthable, :omniauth_providers => [:facebook]
@@ -24,6 +26,29 @@ class User < ApplicationRecord
 
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  validates(:username, {
+    presence: {message: 'must exist'},
+    uniqueness: {message: 'already exist'}
+  })
+
+  validates(:first_name, {
+    presence: {message: 'must exist'}
+  })
+
+  validates(:last_name, {
+    presence: {message: 'must exist'}
+  })
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  # The `validates` option `format:` takes a Regular Expression which is
+  # way to verify that string is formatted in certain way. The regular expression
+  # above tests that our emails begin with alpha numeric characters, have a @
+  # in the middle which is followed by a word, a dot, then another word.
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    format: VALID_EMAIL_REGEX
 
   # helper methods
 

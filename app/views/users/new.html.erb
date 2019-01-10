@@ -1,10 +1,10 @@
-<div class = 'modal-header'>
-  <h1 class = "text-center"> Sign Up </h1>
+<div class = 'modal-header flex-center'>
+  <h1> Sign Up </h1>
 </div>
 
 <div class = 'modal-body'>
   <div class = "creation_form">
-    <%= simple_form_for User.new do |f| %>
+    <%= simple_form_for @user do |f| %>
       <div class = 'user-name'>
         <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
         <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
@@ -18,8 +18,8 @@
       </div>
 
       <%= f.file_field :avatar %>
-      <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
       <%= f.input :city %>
+
 
       <div class = 'form-btn-container text-center'>
         <%= f.button :submit, :class => 'btn-outline-dark form-btn' %>
