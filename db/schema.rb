@@ -18,16 +18,16 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
   create_table "boards", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
 
   create_table "dislikes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["note_id"], name: "index_dislikes_on_note_id"
     t.index ["user_id"], name: "index_dislikes_on_user_id"
   end
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.bigint "user_id"
     t.string "favorited_type"
     t.bigint "favorited_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
@@ -45,21 +45,21 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
   create_table "folders_notes", id: false, force: :cascade do |t|
-    t.bigint "folder_id", null: false
-    t.bigint "note_id", null: false
+    t.bigint "folder_id"
+    t.bigint "note_id"
   end
 
   create_table "likes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["note_id"], name: "index_likes_on_note_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -82,16 +82,16 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.string "link"
     t.string "file_type"
     t.bigint "note_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",
+    t.datetime "updated_at",
     t.index ["note_id"], name: "index_references_on_note_id"
   end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.string "password_digest"
     t.string "city"
     t.string "date_of_birth"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string "avatar"
     t.string "provider"
     t.string "uid"
