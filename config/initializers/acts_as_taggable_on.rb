@@ -1,1 +1,1 @@
-ActsAsTaggableOn.delimiter = ' ' # use space as delimiter
+ActsAsTaggableOn.default_parser = ' ' # use space as delimiter
