@@ -1,5 +1,10 @@
 <%= render './partials/user_dashboard' %>
 
+<div style = 'text-align: center;'>
+  <p> Folder Name: <strong> <%= @folder.name %> </strong> </p>
+  <%= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+</div>
+
 <div id='note-content'></div>
 
 <div class = 'flex-center'>
