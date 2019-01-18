@@ -1,4 +1,9 @@
-<%= render './partials/user_dashboard' %>
+<% if @dash == 1 %>
+  <%= render './partials/user_dashboard' %>
+<% elsif @dash == 2 %>
+  <%= render './partials/other_user_dashboard' %>
+<% else %>
+<% end%>
 
 <div class = 'flex-center'>
   <div class = "notes-container" style = 'margin-top: 20px;'>

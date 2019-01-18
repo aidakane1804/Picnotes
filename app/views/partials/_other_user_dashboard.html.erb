@@ -3,7 +3,7 @@
     <div class = 'profile-center'>
         <%= render '/components/follow_button', :user => @user %>
         <div class = 'text-right'>
-          <h1 style = 'margin-bottom: 0;'><%= @user.username %></h1>
+          <h1 style = 'margin-bottom: 0;'><%= @user.first_name %> <%= @user.last_name %></h1>
           <p> <%= @user.city %> </p>
           <% if @user.message %>
             <% if @user.message.length > 0 %>
@@ -45,7 +45,7 @@
 
     <div class = 'profile-right'>
       <div class = 'text-right'>
-        <h1 style = 'margin-bottom: 0;'><%= @user.username %></h1>
+        <h1 style = 'margin-bottom: 0;'><%= @user.first_name %> <%= @user.last_name %></h1>
         <p> <%= @user.city %> </p>
         <%= render '/components/follow_button', :user => @user %>
         <% if @user.message %>

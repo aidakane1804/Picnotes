@@ -38,7 +38,7 @@
 
 </script>
 
-<div id="note-modal" class="modal fade" role="dialog">
+<div id="note-modal" class="modal fade" role="dialog" data-backdrop="">
   <div style = "display: flex; align-items: center;">
     <div class = 'note-arrow'>
       <% if @previous_note %>
@@ -130,7 +130,7 @@
                   <p class = "note-page-content-text"> <%= @note.body %> </p>
                   <p> Tags: <%= render @note.tags %></p>
                   <% if user_signed_in? %>
-                    <div class = 'text-center'>
+                    <div class = 'text-center margin-top-20 margin-bottom-20'>
                       <p> Add Picnote to Folder </p>
                       <%= form_tag(note_addfolder_path(@note)) do %>
                         <%= select_tag 'folder_id', options_for_select(@folders.collect{ |folder| [folder.name, folder.id] }) %>
@@ -194,6 +194,7 @@
 </div>
 
 <%= render './modals/edit_note_modal' %>
+<%= render './modals/edit_note_reference_modal' %>
 
 <script>
   document.getElementById("close-btn").click(function(){

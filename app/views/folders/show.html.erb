@@ -1,8 +1,10 @@
+<%= render './partials/user_dashboard' %>
+
 <div id='note-content'></div>
 
 <div class = 'flex-center'>
   <div class = "notes-container" style = 'margin-top: 20px;'>
-    <% @notes.each do |note| %>
+    <% @folder.notes.each do |note| %>
       <div class = 'note-container'>
         <%= link_to(note_path(note), remote: true) do %>
         <%= image_tag note.image.url(:thumb) if note.image.present? %>

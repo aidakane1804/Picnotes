@@ -8,11 +8,21 @@ class UsersController < ApplicationController
 
   def followers
     @user = User.find params[:id]
+    if @user == current_user
+      @dash = 1
+    else
+      @dash = 2
+    end
     @follower = @user.followers
   end
 
   def following
     @user = User.find params[:id]
+    if @user == current_user
+      @dash = 1
+    else
+      @dash = 2
+    end
     @following = @user.following
   end
 

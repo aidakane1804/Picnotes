@@ -67,7 +67,7 @@ class NotesController < ApplicationController
     @note.user = current_user
     if @note.save
       flash[:notice] = "Note Saved"
-      redirect_to notes_path
+      redirect_to note_path(@note)
     else
       flash[:notice] = "Error"
       render :new
@@ -80,7 +80,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update note_params
-      redirect_to user_notes_session_path
+      redirect_to note_path(@note)
     else
       render :edit
     end

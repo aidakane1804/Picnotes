@@ -1,4 +1,7 @@
 class Note < ApplicationRecord
+
+  attr_accessor :image, :image_cache, :remove_image
+
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
   has_many :favorites, as: :favorited
@@ -51,11 +54,11 @@ class Note < ApplicationRecord
   end
 
   def next
-    self.class.where('id > ?', id).first
+    Note.where("id > ?", id).order("id ASC").first || Note.first
   end
 
   def previous
-    self.class.where('id < ?', id).last
+    Note.where("id < ?", id).order("id ASC").first || Note.last
   end
 
   private

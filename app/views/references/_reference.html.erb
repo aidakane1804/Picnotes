@@ -10,13 +10,38 @@
   <%= link_to truncate(reference.link, length: 30), reference.link, target: :_blank %>
 <% end %>
 
-<p>
-  <%= link_to(
-    'Delete',
-    reference_path(reference),
-    data: {confirm: 'Are you sure?'},
-    method: :delete,
-    class: 'blue-appearance-btn'
-  ) %>
-</p>
+<% if current_user %>
+  <% if current_user.username == @note.user.username %>
+  <!-- <button
+    type = 'button'
+    class = 'blue-appearance-btn'
+    data-toggle = 'modal'
+    data-target = '#editReferenceModal'
+    data-whatever = '@mdo'
+    data-dismiss="modal">
+    Edit
+  </button> -->
+  <!-- <p>
+    <%= link_to 'Test', edit_reference_path(reference) %>
+  </p>
+  <button
+    type = 'button'
+    class = 'blue-appearance-btn'
+    data-toggle = 'modal'
+    data-target = '#editReferenceModal'
+    data-whatever = '@mdo'
+    data-dismiss="modal">
+    Edit
+  </button> -->
+  <p>
+    <%= link_to(
+      'Delete',
+      reference_path(reference),
+      data: {confirm: 'Are you sure?'},
+      method: :delete,
+      class: 'blue-appearance-btn'
+    ) %>
+  </p>
+  <% end %>
+<% end %>
 <hr/>

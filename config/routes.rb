@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       put 'like', to: 'notes#upvote'
       put 'dislike', to: 'notes#downvote'
     end
-    resources :references, shallow: true, only: [:create, :destroy]
+    resources :references, shallow: true, only: [:create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]
     resources :likes, shallow: true, only: [:create, :destroy]
     resources :dislikes, shallow: true, only: [:create, :destroy]

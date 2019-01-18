@@ -23,6 +23,22 @@ class ReferencesController < ApplicationController
     redirect_to note_path(@reference.note)
   end
 
+  def edit
+    @note = Note.find(params[:note_id])
+    @reference = @note.references.find(params[:id])
+    @user = current_user
+  end
+
+  def update
+    @note = Note.find(params[:note_id])
+    @reference = @note.references.find(params[:id])
+    if @reference.update reference_params
+      redirect_to note_path(@note)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def find_note
