@@ -53,8 +53,8 @@
                 <%= image_tag 'avatar.png', :style => 'width: 100%;' %>
               <% end %>
               <div class = 'note-container-text' style = 'text-align: center !important;'>
-                <p class = 'mobile-font note-btn-font' style = 'text-transform: capitalize'> <%= user.username %> | <%= user.first_name %> <%= user.last_name %></p>
-                <p class = 'mobile-font note-btn-font'> Picnotes: <%= user.notes.count %> </p>
+                <p class = 'mobile-font note-btn-font' style = 'text-transform: capitalize'> <%= user.username %></p>
+                <p class = 'mobile-font note-btn-font'> <%= user.first_name %> <%= user.last_name %> </p>
               </div>
               <% end %>
             </div>
