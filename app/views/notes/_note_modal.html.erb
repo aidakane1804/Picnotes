@@ -58,7 +58,7 @@
                   <%= fa_icon('bars') %>
               </button>
               <div id = 'note_menu' class = 'hidden'>
-                <p> <%= link_to 'Share', "https://www.facebook.com/sharer/sharer.php?u=http://picnotes.herokuapp.com/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
+                <p> <%= link_to 'Share', "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
                 <p> <button class = 'blue-appearance-btn'> Report </button> </p>
                 <p> <%= render '/components/follow_button', :user => note.user %> </p>
               </div>
