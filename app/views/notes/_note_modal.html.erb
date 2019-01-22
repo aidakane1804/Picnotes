@@ -80,9 +80,9 @@
           <div class = 'modal-header-information-content'>
             <div>
               <% if current_user == note.user %>
-              <p> <%= link_to note.user.username, feed_index_path, class: 'blue-appearance-btn' %> </p>
+              <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %> </p>
               <% else %>
-              <p> <%= link_to note.user.username, user_path(note.user), class: 'blue-appearance-btn' %> </p>
+              <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), class: 'blue-appearance-btn' %> </p>
               <% end %>
               <p>
                 <%= note.created_at.strftime("%m/%d/%Y") %>
