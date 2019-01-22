@@ -13,10 +13,10 @@ class NotesController < ApplicationController
         redirect_to search_index_path
       elsif params[:search].blank? && params[:searchtest] == '3'
         redirect_to search_index_path
-      elsif params[:searchtest] == '1' && params[:search].blank?
+      elsif params[:searchtest] == '1'
         # @notes = Note.tagged_with(params[:search])
         @notes = Note.tagged_with(params[:search], wild: true, any: true)
-      elsif params[:searchtest] == '2' && params[:search]
+      elsif params[:searchtest] == '2'
         @users = User.where("first_name ILIKE ?", "%#{params[:search]}%").or(User.where("last_name ILIKE ?", "%#{params[:search]}%")).or(User.where("username ILIKE ?", "%#{params[:search]}%"))
       elsif params[:searchtest] == '3'
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
