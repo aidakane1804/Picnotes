@@ -1,3 +1,5 @@
+
+
 <div class = "modal fade" id = 'newNoteModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newNoteModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
@@ -42,8 +44,15 @@
               <%= f.label :remote_image_url, 'or Image URL' %>
               <%= f.input :remote_image_url, label: false %>
             </div>
-            <%= f.label :body, 'Notes (Required)' %>
-            <%= f.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+            <%= f.label :body, 'Notes (Required)' %> <span id = 'body-count'> 0 / 650 </span>
+            <%= f.input :body, maxlength: 650, label: false, placeholder: 'No more than 650 characters', :input_html => { :id => 'body-field' } %>
+            <script>
+              $("#body-field").on("keyup", function(){
+                var length = $(this).val().length;
+
+                $("#body-count").html(length + '/650');
+              });
+            </script>
             <%= f.label :tag_list, 'Tags (Required)' %>
             <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
           </div>

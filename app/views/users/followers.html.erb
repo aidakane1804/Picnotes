@@ -15,9 +15,10 @@
       <% else %>
         <%= image_tag 'avatar.png', class: 'follow-image' %>
       <% end %>
-
-      <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
-      <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
+      <div class = 'note-container-text' style = 'text-align: center !important;'>
+        <p class = 'mobile-font note-btn-font' style = 'text-transform: capitalize'> <%= user.first_name %> <%= user.last_name %></p>
+        <p class = 'mobile-font note-btn-font'> Picnotes: <%= user.notes.count %> </p>
+      </div>
       <% end %>
     </div>
   <% end %>

@@ -52,7 +52,7 @@
       <div class="modal-header">
         <div class = 'modal-header-information'>
           <div class = 'modal-header-information-title'>
-            <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %> </h5>
+            <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %></h5>
             <div style = 'display: flex;'>
               <button id = 'hamburger-menu' class = 'blue-appearance-btn'>
                   <%= fa_icon('bars') %>
@@ -130,9 +130,9 @@
               <div class = 'notes-overflow'>
                 <div id = 'information' class = 'tabcontent'>
                   <p class = "note-page-content-text"> <%= @note.body %> </p>
-                  <p> Tags: <%= render @note.tags %></p>
+                  <p> <%= render @note.tags %></p>
                   <% if user_signed_in? %>
-                    <div class = 'text-center margin-top-20 margin-bottom-20'>
+                    <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
                       <p> Add Picnote to Folder </p>
                       <%= form_tag(note_addfolder_path(@note)) do %>
                         <%= select_tag 'folder_id', options_for_select(@folders.collect{ |folder| [folder.name, folder.id] }) %>
@@ -151,7 +151,7 @@
                           <%= link_to(note_path(note), remote: true) do %>
                           <%= image_tag note.image.url(:thumb), class:'similar-note-image' if note.image.present? %>
                           <div class = 'note-container-text'>
-                            <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 25) %> </p>
+                            <p class = "mobile-font note-btn-font" style = 'font-size: 10px;'> <%= truncate(note.title, length: 25) %> </p>
                           </div>
                           <% end %>
                         </div>

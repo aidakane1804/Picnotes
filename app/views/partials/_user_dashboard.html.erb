@@ -52,7 +52,7 @@
         </div>
 
         <div class = 'text-right'>
-          <p class = 'picnotes-font'> Notes </p>
+          <p class = 'picnotes-font'> Picnotes </p>
           <% if @user.notes.count > 0 %>
             <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'blue-appearance-btn'%> </p>
           <% else %>

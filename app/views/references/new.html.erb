@@ -2,6 +2,8 @@
   $(window).on('load', function(){
     $('myModal').modal('show');
     console.log('hi');
+    $('#note-content').html("<%= j render 'reference_note_modal', note: @note %>");
+    $('#reference_note-modal').modal('show');
   })
 </script>
 
@@ -52,10 +54,8 @@
               <% else %>
                 <%= image_tag 'avatar.png' %>
               <% end %>
-              <div class = 'note-container-text' style = 'text-align: center !important;'>
-                <p class = 'mobile-font note-btn-font' style = 'text-transform: capitalize'> <%= user.username %> | <%= user.first_name %> <%= user.last_name %></p>
-                <p class = 'mobile-font note-btn-font'> Picnotes: <%= user.notes.count %> </p>
-              </div>
+              <p class = 'blue-appearance-btn' style = 'text-transform: capitalize'> <%= user.username %> </p>
+              <p class = 'blue-appearance-btn'> Notes: <%= user.notes.count %> </p>
               <% end %>
             </div>
         <% end %>

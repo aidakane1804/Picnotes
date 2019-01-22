@@ -1,0 +1,26 @@
+<div id="reference_note-modal" class="modal fade" role="dialog" data-backdrop="">
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'editReferenceModalLabel' style = 'color:white;'> Create Reference </h5>
+        <button type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div style = 'padding: 10px;'>
+        <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
+          <div>
+            <%= f.input :file_type, collection: Reference::TYPE %>
+            <%= f.input :title %>
+            <%= f.input :author %>
+            <%= f.input :link %>
+          </div>
+          <div class = 'form-btn-container text-center'>
+            <%= f.button :submit, :class => 'blue-appearance-btn' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
