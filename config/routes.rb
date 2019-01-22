@@ -44,9 +44,5 @@ Rails.application.routes.draw do
 
   root 'notes#index'
 
-  get '/404', :to => 'errors#not_found'
-  get '/422', :to => 'errors#unacceptable'
-  get '/500', :to => 'errors#internal_error'
-
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 end
