@@ -8,6 +8,6 @@ class ErrorsController < ApplicationController
   end
 
   def internal_error
-    render :status => 500
+    render :status => 422
   end
 end
