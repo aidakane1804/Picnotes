@@ -10,24 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_222914) do
+ActiveRecord::Schema.define(version: 2019_01_24_192035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "boards", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["user_id"], name: "index_boards_on_user_id"
-  end
-
   create_table "dislikes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_dislikes_on_note_id"
     t.index ["user_id"], name: "index_dislikes_on_user_id"
   end
@@ -36,8 +28,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.bigint "user_id"
     t.string "favorited_type"
     t.bigint "favorited_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
@@ -45,21 +37,21 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
   create_table "folders_notes", id: false, force: :cascade do |t|
-    t.bigint "folder_id"
-    t.bigint "note_id"
+    t.bigint "folder_id", null: false
+    t.bigint "note_id", null: false
   end
 
   create_table "likes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_likes_on_note_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -67,12 +59,10 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "image"
     t.bigint "user_id"
-    t.bigint "board_id"
-    t.index ["board_id"], name: "index_notes_on_board_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -82,16 +72,16 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.string "link"
     t.string "file_type"
     t.bigint "note_id"
-    t.datetime "created_at",
-    t.datetime "updated_at",
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_references_on_note_id"
   end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
@@ -130,8 +120,8 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.string "password_digest"
     t.string "city"
     t.string "date_of_birth"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "avatar"
     t.string "provider"
     t.string "uid"
@@ -157,13 +147,11 @@ ActiveRecord::Schema.define(version: 2019_01_07_222914) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
-  add_foreign_key "boards", "users"
   add_foreign_key "dislikes", "notes"
   add_foreign_key "dislikes", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "likes", "notes"
   add_foreign_key "likes", "users"
-  add_foreign_key "notes", "boards"
   add_foreign_key "notes", "users"
   add_foreign_key "references", "notes"
 end
