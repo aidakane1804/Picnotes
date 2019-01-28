@@ -23,3 +23,6 @@
 .byebug_history
 
 secrets.yml
+server.csr
+server.key
+server.pass.key
