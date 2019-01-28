@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   helper_method :initiate_instance_variables
 
   def current_user
-    @currect_user ||= User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 
   helper_method :current_user

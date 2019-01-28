@@ -51,11 +51,11 @@ class Note < ApplicationRecord
   end
 
   def next
-    Note.where("id < ?", id).order("id ASC").first || Note.first
+    Note.where("id < ?", id).order("id ASC").first || Note.last
   end
 
   def previous
-    Note.where("id > ?", id).order("id ASC").first || Note.last
+    Note.where("id > ?", id).order("id ASC").first || Note.first
   end
 
   private

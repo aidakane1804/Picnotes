@@ -43,9 +43,7 @@ class NotesController < ApplicationController
     @like = @note.likes.find_by_user_id current_user
     @dislike = @note.dislikes.find_by_user_id current_user
     @user = current_user
-    @boards = Board.where(user: current_user)
     @folders = Folder.where(user: current_user)
-    @board = Board.find_by_id(params[:board_id])
     @previous_note = @note.next
     @next_note = @note.previous
     @similar = Note.tagged_with(@note.tags, :any => true)

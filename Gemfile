@@ -76,6 +76,7 @@ gem 'dropzonejs-rails'
 gem 'meta-tags'
 
 # Error 404
+gem 'activeadmin'
 gem "devise"
 
 group :development, :test do
