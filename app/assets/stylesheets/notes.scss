@@ -328,6 +328,11 @@
   margin-right: 10px;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 .note-page-text{
   width: 300px;
 }
