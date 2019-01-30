@@ -55,7 +55,7 @@ class Note < ApplicationRecord
   end
 
   def previous
-    Note.where("id > ?", id).order("id ASC").first || Note.first
+    Note.where("id > ?", id).order("id DESC").first || Note.first
   end
 
   private
