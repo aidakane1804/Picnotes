@@ -5,6 +5,7 @@ class FoldersController < ApplicationController
   end
 
   def show
+    @user = current_user
     @folder = Folder.find(params[:id])
   end
 
