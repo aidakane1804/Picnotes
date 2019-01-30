@@ -322,6 +322,8 @@
   height: 402px;
   overflow: scroll;
   border-bottom: thin $color-grey solid;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
   margin-left: 10px;
   margin-right: 10px;
 }
