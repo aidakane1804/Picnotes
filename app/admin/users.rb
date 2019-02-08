@@ -12,5 +12,19 @@ ActiveAdmin.register User, as: 'People' do
 #   permitted
 # end
 
+permit_params :password, :password_digest
 
+controller do
+    def update
+      if params[:user][:password].blank?
+        params[:user].delete("password")
+        params[:user].delete("password_confirmation")
+      end
+      if params[:user][:email].blank?
+        params[:user].delete("email")
+        params[:user].delete("email_confirmation")
+      end
+      super
+    end
+  end
 end
