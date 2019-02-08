@@ -12,7 +12,25 @@ ActiveAdmin.register User, as: 'People' do
 #   permitted
 # end
 
-permit_params :password, :password_digest
+permit_params :password
+
+index do
+  column :username
+  column :first_name
+  column :last_name
+  column :email
+  actions
+end
+
+show do
+  attributes_table do
+      row :username
+      row :first_name
+      row :last_name
+      row :email
+      row :city
+  end
+end
 
 controller do
     def update
