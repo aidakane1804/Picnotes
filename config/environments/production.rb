@@ -96,7 +96,7 @@ Rails.application.configure do
   # :enable_starttls_auto => true
   # }
 
-  config.action_mailer.default_url_options = { host: 'picnotes.org' }
+  config.action_mailer.default_url_options = { host: 'picnotes.org', protocol: 'https' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
