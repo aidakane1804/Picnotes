@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'calvin.hui.71@live.com'
+  default from: 'noreply@picnotes.org'
   layout 'mailer'
 end
