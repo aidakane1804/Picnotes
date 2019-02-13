@@ -22,7 +22,7 @@
   <%= yield %>
 </div>
 
-<div class = "creation_form">
+<div class = "password_form">
   <%= form_for(:password_reset, url: password_resets_path) do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>

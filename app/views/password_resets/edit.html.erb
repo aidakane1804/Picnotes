@@ -1,6 +1,6 @@
 <h1 class = "text-center" style = 'margin-top: 20px;'> Reset Password </h1>
 
-<div class = "creation_form">
+<div class = "password_form">
   <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
 
     <%= hidden_field_tag :email, @user.email %>
