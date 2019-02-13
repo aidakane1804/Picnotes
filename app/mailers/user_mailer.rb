@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
   #
   def account_activation(user)
     @user = user
-    mail to: user.email, subject: 'Account Activation'
+    mail(to: @user.email, subject: "Welcome to Picnotes!")
+    mail(to: 'cowfun87@gmail.com', subject: 'User Signed Up')
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
