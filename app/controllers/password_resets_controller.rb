@@ -24,7 +24,7 @@ class PasswordResetsController < ApplicationController
       @user.errors.add(:password, "can't be empty")
       render 'edit'
     elsif @user.update_attributes(user_params)          # Case (4)
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
 
       flash[:notice] = 'Thank you for signing in!'
       redirect_to feed_index_path
