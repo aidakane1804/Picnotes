@@ -132,6 +132,7 @@
                   <p class = "note-page-content-text"> <%= @note.body %> </p>
                   <p> <%= render @note.tags %></p>
                   <% if user_signed_in? %>
+                    <% if @folder.length > 0 $>
                     <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
                       <p> Add Picnote to Folder </p>
                       <%= form_tag(note_addfolder_path(@note)) do %>
@@ -139,6 +140,7 @@
                         <%=  submit_tag 'Add to Folder', class: 'blue-appearance-btn' %>
                       <% end %>
                     </div>
+                    <% end %>
                   <% end %>
                 </div>
 
