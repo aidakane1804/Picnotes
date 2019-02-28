@@ -1,0 +1,108 @@
+<script>
+
+  document.getElementById("defaultOpen").click();
+
+  // function openReference(evt, tab){
+  //   var i;
+  //   var x = document.getElementsByClassName('click-reference');
+  //   for (i = 0; i < x.length; i++) {
+  //     x[i].style.display = 'none';
+  //     x[i].style.borderBottom = 'thick #fff solid';
+  //   }
+  //   document.getElementById(tab).style.display = 'block';
+  // }
+
+  // function openTab(evt, tabName) {
+  //     // Declare all variables
+  //     var i, tabcontent, tablinks;
+  //
+  //     // Get all elements with class="tabcontent" and hide them
+  //     tabcontent = document.getElementsByClassName("click-reference");
+  //     for (i = 0; i < tabcontent.length; i++) {
+  //         tabcontent[i].style.display = "none";
+  //     }
+  //
+  //     // Get all elements with class="tablinks" and remove the class "active"
+  //     tablinks = document.getElementsByClassName("tablinks");
+  //     for (i = 0; i < tablinks.length; i++) {
+  //         tablinks[i].className = tablinks[i].className.replace(" active", "");
+  //     }
+  //
+  //     // Show the current tab, and add an "active" class to the button that opened the tab
+  //     document.getElementById(tabName).style.display = "block";
+  //     evt.currentTarget.className += " active";
+  // }
+
+  function openReference(evt, tab) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("click-reference");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("reference-tab");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tab).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+</script>
+
+<div id = 'references' class = 'tabcontent'>
+  <div class = 'reference-tabs'>
+    <% if current_user %>
+      <% if current_user.username == @note.user.username %>
+      <button class = 'reference-tab Add active' id = 'defaultOpen' onclick='openReference(event, "Add")'> Add </button>
+      <% end %>
+    <% end %>
+    <button class = 'reference-tab Textbooks' onclick='openReference(event, "Textbooks")'> Books <%= @textbooks.count%> </button>
+    <button class = 'reference-tab Videos' onclick='openReference(event, "Videos")'> Videos <%= @videos.count%>  </button>
+    <button class = 'reference-tab Papers' onclick='openReference(event, "Papers")'> Articles <%= @papers.count%>  </button>
+  </div>
+
+  <div id = 'reference'>
+
+    <% if current_user %>
+      <% if current_user.username == @note.user.username %>
+        <div id = 'Add' class = 'click-reference' style = ''>
+          <div id = 'Added-Reference' style = 'text-align: center; color: #EAB38B;'>
+          </div>
+          <div style = 'background-color: #3b5998;'>
+            <p style = 'margin-bottom: 10px; padding: 5px; font-size: 15px; color: white;'> Now that you have created your Picnote, add any references that you may have used! </p>
+          </div>
+          <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
+            <div>
+              <%= f.input :file_type, collection: Reference::TYPE %>
+              <%= f.input :title %>
+              <%= f.input :author %>
+              <%= f.input :link %>
+            </div>
+            <div class = 'form-btn-container text-center'>
+              <%= f.button :submit, :class => 'blue-appearance-btn' %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div id = 'Textbooks' class = 'click-reference'>
+      <%= render @textbooks %>
+    </div>
+
+    <div id = 'Videos' class = 'click-reference' style = 'display: none;'>
+      <%= render @videos %>
+    </div>
+
+    <div id = 'Papers' class = 'click-reference' style = 'display: none;'>
+      <%= render @papers %>
+    </div>
+  </div>
+</div>
