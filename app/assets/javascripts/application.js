@@ -21,7 +21,7 @@
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();
 
-document.getElementById("defaultOpen").click();
+// document.getElementById("defaultOpen").click();
 
 function openTab(evt, tabName) {
     // Declare all variables
@@ -43,3 +43,14 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+$(document).ready(function(){ 
+   $("#how-it-works").show('slow');
+   $("#choose-topic").delay(1000).show(100);
+   $("#triangle").delay(1000).show(1000);
+   $("#upload-pic").delay(2000).show(2000);
+   $("#picnotes-img").delay(3000).show(3000);
+   $("#easy").delay(5000).show('fast');
+   $("#share-notes").delay(6000).show('fast');
+   $("#terms-conditions").delay(7000).show('fast');
+ }) 

@@ -359,6 +359,9 @@ input#search{
   color: $color-grey;
 }
 
+.text-red{
+  color: #bc181d;
+}
 /* ---------------------------------------------------- Alignment ---------------------------------------------------- */
 
 /* Float */
@@ -400,6 +403,10 @@ input#search{
 .flex-center{
   display: flex;
   justify-content: center;
+}
+
+#sig{
+   text-align: justify;
 }
 
 /* ---------------------------------------------------- Buttons ---------------------------------------------------- */
@@ -549,8 +556,9 @@ a.profile-links:hover{
 .introModalStyle{
   width: 800px;
   min-width: 250px;
+  min-height: 600px;
   position: absolute;
-  top: 45%;
+  top: 311px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
@@ -560,9 +568,18 @@ a.profile-links:hover{
 
 .intro-image{
   width: 200px;
-  padding-bottom: 20px;
-  border-bottom: 1px $color-red solid;
-  margin-bottom: 20px;
+  #padding-bottom: 20px;
+  #border-bottom: 1px $color-red solid;
+  margin-bottom: 10px;
+}
+
+
+hr{ 
+  height: 1px;
+  color: red;
+  background-color: red;
+  border: none;
+  width: 50%;
 }
 
 @media only screen and (max-width: 800px){

@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote, :addfolder, :empty]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote, :addfolder, :empty, :terms_and_conditions]
 
   def empty
   end
@@ -92,6 +92,9 @@ class NotesController < ApplicationController
     end
   end
 
+  def terms_and_conditions
+
+  end
   def destroy
     @note.destroy
     redirect_to notes_path

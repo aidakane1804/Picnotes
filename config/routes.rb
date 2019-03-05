@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       put 'like', to: 'notes#upvote'
       put 'dislike', to: 'notes#downvote'
     end
+    collection do
+      get 'terms_and_conditions', to: 'notes#terms_and_conditions'
+    end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]
     resources :likes, shallow: true, only: [:create, :destroy]
