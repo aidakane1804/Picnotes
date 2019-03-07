@@ -558,7 +558,7 @@ a.profile-links:hover{
   min-width: 250px;
   min-height: 600px;
   position: absolute;
-  top: 311px;
+  top: 320px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
@@ -571,15 +571,6 @@ a.profile-links:hover{
   #padding-bottom: 20px;
   #border-bottom: 1px $color-red solid;
   margin-bottom: 10px;
-}
-
-
-hr{ 
-  height: 1px;
-  color: red;
-  background-color: red;
-  border: none;
-  width: 50%;
 }
 
 @media only screen and (max-width: 800px){

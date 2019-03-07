@@ -46,11 +46,34 @@ function openTab(evt, tabName) {
 
 $(document).ready(function(){ 
    $("#how-it-works").show('slow');
-   $("#choose-topic").delay(1000).show(100);
-   $("#triangle").delay(1000).show(1000);
-   $("#upload-pic").delay(2000).show(2000);
+   $("#choose-topic").delay(1000).show('fast');
+   $("#upload-pic").delay(2500).show(2000);
    $("#picnotes-img").delay(3000).show(3000);
-   $("#easy").delay(5000).show('fast');
    $("#share-notes").delay(6000).show('fast');
-   $("#terms-conditions").delay(7000).show('fast');
+   $("#coral-triangle").delay(7000).show('fast');
+   $("#easy").delay(8000).show('fast');
+   $("#terms-conditions").delay(9000).show('fast');
+
+   var text="THE CORAL TRIANGLE";
+   var delay=170;
+   var elem = $("#triangle");
+    var addTextByDelay = function(text,elem,delay){
+        if(!elem){
+            elem = $("body");
+        }
+        if(!delay){
+            delay = 300;
+        }
+        if(text.length >0){
+            elem.append(text[0]);
+            setTimeout(
+                function(){
+                    addTextByDelay(text.slice(1),elem,delay);            
+                 },delay                 
+                );
+        }
+    }
+
+    $("#triangle").delay(1300).show('slow');
+    addTextByDelay(text,elem,delay)
  }) 

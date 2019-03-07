@@ -7,45 +7,49 @@
       <%= image_tag 'logo-clean.png', class: 'intro-image' %>
       <h1 class = 'text-grey'> Share your Knowledge </h1>
       <p class = 'text-grey padding-bottom-20'> Join Picnotes, a platform full of knowledge essentials. </p>
-      <hr >
-      <h1 class = 'text-grey' id="how-it-works" style='display: none'>How does it works?</h1>
-      <!-- <button
-        type = 'button'
-        class = 'inverse-blue-btn'
-        data-toggle = 'modal'
-        data-target = '#newSessionModal'
-        data-whatever = '@mdo'>
-        Sign In
-      </button> -->
+      <hr style="border: 1px solid lightgray;width: 50%;">
+      <p class = 'text-red' id="how-it-works" style='display: none'>How does it works?</p>
 
-<!--       <button
-        type = 'button'
-        class = 'blue-btn'
-        data-toggle = 'modal'
-        data-target = '#newUserModal'
-        data-whatever = '@mdo'>
-        Sign Up
-      </button> -->
     <div class="row" style="margin-top: 20px;">
-      <div class="col-md-4" id='choose-topic' style="display: none;">
-        <h1 class = 'text-red'><i>Choose a topic</i></h1>
-        <p class = 'text-grey padding-bottom-20' id='triangle' style="margin-top: 20px; display: none"><i>The Coral Triangle</i></p>
+      <div class="col-md-4" >
+        <P class = 'text-grey' id='choose-topic' style="display: none;">Choose a topic</P>
+        <p class = 'text-grey padding-bottom-20' style='margin-top: 20px;'>
+          <i id='triangle' style='font-size: 14px;display: none'></i></p>
       </div>
       <div class="col-md-4" id='upload-pic' style="display: none;">
-        <h1 class = 'text-red'><i>Upload a picture</i></h1>
+        <p class = 'text-grey'>Upload a picture</p>
         <!-- <div style="width: 258px;height: 179px;" id='div-image'>
 
         </div> -->
         <%= image_tag 'picnotes.png', style: 'margin-top:20px; display:none', id: 'picnotes-img' %>
-        <h1 class = 'text-red' style="margin-top: 30px; font-size: 35px;" id="easy"><i>It's So Easy!</i></h1>
+        <h1 class = 'text-red' style="margin-top: 30px; font-size: 20px;display: none" id="easy">It's so easy!</h1>
       </div>
-      <div class="col-md-4" id='share-notes' style="display: none;">
-        <h1 class = 'text-red'><i>Share your notes</i></h1>
-        <p class = 'text-grey' style="margin-top: 20px;"><i>The  Coral Triangle is a 6  million km2 area  that stretches from Indonsia, Malaysia, Papua New Guinea the philippines, Soloman Island and Taimor Lester.</i></p>
+      <div class="col-md-4">
+        <p class = 'text-grey' id="share-notes" style="display: none">Share your notes</p>
+        <p class = 'text-grey' style="margin-top: 20px; font-size: 14px; display: none" id="coral-triangle"><i>The  Coral Triangle is a 6  million km2 area  that stretches from Indonsia, Malaysia, Papua New Guinea the philippines, Soloman Island and Taimor Lester.</i></p>
       </div>
     </div>
+    <div id='terms-conditions' style="display: none; margin-top: 15px;">
+    <button
+        type = 'button'
+        class = 'inverse-blue-btn btn-lg'
+        data-toggle = 'modal'
+        data-target = '#newSessionModal'
+        data-whatever = '@mdo'
+        >
+        Sign In
+      </button>
+      <button
+        type = 'button'
+        class = 'blue-btn btn-lg'
+        data-toggle = 'modal'
+        data-target = '#newUserModal'
+        data-whatever = '@mdo' >
+        Sign Up
+      </button>
+      <%= link_to 'Terms & Conditions', terms_and_conditions_notes_path, style: 'margin-left: 590px;'%>
+      </div>
     </div>
-    <%= link_to 'Terms & Conditions', terms_and_conditions_notes_path, style: 'margin-left: 640px; display: none', id:'terms-conditions'%>
   </div>
 </div>
 
