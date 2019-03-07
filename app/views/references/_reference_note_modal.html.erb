@@ -1,4 +1,4 @@
-<div id="reference_note-modal" class="modal fade" role="dialog" data-backdrop="">
+<!-- <div id="reference_note-modal" class="modal fade" role="dialog" data-backdrop="">
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header'>
@@ -17,10 +17,217 @@
             <%= f.input :link %>
           </div>
           <div class = 'form-btn-container text-center'>
+            <p> Please refresh page after creating Picnote </p>
             <%= f.button :submit, :class => 'blue-appearance-btn' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
+</div> -->
+
+<script>
+  document.getElementById("defaultOpen").click();
+
+  function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+  }
+
+  function openReference(tab){
+    var i;
+    var x = document.getElementsByClassName('click-reference');
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = 'none';
+      x[i].style.borderBottom = 'thick #FFF solid';
+    }
+    document.getElementById(tab).style.display = 'block';
+  }
+
+  $('#hamburger-menu').click(function(){
+    $('#note_menu').toggle('.hidden')
+  })
+
+</script>
+
+<h1 style = 'display:none;'><%= title @note.title %></h1>
+
+<div id="reference_note-modal" class="modal fade" role="dialog" data-backdrop="">
+  <div style = "display: flex; align-items: center;">
+    <div class = 'note-arrow'>
+      <% if @previous_note %>
+        <%= link_to fa_icon('arrow-left 3x'), note_path(@previous_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+      <% end %>
+    </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class = 'modal-header-information'>
+          <div class = 'modal-header-information-title'>
+            <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %></h5>
+            <div style = 'display: flex;'>
+              <button id = 'hamburger-menu' class = 'blue-appearance-btn'>
+                  <%= fa_icon('bars') %>
+              </button>
+              <div id = 'note_menu' class = 'hidden'>
+                <p> <%= link_to 'Share', "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
+                <p> <button class = 'blue-appearance-btn'> Report </button> </p>
+                <p> <%= render '/components/follow_button', :user => note.user %> </p>
+              </div>
+              <p>
+                <% if user_signed_in? && can?(:favorite, @note)%>
+                  <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+                    <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
+                  <% else %>
+                    <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
+                  <% end %>
+                <% else %>
+                  <%= fa_icon('heart') %> <%= @note.favorites.count %>
+                <% end %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class = 'modal-header-information-content'>
+            <div>
+              <% if current_user == note.user %>
+              <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %> </p>
+              <% else %>
+              <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), class: 'blue-appearance-btn' %> </p>
+              <% end %>
+              <p>
+                <%= note.created_at.strftime("%m/%d/%Y") %>
+                <% if user_signed_in? && can?(:crud, @note) %>
+                  <div style = 'display: flex'>
+                    <button
+                      type = 'button'
+                      class = 'blue-appearance-btn'
+                      data-toggle = 'modal'
+                      data-target = '#editNoteModal'
+                      data-whatever = '@mdo'
+                      data-dismiss="modal">
+                      Edit
+                    </button>
+                    <%= link_to('Delete', note_path(@note), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+                  </div>
+                <% end %>
+              </p>
+            </div>
+            <% if note.user.avatar? %>
+              <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
+            <% else %>
+              <%= image_tag 'avatar.png', class: 'note-avatar-image' %>
+            <% end %>
+          </div>
+        </div>
+        <button type="button" class="close" id='close-btn' data-dismiss="modal">&times;</button>
+      </div>
+
+
+        <div class = "note-page-content">
+          <div class = 'note-mobile-image'>
+            <% if @note.image.present? %>
+            <%= image_tag @note.image.url(:large), class:"note-image" %>
+            <% end %>
+          </div>
+
+            <div class = 'note-page-text'>
+              <div class = 'tab'>
+                <button class = 'tablinks' onclick = 'openTab(event, "information")'> Notes </button>
+                <button class = 'tablinks' onclick = 'openTab(event, "references")' id = 'defaultOpen'> Resources </button>
+                <button class = 'tablinks' onclick = 'openTab(event, "similar")'> Related </button>
+              </div>
+
+              <div class = 'notes-overflow'>
+                <div id = 'information' class = 'tabcontent'>
+                  <p class = "note-page-content-text"> <%= @note.body %> </p>
+                  <p> <%= render @note.tags %></p>
+                  <% if user_signed_in? %>
+                    <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
+                      <p> Add Picnote to Folder </p>
+                      <%= form_tag(note_addfolder_path(@note)) do %>
+                        <%= select_tag 'folder_id', options_for_select(@folders.collect{ |folder| [folder.name, folder.id] }) %>
+                        <%=  submit_tag 'Add to Folder', class: 'blue-appearance-btn' %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div id = 'similar' class = 'tabcontent'>
+                  <div class = 'flex-center'>
+                    <div class = "similar-notes-container" style = 'margin-top: 20px;'>
+                      <% @similar.each do |note| %>
+                        <div class = 'similar-note-container'>
+
+                          <%= link_to(note_path(note), remote: true) do %>
+                          <%= image_tag note.image.url(:thumb), class:'similar-note-image' if note.image.present? %>
+                          <div class = 'note-container-text'>
+                            <p class = "mobile-font note-btn-font" style = 'font-size: 10px;'> <%= truncate(note.title, length: 25) %> </p>
+                          </div>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+                <%= render './references/user_create_reference' %>
+              </div>
+
+              <div class = 'like-container'>
+                <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
+
+                  <%= link_to like_note_path(@note), remote: true, class: 'white-btn like-tab like-color', method: :put do %>
+                    <%= fa_icon('check') %> <span class = 'upvotes-count'><%= @note.get_upvotes.size %> </span>
+                  <% end %>
+
+                  <%= link_to dislike_note_path(@note), remote: true, class: 'white-btn like-tab dislike-color', method: :put do %>
+                    <%= fa_icon('times') %> <span class = 'downvotes-count'><%= @note.get_downvotes.size %> </span>
+                  <% end %>
+                <% else %>
+                  <div class = 'like-tab like-color'>
+                    <%= fa_icon('check') %> <%= @note.get_upvotes.size %>
+                  </div>
+                  <div class = 'like-tab dislike-color'>
+                    <%= fa_icon('times') %> <%= @note.get_downvotes.size %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+    <div class = 'note-arrow'>
+      <% if @next_note %>
+        <%= link_to fa_icon('arrow-right 3x'), note_path(@next_note), data: {toggle: 'modal', dismiss: 'modal'}, remote: true%>
+        <% end %>
+    </div>
+  </div>
 </div>
+
+<%= render './modals/edit_note_modal' %>
+<%= render './modals/edit_note_reference_modal' %>
+
+<script>
+  document.getElementById("close-btn").click(function(){
+
+  });
+</script>

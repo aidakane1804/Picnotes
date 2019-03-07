@@ -8,21 +8,21 @@ class ReferencesController < ApplicationController
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
-    if @reference.save
-      flash[:notice] = "Note Saved"
-      redirect_to note_path(@note)
-    else
-      flash[:notice] = "Error"
-      render :new
-    end
-    # respond_to do |format|
-    #   if @reference.save
-    #     format.html {redirect_to note_path(@note)}
-    #     format.js
-    #   else
-    #     render @note
-    #   end
+    # if @reference.save
+    #   flash[:notice] = "Note Saved"
+    #   redirect_to note_path(@note)
+    # else
+    #   flash[:notice] = "Error"
+    #   render :new
     # end
+    respond_to do |format|
+      if @reference.save
+        format.html {redirect_to note_path(@note)}
+        format.js
+      else
+        render @note
+      end
+    end
   end
 
   def destroy
@@ -33,6 +33,14 @@ class ReferencesController < ApplicationController
   def new
     @note = Note.find(params[:note_id])
     @reference = Reference.new
+    @folders = Folder.where(user: current_user)
+    @similar = Note.tagged_with(@note.tags, :any => true)
+
+    @references_unordered = Reference.where(note_id: @note.id)
+    
+    @textbooks = @references_unordered.where(:file_type => 't')
+    @videos = @references_unordered.where(:file_type => 'v')
+    @papers = @references_unordered.where(:file_type => 'p')
   end
 
   def edit

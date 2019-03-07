@@ -24,7 +24,7 @@ class NotesController < ApplicationController
       @searchresult = params[:search]
       @searchmodel = params[:searchtest]
     else
-      @notes = Note.order(:id)
+      @notes = Note.order(id: :desc)
     end
     @user = current_user
   end

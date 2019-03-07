@@ -17,6 +17,22 @@
   margin-right: 5%;
 }
 
+.password_form{
+  text-align: center;
+  margin-left: 30%;
+  width: 40%;
+  margin-right: 30%;
+}
+
+@media only screen and (max-width: 600px){
+  .password_form{
+    text-align: center;
+    margin-left: 5%;
+    width: 90%;
+    margin-right: 5%;
+  }
+}
+
 
 .note-page-container{
   margin-left: 20%;

@@ -11,7 +11,7 @@
       </div>
 
       <div>
-        <%= simple_form_for @note do |f| %>
+        <%= simple_form_for Note.new do |f| %>
           <div class = 'modal-body'>
             <%= f.label :title, 'Title (Required)' %>
             <%= f.input :title, label: false %>

@@ -50,11 +50,11 @@ class Note < ApplicationRecord
     end
   end
 
-  def next
+  def previous
     Note.where("id < ?", id).order(id: :desc).first || Note.last
   end
 
-  def previous
+  def next
     Note.where("id > ?", id).order(id: :asc).first || Note.first
   end
 

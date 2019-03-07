@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -48,6 +50,8 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
 
   root 'notes#index'
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 end

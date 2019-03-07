@@ -39,7 +39,7 @@ function openReference(tab){
 
     <% if current_user %>
       <% if current_user.username == @note.user.username %>
-        <div id = 'Add' class = 'click-reference' style = 'display: none;'>
+        <div id = 'Add' id = 'defaultOpen' class = 'click-reference' style = 'display: none;'>
           <div id = 'Added-Reference' style = 'text-align: center; color: #EAB38B;'>
           </div>
           <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
