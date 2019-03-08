@@ -559,16 +559,17 @@ a.profile-links:hover{
 .introModalStyle{
   width: 800px;
   min-width: 250px;
-  max-height: calc(100vh - 212px);
+  max-height: 615px;
   overflow:auto;
   position: absolute;
-  top: 250px;
+  top: 322px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
   border: thin $color-white solid ;
   border-radius: 10px;
 }
+
 
 .intro-image{
   width: 200px;
@@ -586,6 +587,8 @@ a.profile-links:hover{
 @media only screen and (max-width: 600px){
   .introModalStyle{
     width: 300px;
+    top: 250px;
+    max-height: 460px;
   }
 }
 
