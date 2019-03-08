@@ -362,6 +362,9 @@ input#search{
 .text-red{
   color: #bc181d;
 }
+.set-font-family{
+  font-family: Times;
+}
 /* ---------------------------------------------------- Alignment ---------------------------------------------------- */
 
 /* Float */
@@ -556,9 +559,10 @@ a.profile-links:hover{
 .introModalStyle{
   width: 800px;
   min-width: 250px;
-  min-height: 600px;
+  max-height: calc(100vh - 212px);
+  overflow:auto;
   position: absolute;
-  top: 320px;
+  top: 250px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
