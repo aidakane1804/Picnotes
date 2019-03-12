@@ -560,9 +560,8 @@ a.profile-links:hover{
   width: 800px;
   min-width: 250px;
   max-height: 615px;
-  overflow:auto;
   position: absolute;
-  top: 322px;
+  top: 325px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
@@ -570,6 +569,9 @@ a.profile-links:hover{
   border-radius: 10px;
 }
 
+.mobile-easy {
+  display:none;  
+}
 
 .intro-image{
   width: 200px;
@@ -587,9 +589,20 @@ a.profile-links:hover{
 @media only screen and (max-width: 600px){
   .introModalStyle{
     width: 300px;
-    top: 250px;
-    max-height: 460px;
+    top: 240px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 440px;
   }
+  .desktop-easy {
+      display: none;
+   }
+   .mobile-easy{
+      display: block;
+   }
+   .margin-for-mobile{
+   margin-top: 10px;
+   }
 }
 
 /* Forms */
