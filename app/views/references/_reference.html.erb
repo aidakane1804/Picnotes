@@ -1,5 +1,7 @@
 <% if reference.title.length > 0 %>
-  <!-- <p> Title: <%#= reference.title %> </p> -->
+  <% unless reference.file_type.eql?('t') %>
+  <p> Title: <%= reference.title %> </p>
+  <% end %>
 <% end %>
 
 <% if reference.author.length > 0 %>
@@ -7,13 +9,9 @@
 <% end %>
 
 <% if reference.link.length > 8 %>  
-  <% if reference.file_type.eql?("t") %>
   <p>
-    <%= link_to strip_url(reference.link).html_safe %>
+    <%= link_to (reference.link).html_safe, (reference.link).html_safe %>
   </p>
-  <% else %>
-  <%= link_to truncate(reference.link, length: 30), reference.link, target: :_blank %>
-  <% end %>
 <% end %>
 <br>
 <% if current_user %>
@@ -51,3 +49,9 @@
   <% end %>
 <% end %>
 <hr/>
+
+
+<script type="text/javascript">
+  debugger
+  $('a:contains(\'https://\')').hide();
+</script>
