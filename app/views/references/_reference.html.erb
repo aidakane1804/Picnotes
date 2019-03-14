@@ -1,15 +1,21 @@
 <% if reference.title.length > 0 %>
-  <p> Title: <%= reference.title %> </p>
+  <!-- <p> Title: <%#= reference.title %> </p> -->
 <% end %>
 
 <% if reference.author.length > 0 %>
   <p> Author: <%= reference.author %> </p>
 <% end %>
 
-<% if reference.link.length > 8 %>
+<% if reference.link.length > 8 %>  
+  <% if reference.file_type.eql?("t") %>
+  <p>
+    <%= link_to strip_url(reference.link).html_safe %>
+  </p>
+  <% else %>
   <%= link_to truncate(reference.link, length: 30), reference.link, target: :_blank %>
+  <% end %>
 <% end %>
-
+<br>
 <% if current_user %>
   <% if current_user.username == @note.user.username %>
   <!-- <button
