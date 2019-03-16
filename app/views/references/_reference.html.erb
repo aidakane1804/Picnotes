@@ -7,7 +7,6 @@
 <% if reference.author.length > 0 %>
   <p> Author: <%= reference.author %> </p>
 <% end %>
-
 <% if reference.link.length > 8 %>  
   <p>
     <%= link_to (reference.link).html_safe, (reference.link).html_safe %>
@@ -52,6 +51,12 @@
 
 
 <script type="text/javascript">
-  debugger
-  $('a:contains(\'https://\')').hide();
+  var links = $('a:contains(\'https://\')')
+  var i;
+  for (i = 0; i < links.length; i++) {
+    debugger
+    if (links[i].text  == ("https://")) {
+      links[i].remove();
+    }
+  }
 </script>
