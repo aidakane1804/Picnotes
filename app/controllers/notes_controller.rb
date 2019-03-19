@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :downvote, :addfolder, :empty, :terms_and_conditions]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline,:about_us,:contact_us,:freelance_research,:educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions]
 
   def empty
   end
@@ -95,6 +95,27 @@ class NotesController < ApplicationController
   def terms_and_conditions
 
   end
+
+  def about_us
+
+  end
+
+  def contact_us
+
+  end
+
+  def community_guideline
+
+  end
+
+  def freelance_research
+
+  end
+
+  def educational_organizations
+
+  end
+
   def destroy
     @note.destroy
     redirect_to notes_path
@@ -126,6 +147,7 @@ class NotesController < ApplicationController
   end
 
   private
+
   def note_params
     params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)
   end

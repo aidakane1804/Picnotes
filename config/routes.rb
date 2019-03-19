@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     end
     collection do
       get 'terms_and_conditions', to: 'notes#terms_and_conditions'
+      get 'about_us', to: 'notes#about_us'
+      get 'contact_us', to: 'notes#contact_us'
+      get 'community_guideline', to: 'notes#community_guideline'
+      get 'freelance_research', to: 'notes#freelance_research'
+      get 'educational_organizations', to: 'notes#educational_organizations'
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]
