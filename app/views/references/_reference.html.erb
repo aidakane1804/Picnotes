@@ -1,15 +1,18 @@
 <% if reference.title.length > 0 %>
+  <% unless reference.file_type.eql?('t') %>
   <p> Title: <%= reference.title %> </p>
+  <% end %>
 <% end %>
 
 <% if reference.author.length > 0 %>
   <p> Author: <%= reference.author %> </p>
 <% end %>
-
-<% if reference.link.length > 8 %>
-  <%= link_to truncate(reference.link, length: 30), reference.link, target: :_blank %>
+<% if reference.link.length > 8 %>  
+  <p>
+    <%= link_to (reference.link).html_safe, (reference.link).html_safe %>
+  </p>
 <% end %>
-
+<br>
 <% if current_user %>
   <% if current_user.username == @note.user.username %>
   <!-- <button
@@ -45,3 +48,15 @@
   <% end %>
 <% end %>
 <hr/>
+
+
+<script type="text/javascript">
+  var links = $('a:contains(\'https://\')')
+  var i;
+  for (i = 0; i < links.length; i++) {
+    debugger
+    if (links[i].text  == ("https://")) {
+      links[i].remove();
+    }
+  }
+</script>
