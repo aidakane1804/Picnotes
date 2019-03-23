@@ -1,0 +1,52 @@
+<div class='profile-dashboard'>
+  <br>
+  <div class="profile-menu">
+    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
+    <p> <%= link_to 'Community Guidlines', community_guideline_notes_path, class: " profile-links set-font-family" %>
+    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family" %>
+    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: "current profile-links set-font-family" %>
+  </div>
+</div>
+<div class="center">
+
+</div>
+
+<style>
+  @import url('http://getbootstrap.com/dist/css/bootstrap.css');
+
+  html, body, .container-table {
+    height: 80%;
+  }
+
+  .container-table {
+    display: table;
+  }
+
+  .vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+  }
+</style>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.0/bootstrap.min.js"></script>
+
+<div class="container container-table">
+  <div class="row vertical-center-row">
+    <div class="text-center col-md-11 col-md-offset-4 footer-color">
+
+      <dl>
+        <dt>For General Inquiries:</dt>
+        <dd>info@picnotes.org
+        <dd>
+        <dt> For Support:</dt>
+        <dd>support@picnotes.org
+        <dd>
+        <dt> For Partners:</dt>
+        <dd> partners@picnotes.org</dd>
+        <dt> For Press:</dt>
+        <dd>press@picnotes.org</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+</div>
+

@@ -1,0 +1,225 @@
+<div class='profile-dashboard'>
+  <br>
+  <div class="profile-menu">
+    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
+    <p> <%= link_to 'Community Guidlines', community_guideline_notes_path, class: "current profile-links set-font-family" %>
+    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family " %>
+    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: " profile-links set-font-family set-font-family" %>
+  </div>
+</div>
+<br>
+<div class="container-fluid" data-turbolinks="false">
+  <div class="row">
+    <div class="col-sm-3" id="spy">
+      <ul class="nav nav-fill flex-column set-font-family">
+        <li class="nav-item">
+          <a class="nav-link footer-color current sha" id="g" href="#a"><h5 class="shar bold">Sharing your knowledge</h5></a>
+        </li>
+        <!--    <li class="nav-item"><a class="nav-link footer-color pro" id="u" href="#b"><h5 class="prov">Providing resources</h5></a></li>-->
+        <li class="nav-item">
+          <a class="nav-link footer-color opt" id="l" href="#c"><h5 class="opti">Optimizing your dashboard</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link footer-color wha" id="o" href="#d">
+            <h5 class="what">What type of topics you should share?</h5></a></li>
+        <li class="nav-item ">
+          <a class="nav-link footer-color com" id="t" href="#e"><h5 class="comm">Communication and Interaction</h5></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 scrollspy-community set-font-family" data-spy="scroll" data-target="#spy">
+      <div class="set-font-family" style="text-align:justify;text-justify: inter-word" id="a">
+        <h4>Sharing your knowledge</h4>
+        <p>
+          Creating Picnotes is very easy. You need to:
+        <p>1. Choose a topic</p>
+        <p>2. Upload a picture</p>
+        <p>3. Share your knowledge (max. 650 characters)</p>
+        <p>4. Provide additional resources</p>
+        <p>5. Submit</p>
+        <p> We created a singular content structure that strongly differs from traditional websites across the web.</p>
+        <%= image_tag "community-quide.png", class: "img-responsive img-thumbnail ", width: "850", height: "270" %>
+        <h4>Providing resources</h4>
+        <p>
+          The notes, in each Picnotes, provide a general understanding of a topic. We encourage lifelong learners to
+          provide resources that will help other users to further their understanding of the topic. The resources can be
+          books, articles or videos.
+        </p>
+      </div>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <div class="set-font-family" style="text-align:justify;text-justify: inter-word" id="c">
+        <h4>Optimizing your dashboard</h4>
+        <p>
+          As soon as you log in, you will be taken to your dashboard. The dashboard has four tabs: </p>
+        <dl>
+          <dt> My Feed</dt>
+          <dd>My Feed shows the Picnotes that your followers and following have created.</dd>
+          <dt> My Picnotes</dt>
+          <dd> My Picnotes shows the Picnotes that you created. </dd>
+          <dt>My Folders</dt>
+          <dd> My Folders is where you can organize your Picnotes into different folders.</dd>
+          <dt>My Faves</dt>
+          <dd> My Faves has the Picnotes that you "liked."</dd></dl>
+      </div>
+      <br>
+      <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <div class="set-font-family" id="d" style="text-align:justify;text-justify: inter-word">
+        <h4>What type of topics you should share?</h4>
+        <p>
+          Take advantage of the platform to share educational topics that are important to you or that might be
+          underrated. The list of educational topics has no boundaries. However, here are suggestions of subject matters
+          that you can share:
+          History | science | geography | Philosophy | Music | Archaeology | Literature | Politics | Sociology |
+          Economics | Arts | Anthropology | Zoology | Linguistics | Medicine | Technology | business | Nature |
+          Mathematics | Physics | Finance
+
+        </p>
+      </div>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <div class="set-font-family" id="e" style="text-align:justify;text-justify: inter-word">
+        <h4>Communication and Interaction</h4>
+        <p>
+          We strongly promote one on one interaction as we believe that it decreases the risk of incivility. If you
+          notice any inaccuracies or mistakes, engage in pleasant and fraternal conversation with the uploader of the
+          topic.
+        </p>
+      </div>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+      <br><br><br> <br> <br><br><br> <br> <br><br><br> <br> <br><br><br> <br>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#g").on({
+
+            click: function () {
+                $("#g").addClass("current", "profile-link");
+                $("#u").removeClass("current");
+                $("#u").removeClass("active");
+                $("#l").removeClass("current");
+                $("#l").removeClass("active");
+                $("#o").removeClass("current");
+                $("#o").removeClass("active");
+                $("#t").removeClass("current");
+                $("#t").removeClass("active");
+
+            }
+        });
+        $("#u").on({
+
+            click: function () {
+                $("#g").removeClass("current");
+                $("#g").removeClass("active");
+                $("#u").addClass("current");
+                $("#l").removeClass("current");
+                $("#l").removeClass("active");
+                $("#o").removeClass("current");
+                $("#o").removeClass("active");
+                $("#t").removeClass("current");
+                $("#t").removeClass("active");
+
+
+            }
+        });
+        $("#l").on({
+
+            click: function () {
+                $("#g").removeClass("current");
+                $("#g").removeClass("active");
+                $("#u").removeClass("current");
+                $("#u").removeClass("active");
+                $("#u").removeClass("current");
+                $("#l").addClass("current");
+                $("#o").removeClass("current");
+                $("#o").removeClass("active");
+                $("#t").removeClass("current");
+                $("#t").removeClass("active");
+
+
+            }
+        });
+        $("#o").on({
+
+            click: function () {
+                $("#g").removeClass("current");
+                $("#g").removeClass("active");
+                $("#u").removeClass("current");
+                $("#u").removeClass("active");
+                $("#u").removeClass("current");
+                $("#l").removeClass("active");
+                $("#l").removeClass("current");
+
+                $("#o").addClass("current");
+                $("#t").removeClass("current");
+                $("#t").removeClass("active");
+
+
+            }
+        });
+        $("#t").on({
+
+            click: function () {
+                $("#g").removeClass("current");
+                $("#g").removeClass("active");
+                $("#u").removeClass("current");
+                $("#u").removeClass("active");
+                $("#l").removeClass("current");
+                $("#l").removeClass("active");
+                $("#o").removeClass("current");
+                $("#o").removeClass("active");
+                $("#t").addClass("current");
+
+            }
+        });
+    });
+
+    $(".sha").click(function () {
+        $(".shar").addClass("bold");
+
+        $(".prov").removeClass("bold");
+        $(".opti").removeClass("bold");
+        $(".what").removeClass("bold");
+        $(".comm").removeClass("bold");
+    });
+    $(".pro").click(function () {
+        $(".shar").removeClass("bold");
+        $(".prov").addClass("bold");
+        $(".opti").removeClass("bold");
+        $(".what").removeClass("bold");
+        $(".comm").removeClass("bold");
+
+    });
+    $(".opt").click(function () {
+        $(".shar").removeClass("bold");
+        $(".prov").removeClass("bold");
+        $(".opti").addClass("bold");
+        $(".what").removeClass("bold");
+        $(".comm").removeClass("bold");
+
+    });
+    $(".wha").click(function () {
+        $(".shar").removeClass("bold");
+        $(".prov").removeClass("bold");
+        $(".opti").removeClass("bold");
+        $(".what").addClass("bold");
+        $(".comm").removeClass("bold");
+
+    });
+    $(".com").click(function () {
+        $(".shar").removeClass("bold");
+        $(".prov").removeClass("bold");
+        $(".opti").removeClass("bold");
+        $(".what").removeClass("bold");
+        $(".comm").addClass("bold");
+
+
+    });
+
+</script>

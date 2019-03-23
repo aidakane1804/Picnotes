@@ -603,6 +603,14 @@ a.profile-links:hover{
    .margin-for-mobile{
    margin-top: 10px;
    }
+  .img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* Forms */
@@ -619,3 +627,56 @@ a.profile-links:hover{
   margin-bottom: 20px;
   border-radius: 5px;
 }
+
+/* ---------------------------------------------------- about-us ---------------------------------------------------- */
+.scrollspy-example {
+  position: relative;
+  height: 330px;
+  overflow: auto;
+}
+.scrollspy-community {
+  position: relative;
+  height: 620px;
+  overflow: auto;
+}
+/* ---------------------------------------------------- footer ---------------------------------------------------- */
+.footer {
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #303030;
+  color: white;
+  text-align: right;
+  height: 50px;
+
+
+}
+
+
+.footer-color{
+  color:#230e07;
+}
+
+a.pfooter-color:active{
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: thick #ff5468 solid;
+}
+.fo-bold{
+  text-decoration: none;
+  font-weight: 900;
+  color: #bc1a1d;
+}
+
+
+.about-us-col-sm-3 {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 33px;
+  padding-left: 52px;
+}
+
+.bold { font-weight: bold; }
+
