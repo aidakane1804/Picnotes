@@ -19,4 +19,11 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Reset Password')
   end
+
+  def contact_us_mail(email,message)
+    @email = email
+    @message = message
+    mail(to: "akane@picnotes.org", subject: "Picnotes Contact US ")
+  end
+
 end

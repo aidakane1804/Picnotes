@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline,:about_us,:contact_us,:freelance_research,:educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form]
 
   def empty
   end
@@ -102,7 +102,16 @@ class NotesController < ApplicationController
 
   def contact_us
 
+
   end
+
+  def contact_us_form
+# unless params[:name] && params[:email] && params[:message]
+    email = params[:Email]
+    message = params[:Message]
+    UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
+  end
+
 
   def community_guideline
 
@@ -115,6 +124,32 @@ class NotesController < ApplicationController
   def educational_organizations
 
   end
+
+  def what_is_picnotes
+
+  end
+
+  def message_from_the_founder
+
+  end
+
+
+  def sharing_your_knowledge
+
+  end
+
+  def optimizing_your_dashboard
+
+  end
+
+  def what_type_of_topics_you_should_share
+
+  end
+
+  def communication_and_interaction
+
+  end
+
 
   def destroy
     @note.destroy

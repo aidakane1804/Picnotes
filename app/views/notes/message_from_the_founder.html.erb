@@ -1,3 +1,4 @@
+
 <style>
 
 
@@ -6,52 +7,79 @@
 <div class='profile-dashboard'>
   <br>
   <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_notes_path, class: "current profile-links set-font-family" %> </p>
+    <p > <%= link_to 'About Us', about_us_notes_path, class: "current profile-links set-font-family" %> </p>
     <p> <%= link_to 'Community Guidelines', community_guideline_notes_path, class: " profile-links set-font-family" %>
     <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family" %>
     <p> <%= link_to 'Contact Us', contact_us_notes_path, class: " profile-links set-font-family" %>
   </div>
 </div>
 <br>
-<div class="container-fluid" style=" padding-right: 56px;" data-turbolinks="false">
+<div class="container-fluid" style=" padding-right: 56px;"  data-turbolinks="false">
   <div class="row">
     <div class="col-sm-3 about-us-col-sm-3 nav-justified " id="spy">
       <ul class="nav nav-fill nav-pillse flex-column set-font-family">
         <!--        <li class="nav-item"><a class="nav-link active text-bold fo-bold " id="g" href="#e"><h5>Our Starting Point</h5></a></li>-->
         <li class="nav-item">
 
-          <a class="nav-link footer-color  p " id="u" href="/notes/what_is_picnotes">
-            <h5 class="text  ">What is Picnotes?</h5></a>
+          <a class="nav-link footer-color  p " id="u" href="/notes/what_is_picnotes"><h5 class="text  ">What is Picnotes?</h5></a>
         </li>
-        <li class="nav-item"><a class="nav-link footer-color current q" id="l" href="/notes/educational_organizations">
-          <h5 class="edu bold">Educational Organizations</h5></a>
+        <li class="nav-item"><a class="nav-link footer-color q" id="l" href="/notes/educational_organizations"><h5 class="edu">Educational Organizations</h5></a>
         </li>
-        <li class="nav-item"><a class="nav-link footer-color fr" id="o" href="/notes/freelance_research">
-          <h5 class="fre">Freelance Researching</h5></a></li>
-        <li class="nav-item"><a class="nav-link footer-color  ms " id="t" href="/notes/message_from_the_founder">
-          <h5 class="msg ">Message from the Founder</h5></a>
+        <li class="nav-item"><a class="nav-link footer-color fr" id="o" href="/notes/freelance_research"><h5 class="fre">Freelance Researching</h5></a></li>
+        <li class="nav-item"><a class="nav-link footer-color current ms " id="t" href="/notes/message_from_the_founder"><h5 class="msg bold">Message from the Founder</h5></a>
         </li>
       </ul>
     </div>
-    <div class=" col-sm-9  scrollspy-example vertical-line" data-spy="scroll" data-target="#spy">
-      <div class="set-font-family" style="text-align:justify;text-justify: inter-word" id="b">
-        <h4 class="font-size-h4">Educational Organizations</h4>
+    <div class=" col-sm-9  scrollspy-example vertical-line"  data-spy="scroll" data-spy="scroll" data-target="#spy">
+      <!--      <div class="set-font-family " id="e">-->
+      <!--        <h4>Our Starting Point</h4>-->
+
+      <!--        <p>  We noticed two things:</p>-->
+      <!--         <p> 1) Traditional educational websites confine us to reading and commenting on articles.<p>-->
+      <!--        <p>  2) Great picture sharing platforms have minimal educational substance. So, where’s that great-->
+      <!--          knowledge-sharing hub for conscious lifelong learners? </p>-->
+      <!--      </div>-->
+
+
+
+      <div class="set-font-family" style="text-align:justify;text-justify: inter-word" id="d">
+        <h4 class="font-size-h4">Message from the Founder</h4>
         <p>
-          We create customized portals for educational organizations such as:</p>
-        <p> 1. Online course providers</p>
-        <p> 2. Language learning centers</p>
-        <p> 3. Colleges</p>
-        <p>We'll add additional functionalities that will cater to your students and your teachers. We'll build a
-          customized platform that will facilitate communication between classmates and between students and their
-          teachers — creating a sense of community within the schools.</p>
-        <p> For more information, contact us at info@picnotes.org
-        </p>
+          Picnotes is a labor of love that started as a personal hobby. For over two years, I held a journal filled with
+          educational notes. My unquenchable curiosity led me to write short notes about a variety of topics. In the
+          course of these two years, the journal had over three hundred notes organized in a clear and concise way. The
+          journal covered topics about literature, arts, history, medicine, philosophy, archaeology, politics, and
+          various other subject matter.</p>
+        <p> With the ongoing work of great web developers, a team of volunteers and a team of education and business
+          advisors, we transformed an educational journal to a fully formed startup company. And, as we continue to
+          build Picnotes, we believe that there are no limitations and no boundaries to educational development.
+          We pledge to create a great place for lifelong learners and a platform free from conflicts, intimidations, and
+          bullying.
+        </p><br>
+        <p>Thank you for visiting Picnotes.org</p>
+        <br>
+        <p>Aida</p>
+
       </div>
 
     </div>
   </div>
 </div>
-
+<!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
+    var glc = _glc || [];
+    glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyEgsSBXVzZXJzGICAkIPm6qALDA');
+    var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' :
+        'http://my.clickdesk.com/clickdesk-ui/browser/');
+    var glcp = (('https:' == document.location.protocol) ? 'https://' : 'http://');
+    var glcspt = document.createElement('script');
+    glcspt.type = 'text/javascript';
+    glcspt.async = true;
+    glcspt.src = glcpath + 'livechat-new.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(glcspt, s);
+</script>
+<!-- End of ClickDesk -->
 
 </body>
 <script>
@@ -75,14 +103,14 @@
 
             click: function () {
 
-                $("#g").removeClass("current", "active");
+                $("#g").removeClass("current","active");
                 // $("#g").removeClass("active");
                 $("#u").addClass("current");
-                $("#l").removeClass("current", "active");
+                $("#l").removeClass("current","active");
                 // $("#l").removeClass("active");
-                $("#o").removeClass("current", "active");
+                $("#o").removeClass("current","active");
                 // $("#o").removeClass("active");
-                $("#t").removeClass("current", "active");
+                $("#t").removeClass("current","active");
                 // $("#t").removeClass("active");
 
 
@@ -92,15 +120,15 @@
 
             click: function () {
                 // $(".text").removeClass("bold");
-                $("#g").removeClass("current", "active");
+                $("#g").removeClass("current","active");
                 // $("#g").removeClass("active");
-                $("#u").removeClass("current", "active");
+                $("#u").removeClass("current","active");
                 // $("#u").removeClass("active");
                 $("#u").removeClass("current");
                 $("#l").addClass("current");
-                $("#o").removeClass("current", "active");
+                $("#o").removeClass("current","active");
                 // $("#o").removeClass("active");
-                $("#t").removeClass("current", "active");
+                $("#t").removeClass("current","active");
                 // $("#t").removeClass("active");
                 // $(".text").removeClass("bold");
 

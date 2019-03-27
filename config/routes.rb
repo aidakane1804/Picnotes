@@ -19,6 +19,14 @@ Rails.application.routes.draw do
       get 'community_guideline', to: 'notes#community_guideline'
       get 'freelance_research', to: 'notes#freelance_research'
       get 'educational_organizations', to: 'notes#educational_organizations'
+      get 'what_is_picnotes', to: 'notes#what_is_picnotes'
+      get 'message_from_the_founder', to: 'notes#message_from_the_founder'
+      get 'sharing_your_knowledge', to: 'notes#sharing_your_knowledge'
+      get 'optimizing_your_dashboard', to: 'notes#optimizing_your_dashboard'
+      get 'what_type_of_topics_you_should_share', to: 'notes#what_type_of_topics_you_should_share'
+      get 'communication_and_interaction', to: 'notes#communication_and_interaction'
+      get 'contact_us_form', to: 'notes#contact_us_form'
+
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]

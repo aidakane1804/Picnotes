@@ -26,27 +26,69 @@
     display: table-cell;
     vertical-align: middle;
   }
+
+  body {
+    background: #ffffff;
+  }
+
+  h1, p {
+    text-align: center;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+
+  .form-height {
+    height: 187px;
+  }
+
+  textarea.form-control {
+    height: 187px;
+  }
 </style>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.1.0/bootstrap.min.js"></script>
+
+
+
+<div class="contact-us-form-box">
+  <h1>Contact Us</h1>
+  <form action="/notes/contact_us_form" method="get">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control" id="email" type="email" name="Email">
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea class="form-control form-height" id="message" name="Message"></textarea>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit"/>
+
+
+    <br><br>
+    <div>
+
+      <p style="text-align:justify;text-justify: inter-word">For General
+        Inquiries:<a href="mailto:info@picnotes.org">info@picnotes.org</a></p>
+
+      <p style="text-align:justify;text-justify: inter-word"> For
+        Support:<a href="mailto:info@picnotes.org">support@picnotes.org</a></p>
+
+      <p style="text-align:justify;text-justify: inter-word"> For
+        Partners:<a href="mailto:info@picnotes.org">partners@picnotes.org</a></p>
+
+      <p style="text-align:justify;text-justify: inter-word"> For
+        Press:<a href="mailto:info@picnotes.org">press@picnotes.org</a></p>
+    </div>
+
+  </form>
+</div>
 
 <div class="container container-table">
   <div class="row vertical-center-row">
     <div class="text-center col-md-11 col-md-offset-4 footer-color">
 
-      <dl>
-        <dt>For General Inquiries:</dt>
-        <dd>info@picnotes.org
-        <dd>
-        <dt> For Support:</dt>
-        <dd>support@picnotes.org
-        <dd>
-        <dt> For Partners:</dt>
-        <dd> partners@picnotes.org</dd>
-        <dt> For Press:</dt>
-        <dd>press@picnotes.org</dd>
-      </dl>
+
     </div>
   </div>
 </div>
 </div>
-
