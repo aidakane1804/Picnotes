@@ -110,6 +110,7 @@ class NotesController < ApplicationController
     email = params[:Email]
     message = params[:Message]
     UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
+    redirect_to contact_us_notes_path
   end
 
 
