@@ -6,6 +6,7 @@ class NotesController < ApplicationController
   end
 
   def index
+    default_meta_tags
     if params[:search]
       if params[:search].blank? && params[:searchtest] == '1'
         redirect_to search_index_path
@@ -30,6 +31,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    default_meta_tags
     @tags = @note.tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
     # @references = @references_unordered.sort_by &:file_type
@@ -93,62 +95,60 @@ class NotesController < ApplicationController
   end
 
   def terms_and_conditions
-
+    about_us_meta_tags
   end
 
   def about_us
-
+    about_us_meta_tags
   end
 
   def contact_us
-
-
+    about_us_meta_tags
   end
 
   def contact_us_form
 # unless params[:name] && params[:email] && params[:message]
     email = params[:Email]
     message = params[:Message]
-    UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
+    UserMailer.contact_us_mail(email, message).deliver_now
     redirect_to contact_us_notes_path
   end
 
-
   def community_guideline
-
+    about_us_meta_tags
   end
 
   def freelance_research
-
+    about_us_meta_tags
   end
 
   def educational_organizations
-
+    about_us_meta_tags
   end
 
   def what_is_picnotes
-
+    about_us_meta_tags
   end
 
   def message_from_the_founder
-
+    about_us_meta_tags
   end
 
-
   def sharing_your_knowledge
-
+    about_us_meta_tags
   end
 
   def optimizing_your_dashboard
-
+    about_us_meta_tags
   end
 
   def what_type_of_topics_you_should_share
-
+    about_us_meta_tags
   end
 
-  def communication_and_interaction
 
+  def communication_and_interaction
+    about_us_meta_tags
   end
 
 
@@ -183,6 +183,7 @@ class NotesController < ApplicationController
   end
 
   private
+
 
   def note_params
     params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)

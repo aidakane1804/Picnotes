@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    default_meta_tags
     @user = User.find params[:id]
   end
 

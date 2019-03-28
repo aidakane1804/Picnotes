@@ -13,19 +13,19 @@
     <div class="col-sm-3 about-us-col-sm-3 nav-justified" id="spy">
       <ul class="nav nav-fill flex-column set-font-family">
         <li class="nav-item">
-          <a class="nav-link footer-color sha" id="g" href="/notes/sharing_your_knowledge">
+          <a class="nav-link footer-color " href="/notes/sharing_your_knowledge">
             <h5 class="shar ">Sharing your knowledge</h5></a>
         </li>
         <!--    <li class="nav-item"><a class="nav-link footer-color pro" id="u" href="#b"><h5 class="prov">Providing resources</h5></a></li>-->
         <li class="nav-item">
-          <a class="nav-link footer-color current opt" id="l" href="/notes/optimizing_your_dashboard">
+          <a class="nav-link footer-color current " href="/notes/optimizing_your_dashboard">
             <h5 class="opti bold">Optimizing your dashboard</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link footer-color wha" id="o" href="/notes/what_type_of_topics_you_should_share">
+          <a class="nav-link footer-color " href="/notes/what_type_of_topics_you_should_share">
             <h5 class="what">What type of topics you should share?</h5></a></li>
         <li class="nav-item ">
-          <a class="nav-link footer-color com" id="t" href="/notes/communication_and_interaction">
+          <a class="nav-link footer-color " href="/notes/communication_and_interaction">
             <h5 class="comm">Communication and Interaction</h5></a>
         </li>
       </ul>
@@ -49,131 +49,3 @@
     </div>
   </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $("#g").on({
-
-            click: function () {
-                $("#g").addClass("current", "profile-link");
-                $("#u").removeClass("current");
-                $("#u").removeClass("active");
-                $("#l").removeClass("current");
-                $("#l").removeClass("active");
-                $("#o").removeClass("current");
-                $("#o").removeClass("active");
-                $("#t").removeClass("current");
-                $("#t").removeClass("active");
-
-            }
-        });
-        $("#u").on({
-
-            click: function () {
-                $("#g").removeClass("current");
-                $("#g").removeClass("active");
-                $("#u").addClass("current");
-                $("#l").removeClass("current");
-                $("#l").removeClass("active");
-                $("#o").removeClass("current");
-                $("#o").removeClass("active");
-                $("#t").removeClass("current");
-                $("#t").removeClass("active");
-
-
-            }
-        });
-        $("#l").on({
-
-            click: function () {
-                $("#g").removeClass("current");
-                $("#g").removeClass("active");
-                $("#u").removeClass("current");
-                $("#u").removeClass("active");
-                $("#u").removeClass("current");
-                $("#l").addClass("current");
-                $("#o").removeClass("current");
-                $("#o").removeClass("active");
-                $("#t").removeClass("current");
-                $("#t").removeClass("active");
-
-
-            }
-        });
-        $("#o").on({
-
-            click: function () {
-                $("#g").removeClass("current");
-                $("#g").removeClass("active");
-                $("#u").removeClass("current");
-                $("#u").removeClass("active");
-                $("#u").removeClass("current");
-                $("#l").removeClass("active");
-                $("#l").removeClass("current");
-
-                $("#o").addClass("current");
-                $("#t").removeClass("current");
-                $("#t").removeClass("active");
-
-
-            }
-        });
-        $("#t").on({
-
-            click: function () {
-                $("#g").removeClass("current");
-                $("#g").removeClass("active");
-                $("#u").removeClass("current");
-                $("#u").removeClass("active");
-                $("#l").removeClass("current");
-                $("#l").removeClass("active");
-                $("#o").removeClass("current");
-                $("#o").removeClass("active");
-                $("#t").addClass("current");
-
-            }
-        });
-    });
-
-    $(".sha").click(function () {
-        $(".shar").addClass("bold");
-
-        $(".prov").removeClass("bold");
-        $(".opti").removeClass("bold");
-        $(".what").removeClass("bold");
-        $(".comm").removeClass("bold");
-    });
-    $(".pro").click(function () {
-        $(".shar").removeClass("bold");
-        $(".prov").addClass("bold");
-        $(".opti").removeClass("bold");
-        $(".what").removeClass("bold");
-        $(".comm").removeClass("bold");
-
-    });
-    $(".opt").click(function () {
-        $(".shar").removeClass("bold");
-        $(".prov").removeClass("bold");
-        $(".opti").addClass("bold");
-        $(".what").removeClass("bold");
-        $(".comm").removeClass("bold");
-
-    });
-    $(".wha").click(function () {
-        $(".shar").removeClass("bold");
-        $(".prov").removeClass("bold");
-        $(".opti").removeClass("bold");
-        $(".what").addClass("bold");
-        $(".comm").removeClass("bold");
-
-    });
-    $(".com").click(function () {
-        $(".shar").removeClass("bold");
-        $(".prov").removeClass("bold");
-        $(".opti").removeClass("bold");
-        $(".what").removeClass("bold");
-        $(".comm").addClass("bold");
-
-
-    });
-
-</script>
