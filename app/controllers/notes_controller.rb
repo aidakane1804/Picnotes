@@ -110,7 +110,7 @@ class NotesController < ApplicationController
 # unless params[:name] && params[:email] && params[:message]
     email = params[:Email]
     message = params[:Message]
-    UserMailer.contact_us_mail(email, message).deliver_now
+    UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
     redirect_to contact_us_notes_path
   end
 
