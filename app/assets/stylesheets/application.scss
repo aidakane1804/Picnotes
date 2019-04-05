@@ -425,6 +425,7 @@ $color-light-blue: #8b9dc3;
   border-radius: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-weight: bold;
 }
 
 .blue-btn:hover {
@@ -469,6 +470,30 @@ $color-light-blue: #8b9dc3;
 }
 
 .blue-appearance-btn:hover {
+  color: $color-light-blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.voilet-appearance-btn {
+  background-color: transparent;
+  border: 0;
+  color:#bc1a1d;
+}
+
+.voilet-appearance-btn:hover {
+  color:rgb(255,0,0);opacity:0.6;;
+  text-decoration: none;
+
+}
+
+.sign-in-btn {
+  background-color: transparent;
+  border: 0;
+  color:$color-blue;
+}
+
+.sign-in-btn:hover {
   color: $color-light-blue;
   text-decoration: none;
 }

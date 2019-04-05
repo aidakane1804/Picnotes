@@ -55,6 +55,9 @@
       </div>
 
       <div>
+        <%= link_to 'About Us', about_us_notes_path, class: 'blue-appearance-btn set-font-family'%>&nbsp;&nbsp;
+        <%= link_to 'Guidelines', community_guideline_notes_path, class: 'blue-appearance-btn set-font-family' %>&nbsp;&nbsp;
+
         <% if user_signed_in? %>
 
           <button
@@ -69,12 +72,20 @@
           <%= link_to feed_index_path, class: 'blue-appearance-btn' do %>
             <%= fa_icon('user-circle 2x') %>
           <% end %>
-
         <% else %>
 
           <button
             type = 'button'
-            class = 'blue-btn'
+            class = 'blue-appearance-btn'
+            data-toggle = 'modal'
+            data-target = '#newSessionModal'
+            data-whatever = '@mdo'>
+            <%= fa_icon('pencil 2x') %>
+          </button>
+
+          <button
+            type = 'button'
+            class = 'sign-in-btn'
             data-toggle = 'modal'
             data-target = '#newSessionModal'
             data-whatever = '@mdo'>
