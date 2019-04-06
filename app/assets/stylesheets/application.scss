@@ -442,7 +442,7 @@ $color-light-blue: #8b9dc3;
   text-transform: uppercase;
   border: thin $color-blue solid;
   border-radius: 5px;
-  padding: 6px 20px 6px 20px;
+  padding: 6px 10px;
   font-weight: bold;
   //margin-right: 20px;
 }
@@ -486,6 +486,7 @@ $color-light-blue: #8b9dc3;
   background-color: transparent;
   border: 0;
   color: $color-grey;
+  cursor: pointer;
 }
 
 .header-link:hover {
@@ -522,7 +523,7 @@ $color-light-blue: #8b9dc3;
   background-color: transparent;
   border: 0;
   color:$color-blue;
-  padding-right: 20px;
+  //padding-right: 20px;
   cursor: pointer;
 }
 
