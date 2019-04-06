@@ -29,7 +29,7 @@
         <%= image_tag 'logo-clean.png', class: 'logo-image' %>
       <% end %>
 
-      <div class = 'search-bar non-mobile'>
+      <div class = 'search-bar'>
 
         <%= form_tag(notes_path, method: :get) do %>
           <%= text_field_tag(:search, params[:search]) %>
@@ -56,8 +56,8 @@
 
       <div>
 
-        <%= link_to 'About Us', about_us_notes_path, class: 'blue-appearance-btn set-font-family'%>&nbsp;&nbsp;
-        <%= link_to 'Guidelines', community_guideline_notes_path, class: 'blue-appearance-btn set-font-family' %>&nbsp;&nbsp;
+        <%= link_to 'About Us', about_us_notes_path, class: 'header-link set-font-family'%>&nbsp;&nbsp;
+        <%= link_to 'Guidelines', community_guideline_notes_path, class: 'header-link set-font-family' %>&nbsp;&nbsp;
 
         <% if user_signed_in? %>
 
@@ -90,12 +90,12 @@
             data-toggle = 'modal'
             data-target = '#newSessionModal'
             data-whatever = '@mdo'>
-            Sign In
+            Log In
           </button>
 
           <button
             type = 'button'
-            class = 'blue-btn'
+            class = 'header-blue-btn'
             data-toggle = 'modal'
             data-target = '#newUserModal'
             data-whatever = '@mdo'>

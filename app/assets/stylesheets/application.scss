@@ -434,6 +434,25 @@ $color-light-blue: #8b9dc3;
   border: thin $color-blue solid;
 }
 
+.header-blue-btn {
+  color: $color-white;
+  background-color: $color-blue;
+  border: none;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: thin $color-blue solid;
+  border-radius: 5px;
+  padding: 6px 20px 6px 20px;
+  font-weight: bold;
+  //margin-right: 20px;
+}
+
+.header-blue-btn:hover {
+  color: $color-white;
+  background-color: $color-light-blue;
+  border: thin $color-blue solid;
+}
+
 .inverse-blue-btn {
   color: $color-blue;
   background-color: $color-white;
@@ -463,10 +482,23 @@ $color-light-blue: #8b9dc3;
   text-decoration: none;
 }
 
+.header-link {
+  background-color: transparent;
+  border: 0;
+  color: $color-grey;
+}
+
+.header-link:hover {
+  color: $black;
+  text-decoration: none;
+  //font-weight: bold;
+}
+
 .blue-appearance-btn {
   background-color: transparent;
   border: 0;
   color: $color-blue;
+  cursor: pointer;
 }
 
 .blue-appearance-btn:hover {
@@ -484,19 +516,22 @@ $color-light-blue: #8b9dc3;
 .voilet-appearance-btn:hover {
   color:rgb(255,0,0);opacity:0.6;;
   text-decoration: none;
-
 }
 
 .sign-in-btn {
   background-color: transparent;
   border: 0;
   color:$color-blue;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .sign-in-btn:hover {
   color: $color-light-blue;
   text-decoration: none;
 }
+
+
 
 .new-note-btn {
   color: white;
@@ -615,7 +650,7 @@ a.profile-links:hover {
 @media only screen and (max-width: 600px) {
   .introModalStyle {
     width: 300px;
-    top: 240px;
+    top: 280px;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 440px;
