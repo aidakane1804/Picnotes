@@ -562,7 +562,7 @@ $color-light-blue: #8b9dc3;
 }
 
 .nav-spacing {
-  height: 55px;
+  height: 50px;
 }
 
 .search-bar {
@@ -613,7 +613,7 @@ a.profile-links:hover {
 #introModal {
   position: fixed;
   width: 100vw;
-  height: 95vh;
+  height: 90vh;
   background-color: rgba(70, 70, 70, 0.7);
   z-index: 9;
 }
@@ -651,7 +651,7 @@ a.profile-links:hover {
 @media only screen and (max-width: 600px) {
   .introModalStyle {
     width: 300px;
-    top: 280px;
+    top: 235px;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 440px;
