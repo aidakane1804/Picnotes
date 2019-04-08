@@ -613,7 +613,7 @@ a.profile-links:hover {
 #introModal {
   position: fixed;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   background-color: rgba(70, 70, 70, 0.7);
   z-index: 9;
 }
@@ -704,6 +704,22 @@ a.profile-links:hover {
 }
 
 /* ---------------------------------------------------- footer ---------------------------------------------------- */
+.sign-in-link {
+  background-color: transparent;
+  //text-transform: uppercase;
+  //font-size: 14px;
+  border: 0;
+  color: #428bca;
+  cursor: pointer;
+  font-weight: 550;
+}
+.sign-in-link:hover {
+  color: #1c71ba;
+  font-weight: 600;
+  text-decoration: none;
+  //font-weight: bold;
+}
+
 .footer {
 
   left: 0;
