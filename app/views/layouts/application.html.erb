@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= display_meta_tags  %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -24,12 +24,12 @@
   </head>
 
   <body>
-    <nav class = "navbar">
+    <nav class = "navbar full-display">
       <%= link_to root_path do %>
         <%= image_tag 'logo-clean.png', class: 'logo-image' %>
       <% end %>
 
-      <div class = 'search-bar non-mobile'>
+      <div class = 'search-bar non-mobile  '>
 
         <%= form_tag(notes_path, method: :get) do %>
           <%= text_field_tag(:search, params[:search]) %>
@@ -56,13 +56,10 @@
 
       <div >
 
-<!--        <%#= link_to 'About Us', about_us_notes_path, class: 'header-link set-font-family non-mobile'%>&nbsp;&nbsp;-->
-<!--        <%#= link_to 'Guidelines', community_guideline_notes_path, class: 'header-link set-font-family non-mobile' %>&nbsp;&nbsp;-->
-        <!--        &nbsp;&nbsp;-->
+
+
         <a class="header-link set-font-family non-mobile" href="/notes/about_us">About Us</a>&nbsp;&nbsp;
-        <!--        <%#= link_to 'About Us', about_us_notes_path, class: 'header-link set-font-family non-mobile'%>&nbsp;&nbsp;-->
         <a class="header-link set-font-family non-mobile" href="/notes/community_guideline">Guidelines</a>&nbsp;
-        <!--        <%#= link_to 'Guidelines', community_guideline_notes_path, class: 'header-link set-font-family non-mobile' %>&nbsp;&nbsp;-->
 
         <% if user_signed_in? %>
 
@@ -110,6 +107,118 @@
         <% end %>
       </div>
     </nav>
+
+
+
+
+<div class="topnav mobile-display " id="myTopnav" >
+  <!--    <nav class = "navbar">-->
+
+<div  >
+  <%= link_to root_path, style:'box-shadow: 0 8px 6px -6px #666;' do %>
+  <%= image_tag 'logo-clean.png', class: 'logo-image  img-logo-responsive' %>
+    <% unless user_signed_in? %>
+
+    <button
+        type='button'
+        class='header-link sign-in-link iphone-screen '
+        data-toggle='modal'
+        data-target='#newSessionModal'
+        data-whatever='@mdo'
+        onclick="myFunction()">
+        Log In
+      </button>
+    <button
+        type='button'
+        class='header-blue-btn '
+        data-toggle='modal'
+        data-target='#newUserModal'
+        data-whatever='@mdo'
+        onclick="myFunction()">
+        Sign Up
+      </button>
+    <% end %>
+  <% end %>
+
+  <% if user_signed_in? %>
+
+           <a style="padding-top: 0;"> <button
+              type = 'button'
+              class = 'blue-appearance-btn'
+              data-toggle = 'modal'
+              data-target = '#newNoteModal'
+              data-whatever = '@mdo'
+              onclick="myFunction()">
+  <%= fa_icon('pencil 2x') %>
+           </button></a>
+
+  <%= link_to feed_index_path, class: 'blue-appearance-btn' , style:'padding-top: 0;' do %>
+  <%= fa_icon('user-circle 2x') %>
+  <% end %>
+  <% else %>
+
+
+
+    <a style="padding-top: 0;">
+      <button
+        type='button'
+        class='header-link set-font-family'
+        data-toggle='modal'
+        data-target='#newSessionModal'
+        data-whatever='@mdo'
+        onclick="myFunction()">
+        Create Picnotes
+      </button>
+    </a>
+    <%end%>
+
+  <a style="padding-top: 0;" class="header-link set-font-family" href="/notes/community_guideline">&nbsp; Guidelines</a>
+  <a  style="padding-top: 0;" class="header-link set-font-family " href="/notes/about_us">&nbsp; About Us</a>
+
+   <a class="container">
+     <div class='search-bar '>
+
+       <%= form_tag(notes_path, method: :get) do %>
+       <%= text_field_tag(:search, params[:search]) %>
+     <% if @searchmodel %>
+    <% if @searchmodel == '3' %>
+    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
+    <% elsif @searchmodel == '2' %>
+    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
+    <% else %>
+    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+    <% end %>
+    <% else %>
+    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+    <% end %>
+
+    <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+    <%= fa_icon('search') %>
+    <% end %>
+       <%end%></div>
+         </a>
+
+
+  <a  class="icon" onclick="myFunction()">
+    <i class="fa fa-bars" style="background-color: white"></i>
+  </a>
+</div>
+</div>
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+
+
+
 
     <div class = "nav-spacing">
     </div>
