@@ -951,7 +951,14 @@ a.pfooter-color:active {
   }
 
   input#search {
-    width:117px;
+    width:50%;
+    border-radius: 25px;
+  }
+
+  #searchtest {
+    background-color: white;
+    height: 26px;
+    border: none;
     border-radius: 25px;
   }
 }
