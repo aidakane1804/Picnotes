@@ -114,9 +114,10 @@
 <div class="topnav mobile-display " id="myTopnav" >
   <!--    <nav class = "navbar">-->
 
-<div  >
-  <%= link_to root_path, style:'box-shadow: 0 8px 6px -6px #666;' do %>
-  <%= image_tag 'logo-clean.png', class: 'logo-image  img-logo-responsive' %>
+<div>
+  <a style="box-shadow: 0 8px 6px -6px #666;">
+<!--  <img src="logo-clean.png" alt="glass" class="logo-image img-logo-responsive" id="glass" />-->
+  <%= image_tag 'logo-clean.png',  id:'glass', class: 'logo-image  img-logo-responsive' , onclick:"myFunction2()" %>
     <% unless user_signed_in? %>
 
     <button
@@ -125,7 +126,7 @@
         data-toggle='modal'
         data-target='#newSessionModal'
         data-whatever='@mdo'
-        onclick="myFunction()">
+      >
         Log In
       </button>
     <button
@@ -134,11 +135,11 @@
         data-toggle='modal'
         data-target='#newUserModal'
         data-whatever='@mdo'
-        onclick="myFunction()">
+       >
         Sign Up
       </button>
-    <% end %>
-  <% end %>
+    <% end %></a>
+  <%# end %>
 
   <% if user_signed_in? %>
 
@@ -215,6 +216,12 @@
             x.className = "topnav";
         }
     }
+
+    function myFunction2() {
+        window.location.href = 'https://www.picnotes.org/';
+
+        }
+
 </script>
 
 
@@ -242,4 +249,7 @@
       })
     });
   </script>
+
+
+
 </html>
