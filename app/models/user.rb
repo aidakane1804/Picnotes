@@ -25,6 +25,20 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+# --------------------------------------------------------------------------------------
+  has_many :messages
+  has_many :subscriptions
+  has_many :chats, through: :subscriptions
+  def existing_chats_users
+    existing_chat_users = []
+    self.chats.each do |chat|
+      existing_chat_users.concat(chat.subscriptions.where.not(user_id: self.id).map {|subscription| subscription.user})
+      # puts 'ok'
+      # rails.logger.info existing_chat_users
+    end
+    existing_chat_users.uniq
+  end
+# ---------------------------------------------------------------------------------------
   validates(:username, {
     presence: {message: 'must exist'},
     uniqueness: {message: 'already exist'}

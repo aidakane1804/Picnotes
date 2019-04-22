@@ -54,7 +54,7 @@
           <div class = 'modal-header-information-title'>
             <h5 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %></h5>
             <div style = 'display: flex;'>
-              <button id = 'hamburger-menu' class = 'blue-appearance-btn'>
+              <button id = 'hamburger-menu' class = 'blue-appearance-btn-in-model'>
                   <%= fa_icon('bars') %>
               </button>
               <div id = 'note_menu' class = 'hidden'>
@@ -71,8 +71,19 @@
                   <% end %>
                 <% else %>
                   <%= fa_icon('heart') %> <%= @note.favorites.count %>
+                <% end %> &nbsp;
+
+                    <% if current_user%>
+                    <%= link_to(user_chats_path(current_user, :other_user =>note.user), method: :post) do %>
+                  <i class='far fa-envelope' style='font-size:19px;color:#bc1a1dc2'></i>
+
+                    <% end %>
                 <% end %>
+
+
+
               </p>
+
             </div>
 
           </div>

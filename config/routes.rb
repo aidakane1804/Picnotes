@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       put 'dislike', to: 'notes#downvote'
     end
     collection do
+      get 'chat_us', to:'chats#index'
       get 'terms_and_conditions', to: 'notes#terms_and_conditions'
       get 'about_us', to: 'notes#about_us'
       get 'contact_us', to: 'notes#contact_us'
@@ -34,13 +35,16 @@ Rails.application.routes.draw do
     resources :dislikes, shallow: true, only: [:create, :destroy]
     post '/addfolder', to: 'notes#addfolder'
   end
-
+  resources :messages, only:[:create]
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
 
   resources :folders
 
   resources :tags, only: [:index, :show]
 
   get 'search/index'
+
 
   resources :feed, only: [:index]
 
@@ -56,6 +60,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+    resources :chats, only: [:index, :show, :create]
     resources :boards
   end
 

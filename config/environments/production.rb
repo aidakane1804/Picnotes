@@ -19,6 +19,13 @@ Rails.application.configure do
   # `config/secrets.yml.key`.
   config.read_encrypted_secrets = true
 
+  #=========================================action-cable======================
+  #
+  config.web_socket_server_url = "wss://www.picnotes.org/cable"
+  config.action_cable.allowed_request_origins = ['https://www.picnotes.org', 'http://www.picnotes.org']
+
+  # =================================/action-cable=========================
+
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?

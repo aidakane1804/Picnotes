@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :initiate_instance_variables
-
+  include UsersHelper
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
       session[:user_id] = nil

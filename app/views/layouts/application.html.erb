@@ -1,40 +1,208 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Picnotes</title>
-    <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= display_meta_tags  %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136450115-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
+<head>
+  <title>Picnotes</title>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= display_meta_tags %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136450115-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+      function gtag() {
+          dataLayer.push(arguments);
+      }
 
-        gtag('js', new Date());
+      gtag('js', new Date());
 
-        gtag('config', 'UA-136450115-1');
-    </script>
-  </head>
+      gtag('config', 'UA-136450115-1');
+  </script>
+</head>
 
-  <body>
-    <nav class = "navbar full-display">
-      <%= link_to root_path do %>
-        <%= image_tag 'logo-clean.png', class: 'logo-image' %>
+<body>
+<nav class="navbar full-display">
+  <%= link_to root_path do %>
+    <%= image_tag 'logo-clean.png', class: 'logo-image' %>
+  <% end %>
+
+  <div class='search-bar non-mobile  '>
+
+    <%= form_tag(notes_path, method: :get) do %>
+      <%= text_field_tag(:search, params[:search]) %>
+
+
+      <% if @searchmodel %>
+        <% if @searchmodel == '3' %>
+          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
+        <% elsif @searchmodel == '2' %>
+          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
+        <% else %>
+          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+        <% end %>
+      <% else %>
+        <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
       <% end %>
 
-      <div class = 'search-bar non-mobile  '>
+      <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+        <%= fa_icon('search') %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+  <div>
+
+    <%#= link_to  user_chat_path do %>
+<!--      <i class='far fa-envelope' style='font-size:36px'></i>-->
+      <%# other_user.username %>
+    <%# end %>
+
+    <a class="header-link set-font-family non-mobile" id="about" href="/notes/about_us">About Us</a>&nbsp;&nbsp;
+    <a class="header-link set-font-family non-mobile" href="/notes/community_guideline">Guidelines</a>&nbsp;
+
+    <% if user_signed_in? %>
+
+      <button
+        type='button'
+        class='blue-appearance-btn'
+        data-toggle='modal'
+        data-target='#newNoteModal'
+        data-whatever='@mdo'>
+        <%= fa_icon('pencil 2x') %>
+      </button>
+
+     <%  if Message.where("recevier_id = ?  AND new = ?", current_user.id , TRUE).any? %>
+
+        <a class="header-link set-font-family non-mobile  " href="/notes/chat_us"> <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+        <span class="new-msg-header"></span>
+      <%else%>
+        <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
+          <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+      <%end%>
+      <%= link_to feed_index_path, class: 'blue-appearance-btn' do %>
+        <%= fa_icon('user-circle 2x') %>
+      <% end %>
+    <% else %>
+
+      <button
+        type='button'
+        class='header-link set-font-family non-mobile'
+        data-toggle='modal'
+        data-target='#newSessionModal'
+        data-whatever='@mdo'>
+        Create Picnotes
+      </button>
+
+      <button
+        type='button'
+        class='header-link sign-in-link '
+        data-toggle='modal'
+        data-target='#newSessionModal'
+        data-whatever='@mdo'>
+        Log In
+      </button>
+
+      <button
+        type='button'
+        class='header-blue-btn '
+        data-toggle='modal'
+        data-target='#newUserModal'
+        data-whatever='@mdo'>
+        Sign Up
+      </button>
+
+    <% end %>
+  </div>
+</nav>
+
+
+<div class="topnav mobile-display " id="myTopnav">
+  <!--    <nav class = "navbar">-->
+
+  <div>
+    <a style="box-shadow: 0 8px 6px -6px #666;">
+      <!--  <img src="logo-clean.png" alt="glass" class="logo-image img-logo-responsive" id="glass" />-->
+      <%= image_tag 'logo-clean.png', id: 'glass', class: 'logo-image  img-logo-responsive', onclick: "myFunction2()" %>
+      <% unless user_signed_in? %>
+
+        <button
+          type='button'
+          class='header-link sign-in-link iphone-screen '
+          data-toggle='modal'
+          data-target='#newSessionModal'
+          data-whatever='@mdo'
+        >
+          Log In
+        </button>
+        <button
+          type='button'
+          class='header-blue-btn '
+          data-toggle='modal'
+          data-target='#newUserModal'
+          data-whatever='@mdo'
+        >
+          Sign Up
+        </button>
+      <% end %></a>
+    <%# end %>
+
+    <% if user_signed_in? %>
+
+      <a style="padding-top: 0;">
+        <button
+          type='button'
+          class='blue-appearance-btn'
+          data-toggle='modal'
+          data-target='#newNoteModal'
+          data-whatever='@mdo'
+          onclick="myFunction()">
+          <%= fa_icon('pencil 2x') %>
+        </button>
+      </a>
+
+      <% if Message.where("recevier_id = ?  AND new = ?", current_user.id, TRUE).any? %>
+        <span class="new-msg-header"></span>
+        <a class="header-link set-font-family non-mobile  " href="/notes/chat_us">
+          <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+        <span class="new-msg-header"></span>
+      <% else %>
+        <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
+          <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+      <% end %>
+
+      <%= link_to feed_index_path, class: 'blue-appearance-btn', style: 'padding-top: 0;' do %>
+        <%= fa_icon('user-circle 2x') %>
+      <% end %>
+    <% else %>
+
+
+      <a style="padding-top: 0;">
+        <button
+          type='button'
+          class='header-link set-font-family'
+          data-toggle='modal'
+          data-target='#newSessionModal'
+          data-whatever='@mdo'
+          onclick="myFunction()">
+          Create Picnotes
+        </button>
+      </a>
+    <% end %>
+
+    <a style="padding-top: 0;" class="header-link set-font-family" href="/notes/community_guideline">&nbsp;
+      Guidelines</a>
+    <a style="padding-top: 0;" class="header-link set-font-family " href="/notes/about_us">&nbsp; About Us</a>
+
+    <a class="container">
+      <div class='search-bar '>
 
         <%= form_tag(notes_path, method: :get) do %>
           <%= text_field_tag(:search, params[:search]) %>
-
-
           <% if @searchmodel %>
             <% if @searchmodel == '3' %>
               <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
@@ -44,165 +212,20 @@
               <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
             <% end %>
           <% else %>
-          <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+            <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
           <% end %>
 
           <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
-              <%= fa_icon('search') %>
+            <%= fa_icon('search') %>
           <% end %>
-        <% end %>
-
-      </div>
-
-      <div >
-
-
-
-        <a class="header-link set-font-family non-mobile" href="/notes/about_us">About Us</a>&nbsp;&nbsp;
-        <a class="header-link set-font-family non-mobile" href="/notes/community_guideline">Guidelines</a>&nbsp;
-
-        <% if user_signed_in? %>
-
-          <button
-            type = 'button'
-            class = 'blue-appearance-btn'
-            data-toggle = 'modal'
-            data-target = '#newNoteModal'
-            data-whatever = '@mdo'>
-            <%= fa_icon('pencil 2x') %>
-          </button>
-
-          <%= link_to feed_index_path, class: 'blue-appearance-btn' do %>
-            <%= fa_icon('user-circle 2x') %>
-          <% end %>
-        <% else %>
-
-          <button
-            type = 'button'
-            class = 'header-link set-font-family non-mobile'
-            data-toggle = 'modal'
-            data-target = '#newSessionModal'
-            data-whatever = '@mdo'>
-            Create Picnotes
-          </button>
-
-          <button
-            type = 'button'
-            class = 'header-link sign-in-link '
-            data-toggle = 'modal'
-            data-target = '#newSessionModal'
-            data-whatever = '@mdo'>
-            Log In
-          </button>
-
-          <button
-            type = 'button'
-            class = 'header-blue-btn '
-            data-toggle = 'modal'
-            data-target = '#newUserModal'
-            data-whatever = '@mdo'>
-            Sign Up
-          </button>
-
-        <% end %>
-      </div>
-    </nav>
-
-
-
-
-<div class="topnav mobile-display " id="myTopnav" >
-  <!--    <nav class = "navbar">-->
-
-<div  >
-  <%= link_to root_path, style:'box-shadow: 0 8px 6px -6px #666;' do %>
-  <%= image_tag 'logo-clean.png', class: 'logo-image  img-logo-responsive' %>
-    <% unless user_signed_in? %>
-
-    <button
-        type='button'
-        class='header-link sign-in-link iphone-screen '
-        data-toggle='modal'
-        data-target='#newSessionModal'
-        data-whatever='@mdo'
-        onclick="myFunction()">
-        Log In
-      </button>
-    <button
-        type='button'
-        class='header-blue-btn '
-        data-toggle='modal'
-        data-target='#newUserModal'
-        data-whatever='@mdo'
-        onclick="myFunction()">
-        Sign Up
-      </button>
-    <% end %>
-  <% end %>
-
-  <% if user_signed_in? %>
-
-           <a style="padding-top: 0;"> <button
-              type = 'button'
-              class = 'blue-appearance-btn'
-              data-toggle = 'modal'
-              data-target = '#newNoteModal'
-              data-whatever = '@mdo'
-              onclick="myFunction()">
-  <%= fa_icon('pencil 2x') %>
-           </button></a>
-
-  <%= link_to feed_index_path, class: 'blue-appearance-btn' , style:'padding-top: 0;' do %>
-  <%= fa_icon('user-circle 2x') %>
-  <% end %>
-  <% else %>
-
-
-
-    <a style="padding-top: 0;">
-      <button
-        type='button'
-        class='header-link set-font-family'
-        data-toggle='modal'
-        data-target='#newSessionModal'
-        data-whatever='@mdo'
-        onclick="myFunction()">
-        Create Picnotes
-      </button>
+        <% end %></div>
     </a>
-    <%end%>
-
-  <a style="padding-top: 0;" class="header-link set-font-family" href="/notes/community_guideline">&nbsp; Guidelines</a>
-  <a  style="padding-top: 0;" class="header-link set-font-family " href="/notes/about_us">&nbsp; About Us</a>
-
-   <a class="container">
-     <div class='search-bar '>
-
-       <%= form_tag(notes_path, method: :get) do %>
-       <%= text_field_tag(:search, params[:search]) %>
-     <% if @searchmodel %>
-    <% if @searchmodel == '3' %>
-    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
-    <% elsif @searchmodel == '2' %>
-    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
-    <% else %>
-    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
-    <% end %>
-    <% else %>
-    <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
-    <% end %>
-
-    <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
-    <%= fa_icon('search') %>
-    <% end %>
-       <%end%></div>
-         </a>
 
 
-  <a  class="icon" onclick="myFunction()">
-    <i class="fa fa-bars" style="background-color: white"></i>
-  </a>
-</div>
+    <a class="icon" onclick="myFunction()">
+      <i class="fa fa-bars" style="background-color: white"></i>
+    </a>
+  </div>
 </div>
 
 
@@ -215,31 +238,37 @@
             x.className = "topnav";
         }
     }
+
+    function myFunction2() {
+        window.location.href = 'https://www.picnotes.org/';
+
+    }
+
 </script>
 
 
+<div class="nav-spacing">
+</div>
 
+<%= render './modals/new_session_modal' %>
+<%= render './modals/new_note_modal' %>
+<%= render './modals/new_user_modal' %>
+<% if user_signed_in? %>
+  <%= render './modals/session_modal' %>
+  <%= render './modals/edit_session_modal' %>
+<% end %>
+<%= yield %>
 
-    <div class = "nav-spacing">
-    </div>
+</body>
 
-    <%= render './modals/new_session_modal' %>
-    <%= render './modals/new_note_modal' %>
-    <%= render './modals/new_user_modal' %>
-    <% if user_signed_in? %>
-      <%= render './modals/session_modal' %>
-      <%= render './modals/edit_session_modal' %>
-    <% end %>
-    <%= yield %>
-
-  </body>
-
-  <script>
+<script>
     $(document).on('ready page:load', function () {
-      $('#post_tag_ids').chosen({
-        allow_single_deselect: true,
-        width: '100%'
-      })
+        $('#post_tag_ids').chosen({
+            allow_single_deselect: true,
+            width: '100%'
+        })
     });
-  </script>
-</html>
+</script>
+
+
+</html>`

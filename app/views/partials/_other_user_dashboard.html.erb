@@ -41,7 +41,21 @@
         <p class = 'picnotes-font'> Picnotes </p>
         <p> <%= @user.notes.count %> </p>
       </div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class='text-right'>
+        <p class='picnotes-font'>
+          <% if current_user%>
+          <% if Note.find_by_user_id(params[:id]) %>
+            <%= link_to(user_chats_path(current_user, :other_user => params[:id]), method: :post) do %>
+              <i class='far fa-envelope' style='font-size:36px'></i>
+
+              </p>
+            <% end %>
+            <% end %>
+          <% end %>
+          </div>
     </div>
+
 
     <div class = 'profile-right'>
       <div class = 'text-right'>

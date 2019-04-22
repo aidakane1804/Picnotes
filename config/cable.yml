@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url:  redis://redistogo:93e2c6c6a1115a3aa66b879ad6a5d3d2@pearlfish.redistogo.com:9376/
   channel_prefix: picnotes-server_production

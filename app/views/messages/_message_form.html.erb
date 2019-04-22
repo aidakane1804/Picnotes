@@ -1,0 +1,21 @@
+<%=form_for message, remote: true,authenticity_token: true do |f|%>
+  <%= f.text_area :content, class:"scroll", data: {textarea: "message"} , placeholder: "Enter to Send" ,style:"width: 449px;" %>
+
+  <%= f.hidden_field :chat_id, value: chat.id %>
+<!--  <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>-->
+<!--  </button>-->
+<%end%>
+<!--<script>-->
+<!--$(".scroll").click(function() {-->
+<!--$('html,body').animate({-->
+<!--scrollTop: $("#message").offset().top},-->
+<!--'slow');-->
+<!--});-->
+<!--</script>-->
+
+<!--<div class="type_msg">-->
+<!--  <div class="input_msg_write">-->
+<!--    <input type="text" class="write_msg" placeholder="Type a message"/>-->
+<!--    <button class="msg_send_btn" type="button">-->
+<!--    </button>-->
+<!--  </div>-->

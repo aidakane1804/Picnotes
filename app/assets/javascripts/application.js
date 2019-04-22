@@ -17,7 +17,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-
+//= require_tree ./channels
+$(".scroll").scrollTop($(".scroll")[0].scrollHeight);
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();
 
