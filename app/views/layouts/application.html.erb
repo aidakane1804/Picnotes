@@ -123,17 +123,19 @@
 
 
 <div class="topnav mobile-display " id="myTopnav">
-  <!--    <nav class = "navbar">-->
-
-  <div>
-    <a style="box-shadow: 0 8px 6px -6px #666;">
+  <div style="box-shadow: 0 8px 6px -6px #666;">
+    <a id="header-link">
       <!--  <img src="logo-clean.png" alt="glass" class="logo-image img-logo-responsive" id="glass" />-->
-      <%= image_tag 'logo-clean.png', id: 'glass', class: 'logo-image  img-logo-responsive', onclick: "myFunction2()" %>
+      <div style="text-align: center"> <%= image_tag 'logo-clean.png', id: 'glass', class: 'logo-image  img-logo-responsive', onclick: "myFunction2()" %></div>
       <% unless user_signed_in? %>
+
+<div style=" position: absolute;
+    right: 4px;
+    top: 15px;">
 
         <button
           type='button'
-          class='header-link sign-in-link iphone-screen '
+          class='header-link sign-in-link iphone-screen  '
           data-toggle='modal'
           data-target='#newSessionModal'
           data-whatever='@mdo'
@@ -142,50 +144,55 @@
         </button>
         <button
           type='button'
-          class='header-blue-btn '
+          class='header-blue-btn'
           data-toggle='modal'
           data-target='#newUserModal'
           data-whatever='@mdo'
         >
           Sign Up
         </button>
-      <% end %></a>
-    <%# end %>
 
+      <% end %></div>
+      </a>
     <% if user_signed_in? %>
-
-      <a style="padding-top: 0;">
+      <a style="padding-bottom: 0px;
+          padding-top: 0px;
+          padding-left: 0px;">
         <button
           type='button'
-          class='blue-appearance-btn'
+          class='mobile-list-align header-link set-font-family'
           data-toggle='modal'
           data-target='#newNoteModal'
           data-whatever='@mdo'
           onclick="myFunction()">
-          <%= fa_icon('pencil 2x') %>
+        Create Picnotes
         </button>
       </a>
-
       <% if Message.where("recevier_id = ?  AND new = ?", current_user.id, TRUE).any? %>
-        <span class="new-msg-header"></span>
-        <a class="header-link set-font-family non-mobile  " href="/notes/chat_us">
-          <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
-        <span class="new-msg-header"></span>
+
+        <a class="header-link set-font-family non-mobile mobile-list-align  " style=" padding-bottom: 1px;
+            padding-top: 0;
+            padding-left: 24px;padding-right: 143px;" href="/notes/chat_us">
+        Inbox <i class="new-msg-header"></i></a>
       <% else %>
-        <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
-          <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+        <a class="header-link set-font-family non-mobile mobile-list-align " style=" padding-bottom: 1px;
+            padding-top: 0;
+            padding-left: 24px;" href="/notes/chat_us">
+        Inbox</a>
       <% end %>
 
-      <%= link_to feed_index_path, class: 'blue-appearance-btn', style: 'padding-top: 0;' do %>
-        <%= fa_icon('user-circle 2x') %>
+      <%= link_to feed_index_path, class: 'mobile-list-align header-link set-font-family', style: 'padding-top: 0; padding-bottom: 1px;
+        padding-top: 0;
+        padding-left: 24px;' do %>
+      Settings
       <% end %>
     <% else %>
-
-
-      <a style="padding-top: 0;">
+      <a style="padding-bottom: 1px;
+          padding-top: 4px;
+          padding-left: 18px;">
         <button
           type='button'
-          class='header-link set-font-family'
+          class='header-link set-font-family  '
           data-toggle='modal'
           data-target='#newSessionModal'
           data-whatever='@mdo'
@@ -195,17 +202,23 @@
       </a>
     <% end %>
 
-    <a style="padding-top: 0;" class="header-link set-font-family" href="/notes/community_guideline">&nbsp;
+    <a style="    padding-bottom: 2px;
+        padding-top: 0;
+        padding-left: 15px;" class="header-link set-font-family" href="/notes/community_guideline">&nbsp;
       Guidelines</a>
-    <a style="padding-top: 0;" class="header-link set-font-family " href="/notes/about_us">&nbsp; About Us</a>
+    <a style="    padding-bottom: 0px;
+        padding-top: 0;
+        padding-left: 15px;" class="header-link set-font-family " href="/notes/about_us">&nbsp; About Us</a>
 
-    <a class="container">
-      <div class='search-bar '>
+    <a class="container" style="text-align: center;width:101%;">
+      <div class='search-bar  '>
 
         <%= form_tag(notes_path, method: :get) do %>
-          <%= text_field_tag(:search, params[:search]) %>
+<div class="wrapper-for-serch">
+           <%= text_field_tag(:search, params[:search]) %>
+
           <% if @searchmodel %>
-            <% if @searchmodel == '3' %>
+           <% if @searchmodel == '3' %>
               <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
             <% elsif @searchmodel == '2' %>
               <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
@@ -219,7 +232,7 @@
           <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
             <%= fa_icon('search') %>
           <% end %>
-        <% end %></div>
+        <% end %></div></div>
     </a>
 
 
@@ -235,8 +248,10 @@
         var x = document.getElementById("myTopnav");
         if (x.className === "topnav") {
             x.className += " responsive";
+            $("#header-link").addClass("herder-bottom-shadow");
         } else {
             x.className = "topnav";
+            // $("#header-link").addClass("herder-bottom-shadow");
         }
     }
 

@@ -80,6 +80,7 @@ input#search {
   width: 200px;
   border-radius: 10px;
   border: none;
+
 }
 
 input.form-control {
@@ -154,6 +155,7 @@ a {
 input#search {
   width: 400px;
   border-radius: 25px;
+  padding-right: 35px;
 }
 
 .profile-center {
@@ -164,6 +166,7 @@ input#search {
   input#search {
     width: 300px;
     border-radius: 25px;
+    padding-right: 35px;
   }
 
   .profile-header {
@@ -180,10 +183,11 @@ input#search {
 }
 
 @media only screen and (max-width: 600px) {
-  input#search {
-    width: 50px;
-    border-radius: 25px;
-  }
+  //input#search {
+  //  width: 50px;
+  //  border-radius: 25px;
+  //  padding-right: 35px;
+  //}
 
   .profile-right {
     display: none;
@@ -896,10 +900,10 @@ a.pfooter-color:active {
 }
 
 .topnav a {
-  float: left;
+  //float: left;
   display: block;
   color: $color-grey;
-  text-align: center;
+  //text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
@@ -923,24 +927,47 @@ a.pfooter-color:active {
     display: none;
   }
 
+  #introModal {
+    position: fixed;
+    width: 100vw;
+    height: 230vh;
+    background-color: rgba(70, 70, 70, 0.7);
+    z-index: 9;
+    margin-top: -73px;
+  }
+
   .topnav a.icon {
     float: right;
     display: block;
-    background-color:#1e1e1db3;
     padding-top: 11px;
     margin-top: 9px;
-    margin-right: 4px
+    margin-right: 4px;
+    position: absolute;
+    left: 11px;
+    top: 0;
+  }
+  .img-logo-responsive{
+    padding-right: 16px;
+    width: 114px;
+    margin-right: auto;
+    margin-left: -11px;
+
+
   }
 }
 
+
+
 @media screen and (max-width: 600px) {
   .topnav.responsive {
-    position: relative;
+    .mobile-button-header {
+      padding-left: 0px;
+    }
   }
 
   .topnav.responsive .icon {
     position: absolute;
-    right: 0;
+    left: 11px;
     top: 0;
   }
 
@@ -949,10 +976,31 @@ a.pfooter-color:active {
     display: block;
     text-align: left;
   }
+  .sign-in-link {
+    background-color: transparent;
+    border: 0;
+    color: #428bca;
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 15px;
+  }
+
+  .header-blue-btn {
+    color: white;
+    background-color: #3b5998;
+    font-size: 11px;
+    text-transform: uppercase;
+    border: thin #3b5998 solid;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 
   input#search {
-    width:50%;
+    width:54%;
     border-radius: 25px;
+    padding-right: 35px;
   }
 
   #searchtest {
@@ -967,7 +1015,7 @@ a.pfooter-color:active {
 }
 
 .iphone-screen{
-
+  padding-left: 0px;
 }
 //.img-logo-responsive{
 //  padding-right: 16px;
@@ -979,16 +1027,22 @@ a.pfooter-color:active {
 @media screen and (max-width: 330px) {
    .iphone-screen{
   padding-left: 0px;
-  margin-left: -22px;}
+  }
 
   .sign-up-button{
     margin-left: 9px;
   }
   .img-logo-responsive{
-    padding-right: 16px;
-    width: 100px;
+    //padding-right: 16px;
+    width: 120px;
     margin-right: auto;
-    margin-left: -11px;}
+    margin-left: -60px;
+    padding-left: 12px;
+    padding-right: 25px;
+
+
+  }
+
 }
   //-----------------------------------------------------------Chat--------------------------------------------------------------
 
@@ -1223,6 +1277,17 @@ img {
 }
 
 //-----------------------------------------------------------Chat--------------------------------------------------------------
+.new-msg-header {
+  margin-top: -102px;
+  margin-left: -10px;
+  height: 10px;
+  width: 10px;
+  background-color: #ff0401f0;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
 
 .padding-chat {
   padding: 20px;
@@ -1260,8 +1325,25 @@ img {
   margin-top: -40px;
 }
 
-@media screen and (max-width: 600px) {
+.model-for-mobile{
 
+}
+@media screen and (max-width: 600px) {
+  .chat_ib h5 {
+    font-size: 15px;
+    color: #464646;
+    margin: 43px 0px 6px 6px;
+  }
+  .new-msg-header {
+    margin-top: -102px;
+    margin-left: -3px;
+    height: 10px;
+    width: 10px;
+    background-color: #ff0401f0;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 0px;
+  }
 
 .chat_list{
 border-bottom: 1px solid #c4c4c4;
@@ -1283,6 +1365,7 @@ padding: 14px 1px 4px}
 
   }
 
+
   .padding-chat {
     padding: 20px;
     padding-top: 215px;
@@ -1290,6 +1373,15 @@ padding: 14px 1px 4px}
     margin-right: 211px;
     padding-left: 215px;
     padding-right: 55px;
+  }
+
+  .model-for-mobile{
+    display: none;
+  }
+
+  .wrapper {
+    text-align: center;
+
   }
 }
 
@@ -1307,16 +1399,6 @@ padding: 14px 1px 4px}
 }
 
 
-.new-msg-header {
-  margin-top: -102px;
-  margin-left: -10px;
-  height: 10px;
-  width: 10px;
-  background-color: #ff0401f0;
-  border-radius: 50%;
-  display: inline-block;
-  margin-bottom: 20px;
-}
 
 .blue-appearance-btn-in-model {
   background-color: transparent;
@@ -1325,3 +1407,37 @@ padding: 14px 1px 4px}
   cursor: pointer;
 
 }
+
+
+
+
+.mobile-button-header {
+  padding-left: 73px;
+}
+
+
+.wrapper-for-serch {
+  text-align: right;
+
+}
+.mobile-list-align{
+  padding-bottom: 1px;
+  padding-top: 0;
+  padding-left: 24px;
+}
+//=====================================model-for-mobile-view========================
+.herder-bottom-shadow{
+  box-shadow: 0 8px 6px -6px #666;
+}
+
+
+//.new-msg{
+//  margin-top: -102px;
+//  margin-left: -3px;
+//  height: 10px;
+//  width: 10px;
+//  background-color: #05a20d;
+//  border-radius: 50%;
+//  display: inline-block;
+//  margin-bottom: 0px;
+//}
