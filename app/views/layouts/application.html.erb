@@ -85,9 +85,27 @@
         <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
           <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
       <%end%>
-      <%= link_to feed_index_path, class: 'blue-appearance-btn' do %>
-        <%= fa_icon('user-circle 2x') %>
-      <% end %>
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= fa_icon('user-circle 2x') %><b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li>  <%= link_to 'Profile', feed_index_path, class: 'blue-appearance-btn set-font-family' %></li>
+          <li>
+            <button
+              type='button'
+              class='blue-appearance-btn set-font-family'
+              data-toggle='modal'
+              data-target='#editSessionModal'
+              data-whatever='@mdo'
+              data-dismiss="modal"
+              style='padding: 0;'>
+              Edit Profile
+            </button>
+          </li>
+          <li>  <%= link_to 'Sign Out', session_path, method: :delete, class: 'blue-appearance-btn set-font-family' %></li>
+
+
+        </ul>
+      </div>
     <% else %>
 
       <button
