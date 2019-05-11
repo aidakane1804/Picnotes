@@ -43,28 +43,28 @@ class User < ApplicationRecord
 
   # ---------------------------------------------------------------------------------------
 
-  # validates(:username, {
-  #     presence: {message: 'must exist'},
-  #     uniqueness: {message: 'already exist'},
-  # })
+  validates(:username, {
+      presence: {message: 'must exist'},
+      uniqueness: {message: 'already exist'},
+  })
+
+  validates(:first_name, {
+      presence: {message: 'must exist'},
+  })
+
+  validates(:last_name, {
+      presence: {message: 'must exist'},
+  })
   #
-  # validates(:first_name, {
-  #     presence: {message: 'must exist'},
-  # })
-  #
-  # validates(:last_name, {
-  #     presence: {message: 'must exist'},
-  # })
-  #
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   # The `validates` option `format:` takes a Regular Expression which is
   # way to verify that string is formatted in certain way. The regular expression
   # above tests that our emails begin with alpha numeric characters, have a @
   # in the middle which is followed by a word, a dot, then another word.
-  # validates :email,
-  #           presence: true,
-  #           uniqueness: true,
-  #           format: VALID_EMAIL_REGEX
+  validates :email,
+            presence: true,
+            uniqueness: true,
+            format: VALID_EMAIL_REGEX
 
 
   # helper methods
