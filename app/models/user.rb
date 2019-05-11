@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  # devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook]
+  # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :folders, dependent: :destroy
 
@@ -25,10 +26,11 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-# --------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------
   has_many :messages
   has_many :subscriptions
   has_many :chats, through: :subscriptions
+
   def existing_chats_users
     existing_chat_users = []
     self.chats.each do |chat|
@@ -38,29 +40,32 @@ class User < ApplicationRecord
     end
     existing_chat_users.uniq
   end
-# ---------------------------------------------------------------------------------------
+
+  # ---------------------------------------------------------------------------------------
+
   validates(:username, {
-    presence: {message: 'must exist'},
-    uniqueness: {message: 'already exist'}
+      presence: {message: 'must exist'},
+      uniqueness: {message: 'already exist'},
   })
 
   validates(:first_name, {
-    presence: {message: 'must exist'}
+      presence: {message: 'must exist'},
   })
 
   validates(:last_name, {
-    presence: {message: 'must exist'}
+      presence: {message: 'must exist'},
   })
-
+  #
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   # The `validates` option `format:` takes a Regular Expression which is
   # way to verify that string is formatted in certain way. The regular expression
   # above tests that our emails begin with alpha numeric characters, have a @
   # in the middle which is followed by a word, a dot, then another word.
   validates :email,
-    presence: true,
-    uniqueness: true,
-    format: VALID_EMAIL_REGEX
+            presence: true,
+            uniqueness: true,
+            format: VALID_EMAIL_REGEX
+
 
   # helper methods
 
@@ -91,12 +96,17 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+
+  def self.create_from_provider_data(provider_data)
+    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|
+      user.email = provider_data.info.email rescue nil
+      name_slices = provider_data.info.name.gsub(/\s+/m, ' ').strip.split(" ")
+      user.username = provider_data.info.name
+      user.first_name = name_slices[0]
+      user.image = provider_data.info.image
+      user.last_name = name_slices[1]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
+
 end
