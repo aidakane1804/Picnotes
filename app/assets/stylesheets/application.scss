@@ -926,7 +926,11 @@ a.pfooter-color:active {
   .topnav a:not(:first-child) {
     display: none;
   }
+  .facebook-button{
+    font-size: 13px;
+    margin-left: 62%;
 
+  }
   #introModal {
     position: fixed;
     width: 100vw;
@@ -1333,6 +1337,7 @@ img {
     color: #464646;
     margin: 43px 0px 6px 6px;
   }
+
   .new-msg-header {
     margin-top: -102px;
     margin-left: -3px;
@@ -1441,4 +1446,39 @@ padding: 14px 1px 4px}
 }
 .fa{
   color: #3b5998;
+}
+
+.facebook-button{
+  border-bottom-width: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 7px;
+  padding-top: 7px;
+  padding-left: 6px;
+  padding-right: 8px;
+  border-left-width: 4px;
+  margin-left: 122px;
+}
+
+
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+
+.btn:hover {
+  opacity: 1;
+}
+.fb {
+  background-color: #3B5998;
+  color: white;
 }

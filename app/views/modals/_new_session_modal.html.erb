@@ -1,3 +1,4 @@
+
 <div class = "modal fade" id = 'newSessionModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newSessionModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
@@ -12,11 +13,17 @@
         <div class = 'text-center'>
           <%= image_tag 'logo-clean.png', class: 'intro-image' %>
         </div>
-        <div style="text-align: center;"> <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div></div>
+       <div class="container">
 
+        <a href=  <%=	 user_facebook_omniauth_authorize_path %> , class="fb btn">
+          <i class="fa fa-facebook" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with Facebook
+        </a>    </div>
         <%= simple_form_for :session, url: session_path do |f| %>
-          <%#= link_to 'Log In with Facebook', user_facebook_omniauth_authorize_path, class: ' facebook-button blue-btn btn-lg'
+
+
+          <%#= link_to' "&nbsp; Continue with Facebook', user_facebook_omniauth_authorize_path, class: ' fa fa-facebook fb btn fab fa fa-facebook', style:"text-align: left ;color:#ffffff;"
           %>
+
          <p style="    text-align: center;
              margin-top: 7px;
              margin-bottom: 0px;
