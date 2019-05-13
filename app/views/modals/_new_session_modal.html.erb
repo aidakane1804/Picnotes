@@ -12,9 +12,16 @@
         <div class = 'text-center'>
           <%= image_tag 'logo-clean.png', class: 'intro-image' %>
         </div>
+        <div style="text-align: center;"> <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div></div>
 
         <%= simple_form_for :session, url: session_path do |f| %>
-
+          <%#= link_to 'Log In with Facebook', user_facebook_omniauth_authorize_path, class: ' facebook-button blue-btn btn-lg'
+          %>
+         <p style="    text-align: center;
+             margin-top: 7px;
+             margin-bottom: 0px;
+             border-bottom-width: 0px;
+             padding-bottom: 0px;"> OR</p>
           <%= f.label 'Email' %>
           <%= f.input :email, label: false %>
 
@@ -25,8 +32,8 @@
           <div class = 'form-btn-container'>
             <%= f.button :submit, 'Sign In', :class => 'blue-appearance-btn' %>
           </div>
-          <%= link_to 'LogIn with Facebook', user_facebook_omniauth_authorize_path, class: 'blue-btn btn-lg'
-           %>&nbsp;&nbsp;
+
+          &nbsp;&nbsp;
         <% end %>
 
       </div>
