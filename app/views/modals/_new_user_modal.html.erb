@@ -1,4 +1,4 @@
-<div class = "modal fade" id = 'newUserModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newUserModalLabel' aria-hidden='true'>
+<div class = "signup-modal fade" id = 'newUserModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newUserModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header'>
@@ -9,39 +9,27 @@
       </div>
 
       <div class = 'modal-body'>
-        <%= simple_form_for User.new do |f| %>
-          <div class = 'user-name'>
-            <%= f.input :first_name, label: 'First Name', class: 'half-space', style: 'flex-basis: 45%;' %>
-            <%= f.input :last_name, label: 'Last Name', class: 'half-space', style: 'flex-basis: 45%;' %>
-          </div>
+        <a href=<%= user_facebook_omniauth_authorize_path %> , class="fb btn">
+          <i class="fa fa-facebook" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with
+          Facebook
+        </a></div>
+      <p style="text-align: center">OR</p>
 
-          <%= f.input :username %>
-          <%= f.input :email %>
-          <div class = 'user-name'>
-            <%= f.input :password %>
-            <%= f.input :password_confirmation, label: 'Password Confirm' %>
-          </div>
-          <p style = 'margin-top: -5px; font-size: 12px;'> Password must contain a capital letter and a numerical digit. </p>
 
-          <div style = 'border: thin #EAB38B solid; padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
-            <%= f.file_field :avatar %>
-          </div>
-          <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
-          <%= f.input :city %>
+      <div class="container">
 
-          <div class = 'form-btn-container text-center'>
-            <%= f.button :submit, :class => 'blue-appearance-btn' %>
-          </div>
-          <div class="container">
-            <%= link_to 'SignUp with Facebook', user_facebook_omniauth_authorize_path, class: 'blue-btn btn-lg container' ,style:"font-size: 14px;
-                padding-left: 5px;
-                padding-right: 8px;
-                padding-top: 6px;
-                padding-bottom: 6px;
-                margin-right: 0px;
-                margin-left: 24%;"%></div>&nbsp;&nbsp;
-        <% end %>
+        <a href="#"   class="fb btn" style="background-color:#0095f0;"
+            data-toggle='modal'
+           data-target='#signupWithEmailModal'
+           data-whatever='@mdo'
+           data-dismiss='modal'>
+          <i class="fa fa-envelope" style="text-align: left ;color:#ffffff;" ></i>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; Sign Up
+          with Email
+        </a></div> <br><br>
+
       </div>
     </div>
   </div>
 </div>
+
+
