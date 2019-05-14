@@ -826,9 +826,33 @@ a.pfooter-color:active {
   margin-left: auto;
 }
 
+.signup-modal {
+  position: fixed;
+  top: 160px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .col-sm-9 {
     padding-right: 0px;
+  }
+
+  .signup-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
   }
   .vertical-line {
     padding-left: 30px;
@@ -1482,3 +1506,4 @@ padding: 14px 1px 4px}
   background-color: #3B5998;
   color: white;
 }
+
