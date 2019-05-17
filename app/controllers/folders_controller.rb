@@ -1,7 +1,17 @@
 class FoldersController < ApplicationController
   def index
-    @user = current_user
-    @folders = Folder.where(user: current_user)
+    if params[:user_id]
+      if params[:user_id] != current_user.id.to_s
+        user = User.find_by(id: params[:user_id])
+        @user = user
+        @folders = Folder.where(user: user)
+      else
+        redirect_to root_path
+      end
+    else
+      @user = current_user
+      @folders = Folder.where(user: current_user)
+    end
   end
 
   def show
@@ -33,7 +43,8 @@ class FoldersController < ApplicationController
   end
 
   private
+
   def folder_params
-    params.require(:folder).permit(:name)
+    params.require(:folder).permit(:name, :user_id)
   end
 end

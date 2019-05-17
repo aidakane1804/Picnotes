@@ -2,8 +2,18 @@ class FavoriteNotesController < ApplicationController
   before_action :set_note, only: [:create, :destroy]
 
   def index
-    @user = current_user
-    @favorites = current_user.favorited_notes
+    if params[:user_id]
+      if params[:user_id] != current_user.id.to_s
+        user = User.find_by(id: params[:user_id])
+        @user = user
+        @favorites = user.favorited_notes
+      else
+        redirect_to root_path
+      end
+    else
+      @user = current_user
+      @favorites = current_user.favorited_notes
+    end
   end
 
   def create

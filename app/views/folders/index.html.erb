@@ -1,76 +1,152 @@
-<%= render './partials/user_dashboard' %>
+<% if @user == current_user %>
+  <%= render './partials/user_dashboard' %>
+  <%= render './modals/new_folder_modal' %>
+<% else %>
+  <%= render './partials/other_user_dashboard' %>
+  <%= render './modals/new_folder_modal' %>
+<% end %>
 
-<%= render './modals/new_folder_modal' %>
+
 
 <div class='flex-center'>
-  <div class="notes-container">
-    <div class='note-container'>
-      <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
-        <%= image_tag 'add.png', class: 'add-note-btn' %>
-        <div class='note-container-text-center'>
-          <p class="mobile-font note-btn-font">
-            New Folder
-          </p>
-        </div>
-      </button>
-    </div>
 
-    <% if @folders.count > 0 %>
-      <% @folders.each do |folder| %>
-        <%= link_to(folder_path(folder),{:class => 'folder-container'}, remote: true) do %>
-        <% folder.notes.each_with_index do |note ,i| %>
-          <% if i < 4 %>
-            <div class='board-test-image'>
-              <% if note.image.url.length > 0 %>
-                <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
-              <% else %>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+  <% if @user == current_user %>
+    <div class="notes-container">
+      <div class='note-container'>
+        <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
+          <%= image_tag 'add.png', class: 'add-note-btn' %>
+          <div class='note-container-text-center'>
+            <p class="mobile-font note-btn-font">
+              New Folder
+            </p>
+          </div>
+        </button>
+
+      </div>
+
+      <% if @folders.count > 0 %>
+        <% @folders.each do |folder| %>
+          <%= link_to(folder_path(folder), {:class => 'folder-container'}, remote: true) do %>
+            <% folder.notes.each_with_index do |note, i| %>
+              <% if i < 4 %>
+                <div class='board-test-image'>
+                  <% if note.image.url.length > 0 %>
+                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                  <% else %>
+                    <%= image_tag 'empty.png', class: 'image-size' %>
+                  <% end %>
+                </div>
               <% end %>
+            <% end %>
+            <% if folder.notes.length == 0 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 1 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 2 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 3 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% end %>
+            <div class='note-container-text'>
+              <p class="mobile-font note-btn-font">
+                <%= truncate(folder.name, length: 40) %>
+              </p>
             </div>
           <% end %>
         <% end %>
-        <% if folder.notes.length == 0 %>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-        <% elsif folder.notes.length == 1 %>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-        <% elsif folder.notes.length == 2 %>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-        <% elsif folder.notes.length == 3 %>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
-          </div>
-        <% end %>
-        <div class='note-container-text'>
-          <p class="mobile-font note-btn-font">
-            <%= truncate(folder.name, length: 40) %>
-          </p>
-        </div>
       <% end %>
-    <% end %>
+
+    </div>
+  <% else %>
+
+
+    <div class="notes-container">
+      <% if @folders.count > 0 %>
+        <% @folders.each do |folder| %>
+          <%= link_to(folder_path(folder), {:class => 'folder-container'}, remote: true) do %>
+            <% folder.notes.each_with_index do |note, i| %>
+              <% if i < 4 %>
+                <div class='board-test-image'>
+                  <% if note.image.url.length > 0 %>
+                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                  <% else %>
+                    <%= image_tag 'empty.png', class: 'image-size' %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+            <% if folder.notes.length == 0 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 1 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 2 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% elsif folder.notes.length == 3 %>
+              <div class='board-test-image'>
+                <%= image_tag 'empty.png', class: 'image-size' %>
+              </div>
+            <% end %>
+            <div class='note-container-text'>
+              <p class="mobile-font note-btn-font">
+                <%= truncate(folder.name, length: 40) %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    </div>
+
+
   <% end %>
-</div>
 </div>
