@@ -53,14 +53,15 @@ class UsersController < ApplicationController
   end
 
   def update
-      if @user.update(user_params)
-        redirect_to feed_index_path
-      else
-        redirect_to edit_user_path(@user)
-      end
+    if @user.update(user_params)
+      redirect_to feed_index_path
+    else
+      redirect_to edit_user_path(@user)
+    end
   end
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end
