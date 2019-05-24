@@ -15,8 +15,18 @@ class FoldersController < ApplicationController
   end
 
   def show
+    if params[:user_id]
+      if params[:user_id] != current_user.id.to_s
+        user = User.find_by(id: params[:user_id])
+        @user = user
+        @folder = Folder.find(params[:id])
+      else
+        redirect_to root_path
+      end
+      else
     @user = current_user
     @folder = Folder.find(params[:id])
+      end
   end
 
   def new
