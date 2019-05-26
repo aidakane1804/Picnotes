@@ -1,13 +1,10 @@
 class FoldersController < ApplicationController
   def index
     if params[:user_id]
-      if params[:user_id] != current_user.id.to_s
+      # if params[:user_id] != current_user.id.to_s
         user = User.find_by(id: params[:user_id])
         @user = user
         @folders = Folder.where(user: user)
-      else
-        redirect_to root_path
-      end
     else
       @user = current_user
       @folders = Folder.where(user: current_user)
@@ -16,13 +13,10 @@ class FoldersController < ApplicationController
 
   def show
     if params[:user_id]
-      if params[:user_id] != current_user.id.to_s
+      # if params[:user_id] != current_user.id.to_s
         user = User.find_by(id: params[:user_id])
         @user = user
         @folder = Folder.find(params[:id])
-      else
-        redirect_to root_path
-      end
       else
     @user = current_user
     @folder = Folder.find(params[:id])
@@ -47,6 +41,7 @@ class FoldersController < ApplicationController
   end
 
   def destroy
+
     @folder = Folder.find(params[:id])
     @folder.destroy
     redirect_to folders_path

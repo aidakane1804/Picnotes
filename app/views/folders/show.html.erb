@@ -1,4 +1,4 @@
-<% if current_user == @user %>
+<% if current_user == @user && current_user != nil && @user != nil %>
   <%= render './partials/user_dashboard' %>
   <div style='text-align: center;'>
     <p> Folder Name: <strong> <%= @folder.name %> </strong></p>
