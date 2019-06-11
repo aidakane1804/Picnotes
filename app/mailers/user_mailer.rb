@@ -23,7 +23,6 @@ class UserMailer < ApplicationMailer
   def contact_us_mail(email,message)
     @email = email
     @message = message
-    # akane@picnotes.org
-    mail(to: "zahidhanif208@gmail.com", subject: "Picnotes Contact US ")
+    mail(to: "akane@picnotes.org", subject: "Picnotes Contact US ")
   end
 end
