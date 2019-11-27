@@ -234,25 +234,27 @@
       <div class='search-bar  '>
 
         <%= form_tag(notes_path, method: :get) do %>
-<div class="wrapper-for-serch">
-           <%= text_field_tag(:search, params[:search]) %>
+          <div class="wrapper-for-serch">
+            <%= text_field_tag(:search, params[:search]) %>
 
-          <% if @searchmodel %>
-           <% if @searchmodel == '3' %>
-              <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
-            <% elsif @searchmodel == '2' %>
-              <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
+            <% if @searchmodel %>
+              <% if @searchmodel == '3' %>
+                <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Picnotes', 3])) %>
+              <% elsif @searchmodel == '2' %>
+                <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]], ['Person', 2])) %>
+              <% else %>
+                <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
+              <% end %>
             <% else %>
               <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
             <% end %>
-          <% else %>
-            <%= select_tag(:searchtest, options_for_select([['Tags', 1], ['Person', 2], ['Picnotes', 3]])) %>
-          <% end %>
 
-          <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
-            <%= fa_icon('search') %>
-          <% end %>
-        <% end %></div></div>
+            <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+              <%= fa_icon('search') %>
+            <% end %>
+        <% end %>
+        </div>
+      </div>
     </a>
 
 
