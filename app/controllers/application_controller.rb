@@ -26,12 +26,12 @@ class ApplicationController < ActionController::Base
 
   def about_us_meta_tags
     @page_title = 'About Our Online Learning Platform | Picnotes'
-    @page_description = 'Picnotes is an online platform for lifelong learners. It is an open knowledge source guide where you can find notes, resources, article and relevant study material for a given topic.'
+    @page_description = 'Picnotes enables users to share educational topics by combining short notes to a cover picture.|Combine short notes to a cover picture and share with your friends.'
   end
 
   def default_meta_tags
     @page_title = 'Online Knowledge Sharing Platform | Picnotes'
-    @page_description = 'Sign up to Picnotes, an online knowledge sharing hub on which you can share educational study material and notes on a variety of topics. It is a complete learning hotspot for learners, students and researchers.'
+    @page_description = 'Combine short notes to a cover picture and share with your friends.'
   end
 
   helper_method :current_user
