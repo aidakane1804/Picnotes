@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+# Heroku Ruby Version Production
+# ruby '2.4.5'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -58,6 +60,7 @@ gem 'jquery-rails'
 gem 'chosen-rails'
 gem 'rails_12factor', group: :production
 gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.11.2'
 
 # Voting (like / dislike)
 gem 'acts_as_votable', '~> 0.12.0'
