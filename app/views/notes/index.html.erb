@@ -25,7 +25,7 @@
     <div class = "notes-container" style = 'margin-top: 20px;'>
       <% @notes.find_each(start: 450, finish: 500) do |note| %>
         <div class = 'note-container'>
-          <%= link_to(note_path(note), remote: true) do %>
+          <%= link_to(note_path(note), { remote: true, title: note.title }) do %>
           <%= image_tag note.image.url(:thumb), { alt: note.title } if note.image.present? %>
           <div class = 'note-container-text'>
             <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 40) %> </p>
