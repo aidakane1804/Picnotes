@@ -23,7 +23,7 @@
 
   <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
-      <% @notes.find_each(start: 450, finish: 500) do |note| %>
+      <% @notes.limit(25).find_all() do |note| %>
         <div class = 'note-container'>
           <%= link_to(note_path(note), { remote: true, title: note.title }) do %>
           <%= image_tag note.image.url(:thumb), { alt: note.title } if note.image.present? %>
