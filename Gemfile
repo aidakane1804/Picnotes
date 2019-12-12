@@ -44,6 +44,8 @@ gem 'mini_magick'
 # Storing on Amazon
 gem "fog-aws"
 gem 'fog'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 # Tags in notes
 gem 'acts-as-taggable-on'

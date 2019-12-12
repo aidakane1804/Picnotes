@@ -25,7 +25,12 @@ class NotesController < ApplicationController
       @searchresult = params[:search]
       @searchmodel = params[:searchtest]
     else
-      @notes = Note.order(id: :desc)
+      @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      respond_to do |format|
+        format.html
+        format.js
+      end
+      # @notes = Note.order(id: :desc)
     end
     @user = current_user
   end
@@ -109,12 +114,12 @@ class NotesController < ApplicationController
   def contact_us_form
     if params[:Email].present? && params[:Message].present?
       email = params[:Email]
-    message = params[:Message]
-    UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
+      message = params[:Message]
+      UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
       redirect_to contact_us_notes_path
     else
       redirect_to contact_us_notes_path
-      end
+    end
   end
 
   def community_guideline
