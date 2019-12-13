@@ -23,13 +23,13 @@
 
   <div class='flex-center'>
     <div class="notes-container" id="notes-div" style='margin-top: 20px;'>
-      <%= render 'notes/note' %>
+      <%= render @notes %>
     </div>
   </div>
 
 
-  <div id="infinite-scrolling">
-    <%= will_paginate %>
+  <div id="infinite-scrolling" >
+    <%= will_paginate unless @notes.blank? %>
   </div>
 
 

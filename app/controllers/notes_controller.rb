@@ -30,7 +30,6 @@ class NotesController < ApplicationController
         format.html
         format.js
       end
-      # @notes = Note.order(id: :desc)
     end
     @user = current_user
   end

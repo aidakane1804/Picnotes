@@ -1,5 +1,4 @@
-debugger
-$('#notes-div').append('<%= j render 'notes/note' %>');
+$('#notes-div').append('<%= j render @notes %>');
 <% if @notes.next_page %>
 $('.pagination').replaceWith('<%= j will_paginate @notes %>');
 <% else %>
