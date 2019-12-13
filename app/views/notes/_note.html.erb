@@ -2,7 +2,7 @@
   <%= link_to(note_path(note), {remote: true, title: note.title}) do %>
     <%= image_tag note.image.url(:thumb), {alt: note.title} if note.image.present? %>
     <div class='note-container-text'>
-      <p class="mobile-font note-btn-font"> <%= note.id %> </p>
+      <p class="mobile-font note-btn-font"> <%= note.title %> </p>
     </div>
   <% end %>
 </div>
