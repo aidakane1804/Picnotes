@@ -13,11 +13,11 @@
 <% if reference.author.length > 0 %>
   <p> Author: <%= reference.author %> </p>
 <% end %>
-<% if reference.link.length > 8 %>  
-  <p>
-    <%= link_to (reference.link).html_safe, (reference.link).html_safe %>
-  </p>
-<% end %>
+<%# if reference.link.length > 8 %>
+<!--  <p>-->
+    <%#= link_to (reference.link).html_safe, (reference.link).html_safe %>
+<!--  </p>-->
+<%# end %>
 <br>
 <% if current_user %>
   <% if current_user.username == @note.user.username %>
