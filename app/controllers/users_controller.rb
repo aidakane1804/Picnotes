@@ -54,6 +54,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      @user.update(nationality: params[:nationality]) if params[:nationality].present?
+      @user.update(about_me: params[:about_me]) if params[:about_me].present?
       redirect_to feed_index_path
     else
       redirect_to edit_user_path(@user)
