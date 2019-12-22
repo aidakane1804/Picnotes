@@ -1,6 +1,12 @@
 <% if reference.title.length > 0 %>
-  <% unless reference.file_type.eql?('t') %>
-  <p> Title: <%= reference.title %> </p>
+  <% arr = ["v", "p", "t",]
+     arr.each do |f|
+  %>
+    <% if reference.file_type.eql?(f) && reference.link.eql?("https://") %>
+      <p> Title: <%= reference.title %> </p>
+    <% elsif reference.file_type.eql?(f) %>
+      <p> Title: <%= link_to (reference.title), reference.link, target: :_blank %> </p>
+    <% end %>
   <% end %>
 <% end %>
 
