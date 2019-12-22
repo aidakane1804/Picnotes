@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_190025) do
+ActiveRecord::Schema.define(version: 2019_12_19_164343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.string "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dislikes", force: :cascade do |t|
@@ -82,6 +88,16 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.integer "user_id"
+    t.integer "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "new"
+    t.integer "recevier_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -111,6 +127,13 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "chat_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -155,6 +178,9 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.string "name"
     t.text "image"
     t.text "message"
+    t.string "nationality"
+    t.text "about_me"
+    t.boolean "follow_status", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

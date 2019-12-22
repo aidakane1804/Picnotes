@@ -1,0 +1,89 @@
+<div class = "modal fade" id = 'followModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editSessionModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'nationalityModal' style = 'color:white;'> Follow Students & Teachers </h5>
+        <button onClick="window.location.reload();" type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+      <style>
+      </style>
+      <div class="table-follow-modal">
+        <div id="result" style="margin-left: 5px;color: green;"></div>
+        <div class = 'modal-body conatiner' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
+
+          <table class="table-condensed">
+            <% User.all.each do |user| %>
+              <% if user_signed_in? %>
+                <% if current_user.id != user.id %>
+                  <% if !current_user.follow?(user) %>
+                    <tr id = <%= user.id * user.id%>>
+                      <td>  <%= user.username %></td>
+                      <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%=user.id %> id=<%=user.id %>> follow</button>
+                      </td>  </tr>
+                  <% else%>
+                    <!--                          <button style="background: white;border: none;color: #3a5998;" class="unfollow" target1= <%#=user.id %> id=<%#=user.id %> > unfollow</button>-->
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bold{
+    color: #b8e314;
+  }
+</style>
+
+<script >
+    $(document).ready(function () {
+        $('.follow').click(function (event) {
+            var id = $(event.target).attr('target');
+            $('#result').html('<p>Request Completing </p>');
+
+            $.ajax({
+                url: '/followunfollow',
+                type: 'post',
+                async: false,
+                data: {
+                    followed_id:id
+                },
+                success: function (request) {
+
+                    $("#"+id).addClass("bold");
+                    $('#result').html('<p> </p>');
+                    $("#"+ id*id).hide();
+                    $("#"+id).hide();
+                    $('#result').html('<p>Request Completed Successfully</p>');
+                },
+                error: function (xhr) {
+                }
+            });
+        })
+    });
+
+    $(document).ready(function () {
+        $('.unfollow').click(function (event) {
+            var id = $(event.target).attr('target1');
+            $.ajax({
+                url: '/unfollow',
+                type: 'post',
+                async: false,
+                data: {
+                    id:id
+                },
+                success: function (request) {
+                    $("#"+id).addClass("bold");
+                },
+                error: function (xhr) {
+                }
+            });
+        })
+    });
+</script>

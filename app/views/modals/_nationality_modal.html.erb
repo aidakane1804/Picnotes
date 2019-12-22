@@ -1,0 +1,61 @@
+<div class = "modal fade" id = 'nationalityModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editSessionModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header'>
+        <h5 class = 'modal-title' id = 'nationalityModal' style = 'color:white;'> Requirements </h5>
+        <button type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for @user do |f| %>
+
+          <div class = 'modal-body' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
+
+
+            <%if current_user.avatar.file.nil? %>
+              <label class="btn btn-primary" style="width: 40%;    color: #fff;background-color: green ">
+                Upload Profile Image
+                <span style="display:none;">
+                    <%= f.file_field :avatar,required: true, multiple: true, name: 'user[avatar]'  %>
+             </span>
+                &nbsp;&nbsp;&nbsp;
+                <i class="filename" style="font-size: 14px;color: #0b0c0b"></i>
+              </label>
+            <%end %>
+
+
+            <% about_me =  @user.about_me.empty? rescue nil%>
+            <% if about_me || @user.about_me.nil?  %>
+              <p>About Me *</p>
+              <%=f.text_area :about_me, required:true ,style:'width:100%'%>
+            <%end %>
+            <% nationality =  @user.nationality.empty? rescue nil%>
+            <%if nationality || @user.nationality.nil? %>
+              <%= f.input :nationality, required:true  %>
+            <%end%>
+            <span style="float: right; color: red"> <b>Note:</b> * All Fields are required</span>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn'>
+            <%= f.button :submit, :class => 'white-btn btn-width' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('input[type="file"]').change(function (e) {
+            $(".filename").empty();
+            var fileName = e.target.files[0];
+            if(fileName){
+                $(".filename").append(fileName.name);
+            }
+        });
+    });
+
+</script>

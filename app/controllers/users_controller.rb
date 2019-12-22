@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
 
       flash[:notice] = 'Thank you for signing up!'
-      redirect_to root_path
+      redirect_to feed_index_path
     else
       render :new
     end
@@ -67,6 +67,8 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :city, :date_of_birth, :avatar, :message)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password,
+                                 :password_confirmation, :city, :date_of_birth, :avatar,
+                                 :message, :about_me, :nationality)
   end
 end
