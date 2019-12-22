@@ -1,22 +1,43 @@
 <% if @user == current_user %>
+  <% about_me = current_user.about_me.empty? rescue nil %>
+  <% nationality = current_user.nationality.empty? rescue nil %>
+
+  <% if (user_signed_in? && (nationality || current_user.nationality.nil?)) || (user_signed_in? && (about_me || current_user.about_me.nil?)) || (user_signed_in?&& current_user.avatar.file.nil?) %>
+    <%= render './modals/nationality_modal' %>
+    <script>
+        $(window).on('load', function () {
+            $('#nationalityModal').modal('show');
+        })
+    </script>
+  <% elsif (user_signed_in? && current_user.follow_status == false) %>
+    <%= render './modals/follow_modal' %>
+    <script>
+        $(window).on('load', function () {
+            $('#followModal').modal('show');
+        })
+    </script>
+  <% end %>
   <%= render './partials/user_dashboard' %>
+
 <% else %>
   <%= render './partials/other_user_dashboard' %>
 <% end %>
-<div id='note-content'></div>
+<% if (user_signed_in?) %>
+  <div id='note-content'></div>
 
-<div class='flex-center'>
-  <div class='notes-container'>
-    <% @notes.each do |note| %>
+  <div class='flex-center'>
+    <div class='notes-container'>
+      <% @notes.each do |note| %>
 
-      <div class='note-container'>
-        <%= link_to(note_path(note), remote: true) do %>
-          <%= image_tag note.image.url(:thumb) if note.image.present? %>
-          <div class='note-container-text'>
-            <p class="mobile-font note-btn-font"> <%= truncate(note.title, length: 50) %> </p>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+        <div class='note-container'>
+          <%= link_to(note_path(note), remote: true) do %>
+            <%= image_tag note.image.url(:thumb) if note.image.present? %>
+            <div class='note-container-text'>
+              <p class="mobile-font note-btn-font"> <%= truncate(note.title, length: 50) %> </p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

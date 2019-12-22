@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'followunfollow', to: 'relationships#ajaxfollowunfollow'
+
   resources :relationships
 
   resources :users do
