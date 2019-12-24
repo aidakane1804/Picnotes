@@ -55,6 +55,9 @@ class User < ApplicationRecord
   validates(:last_name, {
       presence: {message: 'must exist'},
   })
+
+  validates_presence_of :avatar
+
   #
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   # The `validates` option `format:` takes a Regular Expression which is

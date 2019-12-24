@@ -2,7 +2,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'nationalityModal' style = 'color:white;'> Follow Students & Teachers </h5>
+        <h5 class = 'modal-title' id = 'nationalityModal' style = 'color:white;'>  Follow Lifelong Learners </h5>
         <button onClick="window.location.reload();" type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
@@ -14,13 +14,13 @@
         <div class = 'modal-body conatiner' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
 
           <table class="table-condensed">
-            <% User.all.each do |user| %>
+            <% Note.select(:user_id).distinct.limit(10).includes(:user).each do |note| %>
               <% if user_signed_in? %>
-                <% if current_user.id != user.id %>
-                  <% if !current_user.follow?(user) %>
-                    <tr id = <%= user.id * user.id%>>
-                      <td>  <%= user.username %></td>
-                      <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%=user.id %> id=<%=user.id %>> follow</button>
+                <% if current_user.id != note.user.id %>
+                  <% if !current_user.follow?(note.user) %>
+                    <tr id = <%= note.user.id * note.user.id%>>
+                      <td>  <%= note.user.first_name + " " + note.user.last_name %></td>
+                      <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= note.user.id %> id=<%= note.user.id %>> follow</button>
                       </td>  </tr>
                   <% else%>
                     <!--                          <button style="background: white;border: none;color: #3a5998;" class="unfollow" target1= <%#=user.id %> id=<%#=user.id %> > unfollow</button>-->
