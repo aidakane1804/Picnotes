@@ -1,35 +1,44 @@
-<div class = "modal fade " id = 'signupWithEmailModal' tabindex='-1' role = 'dialog' aria-labelledby = 'signupWithEmailModalLabel' aria-hidden='true'>
-  <div class = 'modal-dialog' role = 'document'>
-    <div class = 'modal-content'>
-      <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'signupWithEmailModalLabel' style = 'color: white;'> Create New User </h5>
-        <button type = 'button' class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
-          <span aria-hidden = 'true'> &times; </span>
+<style>
+  #sign-up-picture-button {
+    color: transparent;
+    width: 25%;
+  }
+</style>
+
+<div class="modal fade " id='signupWithEmailModal' tabindex='-1' role='dialog' aria-labelledby='signupWithEmailModalLabel' aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header new-modal-header'>
+        <h5 class='modal-title' id='signupWithEmailModalLabel' style='color: white;'> Create New User </h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'> &times; </span>
         </button>
       </div>
 
-      <div class = 'modal-body'>
+      <div class='modal-body'>
         <%= simple_form_for User.new do |f| %>
-          <div class = 'user-name'>
+          <div class='user-name'>
             <%= f.input :first_name, label: 'First Name', class: 'half-space', style: 'flex-basis: 45%;' %>
             <%= f.input :last_name, label: 'Last Name', class: 'half-space', style: 'flex-basis: 45%;' %>
           </div>
 
           <%= f.input :username %>
           <%= f.input :email %>
-          <div class = 'user-name'>
+          <div class='user-name'>
             <%= f.input :password %>
             <%= f.input :password_confirmation, label: 'Password Confirm' %>
           </div>
-          <p style = 'margin-top: -5px; font-size: 12px;'> Password must contain a capital letter and a numerical digit. </p>
+          <p style='margin-top: -5px; font-size: 12px;'> Password must contain a capital letter and a numerical
+            digit. </p>
 
-          <div style = 'border: thin #EAB38B solid; padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
-            <%= f.file_field :avatar %>
+          <div style='border: thin #EAB38B solid; padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
+            <%= f.file_field :avatar, title: "Upload Picture", id: "sign-up-picture-button", onchange: "pressed()" %>
+            <label id="fileLabel">Upload Picture</label>
           </div>
           <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
           <%= f.input :city %>
 
-          <div class = 'form-btn-container text-center'>
+          <div class='form-btn-container text-center'>
             <%= f.button :submit, :class => 'blue-appearance-btn' %>
           </div>
         <% end %>
@@ -37,3 +46,36 @@
     </div>
   </div>
 </div>
+
+<script>
+    window.pressed = function(){
+        debugger
+        var imgVal = document.getElementById('sign-up-picture-button');
+        if(imgVal.value == "")
+        {
+            fileLabel.innerHTML = "Choose file";
+
+        }
+        else
+        {
+            fileLabel.style.color = "black";
+            var theSplit = imgVal.value.split('\\');
+            fileLabel.innerHTML = theSplit[theSplit.length-1];
+        }
+    };
+
+    $('.blue-appearance-btn').bind("click",function()
+    {
+        debugger
+        var imgVal = document.getElementById('sign-up-picture-button');
+        if(imgVal.value == "")
+        {
+            fileLabel.innerHTML = "Select Image first";
+            fileLabel.style.color = "red";
+
+            return false;
+        }
+
+
+    });
+</script>
