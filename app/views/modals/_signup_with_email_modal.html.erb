@@ -39,7 +39,7 @@
           <%= f.input :city %>
 
           <div class='form-btn-container text-center'>
-            <%= f.button :submit, :class => 'blue-appearance-btn' %>
+            <%= f.button :submit, :class => 'blue-appearance-btn', :id =>"signup-model-form" %>
           </div>
         <% end %>
       </div>
@@ -49,7 +49,7 @@
 
 <script>
     window.pressed = function(){
-        debugger
+        // debugger
         var imgVal = document.getElementById('sign-up-picture-button');
         if(imgVal.value == "")
         {
@@ -64,7 +64,7 @@
         }
     };
 
-    $('.blue-appearance-btn').bind("click",function()
+    $('#signup-model-form').bind("click",function()
     {
         debugger
         var imgVal = document.getElementById('sign-up-picture-button');
