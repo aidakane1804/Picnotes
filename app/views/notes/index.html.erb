@@ -29,7 +29,7 @@
 
 
   <div id="infinite-scrolling" >
-    <%= will_paginate  style: " font-size: 0;" unless @notes.blank? %>
+    <%= will_paginate @notes,  style: " font-size: 0;" unless @notes.blank? %>
   </div>
 
 
@@ -64,25 +64,25 @@
 <%#----------------------------------------footer-------------------------------------%>
 
 
-<div class="container">
-  <div class="footer container-fluid">
-    <div class="row footer-row ">
+<!--<div class="container">-->
+<!--  <div class="footer container-fluid">-->
+<!--    <div class="row footer-row ">-->
 
-      <div class="col-md-8"></div>
-      <div class="col-md-4"></div>
-      <div class="col-md-7"></div>
-      <%= link_to 'About Us', about_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;
-      <%= link_to 'Community Guidelines', community_guideline_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;
+<!--      <div class="col-md-8"></div>-->
+<!--      <div class="col-md-4"></div>-->
+<!--      <div class="col-md-7"></div>-->
+<!--      <%#= link_to 'About Us', about_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;-->
+<!--      <%#= link_to 'Community Guidelines', community_guideline_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;-->
       <!--     <%#= link_to 'Freelance Research', freelance_research_notes_path, class: 'set-font-family', style: 'text-decoration: underline' %>&nbsp;&nbsp;-->
       <!--        <%#= link_to 'Educational Organizations-->
-<!--  ', educational_organizations_notes_path, class: 'set-font-family', style: 'text-decoration: underline' %>&nbsp;&nbsp;-->
-      <%= link_to 'Terms & Conditions', terms_and_conditions_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;text-align: right;' %>&nbsp;&nbsp;
-      <%= link_to 'Contact Us', contact_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>
+  ', educational_organizations_notes_path, class: 'set-font-family', style: 'text-decoration: underline' %>&nbsp;&nbsp;
+<     <%#= link_to 'Terms & Conditions', terms_and_conditions_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;text-align: right;' %>&nbsp;&nbsp;-->
+      <%#= link_to 'Contact Us', contact_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>
 
-    </div>
+<!--    </div>-->
 
 
-  </div>
-  <br>
+<!--  </div>-->
+<!--  <br>-->
 
-</div>
+<!--</div>-->

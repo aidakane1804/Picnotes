@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :current_user
 
   def index
-    @users = current_user.followers
+    @users = current_user.followers rescue []
   end
 
   def followers
