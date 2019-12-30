@@ -29,7 +29,7 @@
 
 
   <div id="infinite-scrolling" >
-    <%= will_paginate @notes,  style: " font-size: 0;" unless @notes.blank? %>
+    <%= will_paginate @notes,  style: " font-size: 0;" unless @notes.blank? rescue ''%>
   </div>
 
 
