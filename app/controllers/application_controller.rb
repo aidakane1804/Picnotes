@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
   before_action :initiate_instance_variables
   include UsersHelper
   def user_signed_in?
