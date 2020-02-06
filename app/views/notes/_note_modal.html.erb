@@ -89,7 +89,7 @@
           </div>
 
           <div class = 'modal-header-information-content'>
-            <div>
+            <div style="padding-left: 10px">
               <% if current_user == note.user %>
               <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %> </p>
               <% else %>
