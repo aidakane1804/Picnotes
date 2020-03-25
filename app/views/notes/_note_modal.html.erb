@@ -157,7 +157,7 @@
                   <div class = 'flex-center'>
                     <div class = "similar-notes-container" style = 'margin-top: 20px;'>
                       <% @similar.each do |note| %>
-                        <div class = 'similar-note-container'>
+                        <div class = 'similar-note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
 
                           <%= link_to(note_path(note), remote: true) do %>
                           <%= image_tag note.image.url(:thumb), class:'similar-note-image' if note.image.present? %>

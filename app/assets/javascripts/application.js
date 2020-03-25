@@ -44,3 +44,15 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+function ChangeUrl(title, url) {
+
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj,"", '/notes',);
+        history.pushState(obj, obj.Title, obj.Url);
+        debugger
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
