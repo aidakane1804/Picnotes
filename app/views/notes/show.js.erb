@@ -1,2 +1,3 @@
 $('#note-content').html("<%= j render 'note_modal', note: @note %>");
+ChangeUrl("", "<%="notes/"+@note.id.to_s+"-"+@note.title.parameterize%>")
 $('#note-modal').modal('show');

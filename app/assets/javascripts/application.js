@@ -56,3 +56,13 @@ function ChangeUrl(title, url) {
         alert("Browser does not support HTML5.");
     }
 }
+function ChangeUrlForUsers(title, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = {Title: title  , Url: url};
+        history.pushState(obj, "", '/users',);
+        history.pushState(obj, obj.Title, obj.Url);
+        debugger
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
