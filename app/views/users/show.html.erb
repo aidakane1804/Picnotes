@@ -1,9 +1,7 @@
 <script>
-    $(document).ready(function () {
         var title = '';
         var url = '<%="users/"+@user.id.to_s+"-"+@user.username.parameterize%>';
         ChangeUrlForUsers(title, url)
-    });
 </script>
 
 <%= render './partials/other_user_dashboard' %>

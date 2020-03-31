@@ -30,7 +30,7 @@
   <%#= link_to root_path do %>
     <%#= image_tag 'logo-clean.png', class: 'logo-image' %>
   <%# end %>
-  <%= link_to image_tag('logo-clean.png', class: 'logo-image'), {action: "index", controller: "notes"} %>
+  <%= link_to image_tag('logo-clean.png', class: 'logo-image'), {action: "index", controller: "notes"}, onclick:'ChangeUrl("", "")' %>
 
   <div class='search-bar non-mobile  '>
 
@@ -277,7 +277,9 @@
     }
 
     function myFunction2() {
+        ChangeUrl("", "");
         window.location.href = 'https://www.picnotes.org/';
+
 
     }
 
@@ -307,6 +309,10 @@
             width: '100%'
         })
     });
+    // global variable for ChangeUrl method  case 1
+    var old_url;
+    var old_url =  window.location.pathname;
+
 </script>
 
 
