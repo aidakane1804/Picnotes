@@ -66,3 +66,12 @@ function ChangeUrlForUsers(title, url) {
         alert("Browser does not support HTML5.");
     }
 }
+
+function changeMetaContent(title, metaName, newMetaContent) {
+    document.title = title;
+    $("meta").each(function() {
+        if($(this).attr("name") === metaName) {
+            $(this).attr("content" , newMetaContent);
+        }
+    });
+}

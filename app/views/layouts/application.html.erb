@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Picnotes | Knowledge Sharing Hub for Lifelong Learners</title>
+  <% if display_meta_tags.present? %>
+    <%= display_meta_tags %>
+  <% else %>
+    <title>Picnotes | Knowledge Sharing Hub for Lifelong Learners</title>
+  <% end %>
   <%= csrf_meta_tags %>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= display_meta_tags %>
   <%= action_cable_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -74,7 +77,8 @@
         class='blue-appearance-btn'
         data-toggle='modal'
         data-target='#newNoteModal'
-        data-whatever='@mdo'>
+        data-whatever='@mdo'
+        onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">
         <%= fa_icon('pencil 2x') %>
       </button>
 
@@ -114,7 +118,8 @@
         class='header-link set-font-family non-mobile'
         data-toggle='modal'
         data-target='#newSessionModal'
-        data-whatever='@mdo'>
+        data-whatever='@mdo'
+        onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">
         Create Picnotes
       </button>
 
@@ -132,7 +137,8 @@
         class='header-blue-btn '
         data-toggle='modal'
         data-target='#newUserModal'
-        data-whatever='@mdo'>
+        data-whatever='@mdo'
+        onclick="changeMetaContent('Sign Up | Picnotes','description', 'Connect with Facebook or Sign Up with Email')">
         Sign Up
       </button>
 
@@ -167,7 +173,7 @@
           data-toggle='modal'
           data-target='#newUserModal'
           data-whatever='@mdo'
-        >
+          onclick="changeMetaContent('Sign Up | Picnotes','description', 'Connect with Facebook or Sign Up with Email')" >
           Sign Up
         </button>
 
@@ -274,6 +280,7 @@
             x.className = "topnav";
             // $("#header-link").addClass("herder-bottom-shadow");
         }
+        changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')
     }
 
     function myFunction2() {
