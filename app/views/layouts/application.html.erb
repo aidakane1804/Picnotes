@@ -8,6 +8,11 @@
   <% end %>
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
+  <!-- BEGIN SHAREAHOLIC CODE -->
+  <link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script" />
+  <meta name="shareaholic:site_id" content="dcd53049032feb792c7b337fe4b4ca4e" />
+  <script data-cfasync="false" async src="https://cdn.shareaholic.net/assets/pub/shareaholic.js"></script>
+  <!-- END SHAREAHOLIC CODE -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
