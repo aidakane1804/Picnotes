@@ -103,7 +103,8 @@ Rails.application.configure do
   #  :authentication       => "plain",
   # :enable_starttls_auto => true
   # }
-
+  config.action_controller.asset_host = 'https://www.picnotes.org/'
+  config.action_mailer.asset_host = config.action_controller.asset_host
   config.action_mailer.default_url_options = { host: 'www.picnotes.org', protocol: 'https' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
