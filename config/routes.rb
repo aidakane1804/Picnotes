@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/sitemap.xml.gz', to: redirect("http://s3-us-west-1.amazonaws.com/picnotes-2019/sitemaps/sitemap.xml.gz")
 
   post '/boards/:id/toggle_note' => 'boards#toggle_note', as: :toggle_board_note
 
