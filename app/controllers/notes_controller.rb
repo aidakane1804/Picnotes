@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder]
 
   def empty
   end
@@ -195,8 +195,17 @@ class NotesController < ApplicationController
   def addfolder
     @note = Note.find params[:note_id]
     @folder = Folder.find params[:folder_id]
-    @note.folders.push(@folder)
+    is_folder_contain_note = @note.folders.include?(@folder)
+    @note.folders.push(@folder) unless is_folder_contain_note
     redirect_to note_path(@note)
+  end
+
+  def add_note_to_folder
+    @folders = Folder.where(user: current_user)
+    @note = Note.find(params[:note_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

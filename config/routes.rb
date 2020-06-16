@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get 'what_type_of_topics_you_should_share', to: 'notes#what_type_of_topics_you_should_share'
       get 'communication_and_interaction', to: 'notes#communication_and_interaction'
       get 'contact_us_form', to: 'notes#contact_us_form'
+      get 'add_note_to_folder', to: 'notes#add_note_to_folder'
 
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]

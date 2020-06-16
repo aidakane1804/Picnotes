@@ -1506,4 +1506,41 @@ padding: 14px 1px 4px}
   background-color: #3B5998;
   color: white;
 }
+.note-container {
+  position: relative;
+}
 
+.image {
+  opacity: 1;
+  display: block;
+  width: auto;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 70%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.note-container:hover .image {
+  opacity: 100%;
+}
+
+.note-container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #ffffff99;
+  color: white;
+  font-size: 16px;
+  padding: 0px 46px;
+}

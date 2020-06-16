@@ -1,1 +1,2 @@
+$('#favorites-count-<%=@note.id%>').html('<%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %>')
 $('.favorites-count').html('<%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %>')

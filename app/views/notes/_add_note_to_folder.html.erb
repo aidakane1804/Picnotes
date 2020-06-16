@@ -1,0 +1,25 @@
+
+<div class="modal fade " id='add_note_to_folder' tabindex='-1' role='dialog' aria-labelledby='add_note_to_folder' aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header new-modal-header'>
+        <h5 class='modal-title' id='add_note_to_folder' style='color: white;'> Add Picnote to Folder </h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'> &times; </span>
+        </button>
+      </div>
+
+      <div class='modal-body'>
+        <% if user_signed_in? %>
+          <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
+            <p></p>
+            <%= form_tag(note_addfolder_path(note)) do %>
+              <%= select_tag 'folder_id', options_for_select(folders.collect{ |folder| [folder.name, folder.id] }) %>
+              <%=  submit_tag 'Add to Folder', class: 'blue-appearance-btn' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,9 @@
-<div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+<div  class='container note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
   <%= link_to(note_path(note), {remote: true, title: note.title}) do %>
-    <%= image_tag note.image.url(:thumb), {alt: note.title} if note.image.present? %>
+    <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
     <div class='note-container-text'>
       <p class="mobile-font note-btn-font"> <%= note.title %> </p>
     </div>
   <% end %>
-</div>
+  <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
+  </div>
