@@ -2,7 +2,7 @@
 
 <div id='note-content'></div>
 
-<div class = " container notes-container"  onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+<div class = "notes-container"  onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
   <% @board.notes.each do |note| %>
 
     <div class = 'text-center'>

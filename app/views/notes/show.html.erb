@@ -26,7 +26,7 @@
   <div class = 'flex-center'>
     <div class = "notes-container" style = 'margin-top: 20px;'>
       <% @notes.each do |note| %>
-        <div class = 'container note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+        <div class = 'note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
           <%= link_to(note_path(note), remote: true) do %>
           <%= image_tag note.image.url(:thumb), class: "image" if note.image.present? %>
           <div class = 'note-container-text'>
