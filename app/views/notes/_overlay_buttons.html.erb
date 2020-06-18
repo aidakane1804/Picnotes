@@ -12,13 +12,13 @@
                  <%= link_to fa_icon('heart'), favorite_note_path(note), remote:true, method: :delete %>
                 </span></div>&nbsp;
           <% end %>
-          <div class="col-sm-4">  <span id = 'add-to-folder-<%=note.id %>'>
+          <div class="col-sm-4" style="padding-left: 22px;">  <span id = 'add-to-folder-<%=note.id %>'>
             <%= link_to fa_icon('plus'), add_note_to_folder_notes_path(note_id: note), remote:true, method: :get %>
           </span></div>&nbsp;
         <% end %>
         <% unless user_signed_in?%>
           <div class="col-sm-4">  <span id = 'add-to-folder-<%note.id %>'><a href="#" data-parent="#panel" data-toggle='modal' data-target="#newSessionModal", data-whatever='@mdo'><%=fa_icon('heart-o') %></a></span></div>
-          <div class="col-sm-4">  <span id = 'add-to-folder-<%note.id %>'><a  href="#" data-parent="#panel" data-toggle='modal' data-target="#newSessionModal", data-whatever='@mdo'><%=fa_icon('plus') %></a></span></div>
+          <div class="col-sm-4" style="padding-left: 22px;">  <span id = 'add-to-folder-<%note.id %>'><a  href="#" data-parent="#panel" data-toggle='modal' data-target="#newSessionModal", data-whatever='@mdo'><%=fa_icon('plus') %></a></span></div>
         <% end %>
       </div>
     </div>
