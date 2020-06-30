@@ -414,6 +414,7 @@ $color-light-blue: #8b9dc3;
 .flex-center {
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 #sig {

@@ -47,7 +47,7 @@
           <% if current_user %>
             <% if Note.find_by_user_id(params[:id]) %>
               <%= link_to(user_chats_path(current_user, :other_user => params[:id]), method: :post) do %>
-                <i class='far fa-envelope' style='font-size:36px'></i>
+                <i class='fa fa-envelope' style='font-size:36px'></i>
 
                 </p>
               <% end %>
@@ -59,7 +59,7 @@
           <% if params[:user_id] && current_user %>
             <% if Note.find_by_user_id(params[:user_id]) %>
               <%= link_to(user_chats_path(current_user, :other_user => params[:user_id]), method: :post) do %>
-                <i class='far fa-envelope' style='font-size:36px'></i>
+                <i class='fa fa-envelope' style='font-size:36px'></i>
 
                 </p>
               <% end %>
