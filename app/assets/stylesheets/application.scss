@@ -654,18 +654,51 @@ a.profile-links:hover {
   .introModalStyle {
     width: 600px;
   }
+
   .header-link-pading{
 
   }
 }
 
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 600px) and (min-width: 320px){
   .introModalStyle {
     width: 300px;
     top: 235px;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: 440px;
+  }
+  //col-sm-4.style{
+  //  padding-left: 6px;
+
+  //}
+ .row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 15px;
+  margin-left: -68px;
+  margin-top: -44px;
+}
+
+  .col-sm-4{
+    position: relative;
+    width: 39%;
+    min-height: 20px;
+    padding-right: 0px;
+    padding-left: 4px;
+    margin-top: 3px;
+  }
+  .middle {
+    transition: 5.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 51%;
+    left: 42%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
   }
   .desktop-easy {
     display: none;
@@ -1519,7 +1552,6 @@ padding: 14px 1px 4px}
   transition: .5s ease;
   backface-visibility: hidden;
 }
-
 .middle {
   transition: .5s ease;
   opacity: 0;
