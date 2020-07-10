@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update]
   before_action :current_user
 
   def index
@@ -61,6 +61,22 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(@user)
     end
   end
+
+  def destroy
+    current_user.notes.each do |note|
+      note.update_attribute("archived","true")
+    end
+    loop do
+      number = rand(10_000..99_999)
+      @email = "archivedaccount"+number.to_s+"@"+"gmail.com"
+      break @email unless User.exists?(email: @email)
+    end
+    current_user.update_attributes(:email => @email)
+    flash[:success] = "User archived."
+    session.delete(:user_id)
+    redirect_to root_path
+    end
+
 
   private
 

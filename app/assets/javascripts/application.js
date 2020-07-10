@@ -51,7 +51,7 @@ function ChangeUrl(title, url) {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/notes',);
         history.pushState(obj, obj.Title, obj.Url);
-        debugger
+
     } else {
         alert("Browser does not support HTML5.");
     }
@@ -61,7 +61,7 @@ function ChangeUrlForUsers(title, url) {
         var obj = {Title: title  , Url: url};
         history.pushState(obj, "", '/users',);
         history.pushState(obj, obj.Title, obj.Url);
-        debugger
+
     } else {
         alert("Browser does not support HTML5.");
     }

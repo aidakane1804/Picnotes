@@ -16,16 +16,16 @@ class NotesController < ApplicationController
         redirect_to search_index_path
       elsif params[:searchtest] == '1'
         # @notes = Note.tagged_with(params[:search])
-        @notes = Note.tagged_with(params[:search], wild: true, any: true)
+        @notes = Note.tagged_with(params[:search], wild: true, any: true).where(archived: false)
       elsif params[:searchtest] == '2'
-        @users = User.where("first_name ILIKE ?", "%#{params[:search]}%").or(User.where("last_name ILIKE ?", "%#{params[:search]}%")).or(User.where("username ILIKE ?", "%#{params[:search]}%"))
+        @users = User.where("first_name ILIKE ?", "%#{params[:search]}%").or(User.where("last_name ILIKE ?", "%#{params[:search]}%")).or(User.where("username ILIKE ?", "%#{params[:search]}%")).where(archived: false)
       elsif params[:searchtest] == '3'
-        @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
+        @notes = Note.where("title ILIKE ?", "%#{params[:search]}%").where(archived: false)
       end
       @searchresult = params[:search]
       @searchmodel = params[:searchtest]
     else
-      @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20).where(archived: false)
       respond_to do |format|
         format.html
         format.js
@@ -35,6 +35,7 @@ class NotesController < ApplicationController
   end
 
   def show
+    if @note.archived == false
     default_meta_tags
     @tags = @note.tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
@@ -56,6 +57,9 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.js
       format.html
+    end
+    else
+      redirect_to root_path
     end
   end
 
