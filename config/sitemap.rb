@@ -39,10 +39,8 @@ SitemapGenerator::Sitemap.create do
   add "notes/what_type_of_topics_you_should_share", priority: 0.64 , :lastmod => Time.now
   add "notes/communication_and_interaction", priority: 0.64 , :lastmod => Time.now
   Note.find_each do |note|
-    if note.archived == false
     add note_path(note.id.to_s+"-"+note.title.parameterize),  priority: 0.80 ,changefreq: 'daily', lastmod: note.updated_at
-     end
-    end
+  end
   # The root path '/' and sitemap index file are added automatically for you.
   # Links are added to the Sitemap in the order they are specified.
   #

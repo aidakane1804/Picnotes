@@ -28,7 +28,6 @@
         <% @folders.each do |folder| %>
           <%= link_to(folder_path(folder), {:class => 'folder-container'}, remote: true) do %>
             <% folder.notes.each_with_index do |note, i| %>
-              <% if note.archived == false %>
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
@@ -38,7 +37,6 @@
                   <% end %>
                 </div>
               <% end %>
-                <%end %>
             <% end %>
             <% if folder.notes.length == 0 %>
               <div class='board-test-image'>
@@ -93,7 +91,6 @@
         <% @folders.each do |folder| %>
           <%= link_to(folder_path(folder,user_id: @user), {:class => 'folder-container'}, remote: true) do %>
             <% folder.notes.each_with_index do |note, i| %>
-              <% if note.archived == false %>
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
@@ -103,7 +100,6 @@
                   <% end %>
                 </div>
               <% end %>
-                <%end %>
             <% end %>
             <% if folder.notes.length == 0 %>
               <div class='board-test-image'>

@@ -19,7 +19,6 @@
     <div class = 'board-container'>
       <div class = 'board-test'>
         <% board.notes.each_with_index do |note ,i| %>
-          <% if note.archived == false %>
           <% if i < 4 %>
             <div class = 'board-test-image'>
               <% if note.image.url.length > 0 %>
@@ -28,7 +27,6 @@
                 <%= image_tag 'empty.png', class: 'image-size' %>
               <% end %>
             </div>
-          <% end %>
           <% end %>
         <% end %>
         <% if board.notes.length == 0 %>
