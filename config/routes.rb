@@ -64,6 +64,9 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+    collection do
+      get 'archived_user', to: 'users#archived_user'
+    end
     resources :chats, only: [:index, :show, :create]
     resources :boards
   end
