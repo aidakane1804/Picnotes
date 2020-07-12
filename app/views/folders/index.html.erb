@@ -27,7 +27,7 @@
       <% if @folders.count > 0 %>
         <% @folders.each do |folder| %>
           <%= link_to(folder_path(folder), {:class => 'folder-container'}, remote: true) do %>
-            <% folder.notes.each_with_index do |note, i| %>
+            <% folder.notes.where(archived: false).each_with_index do |note, i| %>
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
@@ -38,7 +38,7 @@
                 </div>
               <% end %>
             <% end %>
-            <% if folder.notes.length == 0 %>
+            <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
@@ -51,7 +51,7 @@
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 1 %>
+            <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
@@ -61,14 +61,14 @@
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 2 %>
+            <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 3 %>
+            <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
@@ -90,7 +90,7 @@
       <% if @folders.count > 0 %>
         <% @folders.each do |folder| %>
           <%= link_to(folder_path(folder,user_id: @user), {:class => 'folder-container'}, remote: true) do %>
-            <% folder.notes.each_with_index do |note, i| %>
+            <% folder.notes.where(archived: false).each_with_index do |note, i| %>
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
@@ -101,7 +101,7 @@
                 </div>
               <% end %>
             <% end %>
-            <% if folder.notes.length == 0 %>
+            <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
@@ -114,7 +114,7 @@
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 1 %>
+            <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
@@ -124,14 +124,14 @@
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 2 %>
+            <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
-            <% elsif folder.notes.length == 3 %>
+            <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
                 <%= image_tag 'empty.png', class: 'image-size' %>
               </div>

@@ -20,7 +20,7 @@
       <p> Results for #<%= @searchresult %> </p>
     </div>
   <% end %>
-
+<% @notes = @notes.where(archived: false) %>
   <div class='flex-center'>
     <div class="notes-container" id="notes-div" style='margin-top: 20px;'>
       <%= render @notes %>

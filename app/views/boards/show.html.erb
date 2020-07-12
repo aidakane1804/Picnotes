@@ -3,7 +3,7 @@
 <div id='note-content'></div>
 
 <div class = "notes-container"  onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
-  <% @board.notes.each do |note| %>
+  <% @board.notes.where(archived: false).each do |note| %>
 
     <div class = 'text-center'>
       <%= link_to(note_path(note), remote: true)  do %>

@@ -21,7 +21,7 @@
             <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= top_user.id %> id=<%= top_user.id %>> follow</button>
             </td>  </tr>
             <%end%>
-            <% Note.select(:user_id).distinct.limit(10).includes(:user).each do |note| %>
+            <% Note.select(:user_id).distinct.limit(10).includes(:user).where(archived: false).each do |note| %>
               <% if user_signed_in? %>
                 <% if current_user.id != note.user.id %>
                   <% if !current_user.follow?(note.user) && !(note.user.id == top_user.id)  %>

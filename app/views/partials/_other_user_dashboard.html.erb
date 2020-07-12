@@ -91,11 +91,11 @@
   <div class="profile-menu">
     <p> <%= link_to 'Feed', feed_index_path(user_id: @user), class: "#{cp(feed_index_path)} profile-links" %> </p>
     <p> <%= link_to 'Picnotes', user_path(id: @user), class: "#{cp(user_path(id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.notes.count %> </span></p>
+      <span class='note-count'> <%= @user.notes.where(archived:false).count %> </span></p>
     <p> <%= link_to 'Folders', folders_path(user_id: @user), class: "#{cp(folders_path(user_id: @user))} profile-links" %>
       <span class='note-count'> <%= @user.folders.count %> </span></p>
     <p> <%= link_to 'Faves', favorites_path(user_id: @user), class: "#{cp(favorites_path(user_id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.favorited_notes.count %> </span></p>
+      <span class='note-count'> <%= @user.favorited_notes.where(archived:false).count %> </span></p>
   </div>
 
   <!--  <div class = "profile-menu">-->

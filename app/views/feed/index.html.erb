@@ -27,7 +27,7 @@
 
   <div class='flex-center'>
     <div class='notes-container'>
-      <% @notes.each do |note| %>
+      <% @notes.where(archived: false).each do |note| %>
 
         <div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
           <%= link_to(note_path(note), remote: true) do %>

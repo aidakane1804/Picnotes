@@ -173,7 +173,7 @@
                 <div id = 'similar' class = 'tabcontent'>
                   <div class = 'flex-center'>
                     <div class = "similar-notes-container" style = 'margin-top: 20px;'>
-                      <% @similar.each do |note| %>
+                      <% @similar.where(archived: false).each do |note| %>
                         <div class = 'similar-note-container'>
 
                           <%= link_to(note_path(note), remote: true) do %>
