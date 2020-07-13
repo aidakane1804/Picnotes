@@ -56,7 +56,7 @@ class User < ApplicationRecord
       presence: {message: 'must exist'},
   })
 
-  validates_presence_of :avatar
+  #validates_presence_of :avatar
 
   #
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -107,6 +107,7 @@ class User < ApplicationRecord
       user.username = provider_data.info.name
       user.first_name = name_slices[0]
       user.image = provider_data.info.image
+      user.avatar = provider_data.info.image
       user.last_name = name_slices[1]
       user.password = Devise.friendly_token[0, 20]
     end
