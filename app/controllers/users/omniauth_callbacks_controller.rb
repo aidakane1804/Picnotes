@@ -6,6 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
       session[:user_id] = User.find_by_uid(@user.uid).id
     else
+      Rails.logger.info "###################{@user.errors.messages.inspect}@@@@@@@@@@@@@@@@@@@@"
       flash[:error] = 'There was a problem signing you in through Facebook. Please register or try signing in later.'
       redirect_to root_path
     end
