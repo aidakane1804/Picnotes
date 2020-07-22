@@ -81,7 +81,7 @@
         <% end %>
       </div>
       <% if @user.avatar? %>
-        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style:"margin-left: 7px;" %>
       <% else %>
         <%= image_tag 'avatar.png', class: 'avatar-image' %>
       <% end %>

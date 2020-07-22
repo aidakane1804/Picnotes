@@ -24,7 +24,7 @@
             data-toggle='modal'
             data-target='#sessionModal'
             data-whatever='@mdo'>
-            <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
           </button>
         <% else %>
           <button
@@ -73,11 +73,11 @@
           <p>
             <%if !(@user.city.nil? || @user.city.empty?) %>
               <%=@user.city.capitalize%> <br/>
-            <% end %></p>
-          <div class="container"> <p>
+            <% end %>
+
             <% if !(@user.about_me.nil? || @user.about_me.empty?) %>
               <%= @user.about_me.capitalize %>
-            <% end %></p></div>
+            <% end %></p>
           <% if @user.message %>
             <% if @user.message.length > 0 %>
               <p><i> <%= @user.message %> </i></p>
@@ -91,7 +91,7 @@
             data-toggle='modal'
             data-target='#sessionModal'
             data-whatever='@mdo'>
-            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style: 'margin-left: 7px;' %>
           </button>
         <% else %>
           <button
