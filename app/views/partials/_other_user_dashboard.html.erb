@@ -1,9 +1,14 @@
 <div class='profile-dashboard'>
   <div class="profile-header">
     <div class='profile-center'>
-      <%= render '/components/follow_button', :user => @user %>
       <div class='text-right'>
+        <% if @user.avatar? %>
+          <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+        <% else %>
+          <%= image_tag 'avatar.png', class: 'avatar-image' %>
+        <% end %>
         <h1 style='margin-bottom: 0;'><%= @user.first_name %> <%= @user.last_name %></h1>
+        <%= render '/components/follow_button', :user => @user %>
         <p> <%= @user.city %> </p>
         <% if @user.message %>
           <% if @user.message.length > 0 %>
@@ -11,11 +16,11 @@
           <% end %>
         <% end %>
       </div>
-      <% if @user.avatar? %>
-        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
-      <% else %>
-        <%= image_tag 'avatar.png', class: 'avatar-image' %>
-      <% end %>
+      <%# if @user.avatar? %>
+        <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+      <%# else %>
+        <%#= image_tag 'avatar.png', class: 'avatar-image' %>
+      <%# end %>
     </div>
 
     <div class='profile-left'>

@@ -663,6 +663,11 @@ a.profile-links:hover {
 
 
 @media only screen and (max-width: 600px) and (min-width: 320px){
+
+  .text-right{
+    text-align:center !important;
+
+  }
   .introModalStyle {
     width: 300px;
     top: 235px;
