@@ -51,6 +51,9 @@ h1 {
 
 p {
   font-size: 18px;
+  font-size: 18px;
+  text-align: justify;
+  text-align-last: end;
 }
 
 .profile-header {
@@ -93,9 +96,9 @@ input.form-control {
 }
 
 .avatar-image {
-  width: 100px;
+  width: 209px;
   height: 100px;
-  margin-left: 20px;
+  margin-left: 0px;
   border-radius: 50%;
 }
 
@@ -199,6 +202,7 @@ input#search {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    overflow-x: hidden;
   }
 
   .profile-links {
@@ -875,6 +879,9 @@ a.pfooter-color:active {
     padding-right: 0px;
   }
 
+ H1{
+   text-align: center;
+ }
   .signup-modal {
     position: fixed;
     top: 0;
@@ -910,6 +917,8 @@ a.pfooter-color:active {
   }
   p {
     font-size: 16px;
+    text-align-last: center;
+    text-align: justify;
   }
 
   .font-size-h4 {
