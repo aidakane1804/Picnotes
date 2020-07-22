@@ -74,10 +74,10 @@
             <%if !(@user.city.nil? || @user.city.empty?) %>
               <%=@user.city.capitalize%> <br/>
             <% end %></p>
-           <p>
+          <div class="container"> <p>
             <% if !(@user.about_me.nil? || @user.about_me.empty?) %>
               <%= @user.about_me.capitalize %>
-            <% end %></p>
+            <% end %></p></div>
           <% if @user.message %>
             <% if @user.message.length > 0 %>
               <p><i> <%= @user.message %> </i></p>
