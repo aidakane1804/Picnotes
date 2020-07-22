@@ -51,9 +51,6 @@ h1 {
 
 p {
   font-size: 18px;
-  font-size: 18px;
-  text-align: justify;
-  //text-align-last: end;
 }
 
 .profile-header {
@@ -96,8 +93,8 @@ input.form-control {
 }
 
 .avatar-image {
-  width: 120px;
-  height: 97px;
+  width: 100px;
+  height: 100px;
   margin-left: 0px;
   border-radius: 50%;
 }
@@ -674,15 +671,14 @@ a.profile-links:hover {
     max-height: 440px;
   }
  .row{
-   display: flex;
-   flex-wrap: wrap;
-   margin-right: -10px;
-   margin-left: -66px;
-   margin-top: -44px;
-   padding: -2;
-   width: 78px;
-
- }
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 15px;
+  margin-left: -68px;
+  margin-top: -44px;
+   padding: 36px;
+   width: 304px;
+}
 
   .col-sm-4{
     position: relative;
@@ -880,9 +876,7 @@ a.pfooter-color:active {
     padding-right: 0px;
   }
 
- //H1{
- //  text-align: center;
- //}
+
   .signup-modal {
     position: fixed;
     top: 0;
@@ -917,9 +911,7 @@ a.pfooter-color:active {
     padding-top: 0px;
   }
   p {
-    font-size: 16px;
-    text-align-last: center;
-    text-align: justify;
+    font-size: 18px;
   }
 
   .font-size-h4 {
