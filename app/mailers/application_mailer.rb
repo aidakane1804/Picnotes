@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Picnotes'
+  default from: 'Picnotes@picnotes.org'
   layout 'mailer'
 end
