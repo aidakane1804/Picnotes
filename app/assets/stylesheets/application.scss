@@ -147,7 +147,7 @@ a {
 
 .modal-header-information-content {
   flex-basis: 50%;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: right;
   display: flex;
 }
@@ -663,7 +663,11 @@ a.profile-links:hover {
 
 
 @media only screen and (max-width: 600px) and (min-width: 320px){
-
+  .modal-header-information-content {
+    flex-basis: 65%;
+     justify-content: center;
+    text-align: right;
+     display: flex;}
   .text-right{
     text-align:center !important;
 
