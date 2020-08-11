@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get 'chat_us', to:'chats#index'
       get 'terms_and_conditions', to: 'notes#terms_and_conditions'
       get 'about_us', to: 'notes#about_us'
+      get 'for_schools',to: 'notes#for_schools'
       get 'contact_us', to: 'notes#contact_us'
       get 'community_guideline', to: 'notes#community_guideline'
       get 'freelance_research', to: 'notes#freelance_research'

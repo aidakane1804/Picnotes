@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder,:for_schools]
 
   def empty
   end
@@ -106,6 +106,9 @@ class NotesController < ApplicationController
 
   def about_us
     about_us_meta_tags
+  end
+
+  def for_schools
   end
 
   def contact_us

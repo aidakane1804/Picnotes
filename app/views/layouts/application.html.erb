@@ -18,6 +18,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136450115-1"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <script>
       window.dataLayer = window.dataLayer || [];
 
@@ -72,6 +74,7 @@
     <%# end %>
 
     <a class="header-link set-font-family non-mobile" id="about" href="/notes/about_us">About Us</a>&nbsp;&nbsp;
+    <a class="header-link set-font-family non-mobile" href="/notes/for_schools">For Schools</a>&nbsp;
     <a class="header-link set-font-family non-mobile" href="/notes/community_guideline">Guidelines</a>&nbsp;
 
     <% if user_signed_in? %>
