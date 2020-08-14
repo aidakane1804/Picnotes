@@ -16,10 +16,18 @@
  */
 @import 'bootstrap';
 @import 'font-awesome';
-
+@font-face {
+    font-family: "icomoon";
+    src: font-url("icomoon.eot?3cux5j");
+    src: font-url("icomoon.eot?3cux5j#iefix") format("embedded-opentype"),
+        font-url("icomoon.ttf?3cux5j") format("truetype"), font-url("icomoon.woff?3cux5j") format("woff"),
+        font-url("icomoon.svg?3cux5j#icomoon") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
 body {
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
-  font-family: 'Roboto', sans-serif;
+  font-family: 'icomoon' !important; 
 }
 
 .image-upload > input {
@@ -106,13 +114,13 @@ input.form-control {
   border-radius: 50%;
 }
 
-.logo-image {
-  width: 150px;
-}
+button:focus{outline: none !important;}
+
 
 .profile-dashboard {
   padding-top: 20px;
   margin-bottom: 20px;
+  display: none;
 }
 
 .profile-left {
@@ -152,10 +160,12 @@ a {
   display: flex;
 }
 
-input#search {
-  width: 400px;
-  border-radius: 25px;
-  padding-right: 35px;
+.search-bar input#search {
+    width: 271px !important;
+    border-radius: 0;
+    padding-right: 27px !important;
+    padding: 6px 18px;
+    padding-left: 131px !important;
 }
 
 .profile-center {
@@ -443,24 +453,9 @@ $color-light-blue: #8b9dc3;
   border: thin $color-blue solid;
 }
 
-.header-blue-btn {
-  color: $color-white;
-  background-color: $color-blue;
-  border: none;
-  font-size: 15px;
-  text-transform: uppercase;
-  border: thin $color-blue solid;
-  border-radius: 5px;
-  padding: 6px 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
-.header-blue-btn:hover {
-  color: $color-white;
-  background-color: $color-light-blue;
-  border: thin $color-blue solid;
-}
+
+
 
 .inverse-blue-btn {
   color: $color-blue;
@@ -497,13 +492,44 @@ $color-light-blue: #8b9dc3;
   color: $color-grey;
   cursor: pointer;
 }
-
-.header-link:hover {
-  color: $black;
-  text-decoration: none;
-  //font-weight: bold;
+.header-link {
+    color: #302f2fb5;
+    text-align: center;
+    padding: 19px 1px;
+    text-decoration: none;
+    font-size: 16px;
+    border-bottom: 2px solid transparent;
+    margin-right: 9px;
+    cursor: pointer !important;
 }
 
+.sign-in-link {
+    background: none;
+    border: none;
+    color: #bc171d !important;
+    font-size: 16px;
+    cursor: pointer !important;
+
+}
+.header-link:hover {
+ border-bottom: 2px solid #1f488a;
+ color: #000;
+ text-decoration: none;
+}
+.sign-in-link:hover{
+ border-bottom:0 !important;
+ color: #bc171d !important;
+}
+button.header-blue-btn {
+    background: #bc171d;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    margin-left: 17px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer !important;
+}
 .blue-appearance-btn {
   background-color: transparent;
   border: 0;
@@ -558,26 +584,38 @@ $color-light-blue: #8b9dc3;
 
 .navbar {
   background-color: $color-white;
-  -webkit-box-shadow: 0 8px 6px -6px $color-grey;
-  -moz-box-shadow: 0 8px 6px -6px $color-grey;
-  box-shadow: 0 8px 6px -6px $color-grey;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
   width: 100%;
-  position: fixed;
   z-index: 10000;
+  padding: 0.5rem 4rem !important;
+  padding-bottom: 0 !important;
+
+
 }
 
 .navbar-brand {
   color: $color-white;
 }
-
-.nav-spacing {
-  height: 50px;
+.about_us_notes_path .profile-dashboard {
+    padding-top: 20px;
+    margin-bottom: -29px;
+    display: none;
 }
+/*.nav-spacing {
+  height: 50px;
+}*/
 
-.search-bar {
-  border-radius: 25px;
-  background-color: $color-white;
-  border: thin $color-blue solid;
+.search-bar-notes {
+  border: 2px solid #8093bb;
+    width: 274px;
+    height: 40px;
+    position: relative;
+    left: auto;
+   -webkit-box-shadow: 0px 1px 7px 0px rgba(59,89,151,0.29);
+  -moz-box-shadow: 0px 1px 7px 0px rgba(59,89,151,0.29);
+   box-shadow: 0px 1px 7px 0px rgba(59,89,151,0.29);
 }
 
 /* ---------------------------------------------------- Profile Links ---------------------------------------------------- */
@@ -596,7 +634,7 @@ a.profile-links:active {
   text-decoration: none;
   font-weight: 700;
   padding-bottom: 8px;
-  border-bottom: thick $color-blue solid;
+  border-bottom: 2px $color-blue solid;
 }
 
 a.profile-links:hover {
@@ -604,7 +642,7 @@ a.profile-links:hover {
   font-weight: 700;
   text-decoration: none;
   padding-bottom: 8px;
-  border-bottom: thick $color-blue solid;
+  border-bottom: 2px $color-blue solid;
 }
 
 .note-count {
@@ -757,21 +795,8 @@ a.profile-links:hover {
 }
 
 /* ---------------------------------------------------- footer ---------------------------------------------------- */
-.sign-in-link {
-  background-color: transparent;
-  //text-transform: uppercase;
-  //font-size: 14px;
-  border: 0;
-  color: #428bca;
-  cursor: pointer;
-  font-weight: 500;
-}
-.sign-in-link:hover {
-  color: #1c71ba;
-  font-weight: 600;
-  text-decoration: none;
-  //font-weight: bold;
-}
+
+
 
 .footer {
 
@@ -1003,7 +1028,7 @@ a.pfooter-color:active {
     position: fixed;
     width: 100vw;
     height: 230vh;
-    background-color: rgba(70, 70, 70, 0.7);
+    background-color:rgba(70, 70, 70, 0.7);
     z-index: 9;
     margin-top: -73px;
   }
@@ -1055,6 +1080,7 @@ a.pfooter-color:active {
     cursor: pointer;
     font-weight: 500;
     font-size: 15px;
+    cursor: pointer !important;
   }
 
   .header-blue-btn {
@@ -1066,7 +1092,7 @@ a.pfooter-color:active {
     border-radius: 5px;
     padding: 6px 10px;
     font-weight: bold;
-    cursor: pointer;
+    cursor: pointer !important;
   }
 
   input#search {
@@ -1477,9 +1503,15 @@ padding: 14px 1px 4px}
   border: 0;
   color: #3b5998;
   cursor: pointer;
-
+   position: absolute;
+  top: 4px;
+  right: 7px;
 }
-
+button.blue-appearance-btn i.fa.fa-search {
+    position: absolute;
+    top: 10px;
+    right: 6px;
+}
 
 
 
@@ -1587,3 +1619,42 @@ padding: 14px 1px 4px}
 //  font-size: 16px;
 //  padding: 0px 0px;
 //}
+
+
+
+
+.search-bar #searchtest {
+    background-color: white;
+    border: none;
+    border-radius: 0;
+    position:absolute;
+    top: 6px;
+    left: 27px;
+    color: #bababa;
+}
+
+.search-bar select#searchtest:hover{
+  color: #000;
+}
+
+
+.logo-box-setion {
+    width: 15%;
+    float: left;
+}
+.listing-setion-serh-box{
+  width:auto;
+  float: left;
+  text-align: right;
+}
+
+.item-box-listing-setion{
+  width: auto;
+  float: left;
+  text-align: right;
+}
+
+.modal-dialog {
+    margin-top: 112px !important;
+}
+

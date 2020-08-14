@@ -1,21 +1,4 @@
-button.btn-bottom-request.sigup.start {
-    width: 23%;
-    border-radius: 50px;
-}
-button.btn-bottom-request.btn-browsing.sign {
-    width: 15%;
-    border-radius: 10px;
-}
-button.btn-bottom-request.btn-browsing.btn-strive {
-    width: 15%;
-    font-size: 20px;
-    margin-bottom: 24px;
-    border: 1px solid #bc171d;
-    background: transparent;
-    color: #bc171d;
-    line-height: 33px;
-    border-radius: 25px;
-}
+
 button.btn-bottom-request.sigup.join.joi {
     font-size: 20px;
     margin-bottom: 24px;
@@ -149,7 +132,7 @@ body {
     color: #bc171d;
     font-size: 16px;
 }
-.modal-dialog {
+.community-learners-modal-dialog .modal-dialog {
     max-width: 790px !important;
 }
 .btn-signup {
@@ -465,7 +448,7 @@ h4.heading-edu.edu {
     padding-top: 12rem;
     text-align: left;
     font-weight: 700;
-
+    font-family: 'Philosopher', sans-serif !important;
     font-size: 25px;
 }
 h4.heading-edu.edu:after {
@@ -583,7 +566,7 @@ section.community-banner {
     height: 700px;
     background-size: cover;
     position: relative;
-    top: -1px;
+    top: -25px;
 }
 .community-quote {
     position: absolute;
@@ -700,11 +683,21 @@ section.community-banner {
     margin: auto;
     padding-top: 2%;
 }
-
+.contact-us-page,.community_guideline_page,.about_us_notes_path,.terms_and_conditions_page{
+   font-family: 'Philosopher', sans-serif !important;  
+}
 /*Contact us*/
 .heading-drop-line {
     font-weight: 700;
     font-size: 25px;
+   
+}
+
+.about_us_notes_path .first-section-box-about {
+    margin-top: -25px;
+}
+.contact-us-page button.btn-submit.mb-5 {
+    padding: 6px 7px;
 }
 .contact-form {
     width: 74%;
@@ -774,44 +767,46 @@ input:-ms-input-placeholder {
 }
 
 /*Modal*/
-.modal-dialog {
+.community-learners-modal-dialog .modal-dialog {
     max-width: 650px;
 }
-.modal-footer {
+.community-learners-modal-dialog .modal-footer {
     display: flex;
     justify-content: center;
     border: none;
     position: relative;
     top: -26px;
 }
-.modal-header {
+.community-learners-modal-dialog .modal-header {
     border-bottom: 0;
+        height: 49px;
 }
-.h-part {
+.community-learners-modal-dialog .h-part {
     font-size: 16px;
 
     padding: 11px 13px;
     font-family: "Montserrat", sans-serif;
 }
-.btn-signup-modal {
+.community-learners-modal-dialog .btn-signup-modal {
     background: #bc171d;
     border: none;
     color: #fff;
-    padding: 2px 10px;
-    margin-left: 17px;
+    padding: 6px 10px;
+    margin-left: 17px !important;
     font-size: 16px;
     border-radius: 10px;
+    line-height: normal;
 }
-.modal-body {
+.community-learners-modal-dialog .modal-body {
     position: relative;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1rem 4rem;
 }
-.heading-part {
+.community-learners-modal-dialog .heading-part {
     position: relative;
 }
-.heading-part:after {
+.community-learners-modal-dialog .heading-part:after {
     position: absolute;
     right: -12px;
     top: -185px;
@@ -820,15 +815,15 @@ input:-ms-input-placeholder {
     height: 227px;
     background: #a0a0a0a6;
 }
-.img-learner {
+.community-learners-modal-dialog .img-learner {
     width: 83%;
 }
-.mlt_3 {
+.community-learners-modal-dialog .mlt_3 {
     border: none;
     font-size: 21px;
     font-weight: 600;
 }
-.bg-grad {
+.community-learners-modal-dialog .bg-grad {
     width: 100%;
     position: absolute;
     left: 0;
@@ -836,21 +831,24 @@ input:-ms-input-placeholder {
     margin: auto;
     background-image: linear-gradient(to left, #ff5100, #1c5fe4, #ea0770);
 }
-.h-grad {
+.community-learners-modal-dialog .h-grad {
     color: #fff;
     font-size: 19px;
     padding: 8px 0px 9px;
     margin-bottom: 0;
 }
-.modal-header .close {
+.community-learners-modal-dialog .modal-header .close {
     color: #fff;
     padding: 0 !important;
     margin: 0rem 0rem -1rem auto !important;
     background: #000;
     border-radius: 100%;
     width: 24px;
+    font-family: none !important;
 }
-
+.community-learners-modal-dialog .modal-header .close:not(:disabled):not(.disabled):hover, .community-learners-modal-dialog .modal-header .close:not(:disabled):not(.disabled):focus{
+      color: #fffdfd !important;  
+}
 /*Inbox*/
 
 .card-inbox {
@@ -960,7 +958,7 @@ input:-ms-input-placeholder {
 /*    border:none;*/
 /*}*/
 
-.modal-content {
+.community-learners-modal-dialog .modal-content {
     background: image_url("popup-background.jpg");
     width: 100%;
     height: 520px;
@@ -968,11 +966,11 @@ input:-ms-input-placeholder {
     border: none;
     margin-top: 10%;
 }
-.mt_top4 {
+.community-learners-modal-dialog .mt_top4 {
     margin-top: -7px;
     width: 100%;
 }
-.btnbottom-reqst {
+.community-learners-modal-dialog .btnbottom-reqst {
     width: 26%;
     display: block;
     margin: 35px auto;
@@ -1103,7 +1101,7 @@ input:-ms-input-placeholder {
         height: 560px;
         background-size: cover;
         position: relative;
-        top: -1px;
+        top: -25px;
     }
     .community-quote {
         width: 90%;
@@ -1159,7 +1157,7 @@ input:-ms-input-placeholder {
         font-size: 18px;
         width: 60%;
     }
-    .modal-dialog {
+    .community-learners-modal-dialog .modal-dialog {
         max-width: 705px !important;
     }
 }
@@ -1183,7 +1181,7 @@ input:-ms-input-placeholder {
         width: 100%;
         font-size: 20px;
     }
-    .modal-dialog {
+    .community-learners-modal-dialog .modal-dialog {
         max-width: 705px !important;
     }
     .fit-img-1 {
@@ -1373,7 +1371,7 @@ input:-ms-input-placeholder {
         left: 0;
         bottom: -9px;
     }
-    .modal-footer {
+    .community-learners-modal-dialog .modal-footer {
         display: flex;
         justify-content: center;
         border: none;
@@ -1610,7 +1608,6 @@ input:-ms-input-placeholder {
         width: 100%;
         text-align: center;
     }
-
     /* Community page*/
     section.community-banner {
         background: image_url("community-banner-m.png");
@@ -1618,7 +1615,7 @@ input:-ms-input-placeholder {
         height: 258px;
         background-size: cover;
         position: relative;
-        top: -1px;
+        top: -25px;
     }
     .mt_7 {
         margin-top: -33px;
@@ -1692,7 +1689,7 @@ input:-ms-input-placeholder {
     }
 
     /*login*/
-    .modal-body {
+   .community-learners-modal-dialog .modal-body {
         position: relative;
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
@@ -1704,7 +1701,7 @@ input:-ms-input-placeholder {
     .heading-part:after {
         display: none;
     }
-    .modal-header .close {
+  .community-learners-modal-dialog  .modal-header .close {
         color: #fff;
         padding: 0 !important;
         margin: 0rem 0rem -1rem auto !important;
@@ -1748,11 +1745,11 @@ input:-ms-input-placeholder {
         border-bottom-left-radius: 30px;
         background-image: linear-gradient(to left, #ce1280, #015dfe, #c95335);
     }
-    .modal-content {
+   .community-learners-modal-dialog .modal-content {
         border-radius: 30px;
         height: 586px;
     }
-    .modal-footer {
+   .community-learners-modal-dialog .modal-footer {
         display: flex;
         flex-direction: column;
         border: none;
@@ -1996,7 +1993,7 @@ input:-ms-input-placeholder {
         color: #fff;
         font-size: 15px;
     }
-    .modal-content {
+   .community-learners-modal-dialog .modal-content {
         border-radius: 30px;
         height: 505px;
     }
@@ -2017,3 +2014,55 @@ input:-ms-input-placeholder {
     border-radius: 50px;
 }
 
+.about_us_notes_path {
+    width: 100%;
+    float: left;
+}
+.about_us_notes_path .btn-bottom-request {
+    border: none;
+    background: #bc171d;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 9px;
+    color: #fff;
+    display: block;
+    padding: 2px 15px;
+    text-transform: capitalize;
+    width: auto;
+    line-height: 34px;
+    height: 43px;
+}
+.about_us_notes_path .btn-bottom-request:hover{
+    text-decoration: none;
+}
+
+.about_us_notes_path .start,.about_us_notes_path .btn-strive {
+    border: 1px solid #bc171d;
+    background: transparent;
+    color: #bc171d;
+    border-radius: 30px;
+}
+.search-bar #searchtest{
+    text-transform: uppercase;
+}
+.about_us_notes_path .btn-strive {
+    padding: 2px 8px;
+}
+button {
+    cursor: pointer !important;
+    line-height: normal !important; 
+}
+
+#newUserModal ,div#newSessionModal {
+z-index: 9999;
+}
+
+section.contact-us-page .card {
+    width: 89%;
+    margin: auto;
+    padding: 29px 0px;
+    border: none;
+    webkit-box-shadow: 11px 11px 10px -1px rgba(244,244,244,1);
+    -moz-box-shadow: 11px 11px 10px -1px rgba(244,244,244,1);
+    box-shadow: 11px 11px 10px -1px rgba(244,244,244,1);
+}
