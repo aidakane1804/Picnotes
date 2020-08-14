@@ -18,6 +18,22 @@
 //= require turbolinks
 //= require_tree .
 //= require_tree ./channels
+
+
+$(document).on('turbolinks:load', function () {
+    $('.dropdown .dropdown-menu').on('click', 'a.dropdown-item', function () {
+        var searchTest = $(this).text();
+        $('.dropdown a:first').text(searchTest);
+        if(searchTest === 'Tags'){
+            $('#searchtest').val(1);
+        }else if(searchTest === 'Person'){
+            $('#searchtest').val(2);
+        }else{
+            $('#searchtest').val(3);
+        }
+    });
+});
+
 $(".scroll").scrollTop($(".scroll")[0].scrollHeight);
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();

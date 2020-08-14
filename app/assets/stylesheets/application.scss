@@ -582,18 +582,18 @@ button.header-blue-btn {
 
 /* ---------------------------------------------------- Nav Bar ---------------------------------------------------- */
 
-.navbar {
-  background-color: $color-white;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
-  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
-  width: 100%;
-  z-index: 10000;
-  padding: 0.5rem 4rem !important;
-  padding-bottom: 0 !important;
+// .navbar {
+//   background-color: $color-white;
+//   -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
+//   -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 -8px 4px 0 rgba(0, 0, 0, 0.11);
+//   width: 100%;
+//   z-index: 10000;
+//   padding: 0.5rem 4rem !important;
+//   padding-bottom: 0 !important;
 
 
-}
+// }
 
 .navbar-brand {
   color: $color-white;
@@ -1536,14 +1536,14 @@ button.blue-appearance-btn i.fa.fa-search {
 
 
 //=========================================profile dropdown===========================
-.dropdown-menu {
-  position: absolute;
-  right: 0;
-  left: auto;
-  min-width: 6rem;
-  margin: 0.125rem 4px 0;
-  padding-left: 5px;
-}
+// .dropdown-menu {
+//   position: absolute;
+//   right: 0;
+//   left: auto;
+//   min-width: 6rem;
+//   margin: 0.125rem 4px 0;
+//   padding-left: 5px;
+// }
 .fa{
   color: #3b5998;
 }
@@ -1561,18 +1561,18 @@ button.blue-appearance-btn i.fa.fa-search {
 
 
 
-.btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
-  text-decoration: none; /* remove underline from anchors */
-}
+// .btn {
+//   width: 100%;
+//   padding: 12px;
+//   border: none;
+//   border-radius: 4px;
+//   margin: 5px 0;
+//   opacity: 0.85;
+//   display: inline-block;
+//   font-size: 17px;
+//   line-height: 20px;
+//   text-decoration: none; /* remove underline from anchors */
+// }
 
 
 .btn:hover {

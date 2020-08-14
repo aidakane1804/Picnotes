@@ -179,11 +179,11 @@ button:focus {
     display: none;
 }
 .search-input {
-    border: none;
-    height: 36px;
-    width: 169px;
-    padding: 0;
-    position: relative;
+    border: none!important;
+    height: 36px!important;
+    width: 169px!important;
+    padding: 0!important;
+    position: relative!important;
 }
 .icon-search {
     position: absolute;
