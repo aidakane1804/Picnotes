@@ -27,7 +27,7 @@
     font-display: block;
 }
 body {
-  font-family: 'icomoon' !important; 
+  font-family: 'icomoon'; 
 }
 
 .image-upload > input {
@@ -88,6 +88,8 @@ input#search {
   width: 200px;
   border-radius: 10px;
   border: none;
+  padding-left: 10px !important;
+  padding-right: 16px !important;
 
 }
 
@@ -120,7 +122,7 @@ button:focus{outline: none !important;}
 .profile-dashboard {
   padding-top: 20px;
   margin-bottom: 20px;
-  display: none;
+  /*display: none;*/
 }
 
 .profile-left {
@@ -717,7 +719,7 @@ a.profile-links:hover {
     overflow-x: hidden;
     max-height: 440px;
   }
- .row{
+/* .row{
    display: flex;
    flex-wrap: wrap;
    margin-right: 20px;
@@ -726,7 +728,7 @@ a.profile-links:hover {
    padding: -2;
    //width: 78px;
 
-}
+}*/
 
   .col-sm-4{
     position: relative;
@@ -1006,10 +1008,11 @@ a.pfooter-color:active {
   color: black;
 }
 
-.active {
-  background-color: #4CAF50;
-  color: white;
+.btn:focus, .btn.focus{
+  box-shadow: none;
 }
+
+
 
 .topnav .icon {
   display: none;
@@ -1503,12 +1506,12 @@ padding: 14px 1px 4px}
   border: 0;
   color: #3b5998;
   cursor: pointer;
-   position: absolute;
+  /* position: absolute;*/
   top: 4px;
   right: 7px;
 }
 button.blue-appearance-btn i.fa.fa-search {
-    position: absolute;
+    /*position: absolute;*/
     top: 10px;
     right: 6px;
 }
@@ -1658,3 +1661,45 @@ button.blue-appearance-btn i.fa.fa-search {
     margin-top: 112px !important;
 }
 
+.form-control:focus{
+      box-shadow: none;
+}
+
+.dropdown-menu {left: initial; right: 0;}
+/*.modal.community-learners-modal-dialog { z-index: 9999999;}*/
+.header{position: fixed; left: 0; right: 0; background: #fff; z-index: 9999999;top:0;}
+.martop-80{margin-top:80px;}
+
+@media only screen and (min-width:1100px) and (max-width:1309px){
+ .box {width: 350px;}
+ .search-input {width: 60% !important;}
+}
+
+@media only screen and (max-width: 764px){
+.community-learners-modal-dialog .modal-content {}
+.community-learners-modal-dialog .row {margin: 0;}
+.community-learners-modal-dialog .row img.img-learner {width: 60%;clear: both;}
+.community-learners-modal-dialog .modal-footer {width: 100%; display:block !important; position: absolute; top: 3%; text-align: center;}
+.community-learners-modal-dialog .modal-footer button {margin: 0;float: initial;position: initial;top: inherit;margin: 0 0 8px 0;}
+.community-learners-modal-dialog .modal-content .modal-header {}
+.community-learners-modal-dialog .modal-content .modal-header button.close span {padding:0 4px;}
+.community-learners-modal-dialog .bg-grad {bottom: -33px;}
+.community-learners-modal-dialog .modal-header{z-index: 99;}
+.hamburger-menu .menu__btn {display: none; right: 0;}
+.hamburger-menu {display: none;}
+.navbar-nav {  line-height:25px;}
+section.contact-us-page .card{width: 100%;}
+.about_us_notes_path .edu-sec button.btn-bottom-request.btn-browsing.sign,
+.about_us_notes_path .edu-sec a.btn-bottom-request.sigup.start{width: 100%;line-height: initial;height: auto;display: block;}
+}
+
+@media only screen and (max-width: 564px){
+ .btn-bottom-request{width:80% !important;}
+ .note-container:not(:nth-child(3n)) { margin-right: 0;}
+.note-container {    flex-basis: 44%; margin: 3% !important;}
+.navbar-nav { line-height: 45px;}
+.about_us_notes_path .btn-browsing{margin: 15px 30px;}
+.btn-submit { width: 100%; padding: 8px;  margin: 15px 0 60px; font-size: 15px;}
+header .bg-shadow {padding-right: 15px !important;  padding-left: 15px !important;}
+
+}

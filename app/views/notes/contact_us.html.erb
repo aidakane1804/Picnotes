@@ -1,12 +1,3 @@
-<div class='profile-dashboard'>
-  <br>
-  <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
-    <p> <%= link_to 'Community Guidelines', community_guideline_notes_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: "current profile-links set-font-family" %>
-  </div>
-</div>
 <section class="contact-us-page">
   <div class="container pt-5">
     <div class="row">
@@ -27,7 +18,7 @@
                 <input type="email" class="form-control" placeholder="Email" name="Email">
               </div>
               <div class="form-group pt-2">
-                <input type="text" class="form-control" placeholder="Message" name="Message">
+                <textarea type="text" class="form-control" rows="3" placeholder="Message" name="Message"></textarea> 
               </div>
             </div>
           </div>

@@ -34,6 +34,18 @@ $(document).on('turbolinks:load', function () {
     });
 });
 
+$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+    if (scroll >= 30) { 
+        $(".header").addClass("headerfixed");
+        $(".midsec").addClass("headerfsixed");
+    } else {
+        $(".header").removeClass("headerfixed");
+        $(".midsec").removeClass("headerfsixed");
+    }
+});
+
+
 $(".scroll").scrollTop($(".scroll")[0].scrollHeight);
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();

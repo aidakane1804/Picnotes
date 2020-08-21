@@ -41,18 +41,28 @@
     src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3&appId=1103942603139314&autoLogAppEvents=1"></script>
 
   <!-- header new -->
-  <header>
+  <header class="header">
     <div class="container-fluid bg-shadow">
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg mobile-menu-box">
+
+
         <%= link_to image_tag('logo.png'),root_path,class: "navbar-brand"%>
+       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="icon-open-menu"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <%= form_tag(notes_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
             <div class=" box">
-              <div class="dropdown">
+             
+              <%= hidden_field_tag 'searchtest',1 %>
+              <div class="has-search">
+                <%= text_field_tag(:search, params[:search],class: "form-control search-input") %>
+                <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+                  <span class="icon-search"></span>
+                <% end %>
+                <div class="dropdown">
                 <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
                 </a>
@@ -62,12 +72,6 @@
                   <a class="dropdown-item" href="javascript:void(0);">Picnotes</a>
                 </div>
               </div>
-              <%= hidden_field_tag 'searchtest',1 %>
-              <div class="has-search">
-                <%= text_field_tag(:search, params[:search],class: "form-control search-input") %>
-                <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
-                  <span class="icon-search"></span>
-                <% end %>
               </div>
             </div>
           <% end %>
@@ -78,16 +82,25 @@
             <li class="nav-item">
               <a class="nav-link" href="/notes/for_schools">For Schools</a>
             </li>
-            <li class="nav-item">
+           <!--  <li class="nav-item">
               <a class="nav-link" href="/notes/community_guideline">Guidelines</a>
-            </li>
+            </li> -->
             <% if user_signed_in? %>
               <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
               </li>
             <% else %>
               <a class="nav-link" href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
-            <% end %>
+            <% end %><!-- 
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/contact_us">Contact us</a>
+            </li> -->
+            <li class="nav-item mobile-list-view">
+              <a class="nav-link" href="/notes/community_guideline">Guidelines</a>
+            </li>
+            <li class="nav-item mobile-list-view">
+              <a class="nav-link" href="/notes/terms_and_conditions">Terms and Conditions</a>
+            </li>
           </ul>
           <% if user_signed_in? %>
             <% if Message.where("recevier_id = ?  AND new = ?", current_user.id , TRUE).any? %>
@@ -97,8 +110,8 @@
               <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
               <i class='fa fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
             <%end%>
-            <div>
-              <a style="  color: #3b5998;" href="#" data-toggle="dropdown"><%= fa_icon('user-circle 2x') %></a>
+            <div class="dropdown signed_in_dropdown">
+              <a style="  color: #3b5998;" href="#" data-toggle="dropdown" class="btn  dropdown-toggle append-drop"><%= fa_icon('user-circle 2x') %></a>
               <ul class="dropdown-menu">
                 <li>  <%= link_to 'Profile', feed_index_path, class: 'blue-appearance-btn set-font-family' %></li>
                 <li>
@@ -124,7 +137,7 @@
               data-toggle='modal'
               data-target='#newSessionModal'
               data-whatever='@mdo'>
-              Log In
+              Log in
             </button>
             <button
               type='button'
@@ -136,8 +149,21 @@
               Sign up
             </button>
           <% end %>
+          <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+
+            <ul class="menu__box">
+              <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
+              <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
+              <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
+       
     </div>
   </header>
   <!-- header new ending -->
@@ -150,7 +176,9 @@
   <%= render './modals/session_modal' %>
   <%= render './modals/edit_session_modal' %>
   <% end %>
+  <div class="martop-80">
   <%= yield %>
+</div>
 
 </body>
 
