@@ -17,7 +17,12 @@
 
         <a href=  <%=	 user_facebook_omniauth_authorize_path %> , class="fb btn">
           <i class="fa fa-facebook" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with Facebook
-        </a>    </div>
+        </a>
+        <br/>
+        <a href=  <%=  user_google_oauth2_omniauth_authorize_path %> , class="fb btn" style="margin-top: 7px;">
+          <i class="fa fa-google" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with Google
+        </a>
+      </div>
         <%= simple_form_for :session, url: session_path do |f| %>
 
 

@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   acts_as_voter
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
   # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :folders, dependent: :destroy
@@ -94,6 +94,23 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+    #Uncomment the section below if you want users to be created if they don't exist
+    unless user
+        user = User.create(name: data['name'],
+          email: data['email'],
+          username: data['email'],
+          first_name: data['first_name'],
+          last_name: data['last_name'],
+          password: Devise.friendly_token[0,20]
+        )
+    end
+    user
+  end
+
 
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
