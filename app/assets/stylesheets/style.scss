@@ -715,13 +715,13 @@ section.community-banner {
     padding-top: 2%;
 }
 .contact-us-page,.community_guideline_page,.about_us_notes_path,.terms_and_conditions_page{
-   font-family: 'Philosopher', sans-serif !important;  
+   font-family: 'Philosopher', sans-serif !important;
 }
 /*Contact us*/
 .heading-drop-line {
     font-weight: 700;
     font-size: 25px;
-   
+
 }
 
 .about_us_notes_path .first-section-box-about {
@@ -777,7 +777,7 @@ input:-ms-input-placeholder {
     width: 29%;
     margin-top: 16%; border: 1px solid #bc171d;
     margin-left: 38%; transition: .3s;
-} 
+}
 .btn-submit:hover{ background:transparent; border: 1px solid #bc171d; color:#bc171d; }
 .heading-contact {
     font-size: 25px;
@@ -880,7 +880,7 @@ input:-ms-input-placeholder {
     width: 24px;
 }
 .community-learners-modal-dialog .modal-header .close:not(:disabled):not(.disabled):hover, .community-learners-modal-dialog .modal-header .close:not(:disabled):not(.disabled):focus{
-      color: #fffdfd !important;  
+      color: #fffdfd !important;
 }
 .fb.btn {
     width: 100%;
@@ -2174,7 +2174,7 @@ div#newSessionModal .form-btn-container {
 .join.joi:hover{background: #bc171d; color: #fff;}
 button {
     cursor: pointer !important;
-    line-height: normal !important; 
+    line-height: normal !important;
 }
 
 #newUserModal ,div#newSessionModal {
@@ -2296,7 +2296,7 @@ section.contact-us-page .card {
 
 .modal.fade .modal-dialog {
 transform: translate(-100%, 0) !important;
-}    
+}
  .modal.show .modal-dialog {
 transform: none !important;
  -o-transition-property: none !important;
@@ -2305,7 +2305,7 @@ transform: none !important;
     -webkit-transition-property: none !important;
     transition-property: none !important;
 }
-   
+
 .dropdown-menu {left: initial; right: 0;}
 .box .has-search .dropdown a#dropdownMenuLink::after {
     content: "\e905";
@@ -2317,11 +2317,11 @@ transform: none !important;
     margin-top: 7px;
 }
 
-#note-modal.modal.fade .modal-dialog {transform: translate( 0, -100%) !important; transition-property: unset !important;  transition: all .8s linear;} 
-  #note-modal.modal.show .modal-dialog{transform: translate(0%, 0) !important; transition-property: unset !important; } 
+#note-modal.modal.fade .modal-dialog {transform: translate( 0, -100%) !important; transition-property: unset !important;  transition: all .8s linear;}
+  #note-modal.modal.show .modal-dialog{transform: translate(0%, 0) !important; transition-property: unset !important; }
 
-#newSessionModal.modal.fade .modal-dialog {transform: translate( 0, -100%) !important; transition-property: unset !important; } 
-  #newSessionModal.modal.show .modal-dialog{transform: translate(0%, 0) !important; transition-property: unset !important; } 
+#newSessionModal.modal.fade .modal-dialog {transform: translate( 0, -100%) !important; transition-property: unset !important; }
+  #newSessionModal.modal.show .modal-dialog{transform: translate(0%, 0) !important; transition-property: unset !important; }
 
 
 
@@ -2337,3 +2337,36 @@ transform: none !important;
 
   .simple_form  .modal-body .user-name {margin: 0 0 14px 0;}
  .simple_form  .modal-body .user_email {margin: 0 0 14px 0;}
+
+.blue-heading{
+    color: blue;
+    font-size: 25px;
+    font-weight: 900;
+ }
+.circular-new{
+    margin: 5px;
+    padding: 4px 12px;
+    background-color: orange;
+    border-radius: 50%;
+    color: white;
+    font-weight: 800;
+    font-size: 25px;
+}
+.no-content-message{
+    min-height: 500px;
+    margin-top: 21px;
+    padding-top: 18%;
+    background-color: #00000030;
+    border-radius: 50%;
+    max-width: 500px;
+    min-width: 500px;
+    padding-left: 30px;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // background-image: url('blurred-park-with-bokeh-light-nature-background_7190-1284.jpg');
+}
+.no-content-message button{
+    margin-top: 10px;
+}

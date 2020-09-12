@@ -25,10 +25,12 @@
             </div>
 
             <%= f.file_field :avatar %>
+
             <%= f.input :city %>
-
+            <!-- <div class = 'user-name'>
+              <%#= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
+            </div> -->
           </div>
-
           <div class = 'form-btn-container text-center new-note-btn'>
             <%= f.button :submit, :class => 'white-btn btn-width' %>
           </div>

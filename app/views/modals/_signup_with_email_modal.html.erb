@@ -33,10 +33,13 @@
 
           <div style='border: thin #EAB38B solid; padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
             <%= f.file_field :avatar, title: "Upload Picture", id: "sign-up-picture-button", onchange: "pressed()" %>
-            <label id="fileLabel">Upload Picture</label>
+            <label id="fileLabel">
+              Upload Picture
+              <abbr title="required">*</abbr>
+            </label>
           </div>
-          <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
-          <%= f.input :city %>
+          <%#= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, order: [:month, :day, :year] %>
+          <%#= f.input :city %>
 
           <div class='form-btn-container text-center'>
             <%= f.button :submit, :class => 'blue-appearance-btn', :id =>"signup-model-form" %>

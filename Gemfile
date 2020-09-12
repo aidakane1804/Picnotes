@@ -61,7 +61,9 @@ gem 'cancancan'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'chosen-rails'
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'rails_12factor'
+end
 gem 'font-awesome-rails'
 gem 'font-awesome-sass', '~> 5.11.2'
 
@@ -71,6 +73,9 @@ gem 'acts_as_votable', '~> 0.12.0'
 # Facebook
 gem 'omniauth-facebook'
 gem 'thin'
+
+# Google Auth
+gem 'omniauth-google-oauth2'
 
 # Mailers
 gem 'mail_form'

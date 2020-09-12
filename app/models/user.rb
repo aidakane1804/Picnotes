@@ -52,6 +52,10 @@ class User < ApplicationRecord
       presence: {message: 'must exist'},
   })
 
+  validates(:avatar, {
+      presence: {message: 'must exist'},
+  })
+
   validates(:last_name, {
       presence: {message: 'must exist'},
   })
@@ -100,13 +104,15 @@ class User < ApplicationRecord
     user = User.where(email: data['email']).first
     #Uncomment the section below if you want users to be created if they don't exist
     unless user
-        user = User.create(name: data['name'],
-          email: data['email'],
-          username: data['email'],
-          first_name: data['first_name'],
-          last_name: data['last_name'],
-          password: Devise.friendly_token[0,20]
-        )
+      user = User.new(name: data['name'], email: data['email'], username: data['email'], first_name: data['first_name'], last_name: data['last_name'], password: Devise.friendly_token[0,20])
+      user.save(validate: false)
+        # user = User.create(name: data['name'],
+        #   email: data['email'],
+        #   username: data['email'],
+        #   first_name: data['first_name'],
+        #   last_name: data['last_name'],
+        #   password: Devise.friendly_token[0,20]
+        # )
     end
     user
   end
