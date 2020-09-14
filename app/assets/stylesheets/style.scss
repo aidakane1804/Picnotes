@@ -2372,11 +2372,11 @@ transform: none !important;
     margin-top: 10px;
 }
 #favorite-no-data{
-    background-image: url("B6816FBE-2146-4DAB-B7F9-FD265242E693.jpeg");
+    background-image: url("favourite.jpeg");
 }
 
 #user-notes-no-data{
-    background-image: url("019E1279-891A-48EE-BDE3-6982322C4A35.jpeg");
+    background-image: url("mypicnotes.jpeg");
 }
 
 #feed-no-data{
@@ -2400,4 +2400,7 @@ transform: none !important;
 .mp-0 > button {
     padding: 0 !important;
     margin: 0;
+}
+.modal{
+    overflow: scroll !important;
 }

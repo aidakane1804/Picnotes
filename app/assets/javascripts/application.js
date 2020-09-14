@@ -34,9 +34,9 @@ $(document).on('turbolinks:load', function () {
     });
 });
 
-$(window).scroll(function() {    
+$(window).scroll(function() {
     var scroll = $(window).scrollTop();
-    if (scroll >= 30) { 
+    if (scroll >= 30) {
         $(".header").addClass("headerfixed");
         $(".midsec").addClass("headerfsixed");
     } else {
@@ -79,7 +79,6 @@ function ChangeUrl(title, url) {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/notes',);
         history.pushState(obj, obj.Title, obj.Url);
-        debugger
     } else {
         alert("Browser does not support HTML5.");
     }
@@ -89,7 +88,6 @@ function ChangeUrlForUsers(title, url) {
         var obj = {Title: title  , Url: url};
         history.pushState(obj, "", '/users',);
         history.pushState(obj, obj.Title, obj.Url);
-        debugger
     } else {
         alert("Browser does not support HTML5.");
     }
