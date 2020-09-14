@@ -1,32 +1,34 @@
-<% if @user == current_user %>
-  <% about_me = current_user.about_me.empty? rescue nil %>
-  <% nationality = current_user.nationality.empty? rescue nil %>
-
-  <% if (user_signed_in? && (nationality || current_user.nationality.nil?)) || (user_signed_in? && (about_me || current_user.about_me.nil?)) || (user_signed_in?&& current_user.avatar.file.nil?) %>
-    <%= render './modals/nationality_modal' %>
-    <script>
-        $(window).on('load', function () {
-            $('#nationalityModal').modal('show');
-        })
-    </script>
-  <% elsif (user_signed_in? && current_user.follow_status == false) %>
-    <%= render './modals/follow_modal' %>
-    <script>
-        $(window).on('load', function () {
-            $('#followModal').modal('show');
-        })
-    </script>
-  <% end %>
-  <%= render './partials/user_dashboard' %>
-
-<% else %>
-  <%= render './partials/other_user_dashboard' %>
-<% end %>
 <% if (user_signed_in?) %>
-  <div id='note-content'></div>
+  <% if @user == current_user %>
+    <% about_me = current_user.about_me.empty? rescue nil %>
+    <% nationality = current_user.nationality.empty? rescue nil %>
 
-  <div class='flex-center'>
-    <div class='notes-container'>
+    <% if (user_signed_in? && (nationality || current_user.nationality.nil?)) || (user_signed_in? && (about_me || current_user.about_me.nil?)) || (user_signed_in?&& current_user.avatar.file.nil?) %>
+      <%= render './modals/nationality_modal' %>
+      <script>
+          $(window).on('load', function () {
+              $('#nationalityModal').modal('show');
+          })
+      </script>
+    <% elsif (user_signed_in? && current_user.follow_status == false) %>
+      <%= render './modals/follow_modal' %>
+      <script>
+          $(window).on('load', function () {
+              $('#followModal').modal('show');
+          })
+      </script>
+    <% end %>
+    <%= render './partials/user_dashboard' %>
+
+  <% else %>
+    <%= render './partials/other_user_dashboard' %>
+  <% end %>
+<% end %>
+<div id='note-content'></div>
+<div class='flex-center'>
+  <div class='notes-container'>
+
+    <% if @notes.count > 0 %>
       <% @notes.where(archived: false).each do |note| %>
 
         <div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
@@ -39,6 +41,19 @@
           <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
         </div>
       <% end %>
-    </div>
+    <% else %>
+      <% if @user == current_user %>
+        <div>
+          <div class="no-content-message" id="feed-no-data"></div>
+          <div class="desc-content">
+            <h1 class="black-heading">Follow lifelong learners from across the world.</h1>
+            <p class="italic-text">You choose which friends to follow and you'll never miss their Picnotes.</p>
+            <p class="mp-0">
+              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-<% end %>
+</div>

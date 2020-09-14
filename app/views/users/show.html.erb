@@ -10,17 +10,33 @@
 
 <div class = 'flex-center'>
   <div class = "notes-container">
-    <% @user.notes.where(archived: false).each do |note| %>
-
-    <div class = 'note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
-      <%= link_to(note_path(note), remote: true) do %>
-        <%= image_tag note.image.url(:thumb), class:"image" if note.image.present? %>
-        <div class = 'note-container-text'>
-          <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 25) %> </p>
+    <% if @user.notes.where(archived: false).count > 0 %>
+      <% @user.notes.where(archived: false).each do |note| %>
+        <div class = 'note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+          <%= link_to(note_path(note), remote: true) do %>
+            <%= image_tag note.image.url(:thumb), class:"image" if note.image.present? %>
+            <div class = 'note-container-text'>
+              <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 25) %> </p>
+            </div>
+          <% end %>
+          <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
         </div>
       <% end %>
-      <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
-    </div>
+    <% else %>
+      <% if @user == current_user %>
+        <div>
+          <div class="no-content-message" id="user-notes-no-data"></div>
+          <div class="desc-content">
+            <h1 class="black-heading">Share educational topics that you love.</h1>
+            <p class="italic-text">A: Choose a topic.</p>
+            <p class="italic-text">B: Combine a picture to your notes.</p>
+            <p class="italic-text">C: Share resources.</p>
+            <p class="mp-0">
+              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+            </p>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

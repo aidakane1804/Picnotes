@@ -6,13 +6,13 @@
   <%= render './modals/new_folder_modal' %>
 <% end %>
 
- 
+
 
 <div class='flex-center'>
 
   <% if @user == current_user %>
     <div class="notes-container">
-      <div class='note-container'>
+      <!-- <div class='note-container'>
         <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
           <%= image_tag 'add.png', class: 'add-note-btn' %>
           <div class='note-container-text-center'>
@@ -22,7 +22,7 @@
           </div>
         </button>
 
-      </div>
+      </div> -->
 
       <% if @folders.count > 0 %>
         <% @folders.each do |folder| %>
@@ -80,8 +80,26 @@
             </div>
           <% end %>
         <% end %>
-      <% end %>
+      <% else %>
+        <!-- <div class="no-content-message" id="folder-no-data">
+          <h1 class="blue-heading">Curate your Picnotes.</h1>
+          <p>Folders are a way to organize your Picnotes in different categories.</p>
+          <p>
+            <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+          </p>
+        </div> -->
 
+        <div>
+          <div class="no-content-message" id="folder-no-data"></div>
+          <div class="desc-content">
+            <h1 class="black-heading">Curate your Picnotes.</h1>
+            <p class="italic-text">Folders are a way to organize your Picnotes in different categories.</p>
+            <p class="mp-0">
+              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+            </p>
+          </div>
+        </div>
+      <% end %>
     </div>
   <% else %>
 
@@ -146,7 +164,5 @@
       <% end %>
 
     </div>
-
-
   <% end %>
 </div>

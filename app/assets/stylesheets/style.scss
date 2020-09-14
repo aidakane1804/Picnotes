@@ -2338,13 +2338,13 @@ transform: none !important;
   .simple_form  .modal-body .user-name {margin: 0 0 14px 0;}
  .simple_form  .modal-body .user_email {margin: 0 0 14px 0;}
 
-.blue-heading{
-    color: blue;
+.black-heading{
+    color: black;
     font-size: 25px;
     font-weight: 900;
  }
 .circular-new{
-    margin: 5px;
+    // margin: 5px;
     padding: 4px 12px;
     background-color: orange;
     border-radius: 50%;
@@ -2353,13 +2353,14 @@ transform: none !important;
     font-size: 25px;
 }
 .no-content-message{
-    min-height: 500px;
+    float: left;
+    min-height: 450px;
     margin-top: 21px;
     padding-top: 18%;
     background-color: #00000030;
     border-radius: 50%;
-    max-width: 500px;
-    min-width: 500px;
+    max-width: 450px;
+    min-width: 450px;
     padding-left: 30px;
     text-align: center;
     background-position: center;
@@ -2369,4 +2370,34 @@ transform: none !important;
 }
 .no-content-message button{
     margin-top: 10px;
+}
+#favorite-no-data{
+    background-image: url("B6816FBE-2146-4DAB-B7F9-FD265242E693.jpeg");
+}
+
+#user-notes-no-data{
+    background-image: url("019E1279-891A-48EE-BDE3-6982322C4A35.jpeg");
+}
+
+#feed-no-data{
+    background-image: url("FEE87729-1EE1-4658-8AE6-1EBF5B76A307.jpeg");
+}
+
+#folder-no-data{
+    background-image: url("D8F138D3-40A8-421B-867D-864960C36177.jpeg");
+}
+.desc-content{
+    float: left;
+    margin-top: 150px;
+    margin-left: 25px;
+}
+.italic-text{font-style: italic;}
+.mp-0{
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+.mp-0 > button {
+    padding: 0 !important;
+    margin: 0;
 }
