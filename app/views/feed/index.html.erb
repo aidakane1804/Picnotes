@@ -1,4 +1,4 @@
-<%# if (user_signed_in?) %>
+<% if (user_signed_in?) %>
   <% if @user == current_user %>
     <% about_me = current_user.about_me.empty? rescue nil %>
     <% nationality = current_user.nationality.empty? rescue nil %>
@@ -23,7 +23,7 @@
   <% else %>
     <%= render './partials/other_user_dashboard' %>
   <% end %>
-<%# end %>
+<% end %>
 <div id='note-content'></div>
 <div class='flex-center'>
   <div class='notes-container'>
