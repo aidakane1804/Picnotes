@@ -4,21 +4,21 @@
 
 <div class = 'flex-center'>
   <div class = "notes-container">
-    <!-- <div class = 'note-container'>
-      <button
-        type = 'button'
-        style = 'padding: 0; border: none; background-color: transparent;'
-        data-toggle = 'modal'
-        data-target = '#newNoteModal'
-        data-whatever = '@mdo'>
-        <%= image_tag 'add.png', class: 'add-note-btn' %>
-        <div class = 'note-container-text-center'>
-          <p class = "mobile-font note-btn-font"> Add New Picnotes </p>
-        </div>
-      </button>
-    </div> -->
 
     <% if @notes.where(archived: false).count > 0 %>
+      <div class = 'note-container'>
+        <button
+          type = 'button'
+          style = 'padding: 0; border: none; background-color: transparent;'
+          data-toggle = 'modal'
+          data-target = '#newNoteModal'
+          data-whatever = '@mdo'>
+          <%= image_tag 'add.png', class: 'add-note-btn' %>
+          <div class = 'note-container-text-center'>
+            <p class = "mobile-font note-btn-font"> Add New Picnotes </p>
+          </div>
+        </button>
+      </div>
       <% @notes.where(archived: false).each do |note| %>
         <div class = 'note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
           <%= link_to(note_path(note), remote: true) do %>

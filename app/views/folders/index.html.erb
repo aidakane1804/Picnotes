@@ -12,19 +12,18 @@
 
   <% if @user == current_user %>
     <div class="notes-container">
-      <!-- <div class='note-container'>
-        <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
-          <%= image_tag 'add.png', class: 'add-note-btn' %>
-          <div class='note-container-text-center'>
-            <p class="mobile-font note-btn-font">
-              New Folder
-            </p>
-          </div>
-        </button>
-
-      </div> -->
 
       <% if @folders.count > 0 %>
+        <div class='note-container'>
+          <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
+            <%= image_tag 'add.png', class: 'add-note-btn' %>
+            <div class='note-container-text-center'>
+              <p class="mobile-font note-btn-font">
+                New Folder
+              </p>
+            </div>
+          </button>
+        </div>
         <% @folders.each do |folder| %>
           <%= link_to(folder_path(folder), {:class => 'folder-container'}, remote: true) do %>
             <% folder.notes.where(archived: false).each_with_index do |note, i| %>
