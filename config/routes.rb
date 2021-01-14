@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   get 'password_resets/new'
   get 'password_resets/edit'
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -7,7 +8,6 @@ Rails.application.routes.draw do
   get '/sitemap.xml.gz', to: redirect("http://s3-us-west-1.amazonaws.com/picnotes-2019/sitemaps/sitemap.xml.gz")
 
   post '/boards/:id/toggle_note' => 'boards#toggle_note', as: :toggle_board_note
-
   resources :notes do
     member do
       put 'like', to: 'notes#upvote'
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'chat_us', to:'chats#index'
+      get 'community_interview', to: 'notes#community_interview'
       get 'terms_and_conditions', to: 'notes#terms_and_conditions'
       get 'about_us', to: 'notes#about_us'
       get 'for_schools',to: 'notes#for_schools'
@@ -41,7 +42,8 @@ Rails.application.routes.draw do
   resources :messages, only:[:create]
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
-
+  resources :ed_fluencers 
+  
   resources :folders
 
   resources :tags, only: [:index, :show]

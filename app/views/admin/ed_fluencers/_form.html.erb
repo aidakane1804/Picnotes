@@ -1,0 +1,17 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.semantic_errors %>
+  <%= f.inputs  do %>
+	  <%= f.input :title %>
+	  <%= f.input :first_name %>
+	  <%= f.input :last_name %>
+	  <%= f.input :image %>
+	  <%= f.input :content %>
+	  <%#= f.cktext_area :article %>
+	  <%= f.input :facebook %>
+	  <%= f.input :twitter %>
+	  <%= f.input :linkedIn %>
+	  <%= f.input :website %>
+	<% end %>  
+  <%= f.actions %>
+<% end %>  

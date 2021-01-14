@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_164343) do
+ActiveRecord::Schema.define(version: 2021_01_14_102150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 2019_12_19_164343) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
   create_table "dislikes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
@@ -54,6 +64,21 @@ ActiveRecord::Schema.define(version: 2019_12_19_164343) do
     t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_dislikes_on_note_id"
     t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
+  create_table "ed_fluencers", force: :cascade do |t|
+    t.string "title"
+    t.string "first_name"
+    t.string "last_name"
+    t.text "content"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "linkedIn"
+    t.string "website"
+    t.string "image"
+    t.text "article"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -105,6 +130,7 @@ ActiveRecord::Schema.define(version: 2019_12_19_164343) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.bigint "user_id"
+    t.boolean "archived", default: false
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 

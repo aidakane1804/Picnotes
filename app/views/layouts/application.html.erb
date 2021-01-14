@@ -17,6 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag Ckeditor.cdn_url %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136450115-1"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
@@ -156,6 +157,9 @@
             </label>
 
             <ul class="menu__box">
+              <%# if user_signed_in? %>
+                <li><a class="menu__item" href="/ed_fluencers">EdFluencers</a></li>
+              <%# end %>  
               <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
               <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
               <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>

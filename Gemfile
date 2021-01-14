@@ -39,6 +39,8 @@ gem 'simple_form'
 
 # CarrierWave image-upload
 gem 'carrierwave', '~> 1.0'
+gem 'ckeditor'
+
 # Compressing and resizing photos
 gem 'mini_magick'
 
