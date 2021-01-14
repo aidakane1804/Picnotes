@@ -117,6 +117,8 @@ Rails.application.configure do
     :user_name => ENV['SENDGRID_USERNAME'],
     :password => ENV['SENDGRID_PASSWORD']
   }
+  config.assets.digest  = true
+  config.assets.precompile = %w{application.js}
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
