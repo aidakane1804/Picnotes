@@ -29,9 +29,11 @@
             <!-- <button class="btn btn-secondary btn-block"><%= @interview.facebook %></button> -->
           </div>
           <div class="col-md-8 col-lg-8" style="text-align: center;">
-            <div class="pdf-right-box">
-              <%= @interview.article.html_safe if @interview.article.present? %>
-            </div>
+            <% if @interview.article.present? %>
+              <div class="pdf-right-box">
+                <%= @interview.article.html_safe %>
+              </div>
+            <% end %>  
           </div>
         </div>
       </div>
