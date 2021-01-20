@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
   get 'password_resets/new'
   get 'password_resets/edit'
   devise_for :admin_users, ActiveAdmin::Devise.config
