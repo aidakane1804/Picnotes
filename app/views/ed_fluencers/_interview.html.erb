@@ -1,5 +1,5 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg pdf-modal">
     <div class="modal-content">
       <div class="modal-header">
         <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
@@ -20,9 +20,11 @@
             <div class="social_icons">
               <% if  @interview.facebook.present? %>
                 <a href="<%= @interview.facebook%>" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-              <%elsif  @interview.linkedIn.present? %>
+              <% end %>  
+              <%if  @interview.linkedIn.present? %>
                 <a href="<%= @interview.linkedIn%>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              <%elsif @interview.twitter.present? %>
+              <% end %>  
+              <%if @interview.twitter.present? %>
                 <a href="<%= @interview.twitter%>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
               <%end%>
             </div>

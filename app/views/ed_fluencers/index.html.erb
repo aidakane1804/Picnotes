@@ -15,9 +15,11 @@
                      <%=interview.first_name + " "+ interview.last_name%>
                      <span class="title"><%= interview.title %></span>
                    </h4>
-                   <p class="blog-para">
-                     <%=interview.content%>
-                   </p>
+                   <span class="blog-para">
+                     <p class="blog-para">
+                       <%= interview.content.html_safe if interview.content.present? %>
+                     </p>
+                   </span>
                  </div>
            <%end%>
          </div>

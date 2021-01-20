@@ -555,14 +555,14 @@
         }
       }
     }
-    .blog-para {
+    .blog-para, .blog-para p {
       font-size: 15px;
       color: #666;
       margin-top: 5px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-inline-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
      
     }
@@ -606,6 +606,17 @@
   word-break: break-all;
   overflow-y: auto;
   max-height: 500px;
+  p {
+    word-break: break-word;
+  }
+  .paragraph{
+    word-break: break-word; 
+  }
+}
+.pdf-modal {
+  .modal-content {
+    border-radius: 20px;
+  }
 }
 @media (min-width: 991px) {
    #show_interview_model .modal-dialog.modal-lg {
@@ -646,5 +657,6 @@
     text-decoration: none;
   }
 }
-
-
+.cke_ed_fluencer_article{
+  width: 80%;
+}
