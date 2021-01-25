@@ -94,6 +94,7 @@ function ChangeUrlForEdFluencers(title, url) {
         alert("Browser does not support HTML5.");
     }
 }
+
 function ChangeUrlForUsers(title, url) {
     if (typeof (history.pushState) != "undefined") {
         var obj = {Title: title  , Url: url};
