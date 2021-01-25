@@ -83,6 +83,17 @@ function ChangeUrl(title, url) {
         alert("Browser does not support HTML5.");
     }
 }
+
+function ChangeUrlForEdFluencers(title, url) {
+
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj,"", '/ed_fluencers',);
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
 function ChangeUrlForUsers(title, url) {
     if (typeof (history.pushState) != "undefined") {
         var obj = {Title: title  , Url: url};

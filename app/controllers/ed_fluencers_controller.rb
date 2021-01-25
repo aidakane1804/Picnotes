@@ -13,6 +13,7 @@ class EdFluencersController < ApplicationController
 	private
 
   def find_interview
+  	@interviews = EdFluencer.all
   	@interview = EdFluencer.find(params[:id]) if params[:id].present?
   end
 end

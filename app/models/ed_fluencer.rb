@@ -6,5 +6,6 @@ class EdFluencer < ApplicationRecord
 	validates :title, presence: true
 	validates :content, presence: true
 	validates :image, presence: true
+	validates :url, presence: true
 
 end

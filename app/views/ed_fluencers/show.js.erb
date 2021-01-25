@@ -1,2 +1,3 @@
 $('#show_interview_model').html("<%= escape_javascript render(:partial => 'ed_fluencers/interview') %>");
-$('.bd-example-modal-lg').modal('toggle');
+ChangeUrlForEdFluencers("", "<%="ed_fluencers/"+@interview.id.to_s+"-"+@interview.url.parameterize%>");
+$('.bd-example-modal-lg').modal('show');
