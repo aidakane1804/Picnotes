@@ -1,37 +1,37 @@
 <div class="container" style="padding-top: 20px;">
   <div id="show_interview_model"></div>
   <div class="interview-blog">
-   <div class="row">
-    <% if @interviews.present? %>
-      <%- @interviews.each do|interview|%>
-       <div class="col-md-6">
-          <div class="panel-box">
-           <%= link_to ed_fluencer_path(interview), remote: true, class: "blog-box" do %>
-                 <div class="blog-img">
-                   <%=image_tag interview.image.url, size: "500x250", :class => "img-fluid"%>
-                 </div>
-                 <div class="blog-text">
-                   <h4 class="blog-title">
-                     <%=interview.first_name + " "+ interview.last_name%>
-                     <span class="title"><%= interview.title %></span>
-                   </h4>
-                   <span class="blog-para">
-                     <p class="blog-para">
-                       <%= interview.content.html_safe if interview.content.present? %>
-                     </p>
-                   </span>
-                 </div>
-           <%end%>
+    <div class="row">
+      <% if @interviews.present? %>
+        <%- @interviews.each do|interview|%>
+         <div class="col-md-6">
+            <div class="panel-box">
+             <%= link_to ed_fluencer_path(interview), remote: true, class: "blog-box" do %>
+                   <div class="blog-img">
+                     <%=image_tag interview.image.url, size: "500x250", :class => "img-fluid"%>
+                   </div>
+                   <div class="blog-text">
+                     <h4 class="blog-title">
+                       <%=interview.first_name + " "+ interview.last_name%>
+                       <span class="title"><%= interview.title %></span>
+                     </h4>
+                     <span class="blog-para">
+                       <p class="blog-para">
+                         <%= interview.content.html_safe if interview.content.present? %>
+                       </p>
+                     </span>
+                   </div>
+             <%end%>
+           </div>
          </div>
-       </div>
-      <%end%>
-    <%else%>
-      <div class="col-md-6">
-        <div class="panel-box">
-          There is records found!
-        </div>
-      </div>     
-    <%end%>  
-   </div>
+        <%end%>
+      <%else%>
+        <div class="col-md-6">
+          <div class="panel-box">
+            There is no records found!
+          </div>
+        </div>     
+      <%end%>  
+    </div>
   </div>
-</div
+</div>
