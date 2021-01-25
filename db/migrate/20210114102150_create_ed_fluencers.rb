@@ -4,7 +4,6 @@ class CreateEdFluencers < ActiveRecord::Migration[5.2]
       t.string :title
     	t.string :first_name
     	t.string :last_name
-      t.string :url
     	t.text   :content
       t.string :facebook
       t.string :twitter
