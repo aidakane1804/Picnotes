@@ -53,7 +53,7 @@
           <span class="icon-open-menu"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <%= form_tag(notes_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
+          <%= form_tag(notes_path, method: :get,class: "form-inline") do %>
             <div class=" box">
              
               <%= hidden_field_tag 'searchtest',1 %>
@@ -89,9 +89,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
               </li>
+
             <% else %>
               <a class="nav-link" href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
-            <% end %><!-- 
+            <% end %>
+            <li class="nav-item">
+              <a class="nav-link" href="/ed_fluencers">EdFluencers</a>
+            </li>
+            <!-- 
             <li class="nav-item">
               <a class="nav-link" href="/notes/contact_us">Contact us</a>
             </li> -->
@@ -158,10 +163,7 @@
               <span></span>
             </label>
 
-            <ul class="menu__box">
-              <%# if user_signed_in? %>
-                <li><a class="menu__item" href="/ed_fluencers">EdFluencers</a></li>
-              <%# end %>  
+            <ul class="menu__box">  
               <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
               <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
               <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
