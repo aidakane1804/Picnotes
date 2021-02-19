@@ -109,6 +109,7 @@ class NotesController < ApplicationController
   end
 
   def for_schools
+    for_schools_meta_tags
   end
 
   def contact_us
@@ -129,10 +130,7 @@ class NotesController < ApplicationController
   end
 
   def community_guideline
-    @page_title = 'Community Guidelines | Picnotes'
-    @page_description = 'Sharing your knowledge. Optimizing your dashboard.'
-    @page_keywords = 'free online general knowledge,free online knowledge base platform,general knowledge hub,knowledge hub,knowledge sharing websites,knowledge websites,online knowledge portal,online knowledge sharing hub,open knowledge,share your knowledge online,Educational Knowledge,research topics in education,intellectual knowledge,intellectual assets in knowledge management,intellectual knowledge management,best knowledge base platform,knowledge exchange platform,free knowledge base platform,free knowledge sharing platform,online knowledge sharing platform,intellectually stimulating books,hemoglobin study material,Respiratory system study guide,biology study material,philosophical books,How small scale mining works study notes,Raspberry pi study material,meditation books,Polity resources,science and technology study guide,technology study material,geopolitics study material,formation of stars study material,astronomy study material,academic notes astronomy,astronomy academic resources,star formation notes,DNA Study guide,philosophy academic resources,non fictional books,academic climate resources,industrial revolution study material,history study notes,tidal energy study notes,Business management study material,renewable energy study material,renewable energy academic resources,Technology academic notes,enterprenuer study material,climate change study material,picnotes'
-    #expires_in(30.days, public: true)
+    community_guideline_meta_tags
   end
 
   def freelance_research

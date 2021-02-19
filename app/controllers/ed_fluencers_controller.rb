@@ -2,12 +2,15 @@ class EdFluencersController < ApplicationController
 	before_action :find_interview, only: [:show]
 
 	def index
+		ed_fluencers_meta_tags
 		@interviews = EdFluencer.all
 	end	
 
 	
 
-	def show;end
+	def show
+		ed_fluencers_meta_tags
+	end
 
 
 	private
