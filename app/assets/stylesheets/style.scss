@@ -2449,8 +2449,11 @@ transform: none !important;
         display: none;
     }
 }
-
-
+@media (max-width:1375px) {
+    .navbar-nav a {
+        margin-right: 0px !important;
+    }
+}
 @media (min-width: 767px) and (max-width:1200px) {
     .menu__box {
         top: 34px;
