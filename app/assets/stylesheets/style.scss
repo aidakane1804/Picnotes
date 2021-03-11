@@ -190,6 +190,9 @@ button:focus {
 .box .has-search .dropdown a#dropdownMenuLink {
     padding: 0.375rem 0.75rem 0.375rem 0.5rem;
 }
+.box .has-search .dropdown a#dropdownMenuLink1 {
+    padding: 0.375rem 0.75rem 0.375rem 0.5rem;
+}
 .dropdown a {
     color: #bababa;
 }
@@ -2325,7 +2328,17 @@ transform: none !important;
 }
 
 .dropdown-menu {left: initial; right: 0;}
+
 .box .has-search .dropdown a#dropdownMenuLink::after {
+    content: "\e905";
+    position: absolute;
+    color: #bababa;
+    font-size: 13px;
+    font-family: "icomoon" !important;
+    margin-left: 9px;
+    margin-top: 7px;
+}
+.box .has-search .dropdown a#dropdownMenuLink1::after {
     content: "\e905";
     position: absolute;
     color: #bababa;
@@ -2472,9 +2485,15 @@ transform: none !important;
        display: flex;
         width: 100%;
     }
+
+
+
     .navbar-expand-lg .navbar-collapse.hide-in-tablate-view {
         display: none !important;
     }
+
+
+    
     .tablate-right-nav {
         position: absolute;
         right: 0;
