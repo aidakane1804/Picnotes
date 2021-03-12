@@ -18,12 +18,12 @@ class NotesController < ApplicationController
         # @notes = Note.tagged_with(params[:search])
         @notes = Note.tagged_with(params[:search], wild: true, any: true)
       elsif params[:searchtest] == '2' || params[:searchtest1] == '2'
-        @users = User.where("first_name ILIKE ?", "%#{params[:search]}%").or(User.where("last_name ILIKE ?", "%#{params[:search]}%")).or(User.where("username ILIKE ?", "%#{params[:search]}%"))
+        @users = User.where("CONCAT_WS(' ', first_name, last_name) LIKE ?", "%#{params[:search]}%").or(User.where("username ILIKE ?", "%#{params[:search]}%"))
       elsif params[:searchtest] == '3' || params[:searchtest1] == '3'
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
       end
       @searchresult = params[:search]
-      @searchmodel = params[:searchtest]
+      @searchmodel = params[:searchtest] || params[:searchtest1]
     else
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
       respond_to do |format|
