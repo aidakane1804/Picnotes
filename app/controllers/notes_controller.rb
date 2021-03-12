@@ -23,7 +23,7 @@ class NotesController < ApplicationController
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
       end
       @searchresult = params[:search]
-      @searchmodel = params[:searchtest] || params[:searchtest1]
+      @searchmodel = params[:searchtest].present? ? params[:searchtest] : params[:searchtest1]
     else
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
       respond_to do |format|
