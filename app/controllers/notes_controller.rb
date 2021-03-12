@@ -18,7 +18,7 @@ class NotesController < ApplicationController
         # @notes = Note.tagged_with(params[:search])
         @notes = Note.tagged_with(params[:search], wild: true, any: true)
       elsif params[:searchtest] == '2' || params[:searchtest1] == '2'
-        @users = User.where("CONCAT_WS(' ', first_name, last_name) LIKE ?", "%#{params[:search]}%").or(User.where("username ILIKE ?", "%#{params[:search]}%"))
+        @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
       elsif params[:searchtest] == '3' || params[:searchtest1] == '3'
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
       end
