@@ -1,0 +1,217 @@
+
+
+<div class = "modal fade" id = 'edtoolsModal_book' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add A Book</h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false,:required =>true %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false,:required => true %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false,:required =>true %>
+            <%= f.label :link, 'Link (Required)' %>
+            <%= f.input :link, label: false ,:required =>true%>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false ,:required =>'required'%>
+            <%= hidden_field_tag "myedtool_type", 'book' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class = "modal fade" id = 'edtoolsModal_article' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add An Article</h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false ,required:true %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false,required:true %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false,required:true %>
+            <%= f.label :link , 'Link (Required)' %>
+            <%= f.input :link, label: false, required:true %>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false,required:true %>
+            <%= hidden_field_tag "myedtool_type", 'article' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' ,required:true  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class = "modal fade" id = 'edtoolsModal_blog' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add A Blog</h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false %>
+            <%= f.label :link, 'Link (Required)' %>
+            <%= f.input :link, label: false %>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= hidden_field_tag "myedtool_type", 'blog' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class = "modal fade" id = 'edtoolsModal_podcast' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a podcast
+        </h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false %>
+            <%= f.label :link, 'Link (Required)' %>
+            <%= f.input :link, label: false %>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= hidden_field_tag "myedtool_type", 'podcast' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "modal fade" id = 'edtoolsModal_course' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add an Online course
+        </h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false %>
+            <%= f.label :link, 'Link (Required)' %>
+            <%= f.input :link, label: false %>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= hidden_field_tag "myedtool_type", 'online_course' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "modal fade" id = 'edtoolsModal_documentry' tabindex='-1' role = 'dialog' aria-labelledby = 'NoteModalLabel' aria-hidden='true'>
+  <div class = 'modal-dialog' role = 'document'>
+    <div class = 'modal-content'>
+      <div class = 'modal-header new-modal-header' style="background-color: red">
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a documentary
+        </h3>
+        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+          <span aria-hidden = 'true'> &times; </span>
+        </button>
+      </div>
+
+      <div>
+        <%= simple_form_for Myedtool.new do |f| %>
+          <div class = 'modal-body'>
+            <%= f.label :addtitle, 'Add Tittle (Required)' %>
+            <%= f.input :addtitle, label: false %>
+            <%= f.label :chooseacategory, 'Choose A Category (Required)' %>
+            <%= f.input :chooseacategory, label: false %>
+            <%= f.label :notes , 'Notes (Required)' %>
+            <%= f.input :notes , label: false %>
+            <%= f.label :link, 'Link (Required)' %>
+            <%= f.input :link, label: false %>
+            <%= f.label :hashtag, 'Hashtags (Required)' %>
+            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= hidden_field_tag "myedtool_type", 'documentary' %>
+
+          </div>
+          <div class = 'form-btn-container text-center new-note-btn' style="background-color: red">
+            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width'  %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

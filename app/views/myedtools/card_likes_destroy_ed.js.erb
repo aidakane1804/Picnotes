@@ -1,0 +1,1 @@
+$('.btn-rating<%=@myedtool.id%>').html('<%= link_to fa_icon('heart-o'), card_likes_ed_path(myedtool_id: @myedtool), remote:true, method: :post %><%= @myedtool.card_likes.count %>')

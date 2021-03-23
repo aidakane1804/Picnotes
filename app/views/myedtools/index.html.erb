@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Myedtools</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Addtitle</th>
+      <th>Chooseacategory</th>
+      <th>Notes</th>
+      <th>Link</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @myedtools.each do |myedtool| %>
+      <tr>
+        <td><%= myedtool.addtitle %></td>
+        <td><%= myedtool.chooseacategory %></td>
+        <td><%= myedtool.notes %></td>
+        <td><%= myedtool.link %></td>
+        <td><%= link_to 'Show', myedtool %></td>
+        <td><%= link_to 'Edit', edit_myedtool_path(myedtool) %></td>
+        <td><%= link_to 'Destroy', myedtool, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Myedtool', new_myedtool_path %>

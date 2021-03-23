@@ -1,0 +1,111 @@
+class MyedtoolsController < ApplicationController
+  before_action :authenticate_user!, except: [:new, :comment_section, :fetch_model_form1]
+
+  def  new
+    @myedtool= Myedtool.all
+    @books = Myedtool.where(myedtool_type: "book").order('created_at DESC')
+    @articles = Myedtool.where(myedtool_type: "article").order('created_at DESC')
+    @blogs = Myedtool.where(myedtool_type: "blog").order('created_at DESC')
+    @podcasts = Myedtool.where(myedtool_type: "podcast").order('created_at DESC')
+    @courses = Myedtool.where(myedtool_type: "online_course").order('created_at DESC')
+    @documentaries = Myedtool.where(myedtool_type: "documentary").order('created_at DESC')
+    if params[:user_id]
+      # if params[:user_id] != current_user.id.to_s
+      @current_user_id = current_user.id
+      user_myedtool = User.find_by(id: params[:user_id])
+      @user = user_myedtool
+      @myedtool = Myedtool.new
+    else
+      @user = current_user
+      @myedtool = Myedtool.new
+    end
+  end
+
+  def create
+    @myedtool = Myedtool.new(myedtool_params)
+    @myedtool.myedtool_type = params['myedtool_type']
+    @myedtool.user = current_user
+    if @myedtool.save!
+      redirect_to new_myedtool_path
+    else
+      flash[:error] = 'Could not save record inside Database, Please try again later!'
+      redirect_to new_myedtool_path
+    end
+  end
+
+  def  card_likes_ed
+    @myedtool = Myedtool.find(params[:myedtool_id])
+    current_user_card_like = CardLike.where(myedtool: @myedtool, user: current_user)
+    if current_user_card_like.empty?
+    CardLike.create(myedtool: @myedtool, user: current_user)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def card_comment_likes_ed
+    @myedtool = Myedtool.find(params[:myedtool_id])
+    comment = CardCommentLike.where(myedtool: @myedtool, user: current_user )
+    if comment.empty?
+      CardCommentLike.create(myedtool: @myedtool, user: current_user)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def card_likes_destroy_ed
+    @myedtool = Myedtool.find(params[:myedtool_id])
+    CardLike.where(myedtool: @myedtool, user: current_user).first.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def update
+    @myedtool = Myedtool.find(params[:id])
+    if @myedtool.user_id.to_s == current_user.id.to_s
+      @myedtool.update(myedtool_params)
+      @myedtool.save
+    end
+    redirect_to new_myedtool_path
+
+  end
+
+  def fetch_model_form1
+    @card = Myedtool.find_by_id(params[:id])
+    respond_to do |format|current_user.id
+      format.js
+    end
+  end
+
+  def comment_section
+    @card = Myedtool.find_by_id(params[:id])
+    @likes = @card.card_likes.count
+    @comments = @card.card_comment_likes.count
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_ed_tool_comment
+    @card = Myedtool.find_by_id(params['id'])
+    if @card && !params["card_comment"].empty?
+    @my_ed_tool_comment = CardCommentLike.new(myedtool_id: @card.id.to_s, body: params["card_comment"], user_id: current_user.id)
+    @my_ed_tool_comment.save
+    end
+    @likes = @card.card_likes.count
+    @comments = @card.card_comment_likes.count
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  private
+
+    def myedtool_params
+      params.require(:myedtool).permit(:myedtool_type,:addtitle, :chooseacategory, :notes, :link ,:hashtag)
+    end
+
+end

@@ -1,0 +1,430 @@
+<% if @user == current_user %>
+  <%= render './partials/user_dashboard' %>
+<% else %>
+  <%= render './partials/other_user_dashboard' %>
+<% end %>
+<%= render './modals/ed_tools_modal' %>
+
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+
+<section>
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "book.png", style: 'width:45px;margin-bottom:10px' %>
+        <h6 class="heading-learning mb-0 text-black">Books</h6>
+        <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_book"><%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @books.each do |book| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=book.id %>"><%=link_to current_user_comment_on_card?(book) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: book.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(book) %>
+                        <p class="btn-rating<%= book.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: book), remote:true, method: :delete %> <%= book.card_likes.count %></p>
+                    <%else%>
+                        <p class="btn-rating<%= book.id %>"><%= link_to current_user_liked_card?(book) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: book.id), remote: true, method: :post %> <%= book.card_likes.count %></p>
+                    <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "article.png", style: "width:35px;margin-bottom:10px" %><br>
+        <h6 class="heading-learning color-orange mb-0 text-black">Articles</h6>
+        <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_article"><%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @articles.each do |art| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to art.addtitle, fetch_model_form1_path(id: art.id), remote: true , style: "color: black;" %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=art.id %>"><%= link_to current_user_comment_on_card?(art) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: art.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(art) %>
+                        <p class="btn-rating<%= art.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: art), remote:true, method: :delete %> <%= art.card_likes.count %></p>
+                      <%else%>
+                        <p class="btn-rating<%= art.id %>"><%= link_to current_user_liked_card?(art) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: art.id), remote: true, method: :post %> <%= art.card_likes.count %></p>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "blog.png", style: "width:35px;margin-bottom:10px" %><br>
+        <h6 class="heading-learning color-green mb-0 text-black">Blogs</h6>
+        <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_blog">
+          <%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @blogs.each do |blog| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to blog.addtitle, fetch_model_form1_path(id: blog.id), remote: true , style: "color: black;" %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=blog.id %>"><%=link_to current_user_comment_on_card?(blog) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: blog.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(blog) %>
+                        <p class="btn-rating<%= blog.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: blog), remote:true, method: :delete %> <%= blog.card_likes.count %></p>
+                      <%else%>
+                        <p class="btn-rating<%= blog.id %>"><%= link_to current_user_liked_card?(blog) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: blog.id), remote: true, method: :post %> <%= blog.card_likes.count %></p>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "podcast.png", style: "width:35px;margin-bottom:10px" %><br>
+        <h6 class="heading-learning color-green mb-0 text-black">Podcasts</h6>
+        <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_podcast">
+          <%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @podcasts.each do |pod| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to pod.addtitle, fetch_model_form1_path(id: pod.id), remote: true, style: "color: black;"  %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=pod.id %>"><%=link_to current_user_comment_on_card?(pod) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: pod.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(pod) %>
+                        <p class="btn-rating<%= pod.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: pod), remote: true, method: :delete %> <%= pod.card_likes.count %></p>
+                      <%else%>
+                        <p class="btn-rating<%= pod.id %>"><%= link_to current_user_liked_card?(pod) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: pod.id), remote: true, method: :post %> <%= pod.card_likes.count %></p>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "online_course.png", style: "width:35px;margin-bottom:10px" %><br>
+        <h6 class="heading-learning color-green mb-0 text-black">Online Courses</h6>
+        <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_course">
+          <%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @courses.each do |course| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to course.addtitle, fetch_model_form1_path(id: course.id), remote: true , style: "color: black;"  %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=course.id %>"><%=link_to current_user_comment_on_card?(course) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: course.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(course) %>
+                        <p class="btn-rating<%= course.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: course), remote: true, method: :delete %> <%= course.card_likes.count %></p>
+                      <%else%>
+                        <p class="btn-rating<%= course.id %>"><%= link_to current_user_liked_card?(course) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: course.id), remote: true, method: :post %> <%= course.card_likes.count %></p>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
+        <%= image_tag "documentary.png", style: "width:35px;margin-bottom:10px" %><br>
+        <h6 class="heading-learning color-green mb-0 text-black">Documentaries</h6>
+        <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_documentry">
+          <%= image_tag "red-plus.png", class: "img-plus" %>
+        </button>
+        <% @documentaries.each do |doc| %>
+          <div class="bg-highlight">
+            <div class="status-box border-bottom-red">
+              <div class="row" style="min-height: 135px">
+                <div class="col-12">
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to doc.addtitle, fetch_model_form1_path(id: doc.id), remote: true, style: "color: black;"  %></p>
+                  <div class="text-right pb-2" style="padding-top: 30px">
+                    <div class="column">
+                      <p class="btn-rating comment-icon-ed-tool<%=doc.id %>"><%=link_to current_user_comment_on_card?(doc) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: doc.id), remote: true %></i></p>
+                    </div>
+                    <div class="column">
+                      <%if current_user_liked_card?(doc) %>
+                        <p class="btn-rating<%= doc.id %>"><%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: doc), remote: true, method: :delete %> <%= doc.card_likes.count %></p>
+                      <%else%>
+                        <p class="btn-rating<%= doc.id %>"><%= link_to current_user_liked_card?(doc) ? fa_icon('heart'): fa_icon('heart-o'), card_likes_ed_path(myedtool_id: doc.id), remote: true, method: :post %> <%= doc.card_likes.count %></p>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="card">
+</div>
+
+<style>
+    .column {
+        float: right;
+        width: 14%;
+
+        /* Should be removed. Only for demonstration */
+    }
+    .bg-highlight
+    {
+        background:#f5f5f5;
+        padding: 1px 0 64px 0;
+    }
+    .btn-rating {
+        background: transparent;
+        border: none;
+        padding-right: 5px;
+    }
+    .status-box {
+        background: #fff;
+        width: 90%;
+        margin: 19px auto;
+        border-radius: 5px;
+        border-bottom: 5px solid;
+    }
+    .img-plus
+    {
+        width:35px;
+        margin-bottom: 25px;
+    }
+    .text-lorem {
+        font-size: 21px;
+        font-weight: 800;
+        padding-top: 21px;
+    }
+    .border-bottom-red {
+        border-bottom: 5px solid #fb3c44;
+    }
+    .heading-learning
+    {
+        text-transform: uppercase;
+        font-size: 18px;
+        color: red;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 700;
+    }
+    .btn-status
+    {
+        color: grey;
+        font-weight: 600;
+        font-size: 16px;
+    }
+    .color-orange
+    {
+        color:#f1874b;
+    }
+    .color-green
+    {
+        color:#6fb145;
+    }
+    .img-plus
+    {
+        width:35px;
+        margin-bottom: 25px;
+    }
+    .color-black
+    {
+        color:grey;
+    }
+    .color-grey
+    {
+        color:#bababa;
+    }
+    .bg-highlight
+    {
+        background:#f5f5f5;
+        padding: 1px 0 64px 0;
+    }
+    .status-box
+    {
+        background: #fff;
+        width: 90%;
+        margin:19px auto;
+        border-radius: 5px;
+        border-bottom: 5px solid;
+    }
+    .border-bottom-orange
+    {
+        border-bottom: 5px solid #f1874b;
+    }
+    .border-bottom-red
+    {
+        border-bottom: 5px solid #fb3c44;
+    }
+    .border-bottom-green
+    {
+        border-bottom: 5px solid #6fb145;
+    }
+    .text-lorem
+    {
+        font-size: 21px;
+        font-weight: 800;
+        padding-top: 21px;
+    }
+    .btn-rating
+    {
+        background: transparent;
+        border:none;
+    }
+    .btn-red-modal
+    {
+        background: transparent;
+    }
+    .bg-modal-red
+    {
+        background: #fb3c44;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .bg-modal-orange
+    {
+        background: #f1874b;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .bg-modal-green
+    {
+        background: #6fb145;
+        font-family: 'Open Sans', sans-serif;
+    }
+    .col-form-control
+    {
+        border: 1px solid grey;
+        border-radius: 0;
+        padding: 10px;
+    }
+    .col-form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #fb3c44;
+        outline: 0;
+    }
+
+    .bg-orange
+    {
+        background:#f1874b;
+    }
+    .bg-green
+    {
+        background: #6fb145;
+    }
+
+
+    /*Learning 1*/
+    .text-black
+    {
+        color:#000;
+    }
+    .modal-size
+    {
+        display: block;
+        margin: auto;
+        width: 40%;
+        padding: 46px;
+    }
+    @media only screen and (max-width:1440px)
+    {
+        .community-quote {
+            width: 63%;
+        }
+    }
+
+    @media only screen and (max-width:1366px)
+    {
+        .community-quote {
+            width: 68%;
+        }
+    }
+    @media only screen and (max-width:1280px)
+    {
+        .box {
+            border: 2px solid #8093bb;
+            width: 274px;
+            height: 40px;
+            position: relative;
+            left: 57px;
+        }
+        .community-quote {
+            width: 72%;
+        }
+    }
+    @media only screen and (max-width:1024px)
+    {
+        .navbar-nav a
+        {
+            font-size: 12px;
+        }
+        .btn-request
+        {
+            width: 63%;
+        }
+        .heading-create:after {
+            position: absolute;
+            bottom: 5px;
+            left: 126px;
+        }
+        .btn-bottom-request
+        {
+            width: 27%;
+        }
+        .bg-shadow
+        {
+            padding: 0px 25px;
+        }
+        .box
+        {
+            width: 237px;
+            position: relative;
+            left: 20px;
+        }
+        .text-pic-edu {
+            font-size: 22px;
+        }
+        .heading-k-12
+        {
+            padding-top: 45%;
+            margin-left: 121px;
+        }
+
+    }
+
+</style>
