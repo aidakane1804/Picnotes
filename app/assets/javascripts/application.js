@@ -26,10 +26,16 @@ $(document).on('turbolinks:load', function () {
         $('.dropdown a:first').text(searchTest);
         if(searchTest === 'Tags'){
             $('#searchtest').val(1);
+            $('#searchtest1').val(1);
+            $('#dropdownMenuLink1').html("Tags");
         }else if(searchTest === 'Person'){
             $('#searchtest').val(2);
+            $('#searchtest1').val(2);
+            $('#dropdownMenuLink1').html("Person");
         }else{
             $('#searchtest').val(3);
+            $('#searchtest1').val(3);
+            $('#dropdownMenuLink1').html("Picnotes");
         }
     });
 });
@@ -45,8 +51,9 @@ $(window).scroll(function() {
     }
 });
 
-
-$(".scroll").scrollTop($(".scroll")[0].scrollHeight);
+if ($(".scroll")[0]){
+  $(".scroll").scrollTop($(".scroll")[0].scrollHeight);
+}  
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();
 
@@ -85,7 +92,6 @@ function ChangeUrl(title, url) {
 }
 
 function ChangeUrlForEdFluencers(title, url) {
-
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/ed_fluencers',);

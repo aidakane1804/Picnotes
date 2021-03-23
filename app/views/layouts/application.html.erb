@@ -52,10 +52,14 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="icon-open-menu"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
-          <%= form_tag(notes_path, method: :get,class: "form-inline my-2 my-lg-0") do %>
+
+
+        
+
+
+        <div class="collapse navbar-collapse hide-in-tablate-view" id="navbarSupportedContent">
+          <%= form_tag(notes_path, method: :get,class: "form-inline") do %>
             <div class=" box">
-             
               <%= hidden_field_tag 'searchtest',1 %>
               <div class="has-search">
                 <%= text_field_tag(:search, params[:search],class: "form-control search-input") %>
@@ -75,7 +79,7 @@
               </div>
             </div>
           <% end %>
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto hide-in-tablate">
             <li class="nav-item active">
               <a class="nav-link" href="/notes/about_us">About Us</a>
             </li>
@@ -85,13 +89,19 @@
            <!--  <li class="nav-item">
               <a class="nav-link" href="/notes/community_guideline">Guidelines</a>
             </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/ed_fluencers">EdFluencers</a>
+            </li>
             <% if user_signed_in? %>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
+                <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create Picnotes</a>
               </li>
+
             <% else %>
-              <a class="nav-link" href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes | Picnotes','description', 'Combine short notes to a cover picture and share with your friends')">Create Picnotes</a>
-            <% end %><!-- 
+              <a class="nav-link" href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create Picnotes</a>
+            <% end %>
+           
+            <!-- 
             <li class="nav-item">
               <a class="nav-link" href="/notes/contact_us">Contact us</a>
             </li> -->
@@ -148,30 +158,88 @@
               data-toggle='modal'
               data-target='#newUserModal'
               data-whatever='@mdo'
-              onclick="changeMetaContent('Sign Up | Picnotes','description', 'Connect with Facebook or Sign Up with Email')">
+              onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">
               Sign up
             </button>
           <% end %>
-          <div class="hamburger-menu">
-            <input id="menu__toggle" type="checkbox" />
-            <label class="menu__btn" for="menu__toggle">
-              <span></span>
-            </label>
+            <div class="hamburger-menu">
+              <input id="menu__toggle" type="checkbox" />
+              <label class="menu__btn" for="menu__toggle">
+                <span></span>
+              </label>
+              <ul class="menu__box">  
+                <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
+                <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
+                <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+              </ul>
+            </div>
+        </div>
 
-            <ul class="menu__box">
-              <%# if user_signed_in? %>
-                <li><a class="menu__item" href="/ed_fluencers">EdFluencers</a></li>
-              <%# end %>  
-              <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
-              <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
-              <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
-            </ul>
+        <div class="tablate-view-header">
+          <div class="form-container">
+            <%= form_tag(notes_path, method: :get,class: "form-inline") do %>
+            <div class=" box">
+              <%= hidden_field_tag 'searchtest1',1 %>
+              <div class="has-search">
+                <%= text_field_tag(:search, params[:search],class: "form-control search-input") %>
+                <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+                  <span class="icon-search"></span>
+                <% end %>
+                <div class="dropdown">
+                <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                  <a class="dropdown-item" href="javascript:void(0);">Tags</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Person</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Picnotes</a>
+                </div>
+              </div>
+              </div>
+            </div>
+          <% end %>
           </div>
+          <div class="tablate-right-nav">
+            <div class="tablate-view-btns">
+              <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
+
+              <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Sign Up</button>
+            </div>
+            <div class="hamburger-menu">
+              <input id="menu__toggle" type="checkbox" />
+              <label class="menu__btn" for="menu__toggle">
+                <span></span>
+              </label>
+              <ul class="menu__box">  
+                <li><a class="menu__item" href="/notes/community_guideline">Guidelines</a></li>
+                <li><a class="menu__item" href="/notes/terms_and_conditions">Terms and Conditions</a></li>
+                <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+              </ul>
+            </div>
+           </div> 
         </div>
       </nav>
-       
-    </div>
   </header>
+
+<div class="tablate-navbar-container">
+  <ul class="navbar-nav tablate-navbar">
+    <li class="nav-item active">
+      <a class="nav-link" href="/notes/about_us">About Us</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/notes/for_schools">For Schools</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/ed_fluencers">EdFluencers</a>
+    </li>
+    <li class="nav-item">
+      <!-- <a class="nav-link" href="/ed_fluencers">Create Picnotes</a> -->
+      <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create Picnotes</a>
+
+    </li>
+  </ul>
+</div>
+
   <!-- header new ending -->
   <%= render './modals/new_session_modal' %>
   <%= render './modals/new_note_modal' %>

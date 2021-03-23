@@ -8,22 +8,22 @@ class NotesController < ApplicationController
   def index
     default_meta_tags
     if params[:search]
-      if params[:search].blank? && params[:searchtest] == '1'
+      if params[:search].blank? && (params[:searchtest] == '1' || params[:searchtest1] == '1')
         redirect_to search_index_path
-      elsif params[:search].blank? && params[:searchtest] == '2'
+      elsif params[:search].blank? && (params[:searchtest] == '2' || params[:searchtest1] == '2')
         redirect_to search_index_path
-      elsif params[:search].blank? && params[:searchtest] == '3'
+      elsif params[:search].blank? && (params[:searchtest] == '3' || params[:searchtest1] == '3')
         redirect_to search_index_path
-      elsif params[:searchtest] == '1'
+      elsif params[:searchtest] == '1' || params[:searchtest1] == '1'
         # @notes = Note.tagged_with(params[:search])
         @notes = Note.tagged_with(params[:search], wild: true, any: true)
-      elsif params[:searchtest] == '2'
-        @users = User.where("first_name ILIKE ?", "%#{params[:search]}%").or(User.where("last_name ILIKE ?", "%#{params[:search]}%")).or(User.where("username ILIKE ?", "%#{params[:search]}%"))
-      elsif params[:searchtest] == '3'
+      elsif params[:searchtest] == '2' || params[:searchtest1] == '2'
+        @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+      elsif params[:searchtest] == '3' || params[:searchtest1] == '3'
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
       end
       @searchresult = params[:search]
-      @searchmodel = params[:searchtest]
+      @searchmodel = params[:searchtest].present? ? params[:searchtest] : params[:searchtest1]
     else
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
       respond_to do |format|
@@ -109,6 +109,7 @@ class NotesController < ApplicationController
   end
 
   def for_schools
+    for_schools_meta_tags
   end
 
   def contact_us
@@ -129,10 +130,7 @@ class NotesController < ApplicationController
   end
 
   def community_guideline
-    @page_title = 'Community Guidelines | Picnotes'
-    @page_description = 'Sharing your knowledge. Optimizing your dashboard.'
-    @page_keywords = 'free online general knowledge,free online knowledge base platform,general knowledge hub,knowledge hub,knowledge sharing websites,knowledge websites,online knowledge portal,online knowledge sharing hub,open knowledge,share your knowledge online,Educational Knowledge,research topics in education,intellectual knowledge,intellectual assets in knowledge management,intellectual knowledge management,best knowledge base platform,knowledge exchange platform,free knowledge base platform,free knowledge sharing platform,online knowledge sharing platform,intellectually stimulating books,hemoglobin study material,Respiratory system study guide,biology study material,philosophical books,How small scale mining works study notes,Raspberry pi study material,meditation books,Polity resources,science and technology study guide,technology study material,geopolitics study material,formation of stars study material,astronomy study material,academic notes astronomy,astronomy academic resources,star formation notes,DNA Study guide,philosophy academic resources,non fictional books,academic climate resources,industrial revolution study material,history study notes,tidal energy study notes,Business management study material,renewable energy study material,renewable energy academic resources,Technology academic notes,enterprenuer study material,climate change study material,picnotes'
-    #expires_in(30.days, public: true)
+    community_guideline_meta_tags
   end
 
   def freelance_research

@@ -1671,10 +1671,7 @@ button.blue-appearance-btn i.fa.fa-search {
 .header{position: fixed; left: 0; right: 0; background: #fff; z-index: 9999999;top:0;}
 .martop-80{margin-top:80px;}
 
-@media only screen and (min-width:1100px) and (max-width:1309px){
- .box {width: 350px;}
- .search-input {width: 60% !important;}
-}
+
 
 @media only screen and (max-width: 764px){
 .community-learners-modal-dialog .modal-content {}
