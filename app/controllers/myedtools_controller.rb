@@ -2,23 +2,28 @@ class MyedtoolsController < ApplicationController
   before_action :authenticate_user!, except: [:new, :comment_section, :fetch_model_form1]
 
   def  new
-    @myedtool= Myedtool.all
-    @books = Myedtool.where(myedtool_type: "book").order('created_at DESC')
-    @articles = Myedtool.where(myedtool_type: "article").order('created_at DESC')
-    @blogs = Myedtool.where(myedtool_type: "blog").order('created_at DESC')
-    @podcasts = Myedtool.where(myedtool_type: "podcast").order('created_at DESC')
-    @courses = Myedtool.where(myedtool_type: "online_course").order('created_at DESC')
-    @documentaries = Myedtool.where(myedtool_type: "documentary").order('created_at DESC')
-    if params[:user_id]
+     if params[:user_id]
+       fetch_data_by_user(params[:user_id])
       # if params[:user_id] != current_user.id.to_s
       @current_user_id = current_user.id
       user_myedtool = User.find_by(id: params[:user_id])
       @user = user_myedtool
       @myedtool = Myedtool.new
-    else
+    elsif params[:id]
+      fetch_data_by_user(params[:id])
       @user = current_user
       @myedtool = Myedtool.new
     end
+  end
+
+  def fetch_data_by_user(user_id)
+    @myedtool= Myedtool.where(user_id: user_id )
+    @books = Myedtool.where(myedtool_type: "book", user_id: user_id).order('created_at DESC')
+    @articles = Myedtool.where(myedtool_type: "article" , user_id: user_id).order('created_at DESC')
+    @blogs = Myedtool.where(myedtool_type: "blog", user_id: user_id).order('created_at DESC')
+    @podcasts = Myedtool.where(myedtool_type: "podcast", user_id: user_id).order('created_at DESC')
+    @courses = Myedtool.where(myedtool_type: "online_course", user_id: user_id).order('created_at DESC')
+    @documentaries = Myedtool.where(myedtool_type: "documentary", user_id: user_id).order('created_at DESC')
   end
 
   def create
@@ -26,10 +31,10 @@ class MyedtoolsController < ApplicationController
     @myedtool.myedtool_type = params['myedtool_type']
     @myedtool.user = current_user
     if @myedtool.save!
-      redirect_to new_myedtool_path
+      redirect_to new_myedtool_path(id: current_user.id)
     else
       flash[:error] = 'Could not save record inside Database, Please try again later!'
-      redirect_to new_myedtool_path
+      redirect_to new_myedtool_path(id: current_user.id)
     end
   end
 

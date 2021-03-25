@@ -4,20 +4,24 @@ class EdtrackersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :update_status, :fetch_model_form, :show, :comment_section_edtracker]
 
   def new
-    @edtrackers = Edtracker.all
-    @want_to_learn = Edtracker.where(edtracker_type: "Want To Learn").order('created_at DESC')
-    @curr_learning = Edtracker.where(edtracker_type: "Currently Learning").order('created_at DESC')
-    @learned = Edtracker.where(edtracker_type: "Learned").order('created_at DESC')
     if params[:user_id]
+      fetch_edtracker_data_by_user(params[:user_id])
       # if params[:user_id] != current_user.id.to_s
       @current_user_id = current_user.id
       user_edtracker = User.find_by(id: params[:user_id])
       @user = user_edtracker
       @edtracker = Edtracker.new
-    else
+    elsif params[:id]
+      fetch_edtracker_data_by_user(params[:id])
       @user = current_user
       @edtracker = Edtracker.new
     end
+  end
+  def fetch_edtracker_data_by_user(user_id)
+    @edtracker= Edtracker.where(user_id: user_id )
+    @want_to_learn = Edtracker.where(edtracker_type: "Want To Learn",user_id: user_id).order('created_at DESC')
+    @curr_learning = Edtracker.where(edtracker_type: "Currently Learning",user_id: user_id).order('created_at DESC')
+    @learned = Edtracker.where(edtracker_type: "Learned",user_id: user_id).order('created_at DESC')
   end
 
   def create
@@ -25,10 +29,10 @@ class EdtrackersController < ApplicationController
     @edtracker.edtracker_type = params['edtracker_type']
     @edtracker.user = current_user
     if @edtracker.save!
-      redirect_to new_edtracker_path
+      redirect_to new_edtracker_path(id: current_user.id)
     else
       flash[:error] = 'Could not save record inside Database, Please try again later!'
-      redirect_to new_edtracker_path
+      redirect_to new_edtracker_path(id: current_user.id)
     end
   end
 
