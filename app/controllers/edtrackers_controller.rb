@@ -7,7 +7,7 @@ class EdtrackersController < ApplicationController
     if params[:user_id]
       fetch_edtracker_data_by_user(params[:user_id])
       # if params[:user_id] != current_user.id.to_s
-      @current_user_id = current_user.id
+      # @current_user_id = current_user.id
       user_edtracker = User.find_by(id: params[:user_id])
       @user = user_edtracker
       @edtracker = Edtracker.new
