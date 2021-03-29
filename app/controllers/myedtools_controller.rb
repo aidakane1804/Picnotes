@@ -5,7 +5,7 @@ class MyedtoolsController < ApplicationController
      if params[:user_id]
        fetch_data_by_user(params[:user_id])
       # if params[:user_id] != current_user.id.to_s
-      @current_user_id = current_user.id
+      # @current_user_id = current_user.id
       user_myedtool = User.find_by(id: params[:user_id])
       @user = user_myedtool
       @myedtool = Myedtool.new
@@ -75,7 +75,6 @@ class MyedtoolsController < ApplicationController
       @myedtool.save
     end
     redirect_to new_myedtool_path
-
   end
 
   def fetch_model_form1

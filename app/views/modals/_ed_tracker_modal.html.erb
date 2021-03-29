@@ -14,11 +14,11 @@
           <div class='modal-body'>
             <%= f.label :topic, 'Topic (Required)' %>
             <%= f.input :topic, label: false, required: true %> <br>
-            <%= f.label :notes, 'Notes (Required)' %>
+            <%= f.label :notes, 'Notes' %>
             <%= f.input :notes, label: false %>
             <%#= f.label :resources, 'Resources (Required)' %>
             <%#= f.input :resources, label: false %>
-            <%= f.label :link, 'Link (Required)' %>
+            <%= f.label :link, 'Link' %>
             <%= f.input :link, label: false %>
             <%= f.label :hashtag, 'Hashtags (Required)' %>
             <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
@@ -40,7 +40,7 @@
   <div class='modal-dialog' role='document'>
     <div class='modal-content'>
       <div class='modal-header new-modal-header' style="background-color: orange">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>I'M Currently Learning</h3>
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Currently Learning</h3>
         <button type='button' class='close' data-dismiss='modal' style='color: white' aria-label='Close'>
           <span aria-hidden='true'> &times; </span>
         </button>
