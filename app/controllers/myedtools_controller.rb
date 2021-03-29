@@ -74,7 +74,7 @@ class MyedtoolsController < ApplicationController
       @myedtool.update(myedtool_params)
       @myedtool.save
     end
-    redirect_to new_myedtool_path
+    redirect_to new_myedtool_path(id: current_user.id)
   end
 
   def fetch_model_form1

@@ -95,7 +95,7 @@ class EdtrackersController < ApplicationController
     @edtracker.update(edtracker_params)
     @edtracker.save
     end
-    redirect_to new_edtracker_path
+    redirect_to new_edtracker_path(id: current_user.id)
 
   end
 
