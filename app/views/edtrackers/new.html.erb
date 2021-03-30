@@ -10,7 +10,7 @@
   <div class="container pt-5">
     <div class="row">
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <h6 class="heading-learning mb-0">Want To Learn</h6>
+        <h6 class="heading-learning mb-0">I want to learn</h6>
         <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
         <%if @want_to_learn.any? %>
@@ -24,9 +24,9 @@
                     <%if card.user == current_user%>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: red">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
+                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end%>
 
@@ -53,7 +53,7 @@
           <%end %>
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <h6 class="heading-learning color-orange mb-0">Currently Learning</h6>
+        <h6 class="heading-learning color-orange mb-0">I'm currently learning</h6>
         <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png", class: "img-plus" %>
         </button>
         <%if @curr_learning.any? %>
@@ -67,9 +67,9 @@
                     <%if card.user == current_user %>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" style="border-block-color: orange">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
+                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end %>
                   </div>
@@ -96,7 +96,7 @@
 
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <h6 class="heading-learning color-green mb-0">Learned</h6>
+        <h6 class="heading-learning color-green mb-0">I learned</h6>
         <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal3">
           <%= image_tag "green-plus.png", class: "img-plus" %>
         </button>
@@ -111,9 +111,9 @@
                     <%if card.user == current_user  %>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: #4CAF50">
 <!--                      <option value="Choose to Option" >Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
+                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end %>
                   </div>
@@ -213,8 +213,7 @@
     }
     .heading-learning
     {
-        text-transform: uppercase;
-        font-size: 18px;
+        font-size: 20px;
         color: red;
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;

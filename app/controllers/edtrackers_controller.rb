@@ -19,9 +19,9 @@ class EdtrackersController < ApplicationController
   end
   def fetch_edtracker_data_by_user(user_id)
     @edtracker= Edtracker.where(user_id: user_id )
-    @want_to_learn = Edtracker.where(edtracker_type: "Want To Learn",user_id: user_id).order('created_at DESC')
-    @curr_learning = Edtracker.where(edtracker_type: "Currently Learning",user_id: user_id).order('created_at DESC')
-    @learned = Edtracker.where(edtracker_type: "Learned",user_id: user_id).order('created_at DESC')
+    @want_to_learn = Edtracker.where(edtracker_type: "I want to learn",user_id: user_id).order('created_at DESC')
+    @curr_learning = Edtracker.where(edtracker_type: "I'm currently learning",user_id: user_id).order('created_at DESC')
+    @learned = Edtracker.where(edtracker_type: "I learned",user_id: user_id).order('created_at DESC')
   end
 
   def create

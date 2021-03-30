@@ -22,7 +22,7 @@
             <%= f.input :link, label: false %>
             <%= f.label :tag_list, 'Hashtags (Required)' %>
             <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
-            <%= hidden_field_tag "edtracker_type", 'Want To Learn' %>
+            <%= hidden_field_tag "edtracker_type", "I want to learn"%>
 
           </div>
           <div class='form-btn-container text-center new-note-btn' style="background-color: red">
@@ -59,7 +59,7 @@
             <%= f.input :link, label: false %>
             <%= f.label :tag_list, 'Hashtags (Required)' %>
             <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
-            <%= hidden_field_tag "edtracker_type", 'Currently Learning' %>
+            <%= hidden_field_tag "edtracker_type", "I'm currently learning" %>
           </div>
           <div class='form-btn-container text-center new-note-btn' style="background-color: chocolate">
             <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>
@@ -94,7 +94,7 @@
             <%= f.input :link, label: false %>
             <%= f.label :tag_list, 'Hashtags (Required)' %>
             <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
-            <%= hidden_field_tag "edtracker_type", 'Learned' %>
+            <%= hidden_field_tag "edtracker_type", "I learned" %>
           </div>
           <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
             <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>

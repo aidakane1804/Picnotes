@@ -21,7 +21,7 @@
             <%= f.input :link, label: false %>
             <%= f.label :tag_list, 'Hashtags (Required)' %>
             <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
-            <%= hidden_field_tag "edtracker_type", 'Learned' %>
+            <%= hidden_field_tag "edtracker_type", 'I learned' %>
           </div>
           <%if card.user == current_user %>
           <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
