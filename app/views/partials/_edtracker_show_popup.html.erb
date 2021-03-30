@@ -13,19 +13,21 @@
           <div class='modal-body'>
             <%= f.label :topic, 'Topic (Required)' %>
             <%= f.input :topic, label: false %>
-            <%= f.label :notes, 'Notes (Required)' %>
+            <%= f.label :notes, 'Notes ' %>
             <%= f.input :notes, label: false %>
             <%#= f.label :resources, 'Resources (Required)' %>
             <%#= f.input :resources, label: false %>
-            <%= f.label :link, 'Link (Required)' %>
+            <%= f.label :link, 'Link ' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
             <%= hidden_field_tag "edtracker_type", 'Learned' %>
           </div>
+          <%if card.user == current_user %>
           <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
             <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>
           </div>
+            <%end %>
           </div>
           </div>
           </div>

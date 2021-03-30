@@ -2,7 +2,7 @@
   <div class="modal-dialog custom-mod modal-size" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button"  onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -26,154 +26,169 @@
 
           </div>
           <div class="count-link-commment text-left d-flex mt-3">
-            <div class="like"><p  id="likes-m-0" class="likes m-0" style="font-family: 'Philosopher', sans-serif;"><%= likes %> Likes</p>
+            <div class="like">
+              <p id="likes-m-0" class="likes m-0" style="font-family: 'Philosopher', sans-serif;"><%= likes %> Likes</p>
             </div>
             <div class="Comment ml-3">
-              <p  class=" edtool-comments-m-0<%card.id %> comments m-0" style="font-family: 'Philosopher', sans-serif;"><%= comments %> Comments</p></div>
+              <p class=" edtool-comments-m-0
+                <% card.id %> comments m-0" style="font-family: 'Philosopher', sans-serif;"><%= comments %> Comments</p>
+            </div>
           </div>
           <div class="row">
             <div class="col-lg-9 mt-2">
               <div class="row">
                 <div class="col-lg-12">
 
-                  <form action="/create_ed_tool_comment?id=<%=card.id%>" method="post" accept-charset="UTF-8" data-remote="true">
+                  <form action="/create_ed_tool_comment?id=<%= card.id %>" method="post" accept-charset="UTF-8" data-remote="true">
                     <div class="form-group mt-3 d-flex" style="margin-bottom: 1rem;">
                       <a class="text-decoration-none" href="#">
+                        <%if current_user %>
                         <% if current_user.avatar? %>
                           <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
                         <% else %>
                           <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
                         <% end %>
+                        <% else %>
+                          <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                        <%end %>
                       </a>
 
-                      <input type="text" class="form-control col-form-control comments" name="card_comment" placeholder="Type Comments">
-                      <button type="submit" class="btn btn-modal-submit send"><i class="fa fa-paper-plane" style="color: white !important;"></i></button>
+                          <input type="text" class="form-control col-form-control comments" name="card_comment" placeholder="Type Comments">
+                      <button type="submit" class="btn btn-modal-submit send">
+                        <i class="fa fa-paper-plane" style="color: white !important;"></i></button>
                     </div>
                   </form>
                 </div>
               </div>
               <% if card.card_comment_likes.any? %>
-              <section class="card pb-2 custom">
-                <div class="border comment-card p-2">
-                  <!-- post header -->
-                  <div class="row m-0">
-                    <div class="">
-                      <a class="text-decoration-none ed_tool_msg_img<%=card.id %>" href="#">
-                        <% if card.card_comment_likes.any? %>
-                          <% if card.card_comment_likes.last.user.avatar? %>
-                            <%= image_tag card.card_comment_likes.last.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                <%card.card_comment_likes.each do|comment| %>
+                <section class="card pb-2 custom">
+                  <div class="border comment-card p-2">
+                    <!-- post header -->
+                    <div class="row m-0">
+                      <div class="">
+                        <a class="text-decoration-none ed_tool_msg_img<%= comment.id %>" href="#">
+                          <% if comment %>
+                            <% if comment.user.avatar? %>
+                              <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                            <% else %>
+                              <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                            <% end %>
                           <% else %>
-                            <%= image_tag card.card_comment_likes.last.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                            <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
                           <% end %>
-                        <% else %>
-                          <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
-                        <% end %>
-                      </a>
-                    </div>
-                    <div class="flex-grow-1 pl-2">
-                      <a class="text-decoration-none" href="#">
-                        <h2 class="text-capitalize h5 mb-0" style="font-family: 'Philosopher', sans-serif;"><%= card.card_comment_likes.last.user.username rescue "" %></h2>
-                      </a>
-                      <p class="small text-secondary m-0 mt-1" style="font-family: 'Philosopher', sans-serif;"><%= time_ago_in_words card.card_comment_likes.last.created_at rescue "" %></p>
-                    </div>
+                        </a>
+                      </div>
+                      <div class="flex-grow-1 pl-2">
+                        <a class="text-decoration-none" href="#">
+                          <h2 class="text-capitalize h5 mb-0" style="font-family: 'Philosopher', sans-serif;"><%= comment.user.username rescue "" %></h2>
+                        </a>
+                        <p class="small text-secondary m-0 mt-1" style="font-family: 'Philosopher', sans-serif;"><%= time_ago_in_words comment.created_at rescue "" %></p>
+                      </div>
 
-                    <div class="dropdown">
-                      <a class="" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-chevron-down"></i>
-                      </a>
-
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 22px, 0px);">
-                        <a class="dropdown-item text-primary" href="#">Edit</a>
-                        <a class="dropdown-item text-primary" href="#">Delete</a>
+                      <div class="dropdown">
+                        <a class="" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <%if card.user == current_user %>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 22px, 0px);">
+                              <%= link_to 'Delete' ,comment_delete_edtools_path(id: comment.id ,card_id: card.id) , remote: true,method: :post ,style: 'color:#007bff; text_align:center' %>
+                        </div>
+                        <%end %>
                       </div>
                     </div>
-                  </div>
-                  <!-- post body -->
-                  <div class="">
-                    <p class="my-2 ed_tool_display_comment<%=card.id%>">
-                      <%= card.card_comment_likes.last.body  rescue""  %>
-                      <!--                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis sem, dictum id bibendum eget, malesuada ut massa.-->
-                    </p>
-                  </div>
-                  <hr class="my-1">
-                  <!-- post footer begins -->
-                  <footer class="">
-                    <!-- post actions -->
+                    <!-- post body -->
                     <div class="">
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
-                          <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff ;"><i class="fa fa-heart"></i>
-                          <%#= card.card_likes.count %>  like(s)</a>
-                        </li>
-                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
-                          <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff">
-                            <i class="fa fa-comment"></i> <%#= card.card_comment_likes.count %> Comment(s) </a>
-                        </li>
-                      </ul>
+                      <p class="my-2 ed_tool_display_comment<%= card.id %>">
+                        <%= comment.body rescue "" %>
+                        <!--                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis sem, dictum id bibendum eget, malesuada ut massa.-->
+                      </p>
                     </div>
+                    <hr class="my-1">
+                    <!-- post footer begins -->
+                    <footer class="">
+                      <!-- post actions -->
 
-                    <!-- collapsed comments begins -->
-                    <div class="collapse" id="collapseExample">
-                      <div class="card border border-right-0 border-left-0 border-bottom-0 mt-1">
-                        <!-- new comment form -->
-                        <section class="mt-3">
-                          <form action="">
-                            <div class="input-group input-group">
-                              <input type="text" class="form-control" placeholder="Write Comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                              <div class="input-group-append">
-                                <a class="text-decoration-none text-white btn btn-primary" href="#" role="button">Comment</a>
+
+                      <!-- collapsed comments begins -->
+                      <div class="collapse" id="collapseExample">
+                        <div class="card border border-right-0 border-left-0 border-bottom-0 mt-1">
+                          <!-- new comment form -->
+                          <section class="mt-3">
+                            <form action="">
+                              <div class="input-group input-group">
+                                <input type="text" class="form-control" placeholder="Write Comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                  <a class="text-decoration-none text-white btn btn-primary" href="#" role="button">Comment</a>
+                                </div>
                               </div>
-                            </div>
-                          </form>
-                        </section>
-                        <section>
-                          <div class="card p-2 mt-3">
-                            <!-- comment header -->
-                            <div class="d-flex">
-                              <div class="">
-                                <a class="text-decoration-none" href="#">
-                                  <img class="profile-pic" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" width="40" height="40" alt="...">
-                                </a>
-                              </div>
-                              <div class="flex-grow-1 pl-2">
-                                <a class="text-decoration-none text-capitalize h6 m-0" href="#">Tarzan</a>
-                                <p class="small m-0 text-muted">27 mins ago</p>
-                              </div>
-                              <div>
-                                <div class="dropdown">
-                                  <a class="" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-chevron-down"></i>
+                            </form>
+                          </section>
+                          <section>
+                            <div class="card p-2 mt-3">
+                              <!-- comment header -->
+                              <div class="d-flex">
+                                <div class="">
+                                  <a class="text-decoration-none" href="#">
+                                    <img class="profile-pic" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png" width="40" height="40" alt="...">
                                   </a>
+                                </div>
+                                <div class="flex-grow-1 pl-2">
+                                  <a class="text-decoration-none text-capitalize h6 m-0" href="#">Tarzan</a>
+                                  <p class="small m-0 text-muted">27 mins ago</p>
+                                </div>
+                                <div>
+                                  <div class="dropdown">
+                                    <a class="" href="#" role="button" id="dropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fas fa-chevron-down"></i>
+                                    </a>
 
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
-                                    <a class="dropdown-item text-primary" href="#">Edit</a>
-                                    <a class="dropdown-item text-primary" href="#">Delete</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink3">
+                                      <a class="dropdown-item text-primary" href="#">Edit</a>
+                                      <a class="dropdown-item text-primary" href="#">Delete</a>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
+                              <!-- comment header -->
+                              <!-- comment body -->
+                              <div class="card-body p-0">
+                                <p class="card-text h7 mb-1">Some quick example text to build on the card title and make
+                                  up the bulk of the card's content.</p>
+                                <a class="card-link small" href="#"> <i class="far fa-thumbs-up"></i> 20 Like </a>
+                              </div>
                             </div>
-                            <!-- comment header -->
-                            <!-- comment body -->
-                            <div class="card-body p-0">
-                              <p class="card-text h7 mb-1">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
-                              <a class="card-link small" href="#"> <i class="far fa-thumbs-up"></i> 20 Like </a>
-                            </div>
-                          </div>
-                        </section>
+                          </section>
+                        </div>
                       </div>
-                    </div>
-                  </footer>
-                  <!-- post footer ends -->
-                </div>
-              </section>
-              <%end%>
+                    </footer>
+                    <!-- post footer ends -->
+                  </div>
+                </section>
+                  <%end %>
+              <% end %>
+              <div class="">
+                <ul class="list-group list-group-horizontal">
+                  <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
+                    <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff ;"><i class="fa fa-heart"></i>
+                      <%#= card.card_likes.count %>  like(s)</a>
+                  </li>
+                  <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
+                    <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff">
+                      <i class="fa fa-comment"></i> <%#= card.card_comment_likes.count %> Comment(s) </a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="col-lg-3">
               <div class="tag-section text-left">
                 <p style="color:black"><b>Tags</b></p><br>
-                <a href="#" style="color: #007bff ;text-decoration: none;
-                  background-color: transparent !important;font-family: 'Philosopher', sans-serif;"><%= card.hashtag %></a><br>
+                <% card.tag_list.each do |tag_name| %>
+                  <% tag_info = get_tag_info(tag_name) %>
+                  <%= link_to tag_name, tag_path(id: tag_info.id), style: "color: #007bff ;text-decoration: none;
+                  background-color: transparent !important;font-family: 'Philosopher', sans-serif;" %>
+                <% end %>
+                <br>
               </div>
             </div>
           </div>
@@ -273,3 +288,11 @@
         font-size: 18px !important;
     }
 </style>
+
+<script>
+  function  kill_model(){
+      $(".modal-backdrop.fade.show").remove();
+      $("#comment-modal<%=card.id%>").remove();
+  }
+
+</script>

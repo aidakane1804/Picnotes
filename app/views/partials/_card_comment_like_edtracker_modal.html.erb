@@ -2,7 +2,7 @@
   <div class="modal-dialog custom-mod modal-size" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
@@ -43,11 +43,15 @@
                   <form action="/create_comment?id=<%= card.id%>" method="post" accept-charset="UTF-8" data-remote="true">
                     <div class="form-group mt-3 d-flex" style="margin-bottom: 1rem;">
                       <a class="text-decoration-none" href="#">
-                        <% if current_user.avatar? %>
-                          <%= image_tag card.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                        <%if current_user %>
+                          <% if current_user.avatar? %>
+                            <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                          <% else %>
+                            <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                          <% end %>
                         <% else %>
-                          <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;"  %>
-                        <% end %>
+                          <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                        <%end %>
                       </a>
 
                       <input type="text" class="form-control col-form-control comments" name="card_comment" placeholder="Type Comments">
@@ -57,17 +61,18 @@
                 </div>
               </div>
               <% if card.card_comment_likes.any? %>
+                <%card.card_comment_likes.each do|comment| %>
               <section class="card pb-2 custom">
                 <div class="border comment-card p-2">
                   <!-- post header -->
                   <div class="row m-0">
                     <div class="">
-                      <a class="text-decoration-none ed_tracker_msg_img<%=card.id %>" href="#">
-                        <% if card.card_comment_likes.any? %>
-                          <% if card.card_comment_likes.last.user.avatar? %>
-                            <%= image_tag card.card_comment_likes.last.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                      <a class="text-decoration-none ed_tracker_msg_img<%=comment.id %>" href="#">
+                        <% if comment %>
+                          <% if comment.user.avatar? %>
+                            <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
                           <% else %>
-                            <%= image_tag card.card_comment_likes.last.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                            <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
                           <% end %>
                           <%else%>
                           <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
@@ -76,26 +81,26 @@
                     </div>
                     <div class="flex-grow-1 pl-2">
                       <a class="text-decoration-none" href="#">
-                        <h2 class="text-capitalize h5 mb-0" style="font-family: 'Philosopher', sans-serif;"><%= card.card_comment_likes.last.user.username rescue "" %></h2>
+                        <h2 class="text-capitalize h5 mb-0" style="font-family: 'Philosopher', sans-serif;"><%= comment.user.username rescue "" %></h2>
                       </a>
-                      <p class="small text-secondary m-0 mt-1" style="font-family: 'Philosopher', sans-serif;"><%= time_ago_in_words card.card_comment_likes.last.created_at rescue "" %></p>
+                      <p class="small text-secondary m-0 mt-1" style="font-family: 'Philosopher', sans-serif;"><%= time_ago_in_words comment.created_at rescue "" %></p>
                     </div>
 
                     <div class="dropdown">
                       <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-chevron-down"></i>
                       </a>
-
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 22px, 0px);">
-                        <a class="dropdown-item text-primary" href="#">Edit</a>
-                        <a class="dropdown-item text-primary" href="#">Delete</a>
-                      </div>
+                      <%if card.user == current_user %>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 22px, 0px);">
+                          <%= link_to 'Delete' ,comment_delete_edtracker_path(id: comment.id ,card_id: card.id) , remote: true,method: :post ,style: 'color:#007bff;text_align:center' %>
+                        </div>
+                      <%end %>
                     </div>
                   </div>
                   <!-- post body -->
                   <div class="">
                     <p class="edtracker_display_comment<%=card.id%> my-2">
-                      <%= card.card_comment_likes.last.body   rescue "" %>
+                      <%= comment.body   rescue "" %>
                       <!--                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras turpis sem, dictum id bibendum eget, malesuada ut massa.-->
                     </p>
                   </div>
@@ -103,18 +108,6 @@
                   <!-- post footer begins -->
                   <footer class="">
                     <!-- post actions -->
-                    <div class="">
-                      <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
-                          <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff ;"><i class="fa fa-heart"></i>
-                            likes</a>
-                        </li>
-                        <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
-                          <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff">
-                            <i class="fa fa-comment"></i>  Comment(s) </a>
-                        </li>
-                      </ul>
-                    </div>
 
                     <!-- collapsed comments begins -->
                     <div class="collapse" id="collapseExample">
@@ -172,13 +165,28 @@
                 </div>
               </section>
                 <%end %>
-
+                <%end %>
+              <div class="">
+                <ul class="list-group list-group-horizontal">
+                  <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-0">
+                    <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff ;"><i class="fa fa-heart"></i>
+                      likes</a>
+                  </li>
+                  <li class="list-group-item flex-fill text-center p-0 px-lg-2 border border-right-0 border-top-0 border-bottom-0">
+                    <a class="small text-decoration-none" href="#" style="font-family: 'Philosopher', sans-serif;font-size: 102%; color: #007bff">
+                      <i class="fa fa-comment"></i>  Comment(s) </a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="col-lg-3">
               <div class="tag-section text-left">
                 <p style="color:black"><b>Tags</b></p><br>
-                <a href="#" style="color: #007bff ;text-decoration: none;
-                  background-color: transparent !important;font-family: 'Philosopher', sans-serif;"><%= card.hashtag %></a><br>
+                <%card.tag_list.each do |tag_name|%>
+                    <% tag_info = get_tag_info(tag_name) %>
+                    <%= link_to tag_name, tag_path(id: tag_info.id), style:"color: #007bff ;text-decoration: none;
+                  background-color: transparent !important;font-family: 'Philosopher', sans-serif;" %>
+                  <%end%><br>
               </div>
             </div>
           </div>
@@ -278,3 +286,11 @@
         font-size: 18px !important;
     }
 </style>
+
+    <script>
+        function  kill_model(){
+        $(".modal-backdrop.fade.show").remove();
+        $("#comment-modal<%=card.id%>").remove();
+    }
+
+</script>

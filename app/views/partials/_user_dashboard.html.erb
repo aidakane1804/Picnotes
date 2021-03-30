@@ -123,7 +123,7 @@
           <span class='note-count'> <%= @user.folders.count %> </span></p>
         <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %>
           <span class='note-count'> <%= @user.favorited_notes.where(archived:false).count %> </span></p>
-        <p> <%= link_to 'EdTrackers',new_edtracker_path(id: current_user), class: "#{cp(new_edtracker_path)} profile-links"  %>
+        <p> <%= link_to 'EdTracker',new_edtracker_path(id: current_user), class: "#{cp(new_edtracker_path)} profile-links"  %>
 <!--          <span class='note-count'> <%#= @user.favorited_notes.where(archived:false).count %> </span></p>-->
         <p> <%= link_to 'EdTools',new_myedtool_path(id: current_user), class: "#{cp(new_myedtool_path)} profile-links"  %>
 

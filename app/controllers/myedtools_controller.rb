@@ -79,7 +79,7 @@ class MyedtoolsController < ApplicationController
 
   def fetch_model_form1
     @card = Myedtool.find_by_id(params[:id])
-    respond_to do |format|current_user.id
+    respond_to do |format|
       format.js
     end
   end
@@ -106,10 +106,19 @@ class MyedtoolsController < ApplicationController
     end
   end
 
+  def comment_delete_edtools
+    @card = Myedtool.find(params[:card_id])
+    card_comment  = CardCommentLike.find(params[:id])
+    card_comment.destroy
+    @likes = @card.card_likes.count
+    @comments = @card.card_comment_likes.count
+
+  end
+
   private
 
     def myedtool_params
-      params.require(:myedtool).permit(:myedtool_type,:addtitle, :chooseacategory, :notes, :link ,:hashtag)
+      params.require(:myedtool).permit(:myedtool_type,:addtitle, :chooseacategory, :tag_list,:notes, :link ,:hashtag)
     end
 
 end

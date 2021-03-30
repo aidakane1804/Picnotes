@@ -1,9 +1,8 @@
-
 <div class="modal fade" id='card_modal<%= card.id %>' tabindex='-1' role='dialog' aria-labelledby='NoteModalLabel' aria-hidden='true'>
   <div class='modal-dialog' role='document'>
     <div class='modal-content'>
       <div class='modal-header new-modal-header' style="background-color: forestgreen">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'><%= card.myedtool_type%></h3>
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'><%= card.myedtool_type %></h3>
         <button type='button' class='close' data-dismiss='modal' style='color: white' aria-label='Close'>
           <span aria-hidden='true'> &times; </span>
         </button>
@@ -15,17 +14,19 @@
             <%= f.input :addtitle, label: false %>
             <%#= f.label :chooseacategory, 'Choose A Category (Required)' %>
             <%#= f.input :chooseacategory, label: false %>
-            <%= f.label :notes , 'Notes (Required)' %>
-            <%= f.input :notes , label: false %>
+            <%= f.label :notes, 'Notes (Required)' %>
+            <%= f.input :notes, label: false %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
 
           </div>
-          <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
-            <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>
-          </div>
+          <% if card.user == current_user %>
+            <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
+              <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>
+            </div>
+          <% end %>
           </div>
           </div>
           </div>

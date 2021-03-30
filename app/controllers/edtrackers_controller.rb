@@ -121,10 +121,18 @@ class EdtrackersController < ApplicationController
       format.js
     end
   end
+  def comment_delete_edtracker
+    @card = Edtracker.find(params[:card_id])
+    card_comment  = CardCommentLike.find(params[:id])
+    card_comment.destroy
+    @likes = @card.card_likes.count
+    @comments = @card.card_comment_likes.count
+
+  end
 
   private
 
   def edtracker_params
-    params.require(:edtracker).permit(:edtracker_type, :topic, :category, :card_like, :hashtag, :notes, :link)
+    params.require(:edtracker).permit(:edtracker_type, :topic, :category, :card_like, :tag_list, :hashtag, :notes, :link)
   end
 end

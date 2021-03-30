@@ -4,7 +4,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Book</h3>
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a book</h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
@@ -21,8 +21,8 @@
             <%= f.input :notes , label: false,:required =>true %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false ,:required =>true%>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false ,:required =>'required'%>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false ,:required =>'required'%>
             <%= hidden_field_tag "myedtool_type", 'book' %>
 
           </div>
@@ -40,7 +40,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Article</h3>
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add an article</h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
@@ -57,8 +57,8 @@
             <%= f.input :notes , label: false,required:true %>
             <%= f.label :link , 'Link (Required)' %>
             <%= f.input :link, label: false, required:true %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false,required:true %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false,required:true %>
             <%= hidden_field_tag "myedtool_type", 'article' %>
 
           </div>
@@ -76,7 +76,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Blog</h3>
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a blog</h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
         </button>
@@ -93,8 +93,8 @@
             <%= f.input :notes , label: false %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
             <%= hidden_field_tag "myedtool_type", 'blog' %>
 
           </div>
@@ -112,7 +112,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Podcast
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a podcast
         </h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
@@ -130,8 +130,8 @@
             <%= f.input :notes , label: false %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
             <%= hidden_field_tag "myedtool_type", 'podcast' %>
 
           </div>
@@ -148,7 +148,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Online course
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add an online course
         </h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
@@ -166,8 +166,8 @@
             <%= f.input :notes , label: false %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
             <%= hidden_field_tag "myedtool_type", 'online_course' %>
 
           </div>
@@ -184,7 +184,7 @@
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
       <div class = 'modal-header new-modal-header' style="background-color: red">
-        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Documentary
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'>Add a documentary
         </h3>
         <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
           <span aria-hidden = 'true'> &times; </span>
@@ -202,8 +202,8 @@
             <%= f.input :notes , label: false %>
             <%= f.label :link, 'Link (Required)' %>
             <%= f.input :link, label: false %>
-            <%= f.label :hashtag, 'Hashtags (Required)' %>
-            <%= f.input :hashtag, value: f.object.hashtag.to_s, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
             <%= hidden_field_tag "myedtool_type", 'documentary' %>
 
           </div>

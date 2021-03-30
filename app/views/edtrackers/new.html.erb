@@ -19,14 +19,17 @@
           <div class="status-box border-bottom-red">
             <div class="row" style="min-height: 135px">
               <div class="col-12">
-                <div class="dropdown text-right">
+              <div class="dropdown text-right" >
                   <div class="btn btn-status dropdown-toggle">
-                    <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: red">
+                    <%if card.user == current_user%>
+                  <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: red">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
                       <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
                       <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
                       <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
                     </select>
+                    <%end%>
+
                   </div>
                 </div>
                 <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
@@ -61,12 +64,14 @@
               <div class="col-12">
                 <div class="dropdown text-right">
                   <div class="btn btn-status dropdown-toggle">
-                    <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" style="border-block-color: orange">
+                    <%if card.user == current_user %>
+                  <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" style="border-block-color: orange">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
                       <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
                       <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
                       <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
                     </select>
+                    <%end %>
                   </div>
                 </div>
                 <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
@@ -101,14 +106,16 @@
           <div class="status-box border-bottom-green">
             <div class="row" style="min-height: 135px">
               <div class="col-12">
-                <div class="dropdown text-right">
+              <div class="dropdown text-right">
                   <div class="btn btn-status dropdown-toggle">
-                    <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: #4CAF50">
+                    <%if card.user == current_user  %>
+                  <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: #4CAF50">
 <!--                      <option value="Choose to Option" >Choose A Status</option>-->
                       <option value="Want To Learn" <%= "selected" if card.edtracker_type == "Want To Learn" %>>Want To Learn</option>
                       <option value="Currently Learning" <%= "selected" if card.edtracker_type == "Currently Learning" %>>Currently Learning</option>
                       <option value="Learned" <%= "selected" if card.edtracker_type == "Learned" %>> Learned</option>
                     </select>
+                    <%end %>
                   </div>
                 </div>
                 <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
