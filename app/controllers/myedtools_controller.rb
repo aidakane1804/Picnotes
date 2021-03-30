@@ -112,7 +112,9 @@ class MyedtoolsController < ApplicationController
     card_comment.destroy
     @likes = @card.card_likes.count
     @comments = @card.card_comment_likes.count
-
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

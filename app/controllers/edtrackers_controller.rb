@@ -122,12 +122,14 @@ class EdtrackersController < ApplicationController
     end
   end
   def comment_delete_edtracker
-    @card = Edtracker.find(params[:card_id])
-    card_comment  = CardCommentLike.find(params[:id])
+    @card = Edtracker.find(params['card_id'])
+    card_comment  = CardCommentLike.find(params['id'])
     card_comment.destroy
     @likes = @card.card_likes.count
     @comments = @card.card_comment_likes.count
-
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
