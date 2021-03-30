@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'fetch_model_form1', to:'myedtools#fetch_model_form1'
   get 'comment_section', to:'myedtools#comment_section'
   post 'create_ed_tool_comment', to:'myedtools#create_ed_tool_comment'
+  post 'comment_delete_edtools', to:'myedtools#comment_delete_edtools'
 
 
   post 'card_liked' , to:'edtrackers#card_liked'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   post 'card_comment_likes' , to:'edtrackers#card_comment_likes'
   get 'comment_section_edtracker', to:'edtrackers#comment_section_edtracker'
   post 'create_comment', to:'edtrackers#create_comment'
+  post 'comment_delete_edtracker', to:'edtrackers#comment_delete_edtracker'
+
 
 
 
