@@ -121,7 +121,7 @@ class EdtrackersController < ApplicationController
       format.js
     end
   end
-  def comment_delete_edtracker
+  def comment_delete
     @card = Edtracker.find(params['card_id'])
     card_comment  = CardCommentLike.find(params['id'])
     card_comment.destroy
