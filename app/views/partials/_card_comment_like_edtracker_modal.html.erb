@@ -9,11 +9,11 @@
       <div class="modal-body">
         <div class="col-12">
           <div class="img-modal" style="text-align: center">
-            <%if card.edtracker_type == "Learned" %>
+            <%if card.edtracker_type == "I learned" %>
               <h3 style="color: #6fb145"> <%= card.edtracker_type  %></h3>
-            <%elsif card.edtracker_type == "Currently Learning" %>
+            <%elsif card.edtracker_type == "I'm currently learning" %>
               <h3 style="color: #f1874b;"> <%= card.edtracker_type  %></h3>
-          <%elsif card.edtracker_type == "Want To Learn" %>
+          <%elsif card.edtracker_type == "I want to learn" %>
               <h3 style="color: red"> <%= card.edtracker_type  %></h3>
           <%end%>
           </div>
@@ -220,20 +220,9 @@
     }
 
     .col-form-control {
-        border: 1px solid grey;
-        border-radius: 6px;
-        padding: 10px;
-    }
-
-    img.user-img {
-        border-radius: 50px;
-        margin: 7px 10px 0 0px;
-    }
-
-    .col-form-control {
-        border: 1px solid grey;
-        border-radius: 6px;
-        padding: 10px;
+        border: 1px solid grey !important;
+        border-radius: 6px !important;
+        padding: 10px !important;
     }
 
     button.btn.btn-modal-submit.send {
@@ -270,14 +259,13 @@
         border-radius: 50px;
         margin: 7px 10px 0 0px;
     }
-
     .modal-header .close {
         color: #fff;
         padding: 0 !important;
-        margin: 0rem 0rem -1rem auto !important;
+        margin: 0rem 0rem 0rem auto !important;
         background: #000;
         border-radius: 100%;
-        width: 26px;
+        width: 24px;
     }
 
     .btn-modal-submit {
