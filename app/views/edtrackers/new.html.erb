@@ -24,9 +24,9 @@
                     <%if card.user == current_user%>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: red">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
+                      <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="I'm currently learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="I learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end%>
 
@@ -67,9 +67,9 @@
                     <%if card.user == current_user %>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" style="border-block-color: orange">
 <!--                      <option value="Choose to Option">Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
+                      <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="I'm currently learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="I learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end %>
                   </div>
@@ -111,9 +111,9 @@
                     <%if card.user == current_user  %>
                   <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: #4CAF50">
 <!--                      <option value="Choose to Option" >Choose A Status</option>-->
-                      <option value="Want To Learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
-                      <option value="Currently Learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
-                      <option value="Learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
+                      <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I want to learn</option>
+                      <option value="I'm currently learning" <%= "selected" if card.edtracker_type == "I'm currently learning" %>>I'm currently learning</option>
+                      <option value="I learned" <%= "selected" if card.edtracker_type == "I learned" %>>I learned</option>
                     </select>
                     <%end %>
                   </div>

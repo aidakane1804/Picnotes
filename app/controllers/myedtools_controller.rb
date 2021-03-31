@@ -22,7 +22,7 @@ class MyedtoolsController < ApplicationController
     @articles = Myedtool.where(myedtool_type: "article" , user_id: user_id).order('created_at DESC')
     @blogs = Myedtool.where(myedtool_type: "blog", user_id: user_id).order('created_at DESC')
     @podcasts = Myedtool.where(myedtool_type: "podcast", user_id: user_id).order('created_at DESC')
-    @courses = Myedtool.where(myedtool_type: "online_course", user_id: user_id).order('created_at DESC')
+    @courses = Myedtool.where(myedtool_type: "online course", user_id: user_id).order('created_at DESC')
     @documentaries = Myedtool.where(myedtool_type: "documentary", user_id: user_id).order('created_at DESC')
   end
 
