@@ -1,7 +1,7 @@
 <div class="modal fade" id='card_modal<%= card.id %>' tabindex='-1' role='dialog' aria-labelledby='NoteModalLabel' aria-hidden='true'>
   <div class='modal-dialog' role='document'>
     <div class='modal-content'>
-      <div class='modal-header new-modal-header' style="background-color: forestgreen">
+      <div class='modal-header new-modal-header' style="background-color: red">
         <h3 class='modal-title' id='NoteModalLabel' style='color: white;'><%= card.myedtool_type %></h3>
         <button type='button' class='close' data-dismiss='modal' style='color: white' aria-label='Close'>
           <span aria-hidden='true'> &times; </span>
@@ -23,7 +23,7 @@
 
           </div>
           <% if card.user == current_user %>
-            <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
+            <div class='form-btn-container text-center new-note-btn' style="background-color: red">
               <%= f.button :submit, 'Submit', :class => 'white-btn btn-width' %>
             </div>
           <% end %>
