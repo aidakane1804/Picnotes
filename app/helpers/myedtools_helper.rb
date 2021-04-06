@@ -1,0 +1,2 @@
+module MyedtoolsHelper
+end

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Edtracker type:</strong>
+  <%= @edtracker.edtracker_type %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @edtracker.topic %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @edtracker.category %>
+</p>
+
+<p>
+  <strong>Resources:</strong>
+  <%= @edtracker.resources %>
+</p>
+
+<p>
+  <strong>Hashtag:</strong>
+  <%= @edtracker.hashtag %>
+</p>
+
+<%= link_to 'Edit', edit_edtracker_path(@edtracker) %> |
+<%= link_to 'Back', edtrackers_path %>

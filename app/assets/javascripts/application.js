@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery3
-//= require chosen-jquery
+// = require chosen-jquery
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
@@ -26,10 +26,16 @@ $(document).on('turbolinks:load', function () {
         $('.dropdown a:first').text(searchTest);
         if(searchTest === 'Tags'){
             $('#searchtest').val(1);
+            $('#searchtest1').val(1);
+            $('#dropdownMenuLink1').html("Tags");
         }else if(searchTest === 'Person'){
             $('#searchtest').val(2);
+            $('#searchtest1').val(2);
+            $('#dropdownMenuLink1').html("Person");
         }else{
             $('#searchtest').val(3);
+            $('#searchtest1').val(3);
+            $('#dropdownMenuLink1').html("Picnotes");
         }
     });
 });
@@ -110,6 +116,28 @@ function changeMetaContent(title, metaName, newMetaContent) {
     $("meta").each(function() {
         if($(this).attr("name") === metaName) {
             $(this).attr("content" , newMetaContent);
+        }
+    });
+}
+
+function ed_tracker_dropdown(Object, id, current_user_id) {
+    var value = Object.value;
+    var id = id;
+    $.ajax({
+        url: "/update_status",
+        type: "POST",
+        dataType: "json",
+        crossDomain: true,
+        data: {
+            status: value,
+            edtracker_id: id,
+            current_user_id: current_user_id
+        },
+        success: function (request) {
+            location.reload();
+        },
+        error: function (xhr) {
+            alert("Please login first!");
         }
     });
 }

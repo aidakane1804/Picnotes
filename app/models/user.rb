@@ -30,7 +30,10 @@ class User < ApplicationRecord
   has_many :messages
   has_many :subscriptions
   has_many :chats, through: :subscriptions
-
+  has_many :card_likes
+  has_many :card_comment_likes
+  has_many :edtrackers
+  has_many :myedtools
   def existing_chats_users
     existing_chat_users = []
     self.chats.each do |chat|

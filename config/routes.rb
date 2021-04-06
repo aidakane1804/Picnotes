@@ -1,6 +1,32 @@
 Rails.application.routes.draw do
+  resources :card_likes
+  resources :myedtools
+  resources :edtrackers
   get 'password_resets/new'
   get 'password_resets/edit'
+  post 'update_status', to: 'edtrackers#update_status'
+  get 'fetch_model_form', to:'edtrackers#fetch_model_form'
+  get 'fetch_model_form1', to:'myedtools#fetch_model_form1'
+  get 'comment_section', to:'myedtools#comment_section'
+  post 'create_ed_tool_comment', to:'myedtools#create_ed_tool_comment'
+  post 'comment_delete_edtools', to:'myedtools#comment_delete_edtools'
+
+
+  post 'card_liked' , to:'edtrackers#card_liked'
+  delete 'card_liked_destroy' , to:'edtrackers#card_liked_destroy'
+  post 'card_comment_likes' , to:'edtrackers#card_comment_likes'
+  get 'comment_section_edtracker', to:'edtrackers#comment_section_edtracker'
+  post 'create_comment', to:'edtrackers#create_comment'
+  post 'comment_delete', to:'edtrackers#comment_delete'
+
+
+
+
+  post 'card_likes_ed' , to:'myedtools#card_likes_ed'
+  delete 'card_likes_destroy_ed' , to:'myedtools#card_likes_destroy_ed'
+  post 'card_comment_likes_ed' , to:'myedtools#card_comment_likes_ed'
+
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -30,6 +56,7 @@ Rails.application.routes.draw do
       get 'communication_and_interaction', to: 'notes#communication_and_interaction'
       get 'contact_us_form', to: 'notes#contact_us_form'
       get 'add_note_to_folder', to: 'notes#add_note_to_folder'
+
 
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]

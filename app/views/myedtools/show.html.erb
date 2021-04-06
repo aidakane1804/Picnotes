@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Addtitle:</strong>
+  <%= @myedtool.addtitle %>
+</p>
+
+<p>
+  <strong>Chooseacategory:</strong>
+  <%= @myedtool.chooseacategory %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @myedtool.notes %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @myedtool.link %>
+</p>
+
+<%= link_to 'Edit', edit_myedtool_path(@myedtool) %> |
+<%= link_to 'Back', myedtools_path %>

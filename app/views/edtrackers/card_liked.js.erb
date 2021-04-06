@@ -1,0 +1,5 @@
+
+$('.btn-rating<%=@selected_ed_tracker%>').html('<%= link_to fa_icon('heart'), card_liked_destroy_path(edtracker_id: @edtracker), remote:true, method: :delete %> <%=@edtracker.card_likes.count %>')
+$(".ed_tracker_likes<%=@selected_ed_tracker%>").empty();
+$(".ed_tracker_comments<%=@selected_ed_tracker%>").empty();
+$(".ed_tracker_likes<%=@selected_ed_tracker%>").html(<%= @edtracker.card_likes.count %>);

@@ -101,6 +101,9 @@
       <span class='note-count'> <%= @user.folders.count %> </span></p>
     <p> <%= link_to 'Faves', favorites_path(user_id: @user), class: "#{cp(favorites_path(user_id: @user))} profile-links" %>
       <span class='note-count'> <%= @user.favorited_notes.where(archived:false).count %> </span></p>
+    <p> <%= link_to 'EdTracker',new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links"  %>
+    <p> <%= link_to 'EdTools',new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links"  %>
+
   </div>
 
   <!--  <div class = "profile-menu">-->
