@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   get 'community-guideline', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
   get 'for-schools',to: 'notes#for_schools'
-  get 'ed-fluencers',to: 'ed_fluencers#index'
+  get 'Edfluencers',to: 'ed_fluencers#index'
 
   # get 'terms_and_conditions', to: 'notes#terms_and_conditions', as: 'terms-and-conditions'
   resources :messages, only:[:create]
