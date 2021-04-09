@@ -62,10 +62,10 @@ Rails.application.routes.draw do
     post '/addfolder', to: 'notes#addfolder'
   end
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
-  get 'community-guideline', to: 'notes#community_guideline'
+  get 'guideline', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
   get 'for-schools',to: 'notes#for_schools'
-  get 'Edfluencers',to: 'ed_fluencers#index'
+  get 'edfluencers',to: 'ed_fluencers#index'
 
   # get 'terms_and_conditions', to: 'notes#terms_and_conditions', as: 'terms-and-conditions'
   resources :messages, only:[:create]
