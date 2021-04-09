@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     post '/addfolder', to: 'notes#addfolder'
   end
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
-  get 'guideline', to: 'notes#community_guideline'
+  get 'guidelines', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
   get 'for-schools',to: 'notes#for_schools'
   get 'edfluencers',to: 'ed_fluencers#index'
