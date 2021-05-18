@@ -2,6 +2,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
     Rails.logger.info "##########--------#{request.env['omniauth.auth'].inspect}--------"
+    provider_data = request.env['omniauth.auth']
+    Rails.logger.info "Email: --------#{provider_data.info.email}--------"
+    name_slices = provider_data.info.name.gsub(/\s+/m, ' ').strip.split(" ")
+    Rails.logger.info "Slices: ----#{name_slices.inspect}-----"
+    Rails.logger.info "Username: ----#{provider_data.info.name}-----"
+    Rails.logger.info "FirsNmae: ----#{name_slices[0]}-----"
+    Rails.logger.info "lastname: ----#{name_slices[1]}-----"
+    Rails.logger.info "avatar: ----#{provider_data.info.image}-----"
+    Rails.logger.info "avatar: ----#{provider_data.info.image}-----"
+    Rails.logger.info "password: ----#{provider_data.info.name}-----"
+    Rails.logger.info "password: ----#{Devise.friendly_token[0, 20]}-----"
+
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
       set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
