@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :card_comment_likes
   has_many :edtrackers
   has_many :myedtools
+  attr_accessor :skip_omni_avatar
   def existing_chats_users
     existing_chat_users = []
     self.chats.each do |chat|
@@ -55,9 +56,7 @@ class User < ApplicationRecord
       presence: {message: 'must exist'},
   })
 
-  validates(:avatar, {
-      presence: {message: 'must exist'},
-  })
+  validates(:avatar, { presence: {message: 'must exist'}}, unless: :skip_omni_avatar)
 
   validates(:last_name, {
       presence: {message: 'must exist'},
@@ -136,6 +135,7 @@ class User < ApplicationRecord
       user.avatar = provider_data.info.image
       user.last_name = name_slices[1]
       user.password = Devise.friendly_token[0, 20]
+      user.skip_omni_avatar =  true
     end
   end
 
