@@ -56,7 +56,7 @@ class User < ApplicationRecord
       presence: {message: 'must exist'},
   })
 
-  validates(:avatar, { presence: {message: 'must exist'}}, unless: :skip_omni_avatar)
+  validates :avatar, :presence => true, :unless => :skip_omni_avatar
 
   validates(:last_name, {
       presence: {message: 'must exist'},
