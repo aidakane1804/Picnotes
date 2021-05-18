@@ -41,11 +41,7 @@ Rails.application.routes.draw do
     collection do
       get 'chat_us', to:'chats#index'
       get 'community_interview', to: 'notes#community_interview'
-      get 'terms_and_conditions', to: 'notes#terms_and_conditions'
-      get 'about_us', to: 'notes#about_us'
-      get 'for_schools',to: 'notes#for_schools'
       get 'contact_us', to: 'notes#contact_us'
-      get 'community_guideline', to: 'notes#community_guideline'
       get 'freelance_research', to: 'notes#freelance_research'
       get 'educational_organizations', to: 'notes#educational_organizations'
       get 'what_is_picnotes', to: 'notes#what_is_picnotes'
@@ -65,11 +61,18 @@ Rails.application.routes.draw do
     resources :dislikes, shallow: true, only: [:create, :destroy]
     post '/addfolder', to: 'notes#addfolder'
   end
+  get 'terms-and-conditions', to: 'notes#terms_and_conditions'
+  get 'guidelines', to: 'notes#community_guideline'
+  get 'about-us', to: 'notes#about_us'
+  get 'for-schools',to: 'notes#for_schools'
+  get 'edfluencers',to: 'ed_fluencers#index'
+
+  # get 'terms_and_conditions', to: 'notes#terms_and_conditions', as: 'terms-and-conditions'
   resources :messages, only:[:create]
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
-  resources :ed_fluencers 
-  
+  resources :ed_fluencers, :except => [:index]
+
   resources :folders
 
   resources :tags, only: [:index, :show]
