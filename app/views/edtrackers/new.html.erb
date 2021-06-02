@@ -11,8 +11,10 @@
     <div class="row">
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning mb-0">WANT TO LEARN</h6>
-        <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png", class: "img-plus" %>
-        </button>
+        <% if @user == current_user %>
+          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png", class: "img-plus" %>
+          </button>
+        <% end %>
         <%if @want_to_learn.any? %>
         <% @want_to_learn.each do |card| %>
         <div class="bg-highlight">
