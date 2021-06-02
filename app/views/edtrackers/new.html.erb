@@ -39,7 +39,8 @@
 
                       </div>
                     </div>
-                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
+<!--                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%#= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>-->
                     <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
@@ -89,7 +90,7 @@
                         <% end %>
                       </div>
                     </div>
-                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
                     <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
@@ -141,7 +142,7 @@
                         <% end %>
                       </div>
                     </div>
-                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
                     <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
