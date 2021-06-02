@@ -17,9 +17,9 @@
         <% end %>
       </div>
       <%# if @user.avatar? %>
-        <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+      <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
       <%# else %>
-        <%#= image_tag 'avatar.png', class: 'avatar-image' %>
+      <%#= image_tag 'avatar.png', class: 'avatar-image' %>
       <%# end %>
     </div>
 
@@ -86,7 +86,7 @@
         <% end %>
       </div>
       <% if @user.avatar? %>
-        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style:"margin-left: 7px;" %>
+        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style: "margin-left: 7px;" %>
       <% else %>
         <%= image_tag 'avatar.png', class: 'avatar-image' %>
       <% end %>
@@ -96,13 +96,21 @@
   <div class="profile-menu">
     <p> <%= link_to 'Feed', feed_index_path(user_id: @user), class: "#{cp(feed_index_path)} profile-links" %> </p>
     <p> <%= link_to 'Picnotes', user_path(id: @user), class: "#{cp(user_path(id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.notes.where(archived:false).count %> </span></p>
+      <span class='note-count'> <%= @user.notes.where(archived: false).count %> </span></p>
     <p> <%= link_to 'Folders', folders_path(user_id: @user), class: "#{cp(folders_path(user_id: @user))} profile-links" %>
       <span class='note-count'> <%= @user.folders.count %> </span></p>
     <p> <%= link_to 'Faves', favorites_path(user_id: @user), class: "#{cp(favorites_path(user_id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.favorited_notes.where(archived:false).count %> </span></p>
-    <p> <%= link_to @user == current_user ? 'My EdTracker' : 'EdTracker',new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links"  %>
-    <p> <%= link_to @user == current_user ? 'My EdTools' : 'EdTools',new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links"  %>
+      <span class='note-count'> <%= @user.favorited_notes.where(archived: false).count %> </span></p>
+    <% if @user == current_user %>
+      <p> <%= link_to 'My EdTracker', new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links" %>
+    <% else %>
+      <p> <%= link_to 'EdTracker', new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links" %>
+    <% end %>
+    <% if @user == current_user %>
+      <p> <%= link_to 'My EdTools', new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links" %>
+    <% else %>
+      <p> <%= link_to 'EdTools', new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links" %>
+    <% end %>
 
   </div>
 
