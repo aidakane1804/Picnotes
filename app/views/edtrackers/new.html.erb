@@ -61,7 +61,7 @@
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning color-orange mb-0">CURRENTLY LEARNING</h6>
-        <% if card.user == current_user %>
+        <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png", class: "img-plus" %>
           </button>
         <% end %>
@@ -112,7 +112,7 @@
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning color-green mb-0">LEARNED</h6>
-        <% if card.user == current_user %>
+        <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal3">
             <%= image_tag "green-plus.png", class: "img-plus" %>
           </button>
