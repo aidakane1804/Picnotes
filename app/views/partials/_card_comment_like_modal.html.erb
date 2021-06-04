@@ -11,7 +11,7 @@
           <%if card.user == current_user %>
             <div style="text-align: right;">
               <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form?id=<%=card.id %>">Edit</a>
-              <%= link_to('Delete', myedtools_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+              <%= link_to('Delete', edit_myedtool_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
             </div>
           <% end %>
           <div class="img-modal" style="text-align: center">
