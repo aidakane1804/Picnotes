@@ -24,7 +24,8 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to current_user_comment_on_card?(book), remote: true, style: "color: black;" %></p>
+<!--                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%#= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>-->
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= book.id %>"><%= link_to current_user_comment_on_card?(book) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: book.id), remote: true %></i></p>
@@ -55,7 +56,8 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to art.addtitle, fetch_model_form1_path(id: art.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to current_user_comment_on_card?(art), remote: true, style: "color: black;" %></p>
+<!--                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%#= link_to art.addtitle, fetch_model_form1_path(id: art.id), remote: true, style: "color: black;" %></p>-->
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= art.id %>"><%= link_to current_user_comment_on_card?(art) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: art.id), remote: true %></i></p>
@@ -87,7 +89,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to blog.addtitle, fetch_model_form1_path(id: blog.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to blog.addtitle, link_to current_user_comment_on_card?(blog), remote: true, style: "color: black;" %></p>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= blog.id %>"><%= link_to current_user_comment_on_card?(blog) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: blog.id), remote: true %></i></p>
@@ -120,7 +122,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to pod.addtitle, fetch_model_form1_path(id: pod.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to pod.addtitle, link_to current_user_comment_on_card?(pod), remote: true, style: "color: black;" %></p>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= pod.id %>"><%= link_to current_user_comment_on_card?(pod) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: pod.id), remote: true %></i></p>
@@ -153,7 +155,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to course.addtitle, fetch_model_form1_path(id: course.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to course.addtitle, link_to current_user_comment_on_card?(course), remote: true, style: "color: black;" %></p>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= course.id %>"><%= link_to current_user_comment_on_card?(course) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: course.id), remote: true %></i></p>
@@ -186,7 +188,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to doc.addtitle, fetch_model_form1_path(id: doc.id), remote: true, style: "color: black;" %></p>
+                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to doc.addtitle, link_to current_user_comment_on_card?(doc), remote: true, style: "color: black;" %></p>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= doc.id %>"><%= link_to current_user_comment_on_card?(doc) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: doc.id), remote: true %></i></p>
