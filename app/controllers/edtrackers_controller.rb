@@ -132,6 +132,11 @@ class EdtrackersController < ApplicationController
     end
   end
 
+  def destroy
+    @edtracker.destroy
+    redirect_to new_edtracker_path(id: current_user.id)
+  end
+
   private
 
   def edtracker_params
