@@ -133,6 +133,7 @@ class EdtrackersController < ApplicationController
   end
 
   def destroy
+    @edtracker = Edtracker.find(params[:id])
     @edtracker.destroy
     redirect_to new_edtracker_path(id: current_user.id)
   end
