@@ -108,7 +108,7 @@ class MyedtoolsController < ApplicationController
 
   def destroy
     @edTool = Myedtool.find(params[:id])
-    edTool.destroy
+    @edTool.destroy
     redirect_to new_myedtool_path(id: current_user.id)
   end
 
