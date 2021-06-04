@@ -24,8 +24,8 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle,comment_section_path(id: book.id), remote: true, style: "color: black;" %></p>
-<!--                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%#= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>-->
+<!--                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%#= link_to book.addtitle,comment_section_path(id: book.id), remote: true, style: "color: black;" %></p>-->
+                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= book.id %>"><%= link_to current_user_comment_on_card?(book) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: book.id), remote: true %></i></p>
