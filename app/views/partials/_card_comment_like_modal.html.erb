@@ -28,7 +28,9 @@
                 <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px;margin-right: 20px;' %>
               <% end %>
             </a>
-            <h4 class="pt-4" style="padding-top: 0.5rem !important;font-size: 1.5rem;"><%= card.addtitle %></h4>
+            <h4 class="pt-4" style="padding-top: 0.5rem !important;font-size: 1.5rem;">
+              <a href="<% card.link %>" target="_blank"><%= card.addtitle %></a>
+             </h4>
 
           </div>
           <div class="count-link-commment text-left d-flex mt-3">
