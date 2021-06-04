@@ -1,19 +1,19 @@
 <div class="modal fade show" id="comment-modal<%= card.id %>" tabindex="-1" role="dialog" aria-labelledby="NoteModalLabel" style=" padding-right: 15px;">
   <div class="modal-dialog custom-mod modal-size" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="display:block !important;">
+        <div>
+        <%if card.user == current_user %>
+            <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form?id=<%=card.id %>">Edit</a>
+            <%= link_to('Delete', edtracker_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+        <% end %>
         <button type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
       </div>
       <div class="modal-body">
         <div class="col-12">
-          <%if card.user == current_user %>
-          <div style="text-align: right;">
-            <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form?id=<%=card.id %>">Edit</a>
-            <%= link_to('Delete', edtracker_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
-          </div>
-            <% end %>
           <div class="img-modal" style="text-align: center">
             <%if card.edtracker_type == "I learned" %>
               <h3 style="color: #6fb145"> <%= card.edtracker_type  %></h3>

@@ -1,8 +1,8 @@
 <div class="modal fade show" id="comment-modal<%= card.id %>" tabindex="-1" role="dialog" aria-labelledby="NoteModalLabel" style=" padding-right: 15px;">
   <div class="modal-dialog custom-mod modal-size" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <div style="text-align: right;">
+      <div class="modal-header" style="display:block !important;">
+        <div>
         <%if card.user == current_user %>
           <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form1?id=<%=card.id %>">Edit</a>
           <%= link_to('Delete', myedtool_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
@@ -14,18 +14,9 @@
       </div>
       <div class="modal-body">
         <div class="col-12">
-          <%if card.user == current_user %>
-            <div style="text-align: right;">
-              <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form1?id=<%=card.id %>">Edit</a>
-              <%= link_to('Delete', myedtool_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
-            </div>
-          <% end %>
           <div class="img-modal" style="text-align: center">
-
             <%= image_tag "#{card.myedtool_type.downcase}.png", style: 'width: 45px; margin-bottom: 10px;' %>
-
           </div>
-
           <div class="title-hashtag text-left mt-4 d-flex">
             <a class="text-decoration-none" href="#">
               <% if card.user.avatar? %>
