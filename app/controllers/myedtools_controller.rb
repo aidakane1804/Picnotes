@@ -106,6 +106,12 @@ class MyedtoolsController < ApplicationController
     end
   end
 
+  def destroy
+    @edTool = Myedtool.find(params[:id])
+    edTool.destroy
+    redirect_to new_myedtool_path(id: current_user.id)
+  end
+
   def comment_delete_edtools
     @card = Myedtool.find(params[:card_id])
     card_comment  = CardCommentLike.find(params[:id])

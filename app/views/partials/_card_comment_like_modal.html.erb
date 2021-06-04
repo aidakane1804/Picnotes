@@ -8,6 +8,12 @@
       </div>
       <div class="modal-body">
         <div class="col-12">
+          <%if card.user == current_user %>
+            <div style="text-align: right;">
+              <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form?id=<%=card.id %>">Edit</a>
+              <%= link_to('Delete', myedtools_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+            </div>
+          <% end %>
           <div class="img-modal" style="text-align: center">
 
             <%= image_tag "#{card.myedtool_type.downcase}.png", style: 'width: 45px; margin-bottom: 10px;' %>
