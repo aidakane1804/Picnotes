@@ -110,9 +110,11 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "podcast.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Podcasts</h6>
+        <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_podcast">
           <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
+          <% end %>
         <% @podcasts.each do |pod| %>
           <div class="bg-highlight">
             <div class="status-box border-bottom-red">
@@ -141,9 +143,11 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "online course.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Online Courses</h6>
+        <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_course">
           <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
+        <% end %>
         <% @courses.each do |course| %>
           <div class="bg-highlight">
             <div class="status-box border-bottom-red">
@@ -172,9 +176,11 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "documentary.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Documentaries</h6>
+        <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_documentry">
           <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
+        <% end %>
         <% @documentaries.each do |doc| %>
           <div class="bg-highlight">
             <div class="status-box border-bottom-red">
