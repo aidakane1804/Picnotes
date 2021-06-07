@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
   get 'guidelines', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
+  get 'tl', to: 'notes#tl'
   get 'for-schools',to: 'notes#for_schools'
   get 'edfluencers',to: 'ed_fluencers#index'
 
