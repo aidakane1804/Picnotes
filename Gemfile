@@ -76,7 +76,8 @@ gem 'omniauth-facebook'
 gem 'thin'
 
 # Google Auth
-gem 'omniauth-google-oauth2'
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-google-oauth2', '0.8.2'
 
 # Mailers
 gem 'mail_form'
