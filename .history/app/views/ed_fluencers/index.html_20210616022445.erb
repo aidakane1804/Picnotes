@@ -1,0 +1,44 @@
+<div class="container ptb">
+  <div id="show_interview_model"></div>
+  <div class="interview-blog">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="heading-edu about">EdFluencers</h4>
+        <p class="text-edu about">Conversations with thoughtful educational leaders and passionate lifelong learners.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <% if @interviews.present? %>
+        <%- @interviews.each do|interview|%>
+         <div class="col-md-6">
+            <div class="panel-box" onclick='ChangeUrlForEdFluencers("", "<%="ed_fluencers/"+interview.id.to_s+"-"+interview.url.parameterize%>")'>
+             <%= link_to ed_fluencer_path(interview), remote: true, class: "blog-box" do %>
+                   <div class="blog-img">
+                     <%=image_tag interview.image.url, size: "500x250", :class => "img-fluid"%>
+                   </div>
+                   <div class="blog-text">
+                     <h4 class="blog-title">
+                       <%=interview.first_name + " "+ interview.last_name%>
+                       <span class="title"><%= interview.title %></span>
+                     </h4>
+                     <span class="blog-para">
+                       <p class="blog-para ">
+                         <%= interview.content.html_safe if interview.content.present? %>
+                       </p>
+                     </span>
+                   </div>
+             <%end%>
+           </div>
+         </div>
+        <%end%>
+      <%else%>
+        <div class="col-md-6">
+          <div class="panel-box">
+            There is no records found!
+          </div>
+        </div>     
+      <%end%>  
+    </div>
+  </div>
+</div>

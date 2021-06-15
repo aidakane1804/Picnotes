@@ -1,0 +1,162 @@
+<!--#app/views/chats/index.html.erb-->
+<!--<ul>-->
+  <%# if @existing_chats_users %>
+    <%# @existing_chats_users.each do |other_user| %>
+      <%# if other_user != current_user %>
+<!--        <li>-->
+          <%#= link_to(user_chats_path(current_user, :other_user => other_user.id), method: :post) do %>
+            <%#= other_user.username %>
+          <%# end %>
+<!--        </li>-->
+      <%# end %>
+    <%# end %>
+  <%# end %>
+<!--</ul>-->
+<!--All Users:-->
+
+
+<!--<ul>-->
+  <%# User.all.each do |other_user| %>
+    <%# if other_user != current_user %>
+<!--      <li>-->
+        <%#= link_to(user_chats_path(current_user, :other_user => other_user.id), method: :post) do %>
+          <%#= other_user.username %>
+        <%# end %>
+<!--      </li>-->
+    <%# end %>
+  <%# end %>
+<!--</ul>-->
+
+
+
+
+
+
+
+
+
+      <%#= image_tag 'logo-clean.png', class: 'intro-image', alt: 'logo clean' %>
+      <!--      <h1 class='text-grey'> Share your Knowledge </h1>-->
+      <!--      <p class='text-grey padding-bottom-20'> Join Picnotes, a platform full of knowledge essentials. </p>-->
+      <!--      <hr style="border: 1px solid lightgray;width: 50%;">-->
+      <!--      <h1 class='text-red set-font-family' style="font-size: 24px;">How does it work?</h1>-->
+
+      <!--      <div class="row" style="margin-top: 20px;">-->
+      <!--        <div class="col-md-4">-->
+      <!--          <P class='text-grey set-font-family'>Choose a topic</P>-->
+      <!--          <p class='text-grey padding-bottom-20 set-font-family' style='margin-top: 20px;'>-->
+      <!--            <i class="set-font-family" style="font-size: 14px;">EX: THE CORAL TRIANGLE</i></p>-->
+      <!--        </div>-->
+      <!--        <div class="col-md-4">-->
+      <!--          <p class='text-grey set-font-family'>Upload a picture</p>-->
+      <!--           <div style="width: 258px;height: 179px;" id='div-image'>-->
+
+      <!--          </div> -->
+      <%#= image_tag 'picnotes.png', alt: 'avatar image' %>
+      <!--          <h1 class='text-red set-font-family desktop-easy' style="margin-top: 10px; font-size: 24px;">It's so-->
+      <!--            easy!</h1>-->
+      <!--        </div>-->
+      <!--        <div class="col-md-4">-->
+      <!--          <p class='text-grey set-font-family margin-for-mobile'>Share your notes</p>-->
+      <!--          <p class='text-grey set-font-family' style="margin-top: 20px; font-size: 14px;">-->
+      <!--            <i>The Coral Triangle is a 6 million km2 area that stretches from Indonesia, Malaysia, Papua New Guinea, the-->
+      <!--              Philippines, Soloman Island and Taimor Lester.</i></p>-->
+      <!--        </div>-->
+      <!--        <h1 class='text-red set-font-family mobile-easy' style="margin-top: 10px; font-size: 24px; margin-left: 92px;">It's-->
+      <!--          so easy!</h1>-->
+      <!--      </div>-->
+      <!--      <div style="margin-top: 15px;">-->
+      <!--        <button-->
+      <!--          type='button'-->
+      <!--          class='inverse-blue-btn btn-lg'-->
+      <!--          data-toggle='modal'-->
+      <!--          data-target='#newSessionModal'-->
+      <!--          data-whatever='@mdo'-->
+      <!--        >-->
+      <!--          Sign In-->
+      <!--        </button>-->
+      <!--        <button-->
+      <!--          type='button'-->
+      <!--          class='blue-btn btn-lg'-->
+      <!--          data-toggle='modal'-->
+      <!--          data-target='#newUserModal'-->
+      <!--          data-whatever='@mdo'>-->
+      <!--          Sign Up-->
+      <!--        </button>-->
+      <!--      </div>-->
+<br><br>
+<div class="container">
+  <div class="headind_srch">
+    <div class="recent_heading  col-sm-2">
+      <h1 class=>Active Chat</h1>
+    </div>
+
+  </div>
+<% if @existing_chats_users %>
+  <% @existing_chats_users.each do |other_user| %>
+    <% if other_user != current_user %>
+      <div class="chat_list">
+        <div class="chat_people">
+          <div class="chat_img">
+            <%other_user.chats.each do |chat|%>
+              <%#= chat.subscriptions.first.chat_id%>
+              <%  chat.subscriptions.each do |x|%>
+
+              <%#= a.chat_id %>
+
+             <%#if a.user_id == current_user.id  %>
+
+                <%#= a.chat_id %>
+                <% unless x.user_id == current_user.id%>
+                <% if Message.where("user_id = ? AND chat_id = ? AND new = ?", x.user_id , x.chat_id, TRUE).any? %>
+
+                  <div class="new-msg"></div>
+                <%end%>
+
+                <%end%>
+              <%end%>
+            <%end%>
+<%# Message.where("user_id = ? AND chat_id = ? AND new = ?", a.user_id , a.chat_id, TRUE) %>
+<!--            ture-->
+              <%#end%>
+<!--            Client.where("orders_count = ? AND locked = ?", params[:orders], false)-->
+
+            <%= link_to(user_chats_path(current_user, :other_user => other_user.id), method: :post) do %>
+              <% if Note.find_by_user_id(other_user.id) %>
+                <% note = Note.find_by_user_id(other_user.id) %>
+                <% if note.user.avatar? %>
+                  <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
+                <% else %>
+                  <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
+                <% end %>
+              <% else %>
+                <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
+              <% end %>
+
+              </div>
+              <div class="chat_ib">
+
+                <h5>  <%= other_user.username %></h5>
+
+              </div>
+            <% end %>
+            </div>
+      </div>
+      <%#else%>
+      <%#= image_tag 'avatar.png', class: 'note-avatar-image',  alt: 'avatar image' %>
+      <%#end%>
+
+      <!--                              ///-->
+
+    <% end %>
+  <% end %>
+<% end %>
+    <%# end %>
+  <%# end %>
+
+</div>
+<%#= link_to "Logout", session_path(current_user.id), method: :delete  %>
+<style>
+
+max-width:543%"
+</style>
