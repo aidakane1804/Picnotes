@@ -19,7 +19,7 @@
               <%= f.label :image, 'File Upload' %>
               <div class = 'image-upload text-center'>
                 <label for="file-input">
-                  <%= image_tag 'file-upload.png', class: 'logo-image', id: 'img_prev' %>
+                  <%= image_tag 'file-upload.png',alt: "image", class: 'logo-image', id: 'img_prev' %>
                   <p>Click to Upload Image </p>
                 </label>
                 <%= f.file_field :image, id: 'file-input', :onchange => 'readURL(this)' %>

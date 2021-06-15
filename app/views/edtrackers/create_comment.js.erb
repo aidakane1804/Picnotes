@@ -13,8 +13,8 @@ $(".comment-icon-ed-tracker<%=@card.id%>").html('<%= link_to   fa_icon('comment'
 
 <%# image_present  =  @card.card_comment_likes.last.user.avatar? rescue  false %>
 <%# if image_present %>
-//$(".ed_tracker_msg_img<%#=@card.id %>").html('<%#= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+//$(".ed_tracker_msg_img<%#=@card.id %>").html('<%#= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb) ,alt: "image", class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
 <%#else%>
-//$(".ed_tracker_msg_img<%#=@card.id %>").html('<%#= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+//$(".ed_tracker_msg_img<%#=@card.id %>").html('<%#= image_tag  "avatar.png" , class: 'avatar-image',alt: "image", style: 'width: 50px; height: 50px;' %>')
 <%#end %>
 //$('.edtracker_display_comment<%#=@selected_card_id %>').append("<%#= @ed_tracker_comment.body %>")

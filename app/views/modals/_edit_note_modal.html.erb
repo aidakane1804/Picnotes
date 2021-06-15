@@ -19,9 +19,9 @@
                 <!-- <label for="file-input"> -->
                   <!-- <% if @note.image.url.length > 0 %> -->
                     <p> Current Image </p>
-                    <%= image_tag @note.image.url, class: 'logo-image', id: 'img_prev' %>
+                    <%= image_tag @note.image.url,alt: "image", class: 'logo-image', id: 'img_prev' %>
                   <!-- <% else %>
-                    <%= image_tag 'file-upload.png', class: 'logo-image', id: 'img_prev' %>
+                    <%= image_tag 'file-upload.png',alt: "image", class: 'logo-image', id: 'img_prev' %>
                   <% end %> -->
                   <!-- <p>Click to Upload Image </p>
                 </label>

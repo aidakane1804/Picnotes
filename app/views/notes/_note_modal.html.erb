@@ -114,9 +114,9 @@
               </p>
             </div>
             <% if note.user.avatar? %>
-              <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
+              <%= image_tag note.user.avatar.url(:thumb),alt: note.title, class: 'note-avatar-image' %>
             <% else %>
-              <%= image_tag 'avatar.png', class: 'note-avatar-image' %>
+              <%= image_tag 'avatar.png', class: 'note-avatar-image',alt: 'no image' %>
             <% end %>
           </div>
         </div>
@@ -127,7 +127,7 @@
         <div class = "note-page-content">
           <div class = 'note-mobile-image'>
             <% if @note.image.present? %>
-            <%= image_tag @note.image.url(:large), class:"note-image" %>
+            <%= image_tag @note.image.url(:large),alt: note.title, class:"note-image" %>
             <% end %>
           </div>
 
@@ -160,7 +160,7 @@
                         <div class = 'similar-note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
 
                           <%= link_to(note_path(note), remote: true) do %>
-                          <%= image_tag note.image.url(:thumb), class:'similar-note-image' if note.image.present? %>
+                          <%= image_tag note.image.url(:thumb), class:'similar-note-image',alt: note.title if note.image.present? %>
                           <div class = 'note-container-text'>
                             <p class = "mobile-font note-btn-font" style = 'font-size: 10px;'> <%= truncate(note.title, length: 25) %> </p>
                           </div>

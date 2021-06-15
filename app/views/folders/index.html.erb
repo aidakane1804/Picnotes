@@ -30,46 +30,46 @@
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
-                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                    <%= image_tag note.image.url(:board_thumb),alt: "image", class: 'image-size' %>
                   <% else %>
-                    <%= image_tag 'empty.png', class: 'image-size' %>
+                    <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
                   <% end %>
                 </div>
               <% end %>
             <% end %>
             <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% end %>
             <div class='note-container-text'>
@@ -111,46 +111,46 @@
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
-                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                    <%= image_tag note.image.url(:board_thumb),alt: "image", class: 'image-size' %>
                   <% else %>
-                    <%= image_tag 'empty.png', class: 'image-size' %>
+                    <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
                   <% end %>
                 </div>
               <% end %>
             <% end %>
             <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
               </div>
             <% end %>
             <div class='note-container-text'>

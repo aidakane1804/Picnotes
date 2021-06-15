@@ -11,9 +11,9 @@
       <div class = 'text-center note-container'>
         <%= link_to user_path(user) do %>
         <% if user.avatar? %>
-          <%= image_tag user.avatar.url(:thumb), class: 'follow-image' %>
+          <%= image_tag user.avatar.url(:thumb),alt: "image", class: 'follow-image' %>
         <% else %>
-          <%= image_tag 'avatar.png', :style => 'width: 100%;' , class: 'follow-image' %>
+          <%= image_tag 'avatar.png',alt: "image", :style => 'width: 100%;' , class: 'follow-image' %>
         <% end %>
 
         <div class = 'note-container-text' style = 'text-align: center !important;'>

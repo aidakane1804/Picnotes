@@ -35,7 +35,7 @@
 
 
 
-      <%#= image_tag 'logo-clean.png', class: 'intro-image' %>
+      <%#= image_tag 'logo-clean.png', class: 'intro-image', alt: 'logo clean' %>
       <!--      <h1 class='text-grey'> Share your Knowledge </h1>-->
       <!--      <p class='text-grey padding-bottom-20'> Join Picnotes, a platform full of knowledge essentials. </p>-->
       <!--      <hr style="border: 1px solid lightgray;width: 50%;">-->
@@ -52,7 +52,7 @@
       <!--           <div style="width: 258px;height: 179px;" id='div-image'>-->
 
       <!--          </div> -->
-      <%#= image_tag 'picnotes.png' %>
+      <%#= image_tag 'picnotes.png', alt: 'avatar image' %>
       <!--          <h1 class='text-red set-font-family desktop-easy' style="margin-top: 10px; font-size: 24px;">It's so-->
       <!--            easy!</h1>-->
       <!--        </div>-->
@@ -125,12 +125,12 @@
               <% if Note.find_by_user_id(other_user.id) %>
                 <% note = Note.find_by_user_id(other_user.id) %>
                 <% if note.user.avatar? %>
-                  <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image', style: "max-width:543%" %>
+                  <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
                 <% else %>
-                  <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
+                  <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
                 <% end %>
               <% else %>
-                <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
+                <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image', style: "max-width:543%" %>
               <% end %>
 
               </div>
@@ -143,7 +143,7 @@
             </div>
       </div>
       <%#else%>
-      <%#= image_tag 'avatar.png', class: 'note-avatar-image' %>
+      <%#= image_tag 'avatar.png', class: 'note-avatar-image',  alt: 'avatar image' %>
       <%#end%>
 
       <!--                              ///-->

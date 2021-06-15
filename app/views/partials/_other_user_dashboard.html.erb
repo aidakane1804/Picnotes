@@ -3,9 +3,9 @@
     <div class='profile-center'>
       <div class='text-right'>
         <% if @user.avatar? %>
-          <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+          <%= image_tag @user.avatar.url(:thumb),alt: "image", class: 'avatar-image' %>
         <% else %>
-          <%= image_tag 'avatar.png', class: 'avatar-image' %>
+          <%= image_tag 'avatar.png',alt: "image", class: 'avatar-image' %>
         <% end %>
         <h1 style='margin-bottom: 0;'><%= @user.first_name %> <%= @user.last_name %></h1>
         <%= render '/components/follow_button', :user => @user %>
@@ -17,9 +17,9 @@
         <% end %>
       </div>
       <%# if @user.avatar? %>
-      <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
+      <%#= image_tag @user.avatar.url(:thumb),alt: "image", class: 'avatar-image' %>
       <%# else %>
-      <%#= image_tag 'avatar.png', class: 'avatar-image' %>
+      <%#= image_tag 'avatar.png',alt: "image", class: 'avatar-image' %>
       <%# end %>
     </div>
 
@@ -86,9 +86,9 @@
         <% end %>
       </div>
       <% if @user.avatar? %>
-        <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style: "margin-left: 7px;" %>
+        <%= image_tag @user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: "margin-left: 7px;" %>
       <% else %>
-        <%= image_tag 'avatar.png', class: 'avatar-image' %>
+        <%= image_tag 'avatar.png',alt: "image", class: 'avatar-image' %>
       <% end %>
     </div>
   </div>

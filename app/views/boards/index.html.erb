@@ -22,46 +22,46 @@
           <% if i < 4 %>
             <div class = 'board-test-image'>
               <% if note.image.url.length > 0 %>
-                <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                <%= image_tag note.image.url(:board_thumb), class: 'image-size',  alt: 'note image' %>
               <% else %>
-                <%= image_tag 'empty.png', class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size',  alt: 'note image' %>
               <% end %>
             </div>
           <% end %>
         <% end %>
         <% if board.notes.length == 0 %>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size',  alt: 'note image' %>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size',  alt: 'note image' %>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size',  alt: 'note image' %>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
         <% elsif board.notes.length == 1 %>
-          <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+          <div class = 'board-test-image'> 
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image'%>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
         <% elsif board.notes.length == 2 %>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
         <% elsif board.notes.length == 3 %>
           <div class = 'board-test-image'>
-            <%= image_tag 'empty.png', class: 'image-size' %>
+            <%= image_tag 'empty.png', class: 'image-size', alt: 'note image' %>
           </div>
         <% end %>
       </div>

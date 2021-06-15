@@ -18,8 +18,8 @@ $(".comment-icon-ed-tool<%=@card.id%>").html('<%= link_to   fa_icon('comment') ,
 //$(".comment-icon-ed-tool<%#=@card.id%>").html('<%#= link_to   fa_icon('comment') , comment_section_path(id: @card.id), remote: true %>')
 
 <%#if image_present%>
-//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb),alt: "image" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
 <%#else%>
-//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag  "avatar.png",alt: "image" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
 <%#end %>
 //$(".ed_tool_display_comment<%#=@card_id%>").html("<%#=@my_ed_tool_comment.body %>");

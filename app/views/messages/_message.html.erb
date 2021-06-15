@@ -1,10 +1,10 @@
 <!--<p><strong><%#= message.user.username %>:</strong> -->
 <%# if note.user.avatar? %>
-  <%#= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
+  <%#= image_tag note.user.avatar.url(:thumb),alt: "image", class: 'note-avatar-image' %>
 <%# else %>
-  <%#= image_tag 'avatar.png', class: 'note-avatar-image' %>
+  <%#= image_tag 'avatar.png',alt: "image", class: 'note-avatar-image' %>
 <%# end %>
 <p  class="nav-justified container  " style="max-width:543%;text-align: left; word-wrap: break-word; " > <span class=" nav-justified badge badge-pill badge-info" ><b><%= message.user.username %> &nbsp; &nbsp; &nbsp;: </b></span> &nbsp; &nbsp; &nbsp; &nbsp;<%=message.content%></p>
 <!--  <p style="max-width:543%;text-align: left;  " > <b><%#= message.user.username %> &nbsp; &nbsp; </b><%#=message.content%></p>-->
-<!--<%#= image_tag message.user.avatar.url(:thumb), class: 'note-avatar-image text-align: left', style:"max-width:543%;text-align: left; " if message.user.avatar? %>&nbsp;<p style="text-align: left"><b><%#= message.user.username unless message.user.avatar? %> &nbsp; &nbsp; </b><%#=message.content%></p>-->
+<!--<%#= image_tag message.user.avatar.url(:thumb),alt: "image", class: 'note-avatar-image text-align: left', style:"max-width:543%;text-align: left; " if message.user.avatar? %>&nbsp;<p style="text-align: left"><b><%#= message.user.username unless message.user.avatar? %> &nbsp; &nbsp; </b><%#=message.content%></p>-->
 <br>

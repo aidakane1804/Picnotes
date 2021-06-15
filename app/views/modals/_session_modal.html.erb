@@ -32,9 +32,9 @@
 
           <div style = "flex-basis: 50%; display: flex; justify-content: center;">
             <% if @user.avatar? %>
-              <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 100px; height: 100px; margin-left: 0;'%>
+              <%= image_tag @user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: 'width: 100px; height: 100px; margin-left: 0;'%>
             <% else %>
-              <%= image_tag 'avatar.png', class: 'avatar-image' %>
+              <%= image_tag 'avatar.png',alt: "image", class: 'avatar-image' %>
             <% end %>
           </div>
         </div>

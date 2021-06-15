@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-4 col-lg-4 pdf-box-left">
-            <%= image_tag @interview.image_url%>
+            <%= image_tag @interview.image_url,alt: "image" %>
             <span class="pdf-box-name">
               <%= get_fullname @interview%>
             </span>

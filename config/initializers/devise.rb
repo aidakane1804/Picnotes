@@ -254,9 +254,9 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   # ==> OmniAuth
-  config.omniauth :facebook,  ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], scope: 'public_profile,email'
+  config.omniauth :facebook,  '312803396566246', '278899be5a6aef416d543ace895ce750', scope: 'public_profile,email'
 
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_APP_SECRET']
+  config.omniauth :google_oauth2, '348997572754-bhoeoullstv73212n1aq0l67sjtgorb9.apps.googleusercontent.com', 'WdAc2PpFIyBScs3RNetN2iPo'
 
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.

@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning mb-0">WANT TO LEARN</h6>
         <% if @user == current_user %>
-          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png", class: "img-plus" %>
+          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
           </button>
         <% end %>
         <% if @want_to_learn.any? %>
@@ -63,7 +63,7 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning color-orange mb-0">CURRENTLY LEARNING</h6>
         <% if @user == current_user %>
-          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png", class: "img-plus" %>
+          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png",alt: "image", class: "img-plus" %>
           </button>
         <% end %>
         <% if @curr_learning.any? %>
@@ -115,7 +115,7 @@
         <h6 class="heading-learning color-green mb-0">LEARNED</h6>
         <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal3">
-            <%= image_tag "green-plus.png", class: "img-plus" %>
+            <%= image_tag "green-plus.png",alt: "image", class: "img-plus" %>
           </button>
         <% end %>
         <% if @learned.any? %>
