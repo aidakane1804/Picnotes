@@ -7,7 +7,7 @@
 <div id='note-content'></div>
 
 <div class='flex-center'>
-  <div class="notes-container" style='margin-top: 20px;'>
+  <div class="notes-container" class="div13">
     <% if @favorites.where(archived: false).count > 0 %>
       <% @favorites.where(archived: false).each do |note| %>
         <div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
@@ -25,7 +25,7 @@
         <h1 class="blue-heading">Collect your favorite Picnotes.</h1>
         <p>See all the Picnotes you've liked in one place.</p>
         <p>
-          <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+          <button type='button' class='div14' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
         </p>
       </div> -->
       <% if @user == current_user %>
@@ -35,7 +35,7 @@
             <h1 class="black-heading">Collect your favorite Picnotes</h1>
             <p class="italic-text">See all the Picnotes you've liked in one place.</p>
             <p class="mp-0">
-              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+              <button type='button' class='div14' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
             </p>
           </div>
         </div>
