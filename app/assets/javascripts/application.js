@@ -81,7 +81,7 @@ function openTab(evt, tabName) {
 }
 
 function ChangeUrl(title, url) {
-
+    $('.modal').modal('hide');
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/notes',);
