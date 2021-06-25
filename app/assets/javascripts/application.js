@@ -81,7 +81,8 @@ function openTab(evt, tabName) {
 }
 
 function ChangeUrl(title, url) {
-    $('.modal').modal('hide');
+    console.log("ss");
+        $('.modal').modal('hide');
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/notes',);
@@ -92,6 +93,7 @@ function ChangeUrl(title, url) {
 }
 
 function ChangeUrlForEdFluencers(title, url) {
+    $('.modal').modal('hide');
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
         history.pushState(obj,"", '/ed_fluencers',);
@@ -102,6 +104,7 @@ function ChangeUrlForEdFluencers(title, url) {
 }
 
 function ChangeUrlForUsers(title, url) {
+    $('.modal').modal('hide');
     if (typeof (history.pushState) != "undefined") {
         var obj = {Title: title  , Url: url};
         history.pushState(obj, "", '/users',);
