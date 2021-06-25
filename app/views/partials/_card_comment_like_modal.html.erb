@@ -15,14 +15,14 @@
       <div class="modal-body">
         <div class="col-12">
           <div class="img-modal" style="text-align: center">
-            <%= image_tag "#{card.myedtool_type.downcase}.png",alt: "image", style: 'width: 45px; margin-bottom: 10px;' %>
+            <%= image_tag "#{card.myedtool_type.downcase}.png", style: 'width: 45px; margin-bottom: 10px;' %>
           </div>
           <div class="title-hashtag text-left mt-4 d-flex">
             <a class="text-decoration-none" href="#">
               <% if card.user.avatar? %>
-                <%= image_tag card.user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                <%= image_tag card.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
               <% else %>
-                <%= image_tag 'avatar.png',alt: "image", style: 'width: 60px; height: 60px;margin-right: 20px;' %>
+                <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px;margin-right: 20px;' %>
               <% end %>
             </a>
             <%
@@ -54,12 +54,12 @@
                       <a class="text-decoration-none" href="#">
                         <%if current_user %>
                         <% if current_user.avatar? %>
-                          <%= image_tag current_user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                          <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
                         <% else %>
-                          <%= image_tag 'avatar.png',alt: "image", style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                          <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
                         <% end %>
                         <% else %>
-                          <%= image_tag 'avatar.png',alt: "image", style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                          <%= image_tag 'avatar.png', style: 'width: 60px; height: 60px; margin-right: 20px;' %>
                         <%end %>
                       </a>
 
@@ -80,12 +80,12 @@
                         <a class="text-decoration-none ed_tool_msg_img<%= comment.id %>" href="#">
                           <% if comment %>
                             <% if comment.user.avatar? %>
-                              <%= image_tag comment.user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                              <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
                             <% else %>
-                              <%= image_tag comment.user.avatar.url(:thumb),alt: "image", class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                              <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
                             <% end %>
                           <% else %>
-                            <%= image_tag 'avatar.png',alt: "image", class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
+                            <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
                           <% end %>
                         </a>
                       </div>

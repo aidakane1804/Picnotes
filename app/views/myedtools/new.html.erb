@@ -13,10 +13,10 @@
   <div class="container pt-5">
     <div class="row">
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "book.png",alt: "image", style: 'width:45px;margin-bottom:10px' %>
+        <%= image_tag "book.png", style: 'width:45px;margin-bottom:10px' %>
         <h6 class="heading-learning mb-0 text-black">Books</h6>
         <% if @user == current_user %>
-          <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_book"><%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+          <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_book"><%= image_tag "red-plus.png", class: "img-plus" %>
           </button>
         <% end %>
         <% @books.each do |book| %>
@@ -45,7 +45,7 @@
         <% end %>
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "article.png",alt: "image", style: "width:35px;margin-bottom:10px" %><br>
+        <%= image_tag "article.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-orange mb-0 text-black">Articles</h6>
         <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_article"><%= image_tag "red-plus.png", class: "img-plus" %>
@@ -77,11 +77,11 @@
         <% end %>
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "blog.png",alt: "image", style: "width:35px;margin-bottom:10px" %><br>
+        <%= image_tag "blog.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Blogs</h6>
         <% if @user == current_user %>
           <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_blog">
-            <%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+            <%= image_tag "red-plus.png", class: "img-plus" %>
           </button>
         <% end %>
         <% @blogs.each do |blog| %>
@@ -110,11 +110,11 @@
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "podcast.png",alt: "image", style: "width:35px;margin-bottom:10px" %><br>
+        <%= image_tag "podcast.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Podcasts</h6>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_podcast">
-          <%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+          <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
           <% end %>
         <% @podcasts.each do |pod| %>
@@ -143,11 +143,11 @@
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "online course.png",alt: "image", style: "width:35px;margin-bottom:10px" %><br>
+        <%= image_tag "online course.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Online Courses</h6>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_course">
-          <%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+          <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
         <% end %>
         <% @courses.each do |course| %>
@@ -176,11 +176,11 @@
       </div>
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
-        <%= image_tag "documentary.png",alt: "image", style: "width:35px;margin-bottom:10px" %><br>
+        <%= image_tag "documentary.png", style: "width:35px;margin-bottom:10px" %><br>
         <h6 class="heading-learning color-green mb-0 text-black">Documentaries</h6>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_documentry">
-          <%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+          <%= image_tag "red-plus.png", class: "img-plus" %>
         </button>
         <% end %>
         <% @documentaries.each do |doc| %>

@@ -12,19 +12,19 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning mb-0">WANT TO LEARN</h6>
         <% if @user == current_user %>
-          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png",alt: "image", class: "img-plus" %>
+          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal"><%= image_tag "red-plus.png", class: "img-plus" %>
           </button>
         <% end %>
         <% if @want_to_learn.any? %>
           <% @want_to_learn.each do |card| %>
             <div class="bg-highlight">
               <div class="status-box border-bottom-red">
-                <div class="row div6" >
+                <div class="row" style="min-height: 135px">
                   <div class="col-12">
                     <div class="dropdown text-right">
                       <div class="btn btn-status dropdown-toggle">
                         <% if card.user == current_user %>
-                          <select id="comboA" class="selectWrapper div7" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" s>
+                          <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: red">
                             <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I
                               want to learn
                             </option>
@@ -39,9 +39,9 @@
 
                       </div>
                     </div>
-                    <p class="text-lorem div8"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, class:'div9' %></p>
-<!--                    <p class="text-lorem div8" , sans-serif;"><%#= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, class: 'div9' %></p>-->
-                    <div class="text-right pb-2 div10" >
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
+<!--                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%#= link_to card.topic, fetch_model_form_path(id: card.id), remote: true, style: "color:black" %></p>-->
+                    <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
                       </div>
@@ -63,19 +63,19 @@
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <h6 class="heading-learning color-orange mb-0">CURRENTLY LEARNING</h6>
         <% if @user == current_user %>
-          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png",alt: "image", class: "img-plus" %>
+          <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal2"><%= image_tag "orange-plus.png", class: "img-plus" %>
           </button>
         <% end %>
         <% if @curr_learning.any? %>
           <% @curr_learning.each do |card| %>
             <div class="bg-highlight">
               <div class="status-box border-bottom-orange">
-                <div class="row div6">
+                <div class="row" style="min-height: 135px">
                   <div class="col-12">
                     <div class="dropdown text-right">
                       <div class="btn btn-status dropdown-toggle">
                         <% if card.user == current_user %>
-                          <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" class="div12">
+                          <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id  rescue '0'%>)" style="border-block-color: orange">
                             <!--                      <option value="Choose to Option">Choose A Status</option>-->
                             <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I
                               want to learn
@@ -90,8 +90,8 @@
                         <% end %>
                       </div>
                     </div>
-                    <p class="text-lorem div8", sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, class: "div9" %></p>
-                    <div class="text-right pb-2 div10">
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
+                    <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
                       </div>
@@ -115,19 +115,19 @@
         <h6 class="heading-learning color-green mb-0">LEARNED</h6>
         <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtrackerModal3">
-            <%= image_tag "green-plus.png",alt: "image", class: "img-plus" %>
+            <%= image_tag "green-plus.png", class: "img-plus" %>
           </button>
         <% end %>
         <% if @learned.any? %>
           <% @learned.each do |card| %>
             <div class="bg-highlight">
               <div class="status-box border-bottom-green">
-                <div class="row div6" >
+                <div class="row" style="min-height: 135px">
                   <div class="col-12">
                     <div class="dropdown text-right">
                       <div class="btn btn-status dropdown-toggle">
                         <% if card.user == current_user %>
-                          <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" class: "div11">
+                          <select id="comboA" class="selectWrapper" onchange="ed_tracker_dropdown(this,<%=card.id %>, <%= current_user.id rescue "0" %>)" style="border-block-color: #4CAF50">
                             <!--                      <option value="Choose to Option" >Choose A Status</option>-->
                             <option value="I want to learn" <%= "selected" if card.edtracker_type == "I want to learn" %>>I
                               want to learn
@@ -142,8 +142,8 @@
                         <% end %>
                       </div>
                     </div>
-                    <p class="text-lorem div8" , sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, class: "div9" %></p>
-                    <div class="text-right pb-2 div10" >
+                    <p class="text-lorem" style=" font-family: 'Philosopher', sans-serif;"><%= link_to card.topic, comment_section_edtracker_path(id: card.id), remote: true, style: "color:black" %></p>
+                    <div class="text-right pb-2" style="padding-top: 30px">
                       <div class="column">
                         <p class="btn-rating comment-icon-ed-tracker<%= card.id %> "><%= link_to current_user_comment_on_card?(card) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_edtracker_path(id: card.id), remote: true %></p>
                       </div>
@@ -196,3 +196,242 @@
 
 </script>
 
+<style>
+
+  .column {
+    float: right;
+    width: 14%;
+
+    /* Should be removed. Only for demonstration */
+  }
+
+  .bg-highlight {
+    background: #f5f5f5;
+    padding: 1px 0 64px 0;
+  }
+
+  .btn-rating {
+    background: transparent;
+    border: none;
+    padding-right: 5px;
+  }
+
+  .status-box {
+    background: #fff;
+    width: 90%;
+    margin: 19px auto;
+    border-radius: 5px;
+    border-bottom: 5px solid;
+  }
+
+  .img-plus {
+    width: 35px;
+    margin-bottom: 25px;
+  }
+
+  .text-lorem {
+    font-size: 21px;
+    font-weight: 800;
+    padding-top: 21px;
+  }
+
+  .border-bottom-red {
+    border-bottom: 5px solid #fb3c44;
+  }
+
+  .heading-learning {
+    font-size: 20px;
+    color: red;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+  }
+
+  .btn-status {
+    color: grey;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .color-orange {
+    color: #f1874b;
+  }
+
+  .color-green {
+    color: #6fb145;
+  }
+
+  .img-plus {
+    width: 35px;
+    margin-bottom: 25px;
+  }
+
+  .color-black {
+    color: grey;
+  }
+
+  .color-grey {
+    color: #bababa;
+  }
+
+  .bg-highlight {
+    background: #f5f5f5;
+    padding: 1px 0 64px 0;
+  }
+
+  .status-box {
+    background: #fff;
+    width: 90%;
+    margin: 19px auto;
+    border-radius: 5px;
+    border-bottom: 5px solid;
+  }
+
+  .border-bottom-orange {
+    border-bottom: 5px solid #f1874b;
+  }
+
+  .border-bottom-red {
+    border-bottom: 5px solid #fb3c44;
+  }
+
+  .border-bottom-green {
+    border-bottom: 5px solid #6fb145;
+  }
+
+  .text-lorem {
+    font-size: 21px;
+    font-weight: 800;
+    padding-top: 21px;
+  }
+
+  .btn-rating {
+    background: transparent;
+    border: none;
+  }
+
+  .btn-red-modal {
+    background: transparent;
+  }
+
+  .bg-modal-red {
+    background: #fb3c44;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .bg-modal-orange {
+    background: #f1874b;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .bg-modal-green {
+    background: #6fb145;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .col-form-control {
+    border: 1px solid grey;
+    border-radius: 0;
+    padding: 10px;
+  }
+
+  .col-form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #fb3c44;
+    outline: 0;
+  }
+
+  .bg-orange {
+    background: #f1874b;
+  }
+
+  .bg-green {
+    background: #6fb145;
+  }
+
+
+  /*Learning 1*/
+  .text-black {
+    color: #000000;
+  }
+
+  .modal-size {
+    display: block;
+    margin: auto;
+    width: 40%;
+    padding: 46px;
+  }
+
+  @media only screen and (max-width: 1440px) {
+    .community-quote {
+      width: 63%;
+    }
+  }
+
+  @media only screen and (max-width: 1366px) {
+    .community-quote {
+      width: 68%;
+    }
+  }
+
+  @media only screen and (max-width: 1280px) {
+    .box {
+      border: 2px solid #8093bb;
+      width: 274px;
+      height: 40px;
+      position: relative;
+      left: 57px;
+    }
+
+    .community-quote {
+      width: 72%;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .navbar-nav a {
+      font-size: 12px;
+    }
+
+    .btn-request {
+      width: 63%;
+    }
+
+    .heading-create:after {
+      position: absolute;
+      bottom: 5px;
+      left: 126px;
+    }
+
+    .btn-bottom-request {
+      width: 27%;
+    }
+
+    .bg-shadow {
+      padding: 0px 25px;
+    }
+
+    .box {
+      width: 237px;
+      position: relative;
+      left: 20px;
+    }
+
+    .text-pic-edu {
+      font-size: 22px;
+    }
+
+    .heading-k-12 {
+      padding-top: 45%;
+      margin-left: 121px;
+    }
+
+  }
+
+  a {
+    /*color: black !important;*/
+    text-decoration: none;
+    background-color: transparent;
+  }
+
+</style>

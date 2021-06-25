@@ -10,7 +10,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-4 col-lg-4 pdf-box-left">
-            <%= image_tag @interview.image_url,alt: "image" %>
+            <%= image_tag @interview.image_url%>
             <span class="pdf-box-name">
               <%= get_fullname @interview%>
             </span>
@@ -30,7 +30,7 @@
             </div>
             <!-- <button class="btn btn-secondary btn-block"><%= @interview.facebook %></button> -->
           </div>
-          <div class="col-md-8 col-lg-8 div3" >
+          <div class="col-md-8 col-lg-8" style="text-align: center;">
             <% if @interview.article.present? %>
               <div class="pdf-right-box">
                 <%= @interview.article.html_safe %>

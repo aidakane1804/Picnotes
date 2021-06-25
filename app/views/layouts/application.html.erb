@@ -7,71 +7,14 @@
   <% else %>
   <title>Picnotes | Knowledge Sharing Hub for Lifelong Learners</title>
   <% end %>
-  <meta property="og:image" content="https://www.picnotes.org/assets/logo-f991b3fbe331515ab2622c055a0811d7c4a9a8d3b0fe1945756fb3c9888035d4.png"/>
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
-  <%= favicon_link_tag asset_path('logo.png') %>
   <!-- BEGIN SHAREAHOLIC CODE -->
   <link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script" />
   <meta name="shareaholic:site_id" content="dcd53049032feb792c7b337fe4b4ca4e" />
   <script data-cfasync="false" async src="https://cdn.shareaholic.net/assets/pub/shareaholic.js"></script>
   <!-- END SHAREAHOLIC CODE -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" media="all" href="/assets/boards.self-639e9fbabaabfd58602e971692d5a23b3d6e42551ba12db5cc060a01ae1c882d.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/card_likes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/ed_fluencers.self-c2989b0a48ddd4b68be853049c2a94689456754a9b73c8a2f7d3582fdf994843.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/edtrackers.self-86628bb608d1c9ef6f3a84732974866bd401f4efde0fdc5cbfe97bff3a71591b.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/folders.self-396f5b2a81ad8f2d58b6cd04170ef74f73c25d612857cc11010185542a8680df.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/modal.self-546cb8627191c7424e8434460bd7ddbd59b509e946b93345817af74a85baf21a.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/myedtools.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/notes.self-c5a002885cde8d97a086626912008527cd4708e364634cbe6c77b38af1738544.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/style.self-de3cfcc302a8e82efbe0f101e1db84c7da5aa642d4f426f5c15bab4c51d7662d.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/tags.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/users.self-93a2a450bf84c75769c4b45cc20962578a10d4ee8e9c22c1ea0cd2956f5c0ab5.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/application.self-b93d1469dd9545406c4294f0755052a500767e69237aa1b6dee0b4087e7efc40.css?body=1" data-turbolinks-track="reload" />
-  <link rel="stylesheet" media="all" href="/assets/chosen.self-bfdb728b0588db5a887bb0e24c55e69af3bb4ae2cb149bf818ec99af614c6182.css?body=1" data-turbolinks-track="reload" />
-  <script src="/assets/jquery3.self-2a83d06853bd343c7bfc2e5d4539814cfa934676e2948ed348311435eca862f5.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/lib/abstract-chosen.self-ff43f2db4e91fea824844eb4d37566bc7248e435c3ea7050d7a252c1c14e4d9a.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/lib/select-parser.self-16f32cef24f1cae19e8b5f5dab3ac72e6fb35ce24fe5ae41d354d60f9bb53491.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/chosen.jquery.self-c1b0ad79c75d520f72310f2594a76189b7c6e407c035a9a4c9022dff262b49a5.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/chosen-jquery.self-6a3cf5192354f71615ac51034b3e97c20eda99643fcaf5bbe6d41ad59bd12167.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/popper.self-2791fae5cb8907627557cd713086322be8a7791c44557801391157b1be697f54.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap-global-this-define.self-10843c548029454bfe6f9f3f119d7242866193d5e262dcfe0951fc789c0fccc6.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/dom/data.self-8967efefbd46b314e2be9dd82c992bbaefe713bf7647ab19631db737841b8fed.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/dom/event-handler.self-e6b9f4551ac41e2abb7c8345ce3fe3baef5cf9059d99bc6f8af12f9b2ab80b0e.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/base-component.self-762fc325956616d2badd4d5d5e5e63c2dc0cac62db1dfa431dd4747311a4b23a.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/dom/manipulator.self-5405be6a29f30684994f29dce3948f12ace56af3c66ed0cc84a7997dbacb73c0.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/dom/selector-engine.self-3b62d269585e2abe77e87e31372eb18e13b9b7aa37a42201cd1254643920e557.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/dropdown.self-f46f871e80d162d2f055004f970560e933de7cd1cca9ee8e3520296e42c3e8cd.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/scrollspy.self-faf0be1d95d4b8e79d2d206278e64b5f3c0a18f2a5ac6ca48811062b210d2f69.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/alert.self-f30a21cffef4f6d3985a84ac9ed7e6749f8923d9986927047b4a14e8103d62be.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/collapse.self-de5b7894404c2f2ab6f929bbcb3c509d093406c7cd54104c5df1077d18617864.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/toast.self-f702c4ab8d3e28d4ea26cdc7a4417e7b5692ae7e76c65d1ea2f1e441aa365697.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/tooltip.self-f0540c3e642745f1c40af24fdb688957b3bc6def59626682962335fc62ec11d1.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/offcanvas.self-b3ebdf2383b4644ecbb9d2e39add9a1d3329e3ea978d10c76df42e134b596226.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/popover.self-26a03a6d4efd92d84e43ca9601ad4f27b8fec5e5ab130c8b4761f38d28882077.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/button.self-4ba6d05f874b48b740d2c614b1d2d8379bb4f6aeb88e196401541916242989a6.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/modal.self-d9f067646408f773e9e3984c32f0d3fe220180662db374490fedc69b2de024d9.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/tab.self-18b812a1b2779afd1d26e88493525a168888dfc443312f4cba206f1cc3060e34.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap/carousel.self-936ef6752cde71d56d290771959226854f33b4b933fd439dd47d29fe344ccbea.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap-global-this-undefine.self-8dadb5ca0b5435daace36e74d9969597974e030c17c6f9da2dcd713769cfc730.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap-sprockets.self-49845c4836a1476d214788cff889c08d33fa1db30f8989214d2d7f81ef885e67.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/rails-ujs.self-81c572f39b69ead02e3f97fe43b76954a434591bc2837e3a35af212315e67569.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/boards.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap.bundle.self-9585671470b2f1e6e1ccfd0228c5ce527f96fe4586d2d8788653eb9a36ab2143.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/bootstrap.bundle.min.self-4bcaf2813bab247ee85d1ffbe2c8c6b9527ad2eddf66164dc0ae66b61dc25bf6.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/action_cable.self-69fddfcddf4fdef9828648f9330d6ce108b93b82b0b8d3affffc59a114853451.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/cable.self-0fa6ddf7e9510efe361a41f0eb56a84098e004cbe1abaac591d4e7878a4026f1.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/channels/chats.self-db4be20db914b65dfe22ada94a79cb9432da1d5f69a166ea06f8e125169a3d5f.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/channels/messages.self-aa893a19a72dd1c4f6c6a3e56cdf534d465f4dfa4f47be331446beb29e2de2ff.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/card_likes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/edtrackers.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/messages_form.self-4db8d261599a24461eb3e5b086c4ca64b3a078866ce5cadad390d6e65423246a.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/myedtools.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/notes.self-71acc77f7970a3228e304afd96970954c13fe6bddd26d1ea7be437b2b0ee3929.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/tags.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" data-turbolinks-track="reload"></script>
-  <script src="/assets/application.self-c5e7ba2e99649fd82fba68ce05ef4728c02898f3fe3d9dbf1ac6959913b55cd2.js?body=1" data-turbolinks-track="reload"></script>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -354,15 +297,11 @@
       width: '100%'
     })
   });
-  $('.close').click(function () {
-      $('.modal').modal('hide');
-  });
-
   // global variable for ChangeUrl method  case 1
   var old_url;
   var old_url = window.location.pathname;
 
-
 </script>
+
 
 </html>`

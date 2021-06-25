@@ -45,9 +45,9 @@
         <div class='note-container'>
           <%= link_to user_path(user) do %>
             <% if user.avatar? %>
-              <%= image_tag user.avatar.url(:thumb),alt: "image" %>
+              <%= image_tag user.avatar.url(:thumb) %>
             <% else %>
-              <%= image_tag 'avatar.png',alt: "image", :style => 'width: 100%;' %>
+              <%= image_tag 'avatar.png', :style => 'width: 100%;' %>
             <% end %>
             <div class='note-container-text' style='text-align: center !important;'>
               <p class='mobile-font note-btn-font' style='text-transform: capitalize'> <%= user.username %></p>

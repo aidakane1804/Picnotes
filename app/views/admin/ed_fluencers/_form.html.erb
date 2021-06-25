@@ -31,7 +31,7 @@
   file_picker_callback: function (callback, value, meta) {
     /* Provide file and text for the link dialog */
     if (meta.filetype === 'file') {
-      callback('https://www.google.com/logos/google.jpg', { text: 'My text' }, { alt: 'My alt text' });
+      callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
     }
 
     /* Provide image and alt text for the image dialog */
@@ -41,7 +41,7 @@
 
     /* Provide alternative source and posted for the media dialog */
     if (meta.filetype === 'media') {
-      callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' }, { alt: 'My alt text' });
+      callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
     }
   },
   templates: [
@@ -70,12 +70,12 @@
 	  <%= f.input :last_name %>
     <%= f.input :url %>
 	  <%= f.input :image %>
-	  <li class="file input required li-width-79-per" id="ed_fluencer_content_input" >
+	  <li class="file input required" id="ed_fluencer_content_input" style="width: 79%;">
     	<label for="ed_fluencer_content" class="label">Content<abbr title="required">*</abbr></label><br>
 	    <%#= f.cktext_area :content %>
 	    <%= f.text_area :content, :class => "tinymce" %>
 	  </li>    
-    <li class="file input required li-width-79-per" id="ed_fluencer_article_input" >
+    <li class="file input required" id="ed_fluencer_article_input" style="width: 79%;">
     	<label for="ed_fluencer_article" class="label">Article<abbr title="required">*</abbr></label><br>
 	    <%= f.text_area :article, :class => "tinymce"  %>
 	  </li>  
@@ -87,3 +87,14 @@
   <%= f.actions %>
 <% end %>
 
+<style>
+	.cke_chrome {
+	  width: 80% !important;
+	  overflow: hidden;
+	}
+</style>
+<script type="text/javascript">
+ 
+
+
+</script>

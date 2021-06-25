@@ -15,7 +15,7 @@
 
       <% if @folders.count > 0 %>
         <div class='note-container'>
-          <button type='button' class='div15' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
+          <button type='button' style='padding: 0; border: none; background-color: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'>
             <%= image_tag 'add.png', class: 'add-note-btn' %>
             <div class='note-container-text-center'>
               <p class="mobile-font note-btn-font">
@@ -30,46 +30,46 @@
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
-                    <%= image_tag note.image.url(:board_thumb),alt: "image", class: 'image-size' %>
+                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
                   <% else %>
-                    <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                    <%= image_tag 'empty.png', class: 'image-size' %>
                   <% end %>
                 </div>
               <% end %>
             <% end %>
             <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% end %>
             <div class='note-container-text'>
@@ -84,7 +84,7 @@
           <h1 class="blue-heading">Curate your Picnotes.</h1>
           <p>Folders are a way to organize your Picnotes in different categories.</p>
           <p>
-            <button type='button' class='div14' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+            <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
           </p>
         </div> -->
 
@@ -94,7 +94,7 @@
             <h1 class="black-heading">Curate your Picnotes</h1>
             <p class="italic-text">Folders are a way to organize your Picnotes in different categories.</p>
             <p class="mp-0">
-              <button type='button' class='div14' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
             </p>
           </div>
         </div>
@@ -111,46 +111,46 @@
               <% if i < 4 %>
                 <div class='board-test-image'>
                   <% if note.image.url.length > 0 %>
-                    <%= image_tag note.image.url(:board_thumb),alt: "image", class: 'image-size' %>
+                    <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
                   <% else %>
-                    <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                    <%= image_tag 'empty.png', class: 'image-size' %>
                   <% end %>
                 </div>
               <% end %>
             <% end %>
             <% if folder.notes.where(archived: false).length == 0 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 1 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 2 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% elsif folder.notes.where(archived: false).length == 3 %>
               <div class='board-test-image'>
-                <%= image_tag 'empty.png',alt: "image", class: 'image-size' %>
+                <%= image_tag 'empty.png', class: 'image-size' %>
               </div>
             <% end %>
             <div class='note-container-text'>

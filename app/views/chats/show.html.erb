@@ -54,9 +54,9 @@
                 <div class="headind_srch">
                   <div class="recent_heading">
                     <% if current_user.avatar? %>
-                      <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image max-width-543-per', alt: 'avatar image' %>
+                      <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image', style: "max-width:543%" %>
                     <% else %>
-                      <%= image_tag 'avatar.png', class: 'note-avatar-image max-width-543-per', alt: 'avatar image' %>
+                      <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
                     <% end %>
                     <%= current_user.username %>
                     <h4>
@@ -84,12 +84,12 @@
                                         <% note = Note.find_by_user_id(other_user.id) %>
                                         <%# Message.where("user_id = ? AND chat_id = ? AND new = ?", current_user.id, other_user.id, TRUE) %>
                                         <% if note.user.avatar? %>
-                                          <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image max-width-543-per', alt: 'avatar image' %>
+                                          <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image', style: "max-width:543%" %>
                                         <% else %>
-                                          <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image max-width-543-per'%>
+                                          <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
                                         <% end %>
                                       <% else %>
-                                        <%= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image max-width-543-per' %>
+                                        <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
                                       <% end %>
 
                                       </div>
@@ -107,7 +107,7 @@
                                     </div>
                                     </div>
                                 <%#else%>
-                                <%#= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image' %>
+                                <%#= image_tag 'avatar.png', class: 'note-avatar-image' %>
                                 <%#end%>
 
                                 <!--                              ///-->
@@ -129,19 +129,19 @@
                             <% if Note.find_by_user_id(params[:other_user]) %>
                               <% @note = Note.find_by_user_id(params[:other_user]) %>
                               <% if @note.user.avatar? %>
-                                <%= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image max-width-543-per', alt: 'avatar image' %>
+                                <%= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image', style: "max-width:543%" %>
 
                                 <!--                        <h5 class="col-sm-1">&nbsp;&nbsp; <%#= @note.user.username rescue'' %></h5>-->
 
                               <% else %>
-                                <%= image_tag 'avatar.png', class: 'note-avatar-image max-width-543-per', alt: 'avatar image'%>
+                                <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
 
                                 <!--                        <h5 class="col-sm-1">&nbsp;&nbsp; <%#= @note.user.username rescue'' %></h5>-->
 
 
                               <% end %>
                             <% else %>
-                              <%= image_tag 'avatar.png', class: 'note-avatar-image max-width-543-per', alt: 'avatar image' %>
+                              <%= image_tag 'avatar.png', class: 'note-avatar-image', style: "max-width:543%" %>
 
 
                               <!--                      <h5 class="col-sm-1">&nbsp;&nbsp; <%#= @note.user.username rescue'' %></h5>-->
@@ -149,7 +149,8 @@
 
                             <% end %>
                           </div>
-                          <div class="col-sm-5 div1"><%= User.find(params[:other_user]).username if User.find(params[:other_user]).username? %>
+                          <div clas="col-sm-5" style="    margin-left: 211px;
+                              margin-top: -40px;"><%= User.find(params[:other_user]).username if User.find(params[:other_user]).username? %>
                             <h1 id="circle">
 
                             </h1>
@@ -169,9 +170,9 @@
                 </div>
                 <div class="mesgs">
                   <%# if @note.user.avatar? %>
-                  <%#= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image', alt: 'avatar image' %>
+                  <%#= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
                   <%# else %>
-                  <%#= image_tag 'avatar.png', class: 'note-avatar-image', alt: 'avatar image' %>
+                  <%#= image_tag 'avatar.png', class: 'note-avatar-image' %>
                   <!--                <%# end %> &nbsp;<%#= @other_user.username %>-->
                   <br><br><br>
                   <div class="msg_history scroll">
@@ -181,7 +182,7 @@
                       </div>
                       <%#  note = Note.find(other_user.id)   rescue '83'%>
                       <%# if note.user.avatar? %>
-                      <%#= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image', alt: 'avatar image' %>
+                      <%#= image_tag @note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
                       <%# else %>
                       <%#= image_tag 'avatar.png', class: 'note-avatar-image' %>
                       <%# end %>
@@ -190,7 +191,7 @@
                       <div class="received_msg scroll">
                         <div class="received_withd_msg scroll">
                           <% if @chat.messages.any? %>
-                            <div class="scroll nav-justified div2" id="messages">
+                            <div class="scroll nav-justified" id="messages" style="margin-left: -40px;">
 
                               <%= render partial: 'messages/message', collection: @chat.messages.order(id: :asc) %>
 

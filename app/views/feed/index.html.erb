@@ -33,7 +33,7 @@
 
         <div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
           <%= link_to(note_path(note), remote: true) do %>
-            <%= image_tag note.image.url(:thumb),alt: "image", class:"image" if note.image.present? %>
+            <%= image_tag note.image.url(:thumb), class:"image" if note.image.present? %>
             <div class='note-container-text'>
               <p class="mobile-font note-btn-font"> <%= truncate(note.title, length: 50) %> </p>
             </div>
@@ -49,7 +49,7 @@
             <h1 class="black-heading">Follow lifelong learners from across the world</h1>
             <p class="italic-text">You choose which friends to follow and you'll never miss their Picnotes.</p>
             <p class="mp-0">
-              <button type='button' class='div14' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
+              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
             </p>
           </div>
         </div>
