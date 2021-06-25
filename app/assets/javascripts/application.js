@@ -81,7 +81,6 @@ function openTab(evt, tabName) {
 }
 
 function ChangeUrl(title, url) {
-    console.log("ss");
         $('.modal').modal('hide');
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };
