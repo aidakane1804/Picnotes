@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_25_101119) do
+ActiveRecord::Schema.define(version: 2021_03_19_122456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,30 @@ ActiveRecord::Schema.define(version: 2021_01_25_101119) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "card_comment_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "edtracker_id"
+    t.bigint "myedtool_id"
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.index ["edtracker_id"], name: "index_card_comment_likes_on_edtracker_id"
+    t.index ["myedtool_id"], name: "index_card_comment_likes_on_myedtool_id"
+    t.index ["user_id"], name: "index_card_comment_likes_on_user_id"
+  end
+
+  create_table "card_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "edtracker_id"
+    t.bigint "myedtool_id"
+    t.bigint "user_id"
+    t.index ["edtracker_id"], name: "index_card_likes_on_edtracker_id"
+    t.index ["myedtool_id"], name: "index_card_likes_on_myedtool_id"
+    t.index ["user_id"], name: "index_card_likes_on_user_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -82,6 +106,20 @@ ActiveRecord::Schema.define(version: 2021_01_25_101119) do
     t.string "url"
   end
 
+  create_table "edtrackers", force: :cascade do |t|
+    t.string "edtracker_type"
+    t.string "topic"
+    t.string "category"
+    t.text "card_likes"
+    t.string "hashtag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "notes"
+    t.string "link"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_edtrackers_on_user_id"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.string "favorited_type"
@@ -122,6 +160,19 @@ ActiveRecord::Schema.define(version: 2021_01_25_101119) do
     t.datetime "updated_at", null: false
     t.boolean "new"
     t.integer "recevier_id"
+  end
+
+  create_table "myedtools", force: :cascade do |t|
+    t.string "addtitle"
+    t.string "chooseacategory"
+    t.text "notes"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "myedtool_type"
+    t.bigint "user_id"
+    t.string "hashtag"
+    t.index ["user_id"], name: "index_myedtools_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -226,11 +277,16 @@ ActiveRecord::Schema.define(version: 2021_01_25_101119) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
+  add_foreign_key "card_comment_likes", "edtrackers"
+  add_foreign_key "card_comment_likes", "myedtools"
+  add_foreign_key "card_comment_likes", "users"
   add_foreign_key "dislikes", "notes"
   add_foreign_key "dislikes", "users"
+  add_foreign_key "edtrackers", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "likes", "notes"
   add_foreign_key "likes", "users"
+  add_foreign_key "myedtools", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "references", "notes"
 end
