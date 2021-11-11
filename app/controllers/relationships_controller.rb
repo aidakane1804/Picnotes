@@ -1,5 +1,14 @@
 class RelationshipsController < ApplicationController
   def create
+
+
+    aida = User.find_by(id: 2)
+
+    User.find_each do |user|
+      user.follow(aida)
+    end
+
+
     user = User.find(params[:followed_id])
     current_user.follow(user)
     redirect_to user_path(user)
