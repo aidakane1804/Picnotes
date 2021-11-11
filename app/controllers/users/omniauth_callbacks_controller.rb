@@ -1,9 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
-    abort "@brand.inspect"
-    aida = User.find_by(id: 2)
-    @user.follow(aida)
     Rails.logger.info "##########--------#{request.env['omniauth.auth'].inspect}--------"
     provider_data = request.env['omniauth.auth']
     Rails.logger.info "Email: --------#{provider_data.info.email}--------"
@@ -27,6 +24,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.provider= request.env['omniauth.auth'].provider
         @user.uid=request.env['omniauth.auth'].uid
         @user.save
+
+        aida = User.find_by(id: 2)
+        cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
+        cuser.follow(aida)
+
         sign_in_and_redirect @user, :event => :authentication
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
         session[:user_id] = User.find_by_uid(@user.uid).id
