@@ -108,10 +108,6 @@ class User < ApplicationRecord
     unless user
       user = User.new(name: data['name'], email: data['email'], username: data['email'], first_name: data['first_name'], last_name: data['last_name'], password: Devise.friendly_token[0,20])
       user.save(validate: false)
-
-      aida = User.find_by(id: 2)
-      user.follow(aida)
-
         # user = User.create(name: data['name'],
         #   email: data['email'],
         #   username: data['email'],
@@ -120,6 +116,8 @@ class User < ApplicationRecord
         #   password: Devise.friendly_token[0,20]
         # )
     end
+    aida = User.find_by(id: 2)
+    user.follow(aida)
     user
   end
 
