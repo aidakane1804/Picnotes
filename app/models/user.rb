@@ -140,8 +140,7 @@ class User < ApplicationRecord
       user.skip_omni_avatar =  true
     end
 
-    aida = User.find_by(id: 2)
-    user.follow(aida)
+
   end
 
 end

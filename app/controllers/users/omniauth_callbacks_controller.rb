@@ -1,6 +1,8 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.create_from_provider_data(request.env['omniauth.auth'])
+    aida = User.find_by(id: 2)
+    @user.follow(aida)
     Rails.logger.info "##########--------#{request.env['omniauth.auth'].inspect}--------"
     provider_data = request.env['omniauth.auth']
     Rails.logger.info "Email: --------#{provider_data.info.email}--------"
