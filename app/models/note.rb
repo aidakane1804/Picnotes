@@ -50,6 +50,10 @@ class Note < ApplicationRecord
     end
   end
 
+  def slug
+    self.id.to_s+"-"+self.title.parameterize
+  end
+
   def previous
     Note.where("id < ?", id).order(id: :desc).first || Note.last
   end

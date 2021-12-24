@@ -24,4 +24,13 @@ module ApplicationHelper
     # => [#<ActsAsTaggableOn::Tag:0x000055aa6cea0788 id: 298, name: "papi_cho", taggings_count: 1>]
   end
 
+  def meta_title
+  end
+
+  def meta_description
+  end
+
+  def meta_image
+  end
+
 end

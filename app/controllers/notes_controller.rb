@@ -35,7 +35,7 @@ class NotesController < ApplicationController
   end
 
   def show
-    default_meta_tags
+    
     @tags = @note.tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
     # @references = @references_unordered.sort_by &:file_type
@@ -53,6 +53,13 @@ class NotesController < ApplicationController
     @previous_note = @note.next
     @next_note = @note.previous
     @similar = Note.tagged_with(@note.tags, :any => true)
+    @meta_title = @note.title
+    @meta_description = @note.body.slice(0,130)
+    @meta_keywords = @note.body
+    @meta_image = @note.image.url
+
+    set_meta_tags title: @meta_title, description: @meta_description, keywords: @meta_keywords
+
     respond_to do |format|
       format.js
       format.html

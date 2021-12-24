@@ -59,6 +59,13 @@ class ApplicationController < ActionController::Base
     #expires_in(30.days, public: true)
   end
 
+  def note_meta_tags
+    @meta_title = @note.title
+    @meta_description = @note.body.slice(0,50)
+    @meta_keywords = @note.body
+    @meta_image = @note.image.url
+  end
+
   helper_method :current_user
 
   private
