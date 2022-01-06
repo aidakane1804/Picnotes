@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def note_meta_tags
-    @meta_title = @note.title
+    @meta_title = "Note1" #@note.title
     @meta_description = @note.body.slice(0,50)
     @meta_keywords = @note.body
     @meta_image = @note.image.url
