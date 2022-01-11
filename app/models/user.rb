@@ -116,8 +116,8 @@ class User < ApplicationRecord
         #   password: Devise.friendly_token[0,20]
         # )
     end
-    aida = User.find_by(id: 2)
-    user.follow(aida)
+    # aida = User.find_by(id: 2)
+    # user.follow(aida)
     user
   end
 
