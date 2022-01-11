@@ -37,6 +37,12 @@ class UsersController < ApplicationController
       UserMailer.account_activation(@user).deliver_now
       session[:user_id] = @user.id
 
+      begin
+        aida = User.find_by(id: 2)
+        @user.follow(aida)
+      rescue => e
+      end
+
       flash[:notice] = 'Thank you for signing ups!'
       redirect_to feed_index_path
     else
