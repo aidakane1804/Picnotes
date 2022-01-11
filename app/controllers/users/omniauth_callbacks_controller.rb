@@ -28,9 +28,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.uid=request.env['omniauth.auth'].uid
         @user.save
 
-        aida = User.find_by(id: 2)
-        cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
-        cuser.follow(aida)
+        # aida = User.find_by(id: 2)
+        # cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
+        # cuser.follow(aida)
 
         sign_in_and_redirect @user, :event => :authentication
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
