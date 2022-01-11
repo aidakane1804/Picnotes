@@ -18,9 +18,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, :event => :authentication
       set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
       session[:user_id] = User.find_by_uid(@user.uid).id
-      # aida = User.find_by(id: 2)
-      # cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
-      # cuser.follow(aida)
+      begin
+        aida = User.find_by(id: 2)
+        cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
+        cuser.follow(aida)
+      rescue => e
+      end
+
     elsif  !(@user.persisted?)
       @user = User.find_by_email(request.env['omniauth.auth'].info.email)
       if @user.persisted?
@@ -28,9 +32,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.uid=request.env['omniauth.auth'].uid
         @user.save
 
-        # aida = User.find_by(id: 2)
-        # cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
-        # cuser.follow(aida)
+        begin
+          aida = User.find_by(id: 2)
+          cuser = User.find_by(id: User.find_by_uid(@user.uid).id)
+          cuser.follow(aida)
+        rescue => e
+        end
 
         sign_in_and_redirect @user, :event => :authentication
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
