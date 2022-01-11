@@ -34,10 +34,10 @@ class UsersController < ApplicationController
     @user = User.new user_params
 
     if @user.save
-      UserMailer.account_activation(@user).deliver_now
+      # UserMailer.account_activation(@user).deliver_now
       session[:user_id] = @user.id
 
-      flash[:notice] = 'Thank you for signing up!'
+      flash[:notice] = 'Thank you for signing ups!'
       redirect_to feed_index_path
     else
       render :new
