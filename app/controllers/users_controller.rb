@@ -44,6 +44,7 @@ class UsersController < ApplicationController
       rescue => e
       end
 
+
       flash[:notice] = 'Thank you for signing ups!'
       redirect_to feed_index_path
     else
