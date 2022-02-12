@@ -97,7 +97,7 @@
                 <% end %>
                 <p>
                   <%#= note.created_at.strftime("%m/%d/%Y") %>
-                  <%# if user_signed_in? && can?(:crud, @note) %>
+                  <% if user_signed_in? && can?(:crud, @note) %>
                     <div style = 'display: flex'>
                       <button
                         type = 'button'
@@ -110,7 +110,7 @@
                       </button>
                       <%= link_to('Delete', note_path(@note), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
                     </div>
-                  <%# end %>
+                  <% end %>
                 </p>
 
               </div>
