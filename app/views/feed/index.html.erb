@@ -7,13 +7,15 @@
       <%= render './modals/nationality_modal' %>
       <script>
           $(window).on('load', function () {
+              alert("here");
               $('#nationalityModal').modal('show');
           })
       </script>
-    <% elsif (user_signed_in? && current_user.follow_status == false) %>
+    <% elsif user_signed_in? && current_user.follow_status == false %>
       <%= render './modals/follow_modal' %>
       <script>
           $(window).on('load', function () {
+              alert("heres");
               $('#followModal').modal('show');
           })
       </script>
