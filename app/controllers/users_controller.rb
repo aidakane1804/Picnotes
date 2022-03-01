@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
 
     if @user.save
-      # UserMailer.account_activation(@user).deliver_now
+      UserMailer.account_activation(@user).deliver_now
       session[:user_id] = @user.id
 
       begin
