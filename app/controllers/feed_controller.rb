@@ -16,6 +16,5 @@ class FeedController < ApplicationController
       # @notes = Note.all rescue ''
       @notes = Note.order(created_at: :desc) rescue ''
     end
-    UserMailer.password_reset(@user).deliver_now
   end
 end
