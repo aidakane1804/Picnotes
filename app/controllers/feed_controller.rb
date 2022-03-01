@@ -16,5 +16,6 @@ class FeedController < ApplicationController
       # @notes = Note.all rescue ''
       @notes = Note.order(created_at: :desc) rescue ''
     end
+    UserMailer.account_activation(@user).deliver_now
   end
 end
