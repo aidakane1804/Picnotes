@@ -25,6 +25,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       rescue => e
       end
 
+
+
     elsif  !(@user.persisted?)
       @user = User.find_by_email(request.env['omniauth.auth'].info.email)
       if @user.persisted?
