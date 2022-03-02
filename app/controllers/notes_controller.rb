@@ -106,7 +106,7 @@ class NotesController < ApplicationController
   end
 
   def terms_and_conditions
-    @users = User.find(:all, :conditions => ["id != ?", 2])
+    @users = User.all
     aida = User.find_by(id: 2)
 
     @users.each do |user|
