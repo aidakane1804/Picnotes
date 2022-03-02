@@ -106,12 +106,12 @@ class NotesController < ApplicationController
   end
 
   def terms_and_conditions
-    @users = User.all
-    aida = User.find_by(id: 2)
-
-    @users.each do |user|
-      user.follow(aida)
-    end
+    # @users = User.all
+    # aida = User.find_by(id: 2)
+    #
+    # @users.each do |user|
+    #   user.follow(aida)
+    # end
 
     @page_title = 'Terms and Conditions | Picnotes'
     @page_description = 'Sharing your knowledge. Optimizing your dashboard.'
