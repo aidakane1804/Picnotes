@@ -21353,7 +21353,7 @@ button.blue-appearance-btn i.fa.fa-search {
   }
   /* line 1698, app/assets/stylesheets/application.scss */
   .note-container {
-    flex-basis: 44%;
+    flex-basis: 100%;
     margin: 3% !important;
   }
   /* line 1699, app/assets/stylesheets/application.scss */

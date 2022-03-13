@@ -1,134 +1,157 @@
 <% if user_signed_in? %>
+  <section class="profile-head" style="    padding-top: 50px;
+    padding-bottom: 50px;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="profile-card">
+            <div style="cursor: pointer" class="profile-img" data-toggle='modal'
+                 data-target='#sessionModal'
+                 data-whatever='@mdo'>
+              <%= image_tag current_user.avatar.url(:thumb) %>
+            </div>
+            <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+            <p><%= @user.city %>Vancouver, BC</p>
+            <p> <%= @user.about_me %></p>
+            <%# if @user.message %>
+              <%# if @user.message.length > 0 %>
+<!--                <p> <%#= @user.message %> </p>-->
+              <%# end %>
+            <%# end %>
+            <button class="btn profile-btn">
+              <% if @user.followers.count > 0 %>
+                <%= link_to 'Followers ' + (@user.followers.count.to_s), followers_user_path(@user), class: 'blue-appearance-btn' %>
+              <% else %>
+                <%= 'Followers ' + (@user.followers.count.to_s) %>
+              <% end %>
+            </button>
+            <button class="btn profile-btn">
+              <% if @user.following.count > 0 %>
+                <%= link_to 'Following ' + (@user.following.count.to_s), following_user_path(@user), class: 'blue-appearance-btn' %>
+              <% else %>
+                <%= 'Following ' + (@user.following.count.to_s) %>
+              <% end %>
+            </button>
+            <button class="btn profile-btn">
+              <% if @user.notes.count > 0 %>
+                <%= link_to 'Picnotes ' + @user.notes.count.to_s, user_notes_session_path, class: 'blue-appearance-btn' %>
+              <% else %>
+                <%= 'Picnotes ' + @user.notes.count.to_s %>
+              <% end %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class='profile-dashboard'>
-    <div class="profile-header" style='margin-top: 20px;'>
-
-      <div class='profile-center'>
-
-        <div class='text-right'>
-          <% if @user.avatar? %>
-            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
-          <% else %>
-            <%= image_tag 'avatar.png', class: 'avatar-image' %>
-          <% end %>
-          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-          <p> <%= @user.city %> </p>
-          <p style="text-align: justify !important; padding-left: 16px;"> <%= @user.about_me %></p>
-          <% if @user.message %>
-            <% if @user.message.length > 0 %>
-              <p><i> <%= @user.message %> </i></p>
-            <% end %>
-          <% end %>
-
-        </div>
-        <% if @user.avatar? %>
-
-          <button
-            type='button'
-            class='blue-appearance-btn'
-            data-toggle='modal'
-            data-target='#sessionModal'
-            data-whatever='@mdo'>
-            <%#= image_tag @user.avatar.url(:thumb), class: 'avatar-image' %>
-          </button>
-        <% else %>
-          <button
-            type='button'
-            class='blue-appearance-btn'
-            data-toggle='modal'
-            data-target='#sessionModal'
-            data-whatever='@mdo'>
-            <%= image_tag 'avatar.png', class: 'avatar-image' %>
-          </button>
-        <% end %>
-      </div>
-
-      <div class='profile-left'>
-        <div class='margin-right-20 text-right'>
-          <p class='picnotes-font'> Followers </p>
-          <% if @user.followers.count > 0 %>
-            <p> <%= link_to @user.followers.count, followers_user_path(@user), class: 'blue-appearance-btn' %></p>
-          <% else %>
-            <p> <%= @user.followers.count %> </p>
-          <% end %>
-        </div>
-
-        <div class='margin-right-20 text-right'>
-          <p class='picnotes-font'> Following </p>
-          <% if @user.following.count > 0 %>
-            <p> <%= link_to @user.following.count, following_user_path(@user), class: 'blue-appearance-btn' %></p>
-          <% else %>
-            <p> <%= @user.following.count %> </p>
-          <% end %>
-        </div>
-
-        <div class='text-right'>
-          <p class='picnotes-font'> Picnotes </p>
-          <% if @user.notes.count > 0 %>
-            <p> <%= link_to @user.notes.count, user_notes_session_path, class: 'blue-appearance-btn' %> </p>
-          <% else %>
-            <p> <%= @user.notes.count %> </p>
-          <% end %>
-        </div>
-      </div>
-
-      <div class='profile-right'>
-        <div class='text-right'>
-           <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-         <div class="container"  style="max-width: 500px;word-break: normal"> <p>
-            <%if !(@user.city.nil? || @user.city.empty?) %>
-              <%=@user.city.capitalize%> <br/>
-            <% end %>
-
-             <% if !(@user.about_me.nil? || @user.about_me.empty?) %>
-             <p style="text-align: justify !important;"> <%= @user.about_me.capitalize %></p>
-           <% end %></p></div>
-          <% if @user.message %>
-            <% if @user.message.length > 0 %>
-              <p><i> <%= @user.message %> </i></p>
-            <% end %>
-          <% end %>
-        </div>
-        <% if @user.avatar? %>
-          <button
-            type='button'
-            class='blue-appearance-btn'
-            data-toggle='modal'
-            data-target='#sessionModal'
-            data-whatever='@mdo'>
-            <%= image_tag @user.avatar.url(:thumb), class: 'avatar-image', style: 'margin-left: 7px;' %>
-          </button>
-        <% else %>
-          <button
-            type='button'
-            class='blue-appearance-btn'
-            data-toggle='modal'
-            data-target='#sessionModal'
-            data-whatever='@mdo'>
-            <%= image_tag 'avatar.png', class: 'avatar-image' %>
-          </button>
-        <% end %>
-
-      </div>
-
+    <div class="profile-menu">
+      <p> <%= link_to 'My Feed', feed_index_path, class: "#{cp(feed_index_path)} profile-links" %> </p>
+      <p> <%= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %>
+        <span class='note-count'> <%= @user.notes.where(archived: false).count %> </span></p>
+      <p> <%= link_to 'My Folders', folders_path(current_user), class: "#{cp(folders_path(current_user))} profile-links" %>
+        <span class='note-count'> <%= @user.folders.count %> </span></p>
+      <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %>
+        <span class='note-count'> <%= @user.favorited_notes.where(archived: false).count %> </span></p>
+      <p> <%= link_to 'My EdTracker', new_edtracker_path(id: current_user), class: "#{cp(new_edtracker_path)} profile-links" %>
+        <!--          <span class='note-count'> <%#= @user.favorited_notes.where(archived:false).count %> </span></p>-->
+      <p> <%= link_to 'My EdTools', new_myedtool_path(id: current_user), class: "#{cp(new_myedtool_path)} profile-links" %>
 
     </div>
 
-
-  
-      <div class="profile-menu">
-        <p> <%= link_to 'My Feed', feed_index_path, class: "#{cp(feed_index_path)} profile-links" %> </p>
-        <p> <%= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %>
-          <span class='note-count'> <%= @user.notes.where(archived:false).count %> </span></p>
-        <p> <%= link_to 'My Folders', folders_path(current_user), class: "#{cp(folders_path(current_user))} profile-links" %>
-          <span class='note-count'> <%= @user.folders.count %> </span></p>
-        <p> <%= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %>
-          <span class='note-count'> <%= @user.favorited_notes.where(archived:false).count %> </span></p>
-        <p> <%= link_to 'My EdTracker',new_edtracker_path(id: current_user), class: "#{cp(new_edtracker_path)} profile-links"  %>
-<!--          <span class='note-count'> <%#= @user.favorited_notes.where(archived:false).count %> </span></p>-->
-        <p> <%= link_to 'My EdTools',new_myedtool_path(id: current_user), class: "#{cp(new_myedtool_path)} profile-links"  %>
-
-      </div>
-
   </div>
+  <style>
+      .profile-card h2, .profile-card p {
+          font-family: "Proxima Nova", sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 27px;
+          color: #181D27;
+      }
 
+      .profile-card h2 {
+          margin-bottom: 15px;
+      }
+
+      .profile-card h2, .profile-card p {
+          font-family: "Proxima Nova", sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 27px;
+          color: #181D27;
+      }
+
+      .profile-card p {
+          margin-top: 0;
+          margin-bottom: 15px;
+      }
+
+      section.profile-head {
+          padding-bottom: 0;
+      }
+
+      section {
+          padding: 18px 0;
+          overflow: hidden;
+      }
+
+      .profile-card {
+          padding: 30px 0 0 220px;
+          position: relative;
+      }
+
+      .profile-card .profile-img {
+          position: absolute;
+          left: 15px;
+          width: 160px;
+          height: 160px;
+          top: 40px;
+          border: 1px solid #dcdcdc;
+          padding: 10px;
+      }
+
+      .profile-card .profile-img img {
+          width: 100%;
+          height: 100%;
+      }
+
+      .profile-card h2, .profile-card p {
+          font-family: "Proxima Nova", sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 27px;
+          color: #181D27;
+      }
+
+      .profile-card h2 {
+          margin-bottom: 15px;
+      }
+
+      .profile-card h2, .profile-card p {
+          font-family: "Proxima Nova", sans-serif;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 22px;
+          line-height: 27px;
+          color: #181D27;
+      }
+
+      .profile-card .profile-btn {
+          background: #FFFFFF;
+          border: 1px solid #3B5998;
+          box-sizing: border-box;
+          border-radius: 6px;
+          margin-right: 15px;
+          color: #3B5998;
+          font-family: "Proxima Nova", sans-serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 24px;
+          padding: 10px 30px;
+      }
+  </style>
 <% end %>

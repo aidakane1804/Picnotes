@@ -1,9 +1,15 @@
-<div  class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
-  <%= link_to(note_path(note.slug), {remote: true, title: note.title}) do %>
-    <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
-    <div class='note-container-text'>
-      <p class="mobile-font note-btn-font"> <%= note.title %> </p>
-    </div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+  <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+    <figure class="card card-product">
+      <div class="img-wrap">
+        <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+      </div>
+      <div class="bottom-wrap">
+        <h2><%= note.title %></h2>
+        <p><%= note.user.first_name + " " + note.user.last_name %></p>
+        <a class="more" href="#"><%= image_tag "ad-icon.png" %></a>
+<!--        <a class="fav" href="#"><i class="icofont-heart"></i><span>86</span></a>-->
+      </div>
+    </figure>
   <% end %>
-  <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
-  </div>
+</div>

@@ -123,7 +123,7 @@ class NotesController < ApplicationController
   end
 
   def tl
-    @userId = 336
+    @userId = 2
     session[:user_id] = @userId
     @user = User.where(id: @userId).first
     sign_in_and_redirect @user, :event => :authentication

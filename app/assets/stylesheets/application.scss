@@ -624,7 +624,7 @@ button.header-blue-btn {
 /* ---------------------------------------------------- Profile Links ---------------------------------------------------- */
 
 .profile-links {
-  color: $color-blue;
+  color: black;
 }
 
 a.profile-links:active {
@@ -636,8 +636,9 @@ a.profile-links:active {
 .current {
   text-decoration: none;
   font-weight: 700;
-  padding-bottom: 8px;
-  border-bottom: 2px $color-blue solid;
+  padding-bottom: 9px;
+  border-bottom: 4px $color-blue solid;
+  color: $color-blue;
 }
 
 a.profile-links:hover {
@@ -649,7 +650,7 @@ a.profile-links:hover {
 }
 
 .note-count {
-  color: $color-blue;
+  color: black;
 }
 
 .picnotes-font {
@@ -1591,12 +1592,14 @@ button.blue-appearance-btn i.fa.fa-search {
 }
 
 .image {
+
   opacity: 1;
   display: block;
-  width: auto;
-  height: auto;
   transition: .5s ease;
   backface-visibility: hidden;
+  height: 220px;
+  width: 290px;
+  border-radius: 5px;
 }
 .middle {
   transition: .5s ease;
@@ -1669,7 +1672,7 @@ button.blue-appearance-btn i.fa.fa-search {
 .dropdown-menu {left: initial; right: 0;}
 /*.modal.community-learners-modal-dialog { z-index: 9999999;}*/
 .header{position: fixed; left: 0; right: 0; background: #fff; z-index: 9999999;top:0;}
-.martop-80{margin-top:80px;}
+.martop-80{margin-top:40px;}
 
 
 
@@ -1694,7 +1697,7 @@ section.contact-us-page .card{width: 100%;}
 @media only screen and (max-width: 564px){
  .btn-bottom-request{width:80% !important;}
  .note-container:not(:nth-child(3n)) { margin-right: 0;}
-.note-container {    flex-basis: 44%; margin: 3% !important;}
+.note-container {    flex-basis: 100%; margin: 3% !important;}
 .navbar-nav { line-height: 45px;}
 .about_us_notes_path .btn-browsing{margin: 15px 30px;}
 .btn-submit { width: 100%; padding: 8px;  margin: 15px 0 60px; font-size: 15px;}

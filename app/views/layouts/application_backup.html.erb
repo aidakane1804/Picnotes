@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% if display_meta_tags.present? %>
+    <%= display_meta_tags %>
+  <% else %>
+    <title>Picnotes | Knowledge Sharing Hub for Lifelong Learners</title>
+  <% end %>
+
+
+  <meta name="image" property="og:image" content="https://www.picnotes.org/assets/logo-1.png">
+  <meta property=’og:title’ content='Picnotes'/>
+  <meta property=’og:image’ content='https://www.picnotes.org/assets/logo-1.png'/>
+  <meta property=’og:description’ content='Knowledge Sharing Hub for Lifelong Learners'/>
+  <meta property=’og:url’ content='https://www.picnotes.org/'/>
+  <meta property='og:image:width' content='2236'/>
+  <meta property='og:image:height' content='2179'/>
+  <!-- TYPE BELOW IS PROBABLY: 'website' or 'article' or look on https://ogp.me/#types -->
+  <meta property="og:type" content='website'/>
+
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%= favicon_link_tag asset_path('favicon.png') %>
+  <!-- BEGIN SHAREAHOLIC CODE -->
+  <link rel="preload" href="https://cdn.shareaholic.net/assets/pub/shareaholic.js" as="script"/>
+  <meta name="shareaholic:site_id" content="dcd53049032feb792c7b337fe4b4ca4e"/>
+  <script data-cfasync="false" async src="https://cdn.shareaholic.net/assets/pub/shareaholic.js"></script>
+  <!-- END SHAREAHOLIC CODE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136450115-1"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+  <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+          dataLayer.push(arguments);
+      }
+
+      gtag('js', new Date());
+
+      gtag('config', 'UA-136450115-1');
+  </script>
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3&appId=1103942603139314&autoLogAppEvents=1"></script>
+
+<!-- header new -->
+<header class="header">
+  <div class="container-fluid" style="border-bottom: 1px solid #DCDCDC">
+    <nav class="navbar navbar-expand-lg mobile-menu-box">
+
+
+      <%= link_to image_tag('logo.png'), root_path, class: "navbar-brand",style: "width:130px" %>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="icon-open-menu"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse hide-in-tablate-view" id="navbarSupportedContent">
+        <%= form_tag(notes_path, method: :get, class: "form-inline") do %>
+          <div class=" box">
+            <%= hidden_field_tag 'searchtest', 1 %>
+            <div class="has-search">
+              <%= text_field_tag(:search, params[:search], class: "form-control search-input") %>
+              <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+                <span class="icon-search"></span>
+              <% end %>
+              <div class="dropdown">
+                <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="javascript:void(0);">Tags</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Person</a>
+                  <a class="dropdown-item" href="javascript:void(0);">Picnotes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <ul class="navbar-nav ml-auto hide-in-tablate">
+          <li class="nav-item active">
+            <a class="nav-link" href="/about-us">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/for-schools">For Schools</a>
+          </li>
+          <!--  <li class="nav-item">
+             <a class="nav-link" href="/notes/community_guideline">Guidelines</a>
+           </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="/edfluencers">EdFluencers</a>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
+                Picnotes</a>
+            </li>
+
+          <% else %>
+            <a class="nav-link" href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
+              Picnotes</a>
+          <% end %>
+
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="/notes/contact_us">Contact us</a>
+          </li> -->
+          <li class="nav-item mobile-list-view">
+            <a class="nav-link" href="/edfluencers">EdFluencers</a>
+          </li>
+          <li class="nav-item mobile-list-view">
+            <a class="nav-link" href="/guidelines">Guidelines</a>
+          </li>
+          <li class="nav-item mobile-list-view">
+            <a class="nav-link" href="/terms-and-conditions">Terms and Conditions</a>
+          </li>
+        </ul>
+        <% if user_signed_in? %>
+          <% if Message.where("recevier_id = ?  AND new = ?", current_user.id, TRUE).any? %>
+            <a class="header-link set-font-family non-mobile  " href="/notes/chat_us">
+              <i class='far fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+            <span class="new-msg-header"></span>
+          <% else %>
+            <a class="header-link set-font-family non-mobile " href="/notes/chat_us">
+              <i class='fa fa-envelope' style='font-size:36px'></i></a>&nbsp;&nbsp;
+          <% end %>
+          <div class="dropdown signed_in_dropdown">
+            <a style="  color: #3b5998;" href="#" data-toggle="dropdown" class="btn  dropdown-toggle append-drop"><%= fa_icon('user-circle 2x') %></a>
+            <ul class="dropdown-menu">
+              <li>  <%= link_to 'Profile', feed_index_path, class: 'blue-appearance-btn set-font-family' %></li>
+              <li>
+                <button
+                  type='button'
+                  class='blue-appearance-btn set-font-family'
+                  data-toggle='modal'
+                  data-target='#editSessionModal'
+                  data-whatever='@mdo'
+                  data-dismiss="modal"
+                  style='padding: 0;'>
+                  Edit Profile
+                </button>
+              </li>
+              <li><%= link_to 'Sign Out', session_path, method: :delete, class: 'blue-appearance-btn set-font-family' %>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+          <button
+            type='button'
+            class='btn-login'
+            data-toggle='modal'
+            data-target='#newSessionModal'
+            data-whatever='@mdo'>
+            Log in
+          </button>
+          <button
+            type='button'
+            class='btn-signup'
+            data-toggle='modal'
+            data-target='#newUserModal'
+            data-whatever='@mdo'
+            onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">
+            Sign up
+          </button>
+        <% end %>
+        <div class="hamburger-menu">
+          <input id="menu__toggle" type="checkbox"/>
+          <label class="menu__btn" for="menu__toggle">
+            <span></span>
+          </label>
+          <ul class="menu__box">
+            <li><a class="menu__item" href="/guidelines">Guidelines</a></li>
+            <li><a class="menu__item" href="/terms-and-conditions">Terms and Conditions</a></li>
+            <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tablate-view-header">
+        <div class="form-container">
+          <%= form_tag(notes_path, method: :get, class: "form-inline") do %>
+            <div class=" box">
+              <%= hidden_field_tag 'searchtest1', 1 %>
+              <div class="has-search">
+                <%= text_field_tag(:search, params[:search], class: "form-control search-input") %>
+                <%= button_tag(type: "submit", class: 'blue-appearance-btn') do %>
+                  <span class="icon-search"></span>
+                <% end %>
+                <div class="dropdown">
+                  <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                    <a class="dropdown-item" href="javascript:void(0);">Tags</a>
+                    <a class="dropdown-item" href="javascript:void(0);">Person</a>
+                    <a class="dropdown-item" href="javascript:void(0);">Picnotes</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="tablate-right-nav">
+          <div class="tablate-view-btns">
+            <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
+
+            <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Sign
+              Up
+            </button>
+          </div>
+          <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox"/>
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+            <ul class="menu__box">
+              <li><a class="menu__item" href="/guidelines">Guidelines</a></li>
+              <li><a class="menu__item" href="/terms-and-conditions">Terms and Conditions</a></li>
+              <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="tablate-navbar-container">
+  <ul class="navbar-nav tablate-navbar">
+    <li class="nav-item active">
+      <a class="nav-link" href="/about-us">About Us</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/for-schools">For Schools</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/edfluencers">EdFluencers</a>
+    </li>
+    <li class="nav-item">
+      <!-- <a class="nav-link" href="/ed_fluencers">Create Picnotes</a> -->
+      <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
+        Picnotes</a>
+
+    </li>
+  </ul>
+</div>
+
+<!-- header new ending -->
+<%= render './modals/new_session_modal' %>
+<%= render './modals/new_note_modal' %>
+<%= render './modals/new_user_modal' %>
+<%= render './modals/signup_with_email_modal' %>
+
+<% if user_signed_in? %>
+  <%= render './modals/session_modal' %>
+  <%= render './modals/edit_session_modal' %>
+<% end %>
+<div class="martop-80">
+  <%= yield %>
+</div>
+
+<% if ((params[:controller] == "notes" && (params[:action] == "index" || params[:action] == "show")) || (params[:controller] == "notes" && params[:action] == "about_us") || (params[:controller] == "notes" && params[:action] == "about_us") || (params[:controller] == "ed_fluencers" && (params[:action] == "index" || params[:action] == "show")) || (params[:controller] == "notes" && params[:action] == "terms_and_conditions") || (params[:controller] == "notes" && params[:action] == "community_guideline") || (params[:controller] == "notes" && params[:action] == "contact_us") || (params[:controller] == "notes" && params[:action] == "for_schools")) %>
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>
+                <%= link_to image_tag('white-logo.png'), root_path %>
+              </h3>
+              <p>Picnotes combines the appeal of a picture sharing platform to an educational website.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/about-us">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="for-schools">For Schools</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="ed-fluencers">EdFluencerss</a></li>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="#" data-toggle="modal" data-target="#newNoteModal" data-whatever="@mdo" onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
+                  Picnotes</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#guidelines">Guidelines</a></li>
+              <li><a href="terms-and-conditions">Terms &amp; Conditions</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#contact_us"> Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Contact Us</h4>
+            <ul>
+              <li><%= image_tag "location_on.png" %> 33 Glenvale Crescent Mulgrave
+                VIC 3170 Australia
+              </li>
+              <li><%= image_tag "email.png" %><a href="#">picnotes@support.org</a></li>
+              <li><%= image_tag "call.png" %><a href="#">+1 234-567-8901</a></li>
+            </ul>
+            <div class="social-links mt-3">
+              <a href="#" class="facebook"><%= image_tag "fb.png" %></a>
+              <a href="#" class="twitter"><%= image_tag "twitter.png" %></a>
+              <a href="#" class="linkedin"><%= image_tag "linkedin.png" %></a>
+              <a href="#" class="instagram"><%= image_tag "instagram.png" %></a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-inner">
+        <ul>
+          <li>
+            <a href="/about-us">About Us</a>
+          </li>
+          <li>
+            <a href="/for-schools">For Schools</a>
+          </li>
+          <li>
+            <a href="/edfluencers">EdFluencers</a>
+          </li>
+          <li>
+            <a href="/guidelines">Guidelines</a>
+          </li>
+          <li>
+            <a href="/terms-and-conditions">Terms and Conditions</a>
+          </li>
+          <li>
+            <a href="/notes/contact_us">Contact Us</a>
+          </li>
+        </ul>
+
+        <div class="copy-right">
+          &copy; Picnotes 2021
+        </div>
+      </div>
+    </div>
+  </footer>
+<% end %>
+
+
+</body>
+<style>
+  .notes-container{
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+  }
+    #footer {
+        background: #181D27;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    #footer .footer-top {
+        background: #181D27;
+        padding: 120px 0 100px 0;
+        border-top: 2px solid #e9ecee;
+        border-bottom: 2px solid #e9ecee;
+    }
+
+    #footer .footer-top .footer-links {
+        margin-bottom: 30px;
+    }
+
+    #footer .footer-top .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #footer .footer-top .footer-links ul li:first-child {
+        padding-top: 0;
+    }
+
+    #footer .footer-top .footer-links ul li {
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    #footer .footer-top .footer-links ul a, .footer-top .footer-newsletter ul li a {
+        color: #fff;
+        transition: 0.3s;
+        display: inline-block;
+        line-height: 1;
+    }
+
+    #footer .footer-top .social-links a {
+        font-size: 18px;
+        display: inline-block;
+        color: #fff;
+        line-height: 0.9;
+        padding: 8px 0;
+        margin-right: 17px;
+        border-radius: 50%;
+        text-align: center;
+        width: 36px;
+        height: 36px;
+        transition: 0.3s;
+    }
+
+    #footer .footer-top h4 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        position: relative;
+        padding-bottom: 40px;
+    }
+
+    .footer-top .footer-newsletter ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-top .footer-newsletter ul li {
+        list-style: none;
+        padding: 0 0 20px 40px;
+        position: relative;
+    }
+
+    .footer-top .footer-newsletter ul li img {
+        position: absolute;
+        top: 0px;
+        left: 0;
+    }
+</style>
+<script>
+    $(document).on('ready page:load', function () {
+        $('#post_tag_ids').chosen({
+            allow_single_deselect: true,
+            width: '100%'
+        })
+    });
+    // global variable for ChangeUrl method  case 1
+    var old_url;
+    var old_url = window.location.pathname;
+
+</script>
+
+
+</html>`
