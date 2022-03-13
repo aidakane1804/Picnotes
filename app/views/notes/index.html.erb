@@ -22,7 +22,7 @@
   <% end %>
   <% @notes = @notes.where(archived: false) %>
   <div class='flex-center'>
-    <div class="notes-container" id="notes-div" style='margin-top: 60px;'>
+    <div class="notes-container" id="notes-div">
       <%= render @notes %>
     </div>
   </div>
