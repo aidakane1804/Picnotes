@@ -106,9 +106,11 @@
           </div>
         </form>
       <% else %>
-        <a data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo' class="btn btn-primary login-btn align-middle" href="#">Login</a>
-        <a data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')" class="btn btn-danger signup-btn align-middle" href="#">Sign
-          Up</a>
+        <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
+
+        <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Sign
+          Up
+        </button>
         </div>
       <% end %>
       <button type="button" class="mobile-nav-toggle d-lg-none"><span class="icon-open-menu"></span></button>
@@ -153,7 +155,7 @@
 
     @media screen and (max-width: 1600px) {
         .card-product .bottom-wrap h2 {
-            font-size: 16px;
+            font-size: 16px !important;
         }
     }
 
@@ -195,6 +197,16 @@
         line-height: 17px;
         letter-spacing: 0.02em;
         color: #818B98;
+    }
+
+    .card-product .bottom-wrap a {
+        font-family: "Proxima Nova", sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.02em;
+        color: #818B98 !important;
     }
 
     .card-product .bottom-wrap h2 {
@@ -646,7 +658,7 @@
               <li><a href="/">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="/about-us">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="for-schools">For Schools</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="ed-fluencers">EdFluencerss</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="edfluencers">EdFluencerss</a></li>
               <li><i class="bx bx-chevron-right"></i>
                 <a href="#" data-toggle="modal" data-target="#newNoteModal" data-whatever="@mdo" onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
                   Picnotes</a></li>
@@ -656,10 +668,10 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Support</h4>
             <ul>
-              <li><a href="#guidelines">Guidelines</a></li>
+              <li><a href="/guidelines">Guidelines</a></li>
               <li><a href="terms-and-conditions">Terms &amp; Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#contact_us"> Contact Us</a></li>
+              <li><a href="/terms-and-conditions">Privacy Policy</a></li>
+              <li><a href="notes/contact_us"> Contact Us</a></li>
             </ul>
           </div>
 

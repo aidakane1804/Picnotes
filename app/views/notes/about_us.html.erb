@@ -1,233 +1,223 @@
 <body>
 <div class="about_us_notes_path">
-	<div class='profile-dashboard'>
   <br>
-  <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_path, class: "current profile-links set-font-family" %> </p>
-    <p> <%= link_to 'Community Guidelines', guidelines_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: " profile-links set-font-family" %>
+  <section class="first-section-box-about">
+    <div class="container ptb ">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="heading-edu about">Conscious lifelong learners have found a place to call home</h4>
+          <p class="text-edu about">A community for those of you whose educational curiosity has no boundaries.
+          </p>
+        </div>
+      </div>
+
+      <div class="edu-sec">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="flex-button">
+              <button type='button' class='btn-bottom-request btn-browsing sign' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up | Picnotes','description', 'Connect with Facebook or Sign Up with Email')">Sign
+                up
+              </button>
+              <!-- <button class="btn-bottom-request sigup start"> Start browsing</button> -->
+              <%= link_to 'Start browsing', root_path, class: 'btn-bottom-request sigup start' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-lg-12 p-0 w-100">
+            <div class="about-banner">
+              <%= image_tag "about-banner.png", class: "img-fluid img-width" %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <h4 class="heading-edu edu">We live and breathe education</h4>
+          <p class="para-edu">Picnotes combines the appeal of a picture
+            sharing platform to an educational website. </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
+          <%= image_tag "img-one.png", class: "img-fluid img-s" %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pl-0 text-left order-sm-1 order-2">
+          <%= image_tag "img-two.png", class: "img-fluid img-l" %>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
+          <h4 class="heading-edu edu">Dedication to personal learning
+            sparks profound pleasure </h4>
+          <p class="para-edu">The greatest sense of personal fulfillment
+            comes from ongoing learning. </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="useful-text text-center">
+          <h4 class=" make">Make your knowledge useful</h4>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<br>
-<section class="first-section-box-about">
-	<div class="container ptb ">
-		<div class="row">
-			<div class="col-12">
-				<h4 class="heading-edu about">Conscious lifelong learners have found a place to call home</h4>
-				<p class="text-edu about">A community for those of you whose educational curiosity has no boundaries.
-				</p>
-			</div>
-		</div>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <h4 class="heading-edu edu Sharing">Sharing is caring </h4>
+          <p class="para-edu text">Somewhere, out there, there's someone
+            who doesn’t know what you know.
+            We believe that education is the ultimate
+            way to connect with people.
+          </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
+          <%= image_tag "im-three1.png", class: "img-fluid img-t" %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pl-0 text-left order-sm-1 order-2">
+          <%= image_tag "img-four.png", class: "img-fluid img-t" %>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
+          <h4 class="heading-edu edu Sharing pinotes">Picnotes are easy and fun to create</h4>
+          <p class="para-edu">Share an educational topic by combining an image
+            to short notes. Provide resources such as articles,
+            videos, and book recommendations. Any resources
+            that you provide, will further other users'
+            understanding about a topic. </p>
+        </div>
 
-		<div class="edu-sec">
-			<div class="row">
-			<div class="col-lg-12">
-				<div class="flex-button">
-					<button type='button' class='btn-bottom-request btn-browsing sign' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up | Picnotes','description', 'Connect with Facebook or Sign Up with Email')">Sign up
-					</button>
-					<!-- <button class="btn-bottom-request sigup start"> Start browsing</button> -->
-					<%= link_to 'Start browsing',root_path,class: 'btn-bottom-request sigup start'%>
-				</div>
-			</div>
-		</div>
-			<div class="row">
-				<div class=" col-lg-12 p-0 w-100">
-					<div class="about-banner">
-						<%= image_tag "about-banner.png",class: "img-fluid img-width"%>
-					</div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <h4 class="heading-edu edu Sharing strive">We strive to offer a fantastic
+            educational activity</h4>
+          <p class="para-edu">Ongoing learning allows you to foster a positive attitude, confidence, and personal
+            growth. However, more than anything, it simply provides tremendous pleasure.
 
-				</div>
-			</div>
-		</div>
-
-	</div>
-</section>
-
-
-<section>
-	<div class="container-fluid ptb">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-				<h4 class="heading-edu edu">We live and breathe education</h4>
-				<p class="para-edu">Picnotes combines the appeal of a picture
-					sharing platform to an educational website. </p>
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
-        <%= image_tag "img-one.png",class: "img-fluid img-s"%>
-			</div>
-		</div>
-	</div>
-</section>
-<section>
-	<div class="container-fluid ptb">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pl-0 text-left order-sm-1 order-2">
-        <%= image_tag "img-two.png",class: "img-fluid img-l"%>
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
-				<h4 class="heading-edu edu">Dedication to personal learning
-					sparks profound pleasure </h4>
-				<p class="para-edu">The greatest sense of personal fulfillment
-					comes from ongoing learning. </p>
-			</div>
-
-		</div>
-	</div>
-</section>
-
-<Div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="useful-text text-center">
-				<h4 class=" make">Make your knowledge useful</h4>
-			</div>
-		</div>
-	</div>
-</Div>
-
-<section>
-	<div class="container-fluid ptb">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-				<h4 class="heading-edu edu Sharing">Sharing is caring </h4>
-				<p class="para-edu text">Somewhere, out there, there's someone
-					who doesn’t know what you know.
-					We believe that education is the ultimate
-					way to connect with people.
-					 </p>
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
-        <%= image_tag "im-three1.png",class: "img-fluid img-t"%>
-			</div>
-		</div>
-	</div>
-</section>
-<section>
-	<div class="container-fluid ptb">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pl-0 text-left order-sm-1 order-2">
-        <%= image_tag "img-four.png",class: "img-fluid img-t"%>
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
-				<h4 class="heading-edu edu Sharing pinotes">Picnotes are easy and fun to create</h4>
-				<p class="para-edu">Share an educational topic by combining an image
-					to short notes. Provide resources such as articles,
-					videos, and book recommendations. Any resources
-					that you provide, will further other users'
-					understanding about a topic. </p>
-			</div>
-
-		</div>
-	</div>
-</section>
-<section>
-	<div class="container-fluid ptb">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-				<h4 class="heading-edu edu Sharing strive">We strive to offer a fantastic
-					educational activity</h4>
-				<p class="para-edu">Ongoing learning allows you to foster a positive attitude, confidence, and personal growth. However, more than anything, it simply provides tremendous pleasure.
-
-			    </p>
-					<%= link_to ' Start sharing',root_path,class: 'btn-bottom-request btn-browsing btn-strive st-sh'%>
-					<!-- <button class="btn-bottom-request btn-browsing btn-strive st-sh">Start sharing</button> -->
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
-        <%= image_tag "img-five.png",class: "img-fluid img-t"%>
-			</div>
-		</div>
-	</div>
-</section>
-	<section>
-		<div class="container ptb">
-			<div class="row">
-				<div class="col-12">
-					<h4 class=" call-home">Personalize and optimize your dashboard </h4>
-				</div>
-			</div>
-		</div>
-	</section>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-				<h4 class="heading-edu edu Sharing collect">Collect a mosaic of
-					educational topics</h4>
-				<p class="para-edu">Your dashboard makes it easy to keep track
-					of popular Picnotes. You can save the topics
-					that you love and organize them into different
-					folders.
-					 </p>
-			</div>
-			<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right pt-5">
-        <%= image_tag "img-six1.png",class: "img-fluid img-t"%>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="useful-text  text-center">
-					<h4 class="heading-edu Cruising">Cruising from one topic to another and
-						learning things that you never knew before</h4>
-						<p class="fluidity">The fluidity of the platform enables you to read one topic after another.
-							If you're looking for something specific narrow your search with #tags.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="about-banner pt-5">
-          <%= image_tag "img-seven1.png",class: "img-fluid img-width"%>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="useful-text  text-center">
-					<h4 class="Cruising part">Be part of a community</h4>
-				</div>
-			</div>
-		</div>
-	</div>
-	<section>
-		<div class="container-fluid ptb">
-			<div class="row">
-				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<h4 class="heading-edu edu">Learn from lifelong learners
-						across the world </h4>
-					<p class="para-edu">Follow people and interact with them.
-						You'll discover who they are and what
-						they're passionate about simply by
-						reading their Picnotes. </p>
-				</div>
-				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pt-4  text-center">
-          <%= image_tag "img-eight.png",class: "img-fluid img-s"%>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center order-sm-1 order-2">
-          <%= image_tag "img-nine.png",class: "img-fluid img-s"%>
-				</div>
-				<div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
-					<h4 class="heading-edu edu Sharing friends">Make friends</h4>
-					<p class="para-edu">Connect with people who view
-						conscious learning as a lifestyle.
-						You will encounter like-minded
-						individuals who like you love to
-						organize their interests and learning goals.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<button type='button' class='btn-bottom-request join joi' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Join us
-					</button>
-				</div>
-			</div>
-		</div>
-	</section>
+          </p>
+          <%= link_to ' Start sharing', root_path, class: 'btn-bottom-request btn-browsing btn-strive st-sh' %>
+          <!-- <button class="btn-bottom-request btn-browsing btn-strive st-sh">Start sharing</button> -->
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right">
+          <%= image_tag "img-five.png", class: "img-fluid img-t" %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container ptb">
+      <div class="row">
+        <div class="col-12">
+          <h4 class=" call-home">Personalize and optimize your dashboard </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <h4 class="heading-edu edu Sharing collect">Collect a mosaic of
+          educational topics</h4>
+        <p class="para-edu">Your dashboard makes it easy to keep track
+          of popular Picnotes. You can save the topics
+          that you love and organize them into different
+          folders.
+        </p>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pr-0 text-right pt-5">
+        <%= image_tag "img-six1.png", class: "img-fluid img-t" %>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="useful-text  text-center">
+          <h4 class="heading-edu Cruising">Cruising from one topic to another and
+            learning things that you never knew before</h4>
+          <p class="fluidity">The fluidity of the platform enables you to read one topic after another.
+            If you're looking for something specific narrow your search with #tags.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="about-banner pt-5">
+          <%= image_tag "img-seven1.png", class: "img-fluid img-width" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="useful-text  text-center">
+          <h4 class="Cruising part">Be part of a community</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="container-fluid ptb">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <h4 class="heading-edu edu">Learn from lifelong learners
+            across the world </h4>
+          <p class="para-edu">Follow people and interact with them.
+            You'll discover who they are and what
+            they're passionate about simply by
+            reading their Picnotes. </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pt-4  text-center">
+          <%= image_tag "img-eight.png", class: "img-fluid img-s" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 text-center order-sm-1 order-2">
+          <%= image_tag "img-nine.png", class: "img-fluid img-s" %>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1">
+          <h4 class="heading-edu edu Sharing friends">Make friends</h4>
+          <p class="para-edu">Connect with people who view
+            conscious learning as a lifestyle.
+            You will encounter like-minded
+            individuals who like you love to
+            organize their interests and learning goals.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <button type='button' class='btn-bottom-request join joi' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Join
+            us
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 <!-- ClickDesk Live Chat Service for websites -->
 <script type='text/javascript'>
@@ -244,7 +234,12 @@
     s.parentNode.insertBefore(glcspt, s);
 </script>
 <!-- End of ClickDesk -->
-
+<style>
+    .about_us_notes_path{
+        background: white !important;
+        float: none !important;
+    }
+</style>
 </body>
 
 

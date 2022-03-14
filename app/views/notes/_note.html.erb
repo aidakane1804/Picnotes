@@ -6,7 +6,7 @@
       </div>
       <div class="bottom-wrap">
         <h2><%= note.title %></h2>
-        <p><%= note.user.first_name + " " + note.user.last_name %></p>
+        <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user) %></p>
         <a class="more" href="#"><%= image_tag "ad-icon.png" %></a>
 <!--        <a class="fav" href="#"><i class="icofont-heart"></i><span>86</span></a>-->
       </div>
