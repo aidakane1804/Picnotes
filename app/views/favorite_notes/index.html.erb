@@ -10,24 +10,9 @@
   <div class="notes-container" style='margin-top: 20px;'>
     <% if @favorites.where(archived: false).count > 0 %>
       <% @favorites.where(archived: false).each do |note| %>
-        <div class='note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
-          <%= link_to(note_path(note), remote: true) do %>
-            <%= image_tag note.image.url(:thumb), class: "image" if note.image.present? %>
-            <div class='note-container-text'>
-              <p class="mobile-font note-btn-font"> <%= truncate(note.title, length: 40) %> </p>
-            </div>
-          <% end %>
-          <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
-        </div>
-      <% end %>
+        <%= render partial: 'notes/note_general', locals: {note: note} %>
+  <% end %>
     <% else %>
-      <!-- <div class="no-content-message" id="favorite-no-data">
-        <h1 class="blue-heading">Collect your favorite Picnotes.</h1>
-        <p>See all the Picnotes you've liked in one place.</p>
-        <p>
-          <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newFolderModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
-        </p>
-      </div> -->
       <% if @user == current_user %>
         <div>
           <div class="no-content-message" id="favorite-no-data"></div>

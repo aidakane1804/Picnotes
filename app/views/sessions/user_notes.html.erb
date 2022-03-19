@@ -20,26 +20,9 @@
         </button>
       </div>
       <% @notes.where(archived: false).each do |note| %>
-        <div class = 'note-container' onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
-          <%= link_to(note_path(note), remote: true) do %>
-          <%= image_tag note.image.url(:thumb), class:"image" if note.image.present? %>
-          <div class = 'note-container-text'>
-            <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 40) %> </p>
-          </div>
-          <% end %>
-          <%= render partial: 'notes/overlay_buttons', locals: {note: note} %>
-        </div>
-      <% end %>
+        <%= render partial: 'notes/note_general', locals: {note: note} %>
+  <% end %>
     <% else %>
-   <!--    <div class="no-content-message" id="user-notes-no-data">
-        <h1 class="blue-heading">Share educational topics that you love.</h1>
-        <p>A: Choose a topic.</p>
-        <p>B: Combine a picture to your notes.</p>
-        <p>C: Share resources.</p>
-        <p>
-          <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
-        </p>
-      </div> -->
       <% if @user == current_user %>
         <div>
           <div class="no-content-message" id="user-notes-no-data"></div>

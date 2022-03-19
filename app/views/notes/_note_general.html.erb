@@ -1,0 +1,48 @@
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col" onclick='ChangeUrl("", "<%="notes/"+note.id.to_s+"-"+note.title.parameterize%>")'>
+  <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+    <figure class="card card-product">
+      <div class="img-wrap">
+        <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+      </div>
+      <div class="bottom-wrap">
+        <h2><%= note.title %></h2>
+        <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user) %>
+          <span style="float: right">
+          <% if user_signed_in? %>
+            <% unless current_user.favorited_notes.exists?(id: note.id) %>
+            <span id='favorites-count-<%= note.id %>'>
+                  <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
+              </span>
+            <% else %><span id='favorites-count-<%= note.id %>'>
+                 <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                </span>
+            <% end %>
+            <span id='add-to-folder-<%= note.id %>'>
+              <a data-remote="true" class="plus_image" data-method="get" href="/notes/add_note_to_folder?note_id=<%= note.id %>">
+                <%= image_tag "icons8-add-30.png" %>
+              </a>
+          </span>
+          <% end %>
+          <% unless user_signed_in? %>
+            <span id='add-to-folder-
+              <% note.id %>'>
+              <a href="#" data-parent="#panel" data-toggle="modal" data-target="#newSessionModal" ,="" data-whatever="@mdo">
+                <i class="fa fa-heart grey_love love_iconss"></i>
+              </a>
+            </span>
+            <span id='add-to-folder-
+          <% note.id %>'>
+              <a href="#" data-parent="#panel"  class="plus_image"data-toggle="modal" data-target="#newSessionModal" ,="" data-whatever="@mdo">
+                <%= image_tag "icons8-add-30.png" %>
+              </a>
+          <% end %>
+          </span>
+
+          <!--          <a style="float: right" class="  " href="#"><%#= image_tag "icons8-add-30.png" %></a>-->
+          <!--          <a style="float: right" href="#"><%#= image_tag "icons8-heart-30.png" %><span>86</span></a>-->
+        </span>
+        </p>
+      </div>
+    </figure>
+  <% end %>
+</div>

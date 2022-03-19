@@ -63,7 +63,7 @@
     <nav class="nav-menu d-none d-lg-block">
       <ul>
         <li class="active"><a href="/about-us">About Us</a></li>
-        <li><a href="/for-schools">For School</a></li>
+        <li><a href="/for-schools">For Schools</a></li>
         <li><a href="/edfluencers">EdFluencers</a></li>
         <li>
           <a href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'
@@ -76,7 +76,7 @@
         <%= hidden_field_tag 'searchtest1', 1 %>
         <input type="text" style="padding: 25px 100px 25px 50px !important;width: 100% !important" name="search" id="search" class="form-control mr-sm-2">
         <img onclick="$('.search_formm').submit()" class="search-icon" src="/assets/search-icon_new-3a73e3281e063df7f0ea2510efd37652780b344c640b582ec98d84e4ac173d26.png">
-        <div class="dropdown droptag" style="margin-top:-5px">
+        <div class="dropdown droptag" style="margin-top:-10px">
           <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
           </a>
@@ -87,37 +87,65 @@
           </div>
         </div>
       <% end %>
-      <% if user_signed_in? %>
-        <a href="#" class="noti"><%= image_tag "noti.png" %></a>
-        <form class="user mr-2">
-          <div class="dropdown profile-drop">
+
+      <button type="button" class="mobile-nav-toggle d-lg-none"><span class="icon-open-menu"></span></button>
+    </div>
+    <div class="tablate-right-nav">
+      <div class="tablate-view-btns">
+        <% if user_signed_in? %>
+          <form class="user mr-2">
+            <div class="dropdown profile-drop">
                     <span class="profile-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image', style: 'margin-left:0px !important' %>
-                      <span class="name"> <%= @user.first_name %> <%= @user.last_name %></span>
                     </span>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
-              <%= link_to 'Profile', feed_index_path, class: 'dropdown-item' %>
-              <a data-toggle='modal'
-                 data-target='#editSessionModal'
-                 data-whatever='@mdo'
-                 data-dismiss="modal" class="dropdown-item" href="#">Edit Profile</a>
-              <%= link_to 'Sign Out', session_path, method: :delete, class: 'dropdown-item' %>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+                <%= link_to 'Profile', feed_index_path, class: 'dropdown-item' %>
+                <a data-toggle='modal'
+                   data-target='#editSessionModal'
+                   data-whatever='@mdo'
+                   data-dismiss="modal" class="dropdown-item" href="#">Edit Profile</a>
+                <%= link_to 'Sign Out', session_path, method: :delete, class: 'dropdown-item' %>
+              </div>
             </div>
-          </div>
-        </form>
-      <% else %>
-        <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
+          </form>
+        <% else %>
+          <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
 
-        <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign Up','description', 'Connect with Facebook or Sign Up with Email')">Sign
-          Up
-        </button>
+          <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign up','description', 'Connect with Facebook or Sign Up with Email')">Sign
+            Up
+          </button>
+          </div>
+        <% end %>
         </div>
-      <% end %>
-      <button type="button" class="mobile-nav-toggle d-lg-none"><span class="icon-open-menu"></span></button>
-      </div>
+    <div class="hamburger-menu">
+      <input id="menu__toggle" type="checkbox"/>
+      <label class="menu__btn" for="menu__toggle">
+        <span></span>
+      </label>
+      <ul class="menu__box">
+        <li><a class="menu__item" href="/guidelines">Guidelines</a></li>
+        <li><a class="menu__item" href="/terms-and-conditions">Terms and Conditions</a></li>
+        <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+
 
 </header><!-- End Header -->
 <style>
+    .tablate-view-btns {
+        margin-top: 10px;
+    }
+
+    .hamburger-menu {
+        right: 60px;
+    }
+
+    .tablate-right-nav {
+        margin-left: 10px;
+        margin-right: 70px;
+    }
+
     .notes_col {
         padding-left: 15px !important;
         padding-right: 15px !important;
@@ -133,12 +161,75 @@
         }
     }
 
+    @media screen and (max-width: 1200px) and (min-width: 769px) {
+        .search_formm {
+            margin-right: 95px !important;
+        }
+
+        .tablate-right-nav {
+            margin-right: 53px;
+            top: 15px;
+        }
+
+        .tablate-right-nav .hamburger-menu {
+            right: -8px !important;
+        }
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 426px) {
+        .search_formm {
+            margin-right: 150px !important;
+        }
+
+        .tablate-right-nav {
+            margin-right: 100px;
+            top: 15px;
+        }
+
+        .tablate-right-nav .hamburger-menu {
+            right: -8px !important;
+        }
+    }
+
+    @media screen and (max-width: 768px) and (min-width: 426px) {
+        .tablate-right-nav {
+            margin-right: 55px;
+        }
+
+    }
+
+    @media (min-width: 767px) and (max-width: 1200px) {
+        .tablate-view-btns {
+            margin-top: 0px;
+        }
+
+        .tablate-right-nav {
+            position: initial;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        .tablate-right-nav {
+            padding-top: 5px;
+        }
+
+        .notes_col {
+            width: 100%;
+        }
+
+        #search, .noti, .search_formm {
+            display: none !important;
+        }
+    }
+
     .card-product .img-wrap img {
-        height: 220px;
+        height: 100%;
         width: 100%;
         max-height: 100%;
         max-width: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 5px;
     }
 
@@ -180,17 +271,38 @@
         }
     }
 
+    @media screen and (max-width: 426px) {
+        .tablate-right-nav{
+            margin-right:50px;
+        }
+        .btn-login{
+            margin: 0px 0px !important;
+        }
+        .tablate-view-btns{
+            margin-top: 0px;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        .tablate-right-nav{
+            margin-left:0px;
+            margin-right:45px;
+        }
+        .btn-signup{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+
     .card-product .bottom-wrap .fav span {
         position: absolute;
         font-size: 16px;
         right: -20px;
         top: 6px;
         color: #181D27;
-        font-family: "Proxima Nova", sans-serif;
     }
 
     .card-product .bottom-wrap p {
-        font-family: "Proxima Nova", sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
@@ -198,19 +310,29 @@
         letter-spacing: 0.02em;
         color: #818B98;
     }
+    .love_iconss{
+        font-size: 25px !important;
+    }
+    .plus_image img{
+        margin-top: -10px;
+    }
+    .orange_love .fa{
+        color: #e82e19 !important;
+    }
+    .grey_love .fa{
+        color: #818b98 !important;
+    }
 
     .card-product .bottom-wrap a {
-        font-family: "Proxima Nova", sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
-        line-height: 17px;
+        line-height: 30px;
         letter-spacing: 0.02em;
         color: #818B98 !important;
     }
 
     .card-product .bottom-wrap h2 {
-        font-family: "Proxima Nova", sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
@@ -276,7 +398,6 @@
         padding: 15px 20px 15px 65px;
         transition: 0.3s;
         font-size: 16px;
-        font-family: "Poppins", sans-serif;
     }
 
     .header-logins form {
@@ -325,6 +446,9 @@
     }
 
     @media screen and (max-width: 992px) {
+        .hamburger-menu{
+            display: none;
+        }
         .mobile-nav-toggle {
             position: fixed;
             right: 15px;
@@ -600,27 +724,9 @@
         padding: 15px 20px;
         transition: 0.3s;
         font-size: 16px;
-        font-family: "Poppins", sans-serif;
     }
 </style>
 <div class="tablate-navbar-container">
-  <ul class="navbar-nav tablate-navbar">
-    <li class="nav-item active">
-      <a class="nav-link" href="/about-us">About Us</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/for-schools">For Schools</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/edfluencers">EdFluencers</a>
-    </li>
-    <li class="nav-item">
-      <!-- <a class="nav-link" href="/ed_fluencers">Create Picnotes</a> -->
-      <a class="nav-link" href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo' onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
-        Picnotes</a>
-
-    </li>
-  </ul>
 </div>
 
 <!-- header new ending -->
@@ -678,17 +784,13 @@
           <div class="col-lg-3 col-md-6 footer-newsletter">
             <h4>Contact Us</h4>
             <ul>
-              <li><%= image_tag "location_on.png" %> 33 Glenvale Crescent Mulgrave
-                VIC 3170 Australia
-              </li>
-              <li><%= image_tag "email.png" %><a href="#">picnotes@support.org</a></li>
-              <li><%= image_tag "call.png" %><a href="#">+1 234-567-8901</a></li>
+              <li><%= image_tag "email.png" %><a href="#">info@picnotes.org</a></li>
             </ul>
             <div class="social-links mt-3">
-              <a href="#" class="facebook"><%= image_tag "fb.png" %></a>
-              <a href="#" class="twitter"><%= image_tag "twitter.png" %></a>
-              <a href="#" class="linkedin"><%= image_tag "linkedin.png" %></a>
-              <a href="#" class="instagram"><%= image_tag "instagram.png" %></a>
+              <a target="_blank" href="https://www.facebook.com/PicnotesEd" class="facebook"><%= image_tag "fb.png" %></a>
+              <a target="_blank" href="https://twitter.com/PicnotesEd" class="twitter"><%= image_tag "twitter.png" %></a>
+              <a target="_blank" href="https://www.linkedin.com/company/picnotesed" class="linkedin"><%= image_tag "linkedin.png" %></a>
+              <a target="_blank" href="https://www.instagram.com/picnotes_knowledgehub/" class="instagram"><%= image_tag "instagram.png" %></a>
             </div>
 
           </div>
