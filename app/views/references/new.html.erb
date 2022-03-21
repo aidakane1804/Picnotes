@@ -27,6 +27,7 @@
     <div class = " container notes-container" style = 'margin-top: 20px;'>
       <% @notes.where(archived: false).each do |note| %>
         <%= render partial: 'notes/note_general', locals: {note: note} %>
+      <% end %>
     </div>
   </div>
 
