@@ -24,7 +24,7 @@
   <% end %>
 
   <div class = 'flex-center'>
-    <div class = " container notes-container" style = 'margin-top: 20px;'>
+    <div  class = " container notes-container" style = 'margin-top: 20px;max-width: 100% !important;'>
       <% @notes.where(archived: false).each do |note| %>
         <%= render partial: 'notes/note_general', locals: {note: note} %>
       <% end %>
