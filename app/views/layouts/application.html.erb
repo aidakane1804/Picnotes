@@ -98,7 +98,9 @@
                     <span class="profile-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <% if current_user.avatar? %>
                         <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image', style: 'margin-left:0px !important' %>
-                       <% end %>
+                      <% else %>
+                      <%= image_tag "avatar.png", class: 'note-avatar-image', style: 'margin-left:0px !important' %>
+                      <% end %>
                     </span>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
                 <%= link_to 'Profile', feed_index_path, class: 'dropdown-item' %>
