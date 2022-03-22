@@ -96,7 +96,11 @@
           <form class="user mr-2">
             <div class="dropdown profile-drop">
                     <span class="profile-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image', style: 'margin-left:0px !important' %>
+                      <% if current_user.avatar? %>
+                        <%= image_tag current_user.avatar.url(:thumb), class: 'note-avatar-image', style: 'margin-left:0px !important' %>
+                      <% else %>
+                      <%= image_tag "avatar.png", class: 'note-avatar-image', style: 'margin-left:0px !important' %>
+                      <% end %>
                     </span>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
                 <%= link_to 'Profile', feed_index_path, class: 'dropdown-item' %>
@@ -135,6 +139,12 @@
 <style>
     .tablate-view-btns {
         margin-top: 10px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .folder-container {
+            margin-right: 12.5px !important;
+        }
     }
 
     .hamburger-menu {
@@ -272,23 +282,26 @@
     }
 
     @media screen and (max-width: 426px) {
-        .tablate-right-nav{
-            margin-right:50px;
+        .tablate-right-nav {
+            margin-right: 50px;
         }
-        .btn-login{
+
+        .btn-login {
             margin: 0px 0px !important;
         }
-        .tablate-view-btns{
+
+        .tablate-view-btns {
             margin-top: 0px;
         }
     }
 
     @media screen and (max-width: 375px) {
-        .tablate-right-nav{
-            margin-left:0px;
-            margin-right:45px;
+        .tablate-right-nav {
+            margin-left: 0px;
+            margin-right: 45px;
         }
-        .btn-signup{
+
+        .btn-signup {
             margin-left: 0px;
             margin-right: 0px;
         }
@@ -310,16 +323,20 @@
         letter-spacing: 0.02em;
         color: #818B98;
     }
-    .love_iconss{
+
+    .love_iconss {
         font-size: 25px !important;
     }
-    .plus_image img{
+
+    .plus_image img {
         margin-top: -10px;
     }
-    .orange_love .fa{
+
+    .orange_love .fa {
         color: #e82e19 !important;
     }
-    .grey_love .fa{
+
+    .grey_love .fa {
         color: #818b98 !important;
     }
 
@@ -446,9 +463,10 @@
     }
 
     @media screen and (max-width: 992px) {
-        .hamburger-menu{
+        .hamburger-menu {
             display: none;
         }
+
         .mobile-nav-toggle {
             position: fixed;
             right: 15px;
