@@ -5,7 +5,11 @@
       <div class="col-md-12">
         <div class="profile-card">
           <div style="cursor: pointer" class="profile-img">
-            <%= image_tag current_user.avatar.url(:thumb) %>
+            <% if current_user.avatar? %>
+              <%= image_tag current_user.avatar.url(:thumb) %>
+            <% else %>
+              <%= image_tag "avatar.png" %>
+            <% end %>
           </div>
           <h2><%= @user.first_name %> <%= @user.last_name %></h2>
           <p><%= @user.city %></p>
@@ -37,8 +41,6 @@
               <%= 'Picnotes ' + @user.notes.count.to_s %>
             <% end %>
           </button>
-
-
         </div>
       </div>
     </div>
@@ -138,7 +140,6 @@
         <%#= image_tag 'avatar.png', class: 'avatar-image' %>
       <%# end %>
 <!--    </div>-->
-  </div>
 
   <div class="profile-menu">
     <p> <%= link_to 'Feed', feed_index_path(user_id: @user), class: "#{cp(feed_index_path)} profile-links" %> </p>
@@ -158,7 +159,6 @@
   <!--    <p> <%#= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %> <span class = 'note-count'> <%#= @user.notes.count %> </span> </p>-->
   <!--    <p> <%#= link_to 'My Faves', favorites_path, class: "#{cp(favorites_path)} profile-links" %> <span class = 'note-count'> <%#= @user.favorited_notes.count %> </span> </p>-->
   <!--  </div>-->
-</div>
 <style>
     .profile-card h2, .profile-card p {
         font-style: normal;
