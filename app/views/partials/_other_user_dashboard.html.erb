@@ -5,8 +5,8 @@
       <div class="col-md-12">
         <div class="profile-card">
           <div style="cursor: pointer" class="profile-img">
-            <% if current_user.avatar? %>
-              <%= image_tag current_user.avatar.url(:thumb) %>
+            <% if @user.avatar? %>
+              <%= image_tag @user.avatar.url(:thumb) %>
             <% else %>
               <%= image_tag "avatar.png" %>
             <% end %>
