@@ -51,7 +51,7 @@ class Note < ApplicationRecord
   end
 
   def slug
-    self.id.to_s+"-"+self.title.parameterize
+    self.title_slug
   end
 
   def previous

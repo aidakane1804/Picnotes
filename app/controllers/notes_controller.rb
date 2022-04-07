@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline,:tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder,:for_schools]
+  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :migrate_notes, :tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder, :for_schools]
 
   def empty
   end
@@ -35,7 +35,6 @@ class NotesController < ApplicationController
   end
 
   def show
-    
     @tags = @note.tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
     # @references = @references_unordered.sort_by &:file_type
@@ -54,7 +53,7 @@ class NotesController < ApplicationController
     @next_note = @note.previous
     @similar = Note.tagged_with(@note.tags, :any => true)
     @meta_title = @note.title
-    @meta_description = @note.body.slice(0,160)
+    @meta_description = @note.body.slice(0, 160)
     @meta_keywords = @note.body
     @meta_image = @note.image.url
 
@@ -86,6 +85,7 @@ class NotesController < ApplicationController
     @note.user = current_user
     if @note.save
       flash[:notice] = "Note Saved"
+      @note.update_column(:title_slug, @note.title.parameterize)
       redirect_to new_note_reference_path(@note)
     else
       flash[:notice] = "Error"
@@ -127,6 +127,14 @@ class NotesController < ApplicationController
     session[:user_id] = @userId
     @user = User.where(id: @userId).first
     sign_in_and_redirect @user, :event => :authentication
+  end
+
+  def migrate_notes
+    @items = Note.all
+
+    @items.each do |item|
+      item.update_column(:title_slug, item.title.parameterize)
+    end
   end
 
   def for_schools
@@ -185,11 +193,9 @@ class NotesController < ApplicationController
     about_us_meta_tags
   end
 
-
   def communication_and_interaction
     about_us_meta_tags
   end
-
 
   def destroy
     @note.destroy
@@ -232,13 +238,12 @@ class NotesController < ApplicationController
 
   private
 
-
   def note_params
     params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)
   end
 
   def find_note
-    @note = Note.find params[:id]
+    @note = Note.where(title_slug: params[:id]).first
   end
 
   def authorize_user!
@@ -247,6 +252,5 @@ class NotesController < ApplicationController
       redirect_to root_path
     end
   end
-
 
 end
