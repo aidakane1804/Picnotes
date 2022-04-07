@@ -4,6 +4,10 @@
       <%= form_for(current_user.active_relationships.build) do |f| %>
         <%= hidden_field_tag :followed_id, user.id %>
         <%= f.submit 'Follow', class: 'blue-appearance-btn' %>
+        <a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida">
+          <i class="fa fa-envelope" style="font-size:36px"></i>
+
+        </a><a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida"></a>
       <% end %>
     <% else %>
       <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),

@@ -5,8 +5,8 @@
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
       </div>
       <div class="bottom-wrap">
-        <h2><%= note.title %></h2>
-        <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user) %>
+        <h1><%= note.title %></h1>
+        <h2><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user) %>
           <span style="float: right">
           <% if user_signed_in? %>
             <% unless current_user.favorited_notes.exists?(id: note.id) %>
@@ -41,7 +41,7 @@
           <!--          <a style="float: right" class="  " href="#"><%#= image_tag "icons8-add-30.png" %></a>-->
           <!--          <a style="float: right" href="#"><%#= image_tag "icons8-heart-30.png" %><span>86</span></a>-->
         </span>
-        </p>
+        </h2>
       </div>
     </figure>
   <% end %>

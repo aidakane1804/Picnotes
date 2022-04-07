@@ -5,16 +5,14 @@
       <div class="col-md-12">
         <div class="profile-card">
           <div style="cursor: pointer" class="profile-img">
-            <%= image_tag current_user.avatar.url(:thumb) %>
+            <% if @user.avatar? %>
+            <%= image_tag @user.avatar.url(:thumb) %>
+            <% else %>
+            <%= image_tag 'avatar.png' %>
+            <% end %>
           </div>
           <h2><%= @user.first_name %> <%= @user.last_name %></h2>
           <p><%= @user.city %></p>
-          <p> <%= @user.about_me %></p>
-          <% if @user.message %>
-          <% if @user.message.length > 0 %>
-                          <p> <%#= @user.message %> </p>
-          <% end %>
-          <% end %>
           <%= render '/components/follow_button', :user => @user %>
           <button class="btn profile-btn">
             <% if @user.followers.count > 0 %>
@@ -141,15 +139,15 @@
   </div>
 
   <div class="profile-menu">
-    <p> <%= link_to 'Feed', feed_index_path(user_id: @user), class: "#{cp(feed_index_path)} profile-links" %> </p>
-    <p> <%= link_to 'Picnotes', user_path(id: @user), class: "#{cp(user_path(id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.notes.where(archived: false).count %> </span></p>
-    <p> <%= link_to 'Folders', folders_path(user_id: @user), class: "#{cp(folders_path(user_id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.folders.count %> </span></p>
-    <p> <%= link_to 'Faves', favorites_path(user_id: @user), class: "#{cp(favorites_path(user_id: @user))} profile-links" %>
-      <span class='note-count'> <%= @user.favorited_notes.where(archived: false).count %> </span></p>
-    <p> <%= link_to 'EdTracker', new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links" %>
-    <p> <%= link_to 'EdTools', new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links" %>
+    <h2 style="font-size:19px">  <%= link_to 'Feed', feed_index_path(user_id: @user), class: "#{cp(feed_index_path)} profile-links" %> </h2>
+    <h2 style="font-size:19px"> <%= link_to 'Picnotes', user_path(id: @user), class: "#{cp(user_path(id: @user))} profile-links" %>
+      <span class='note-count'> <%= @user.notes.where(archived: false).count %> </span></h2>
+    <h2 style="font-size:19px"> <%= link_to 'Folders', folders_path(user_id: @user), class: "#{cp(folders_path(user_id: @user))} profile-links" %>
+      <span class='note-count'> <%= @user.folders.count %> </span></h2>
+    <h2 style="font-size:19px"> <%= link_to 'Faves', favorites_path(user_id: @user), class: "#{cp(favorites_path(user_id: @user))} profile-links" %>
+      <span class='note-count'> <%= @user.favorited_notes.where(archived: false).count %> </span></h2>
+    <h2 style="font-size:19px"> <%= link_to 'EdTracker', new_edtracker_path(user_id: @user), class: "#{cp(new_edtracker_path)} profile-links" %></h2>
+    <h2 style="font-size:19px"> <%= link_to 'EdTools', new_myedtool_path(user_id: @user), class: "#{cp(new_myedtool_path)} profile-links" %></h2>
 
   </div>
 

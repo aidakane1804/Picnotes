@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "book.png", style: 'width:45px;margin-bottom:10px' %>
-        <h6 class="heading-learning mb-0 text-black">Books</h6>
+        <h5 class="heading-learning mb-0 text-black">Books</h5>
         <% if @user == current_user %>
           <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_book"><%= image_tag "red-plus.png", class: "img-plus" %>
           </button>
@@ -24,7 +24,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle,comment_section_path(id: book.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%= link_to book.addtitle,comment_section_path(id: book.id), remote: true, style: "color: black;" %></h6>
 <!--                  <p class="text-lorem" style="padding-top: 57px;  color: black; font-family: 'Philosopher', sans-serif; "><%#= link_to book.addtitle, fetch_model_form1_path(id: book.id), remote: true, style: "color: black;" %></p>-->
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
@@ -46,7 +46,7 @@
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "article.png", style: "width:35px;margin-bottom:10px" %><br>
-        <h6 class="heading-learning color-orange mb-0 text-black">Articles</h6>
+        <h5 class="heading-learning color-orange mb-0 text-black">Articles</h5>
         <% if @user == current_user %>
           <button type="button " class="btn" data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_article"><%= image_tag "red-plus.png", class: "img-plus" %>
           </button>
@@ -56,7 +56,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to art.addtitle,comment_section_path(id: art.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to art.addtitle,comment_section_path(id: art.id), remote: true, style: "color: black;" %></h6>
 <!--                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%#= link_to art.addtitle, fetch_model_form1_path(id: art.id), remote: true, style: "color: black;" %></p>-->
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
@@ -78,7 +78,7 @@
       </div>
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "blog.png", style: "width:35px;margin-bottom:10px" %><br>
-        <h6 class="heading-learning color-green mb-0 text-black">Blogs</h6>
+        <h5 class="heading-learning color-green mb-0 text-black">Blogs</h5>
         <% if @user == current_user %>
           <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_blog">
             <%= image_tag "red-plus.png", class: "img-plus" %>
@@ -89,7 +89,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to blog.addtitle,comment_section_path(id: blog.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to blog.addtitle,comment_section_path(id: blog.id), remote: true, style: "color: black;" %></h6>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= blog.id %>"><%= link_to current_user_comment_on_card?(blog) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: blog.id), remote: true %></i></p>
@@ -111,7 +111,7 @@
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "podcast.png", style: "width:35px;margin-bottom:10px" %><br>
-        <h6 class="heading-learning color-green mb-0 text-black">Podcasts</h6>
+        <h5 class="heading-learning color-green mb-0 text-black">Podcasts</h5>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_podcast">
           <%= image_tag "red-plus.png", class: "img-plus" %>
@@ -122,7 +122,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to pod.addtitle,comment_section_path(id: pod.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to pod.addtitle,comment_section_path(id: pod.id), remote: true, style: "color: black;" %></h6>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= pod.id %>"><%= link_to current_user_comment_on_card?(pod) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: pod.id), remote: true %></i></p>
@@ -144,7 +144,7 @@
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "online course.png", style: "width:35px;margin-bottom:10px" %><br>
-        <h6 class="heading-learning color-green mb-0 text-black">Online Courses</h6>
+        <h5 class="heading-learning color-green mb-0 text-black">Online Courses</h5>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_course">
           <%= image_tag "red-plus.png", class: "img-plus" %>
@@ -155,7 +155,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to course.addtitle,comment_section_path(id: course.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to course.addtitle,comment_section_path(id: course.id), remote: true, style: "color: black;" %></h6>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= course.id %>"><%= link_to current_user_comment_on_card?(course) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: course.id), remote: true %></i></p>
@@ -177,7 +177,7 @@
 
       <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 text-center pt-5">
         <%= image_tag "documentary.png", style: "width:35px;margin-bottom:10px" %><br>
-        <h6 class="heading-learning color-green mb-0 text-black">Documentaries</h6>
+        <h5 class="heading-learning color-green mb-0 text-black">Documentaries</h5>
         <% if @user == current_user %>
         <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_documentry">
           <%= image_tag "red-plus.png", class: "img-plus" %>
@@ -188,7 +188,7 @@
             <div class="status-box border-bottom-red">
               <div class="row" style="min-height: 135px">
                 <div class="col-12">
-                  <p class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to doc.addtitle,comment_section_path(id: doc.id), remote: true, style: "color: black;" %></p>
+                  <h6 class="text-lorem" style="padding-top: 57px;font-family: 'Philosopher', sans-serif;"><%= link_to doc.addtitle,comment_section_path(id: doc.id), remote: true, style: "color: black;" %></h6>
                   <div class="text-right pb-2" style="padding-top: 30px">
                     <div class="column">
                       <p class="btn-rating comment-icon-ed-tool<%= doc.id %>"><%= link_to current_user_comment_on_card?(doc) ? fa_icon('comment') : fa_icon('comment-o'), comment_section_path(id: doc.id), remote: true %></i></p>

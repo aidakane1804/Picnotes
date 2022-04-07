@@ -157,7 +157,7 @@
 
               <div class = 'notes-overflow'>
                 <div id = 'information' class = 'tabcontent'>
-                  <p class = "note-page-content-text"> <%= @note.body %> </p>
+                  <h2 class = "note-page-content-text"> <%= @note.body %> </h2>
                   <p> <%= render @note.tags %></p>
                   <% if user_signed_in? %>
                     <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>

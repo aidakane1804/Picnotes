@@ -38,7 +38,7 @@
 
 </script>
 
-<h1 style = 'display:none;'><%= title @note.title %></h1>
+<h1 style = 'display:none;'><%= title @note.title+" | Picnotes | Knowledge Sharing Hub for Lifelong Learners" %></h1>
 <% note = @note %>
 <div >
   <div style = "display: flex; align-items: center;">
@@ -140,7 +140,7 @@
 
                 <div class = 'notes-overflow'>
                   <div id = 'information' class = 'tabcontent'>
-                    <p class = "note-page-content-text"> <%= @note.body %> </p>
+                    <h2 class = "note-page-content-text"> <%= @note.body %> </h2>
                     <p> <%= render @note.tags %></p>
                     <% if user_signed_in? %>
                       <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>

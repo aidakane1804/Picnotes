@@ -1,14 +1,14 @@
 <% if current_user == @user && current_user != nil && @user != nil && current_user.id == @folder.user_id %>
   <%= render './partials/user_dashboard' %>
   <div style='text-align: center;'>
-    <p> Folder Name: <strong> <%= @folder.name %> </strong></p>
+    <h2> Folder Name: <strong> <%= @folder.name %> </strong></h2>
     <%= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
   </div>
 <% else %>
 
   <%= render './partials/other_user_dashboard' %>
   <div style='text-align: center;'>
-    <p> Folder Name: <strong> <%= @folder.name %> </strong></p>
+    <h1> Folder Name: <strong> <%= @folder.name %> </strong></h1>
     <%#= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
   </div>
 <% end %>

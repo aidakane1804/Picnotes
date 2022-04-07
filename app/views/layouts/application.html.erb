@@ -75,7 +75,7 @@
       <%= form_tag(notes_path, method: :get, class: "form-inline search_formm") do %>
         <%= hidden_field_tag 'searchtest1', 1 %>
         <input type="text" style="padding: 25px 100px 25px 50px !important;width: 100% !important" name="search" id="search" class="form-control mr-sm-2">
-        <img onclick="$('.search_formm').submit()" class="search-icon" src="/assets/search-icon_new-3a73e3281e063df7f0ea2510efd37652780b344c640b582ec98d84e4ac173d26.png">
+        <img onclick="$('.search_formm').submit()" class="search-icon" src="/assets/search-icon_new-3a73e3281e063df7f0ea2510efd37652780b344c640b582ec98d84e4ac173d26.png" alt="search...">
         <div class="dropdown droptag" style="margin-top:-10px">
           <a class="btn  dropdown-toggle append-drop" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false">Tags<span class="icon-Down_Arow"></span>
@@ -137,6 +137,22 @@
 
 </header><!-- End Header -->
 <style>
+  .note-page-content-text{
+      font-size : 18px !important;
+      font-weight: 400 !important;
+      line-height: 1.5 !important;
+      color: #212529 !important;
+      text-align: left !important;
+      font-family: 'Philosopher', sans-serif !important;
+  }
+.card-product .bottom-wrap h1 {
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
+    letter-spacing: 0.02em !important;
+    color: #181D27 !important;
+}
     .tablate-view-btns {
         margin-top: 10px;
     }
@@ -346,7 +362,7 @@
         font-size: 14px;
         line-height: 30px;
         letter-spacing: 0.02em;
-        color: #818B98 !important;
+        color:#818B98 !important
     }
 
     .card-product .bottom-wrap h2 {
