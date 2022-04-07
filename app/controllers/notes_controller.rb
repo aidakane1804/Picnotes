@@ -84,8 +84,9 @@ class NotesController < ApplicationController
     @note = Note.new note_params
     @note.user = current_user
     if @note.save
+      @noted = Note.find(@note.id)
+      @noted.update_column(:title_slug, @noted.title.parameterize)
       flash[:notice] = "Note Saved"
-      @note.update_column(:title_slug, @note.title.parameterize)
       redirect_to new_note_reference_path(@note)
     else
       flash[:notice] = "Error"
