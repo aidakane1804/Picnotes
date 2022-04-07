@@ -11,12 +11,11 @@
       <% end %>
     <% else %>
       <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
-        html: {method: :delete}) do |f| %>
+                   html: { method: :delete }) do |f| %>
         <%= f.submit 'Unfollow', class: "blue-appearance-btn" %>
-        <a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida">
-          <i class="fa fa-envelope" style="font-size:36px"></i>
-
-        </a><a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida"></a>
+<!--        <a rel="nofollow" data-method="post" href="/users/<%#= current_user.id %>/chats?other_user=2-aida">-->
+<!--          <i class="fa fa-envelope" style="font-size:36px"></i>-->
+<!--        </a>-->
       <% end %>
     <% end %>
   <% end %>
