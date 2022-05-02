@@ -238,13 +238,19 @@ class NotesController < ApplicationController
   end
 
   private
-
+  def is_number? string
+    true if Float(string) rescue false
+  end
   def note_params
     params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)
   end
 
   def find_note
-    @note = Note.where(title_slug: params[:id]).first
+    if is_number?(params[:id])
+      @note = Note.where(id: params[:id]).first
+    else
+      @note = Note.where(title_slug: params[:id]).first
+    end
   end
 
   def authorize_user!
