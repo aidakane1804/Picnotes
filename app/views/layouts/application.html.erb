@@ -65,10 +65,14 @@
         <li class="active"><a href="/about-us">About Us</a></li>
         <li><a href="/for-schools">For Schools</a></li>
         <li><a href="/edfluencers">EdFluencers</a></li>
-        <li>
+        <% if user_signed_in? %>
+          <li>
           <a href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'
              onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
             Picnotes</a></li>
+        <% else %>
+        <% end %>
+        <li>
       </ul>
     </nav><!-- .nav-menu -->
     <div class="header-logins">
@@ -137,22 +141,24 @@
 
 </header><!-- End Header -->
 <style>
-  .note-page-content-text{
-      font-size : 18px !important;
-      font-weight: 400 !important;
-      line-height: 1.5 !important;
-      color: #212529 !important;
-      text-align: left !important;
-      font-family: 'Philosopher', sans-serif !important;
-  }
-.card-product .bottom-wrap h1 {
-    font-style: normal !important;
-    font-weight: bold !important;
-    font-size: 20px !important;
-    line-height: 24px !important;
-    letter-spacing: 0.02em !important;
-    color: #181D27 !important;
-}
+    .note-page-content-text {
+        font-size: 18px !important;
+        font-weight: 400 !important;
+        line-height: 1.5 !important;
+        color: #212529 !important;
+        text-align: left !important;
+        font-family: 'Philosopher', sans-serif !important;
+    }
+
+    .card-product .bottom-wrap h1 {
+        font-style: normal !important;
+        font-weight: bold !important;
+        font-size: 20px !important;
+        line-height: 24px !important;
+        letter-spacing: 0.02em !important;
+        color: #181D27 !important;
+    }
+
     .tablate-view-btns {
         margin-top: 10px;
     }
@@ -362,7 +368,7 @@
         font-size: 14px;
         line-height: 30px;
         letter-spacing: 0.02em;
-        color:#818B98 !important
+        color: #818B98 !important
     }
 
     .card-product .bottom-wrap h2 {
@@ -799,9 +805,12 @@
               <li><i class="bx bx-chevron-right"></i> <a href="/about-us">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="for-schools">For Schools</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="edfluencers">EdFluencerss</a></li>
-              <li><i class="bx bx-chevron-right"></i>
-                <a href="#" data-toggle="modal" data-target="#newNoteModal" data-whatever="@mdo" onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
-                  Picnotes</a></li>
+              <% if user_signed_in? %>
+                <li><i class="bx bx-chevron-right"></i>
+                  <a href="#" data-toggle="modal" data-target="#newNoteModal" data-whatever="@mdo" onclick="changeMetaContent('Create Picnotesreate Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create
+                    Picnotes</a></li>
+              <% else %>
+              <% end %>
             </ul>
           </div>
 
