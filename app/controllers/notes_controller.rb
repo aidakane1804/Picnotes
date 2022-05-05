@@ -13,12 +13,12 @@ class NotesController < ApplicationController
       else
         @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
         @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
-        @tagged = []
+        @tagged = Array.new
         @notesTagged.each do |noteTag|
           @tagged.push(noteTag.id)
         end
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
-        @notes = @notes.where('id NOT IN (?)',@tagged)
+        @notes = @notes.where.not(id: @tagged)
       end
       @searchresult = params[:search]
     else
