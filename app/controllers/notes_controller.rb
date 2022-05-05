@@ -13,12 +13,18 @@ class NotesController < ApplicationController
       else
         @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
         @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+        @tagged = []
+        @notesTagged.each do |noteTag|
+          @tagged.push(noteTag.id)
+        end
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
+        @notes = @notes.where('id NOT IN (?)',@tagged)
       end
       @searchresult = params[:search]
     else
       @users = []
       @notesTagged = []
+      @tagged = []
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
       respond_to do |format|
         format.html
