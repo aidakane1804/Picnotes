@@ -11,13 +11,14 @@ class NotesController < ApplicationController
       if params[:search].blank?
         redirect_to search_index_path
       else
-        @notes = Note.tagged_with(params[:search], wild: true, any: true)
+        @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
         @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
-        @notes.merge(Note.where("title ILIKE ?", "%#{params[:search]}%"))
+        @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
       end
       @searchresult = params[:search]
     else
-      @users = [];
+      @users = []
+      @notesTagged = []
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
       respond_to do |format|
         format.html
