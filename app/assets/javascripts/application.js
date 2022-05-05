@@ -24,19 +24,6 @@ $(document).on('turbolinks:load', function () {
     $('.dropdown .dropdown-menu').on('click', 'a.dropdown-item', function () {
         var searchTest = $(this).text();
         $('.dropdown a:first').text(searchTest);
-        if(searchTest === 'Tags'){
-            $('#searchtest').val(1);
-            $('#searchtest1').val(1);
-            $('#dropdownMenuLink1').html("Tags");
-        }else if(searchTest === 'Person'){
-            $('#searchtest').val(2);
-            $('#searchtest1').val(2);
-            $('#dropdownMenuLink1').html("Person");
-        }else{
-            $('#searchtest').val(3);
-            $('#searchtest1').val(3);
-            $('#dropdownMenuLink1').html("Picnotes");
-        }
     });
 });
 

@@ -13,52 +13,49 @@
   <%= render './modals/intro_modal' %>
 <% end %>
 
-<% if @searchmodel != '2' %>
 
-  <% if @searchresult %>
-    <div style='text-align: center; margin-top: 30px; width: 100%;'>
-      <p> Results for #<%= @searchresult %> </p>
-    </div>
-  <% end %>
-  <% @notes = @notes.where(archived: false) %>
-  <div class='flex-center'>
-    <div class="notes-container" id="notes-div">
-      <%= render @notes %>
-    </div>
-  </div>
-
-
-  <div id="infinite-scrolling">
-    <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
-  </div>
-
-
-<% else %>
-
+<% if @searchresult %>
   <div style='text-align: center; margin-top: 30px; width: 100%;'>
-    <p> User with the name: <%= @searchresult %> </p>
-  </div>
-
-  <div class='flex-center'>
-    <div class="notes-container" style='margin-top: 20px;'>
-      <% @users.each do |user| %>
-        <div class='note-container'>
-          <%= link_to user_path(user) do %>
-            <% if user.avatar? %>
-              <%= image_tag user.avatar.url(:thumb) %>
-            <% else %>
-              <%= image_tag 'avatar.png', :style => 'width: 100%;' %>
-            <% end %>
-            <div class='note-container-text' style='text-align: center !important;'>
-              <p class='mobile-font note-btn-font' style='text-transform: capitalize'> <%= user.username %></p>
-              <p class='mobile-font note-btn-font'> <%= user.first_name %> <%= user.last_name %> </p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <p> Results for <%= @searchresult %> </p>
   </div>
 <% end %>
+<% @notes = @notes.where(archived: false) %>
+<div class='flex-center'>
+  <div class="notes-container" id="notes-div">
+    <%= render @notes %>
+  </div>
+</div>
+
+
+<div id="infinite-scrolling">
+  <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
+</div>
+
+
+
+<div style='text-align: center; margin-top: 30px; width: 100%;'>
+  <p> User with the name: <%= @searchresult %> </p>
+</div>
+
+<div class='flex-center'>
+  <div class="notes-container" style='margin-top: 20px;'>
+    <% @users.each do |user| %>
+      <div class='note-container'>
+        <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url(:thumb) %>
+          <% else %>
+            <%= image_tag 'avatar.png', :style => 'width: 100%;' %>
+          <% end %>
+          <div class='note-container-text' style='text-align: center !important;'>
+            <p class='mobile-font note-btn-font' style='text-transform: capitalize'> <%= user.username %></p>
+            <p class='mobile-font note-btn-font'> <%= user.first_name %> <%= user.last_name %> </p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%#----------------------------------------footer-------------------------------------%>
 
