@@ -110,7 +110,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "smtp.sendgrid.net",
     :port => 465,
-    :domain => "picnotes.org",
+    :domain => "info@picnotes.org",
+    :default_from_email => "info@picnotes.org",
     :ssl => true,
     :enable_starttls_auto => true,
     :authentication => :login,
