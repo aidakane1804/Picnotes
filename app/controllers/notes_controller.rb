@@ -120,9 +120,7 @@ class NotesController < ApplicationController
   end
 
   def about_us
-    @user = User.find_by(id: 2)
-    UserMailer.account_activation(@user).deliver_now
-    # about_us_meta_tags
+    about_us_meta_tags
   end
 
   def tl
