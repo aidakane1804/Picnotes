@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   end
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
   get 'guidelines', to: 'notes#community_guideline'
-  get 'about-us', to: 'notes#about_us'
+  get 'about-us', to: 'notes#to'
   get 'tl', to: 'notes#tl'
   get 'migrate_notes', to: 'notes#migrate_notes'
   get 'for-schools',to: 'notes#for_schools'
@@ -109,7 +109,7 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
 
   root 'notes#index'
-
+  get 'index', to: 'notes#index'
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
