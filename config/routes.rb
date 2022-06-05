@@ -109,7 +109,7 @@ Rails.application.routes.draw do
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
 
   root 'notes#index'
-  get 'index', to: 'notes#index'
+  get 'index', to: 'home#index'
   resources :password_resets, only: [:new, :create, :edit, :update]
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
