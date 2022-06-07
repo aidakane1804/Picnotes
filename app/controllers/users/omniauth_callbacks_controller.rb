@@ -43,7 +43,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         sign_in_and_redirect @user, :event => :authentication
         set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
-        session[:user_id] = User.find_by_uid(@user.uid).id
+        session[:user_id] = @user.id
+        # session[:user_id] = User.find_by_uid(@user.uid).id
       end
     else
       Rails.logger.info "###################{@user.errors.messages.inspect}@@@@@@@@@@@@@@@@@@@@"
