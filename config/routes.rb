@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   end
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
   get 'guidelines', to: 'notes#community_guideline'
-  get 'about-us', to: 'notes#to'
+  get 'about-us', to: 'notes#about_us'
   get 'tl', to: 'notes#tl'
   get 'migrate_notes', to: 'notes#migrate_notes'
   get 'for-schools',to: 'notes#for_schools'
