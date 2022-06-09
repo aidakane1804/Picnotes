@@ -16,10 +16,6 @@ class FeedController < ApplicationController
       # @notes = Note.all rescue ''
       @notes = Note.order(created_at: :desc) rescue ''
     end
-    my_array = []
-    @notes.each do |favorite|
-      my_array.push favorite.title_slug
-    end
-    session[:picnotes] = my_array
+
   end
 end
