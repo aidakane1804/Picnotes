@@ -4,18 +4,19 @@ class FavoriteNotesController < ApplicationController
   def index
     if params[:user_id]
       # if params[:user_id] != current_user.id.to_s
-        user = User.find_by(id: params[:user_id])
-        @user = user
-        @favorites = user.favorited_notes
+      user = User.find_by(id: params[:user_id])
+      @user = user
+      @favorites = user.favorited_notes
     else
       @user = current_user
       @favorites = current_user.favorited_notes
     end
-    my_array = [24, 25,26]
+    my_array = []
     @favorites.each do |favorite|
-      session[:picnotes] ||= my_array
-
+      my_array.push favorite.title_slug
     end
+    session[:picnotes] ||= my_array
+
   end
 
   def create
