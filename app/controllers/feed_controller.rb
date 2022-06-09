@@ -19,7 +19,7 @@ class FeedController < ApplicationController
     my_array = []
     if @notes.count > 0
       @notes.where(archived: false).each do |note|
-        my_array.push note.title_slug || "no-title"
+        my_array.push "no-title"
       end
     end
     session[:picnotes] = my_array
