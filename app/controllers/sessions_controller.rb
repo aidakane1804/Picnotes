@@ -11,6 +11,11 @@ class SessionsController < ApplicationController
   def user_notes
     @user = current_user
     @notes = Note.where(user: @user)
+    my_array = []
+    @notes.each do |favorite|
+      my_array.push favorite.title_slug
+    end
+    session[:picnotes] = my_array
   end
 
   def new

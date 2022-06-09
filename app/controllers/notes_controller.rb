@@ -31,7 +31,8 @@ class NotesController < ApplicationController
         format.js
       end
     end
-    @user = current_user
+    my_array = []
+    session[:picnotes] = my_array
   end
 
   def show
