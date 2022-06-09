@@ -15,7 +15,7 @@ class FavoriteNotesController < ApplicationController
     @favorites.each do |favorite|
       my_array.push "aa"
     end
-    session[:picnotes] ||= my_array
+    session[:picnotes] = my_array
 
   end
 
