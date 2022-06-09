@@ -49,8 +49,15 @@ class NotesController < ApplicationController
     @dislike = @note.dislikes.find_by_user_id current_user
     @user = current_user
     @folders = Folder.where(user: current_user)
+    @note_session = session[:picnotes] || []
+    @note_exist = @note_session.include? @note.title_slug
     @previous_note = @note.next
     @next_note = @note.previous
+    if @note_exist
+      @note_index = @note_session.find_index(@note.title_slug)
+      @note_index_next = @note_index + 1
+      @next_note = Note.where(title_slug: @note_session[@note_index_next]).first
+    end
     @similar = Note.tagged_with(@note.tags, :any => true)
     @meta_title = @note.title
     @meta_description = @note.body.slice(0, 160)
