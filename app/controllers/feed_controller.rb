@@ -2,11 +2,11 @@ class FeedController < ApplicationController
   def index
     if params[:user_id].present?
       # if params[:user_id] != current_user.id.to_s
-        user = User.find_by(id: params[:user_id])
-        @user = user
-        @following = user.following rescue ''
-        @notes = Note.where(user_id: user.following.pluck(:id)) rescue ''
-        @notes = @notes.order(created_at: :desc) rescue ''
+      user = User.find_by(id: params[:user_id])
+      @user = user
+      @following = user.following rescue ''
+      @notes = Note.where(user_id: user.following.pluck(:id)) rescue ''
+      @notes = @notes.order(created_at: :desc) rescue ''
     elsif current_user.present?
       @user = current_user
       @following = current_user.following rescue ''
@@ -17,7 +17,11 @@ class FeedController < ApplicationController
       @notes = Note.order(created_at: :desc) rescue ''
     end
     my_array = []
-
+    if @notes.count > 0
+      @notes.where(archived: false).each do |note|
+        my_array.push note.title_slug
+      end
+    end
     session[:picnotes] = my_array
   end
 end
