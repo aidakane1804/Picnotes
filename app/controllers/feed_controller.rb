@@ -17,11 +17,12 @@ class FeedController < ApplicationController
       @notes = Note.order(created_at: :desc) rescue ''
     end
     my_array = []
+    session[:picnotes] = []
     if @notes.count > 0
       @notes.where(archived: false).each do |note|
         my_array.push "no-title"
       end
     end
-    # session[:picnotes] = my_array
+    session[:picnotes] = []
   end
 end
