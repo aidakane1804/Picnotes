@@ -56,7 +56,9 @@ class NotesController < ApplicationController
     if @note_exist
       @note_index = @note_session.find_index(@note.title_slug)
       @note_index_next = @note_index + 1
-      @next_note = Note.where(title_slug: @note_session[@note_index_next]).first
+      @next_note = Note.where(title_slug: @note_session[@note_index_next]).first || @next_note
+      @note_index_previous = @note_index - 1
+      @previous_note = Note.where(title_slug: @note_session[@note_index_previous]).first || @previous_note
     end
     @similar = Note.tagged_with(@note.tags, :any => true)
     @meta_title = @note.title
