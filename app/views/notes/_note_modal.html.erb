@@ -37,8 +37,10 @@
   })
 
 </script>
-
-<h1 style = 'display:none;'><%= title session[:answer] %></h1>
+<% session[:picnotes].each do |session_note| %>
+  <%= title session[:session_note] %>
+<% end %>
+<h1 style = 'display:none;'>ass</h1>
 
 <div id="note-modal" class="modal fade" role="dialog" data-backdrop="">
   <div style = "display: flex; align-items: center;">

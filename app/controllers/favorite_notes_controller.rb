@@ -11,7 +11,11 @@ class FavoriteNotesController < ApplicationController
       @user = current_user
       @favorites = current_user.favorited_notes
     end
-    session[:answer] = "some answer"
+    my_array = [24, 25,26]
+    @favorites.each do |favorite|
+      session[:picnotes] ||= my_array
+
+    end
   end
 
   def create
