@@ -16,6 +16,8 @@ class FeedController < ApplicationController
       # @notes = Note.all rescue ''
       @notes = Note.order(created_at: :desc) rescue ''
     end
+    my_array = []
 
+    session[:picnotes] = my_array
   end
 end
