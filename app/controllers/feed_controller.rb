@@ -22,6 +22,6 @@ class FeedController < ApplicationController
         my_array.push "no-title"
       end
     end
-    session[:picnotes] = my_array
+    # session[:picnotes] = my_array
   end
 end
