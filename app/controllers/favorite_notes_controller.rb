@@ -11,6 +11,7 @@ class FavoriteNotesController < ApplicationController
       @user = current_user
       @favorites = current_user.favorited_notes
     end
+    session[:answer] = "some answer"
   end
 
   def create
