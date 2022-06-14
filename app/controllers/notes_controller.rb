@@ -164,7 +164,7 @@ class NotesController < ApplicationController
       message = params[:Message]
       UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
       redirect_to contact_us_notes_path
-      flash[:success] = "Message sent successfully."
+      flash[:notice] = "Message sent successfully."
     else
       flash[:notice] = "Please enter valid email."
       redirect_to contact_us_notes_path
