@@ -164,7 +164,9 @@ class NotesController < ApplicationController
       message = params[:Message]
       UserMailer.contact_us_mail(email, message).deliver_now rescue '""'
       redirect_to contact_us_notes_path
+      flash[:success] = "Message sent successfully."
     else
+      flash[:notice] = "Please enter valid email."
       redirect_to contact_us_notes_path
     end
   end
@@ -248,9 +250,11 @@ class NotesController < ApplicationController
   end
 
   private
+
   def is_number? string
     true if Float(string) rescue false
   end
+
   def note_params
     params.require(:note).permit(:title, :body, :likes, :dislikes, :image, :tag_list, :search, :searchtest, :remote_image_url)
   end
