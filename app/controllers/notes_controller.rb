@@ -19,6 +19,15 @@ class NotesController < ApplicationController
         end
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
         @notes = @notes.where.not(id: @tagged)
+        my_array = []
+        @count = 0
+    @notes.each do |favorite|
+    @count = @count + 1
+    if @count < 15
+      my_array.push favorite.title_slug
+      end
+    end
+    session[:picnotes] = my_array
       end
       @searchresult = params[:search]
     else
@@ -30,9 +39,10 @@ class NotesController < ApplicationController
         format.html
         format.js
       end
-    end
-    my_array = []
+      my_array = []
     session[:picnotes] = my_array
+    end
+
   end
 
   def show
