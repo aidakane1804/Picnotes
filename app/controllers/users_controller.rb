@@ -55,6 +55,13 @@ class UsersController < ApplicationController
   def show
     default_meta_tags
     @user = User.find params[:id]
+    @notes = @user.notes.where(archived: false)
+
+    my_array = []
+    @notes.each do |favorite|
+      my_array.push favorite.title_slug
+    end
+    session[:picnotes] = my_array
   end
 
   def edit

@@ -10,8 +10,8 @@
 
 <div class = 'flex-center'>
   <div class = "notes-container">
-    <% if @user.notes.where(archived: false).count > 0 %>
-      <% @user.notes.where(archived: false).each do |note| %>
+    <% if @notes.count > 0 %>
+      <% @notes.each do |note| %>
         <%= render partial: 'notes/note_general', locals: {note: note} %>
       <% end %>
     <% else %>
