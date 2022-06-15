@@ -17,7 +17,7 @@
 
 <div class='flex-center'>
   <div class="notes-container" style='margin-top: 20px;'>
-    <% @folder.notes.where(archived: false).each do |note| %>
+    <% @notes.each do |note| %>
       <%= render partial: 'notes/note_general', locals: {note: note} %>
   <% end %>
   </div>

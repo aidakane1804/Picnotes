@@ -20,7 +20,14 @@ class FoldersController < ApplicationController
       else
     @user = current_user
     @folder = Folder.find(params[:id])
-      end
+    end
+    @notes = @folder.notes.where(archived: false)
+
+    my_array = []
+    @notes.each do |favorite|
+      my_array.push favorite.title_slug
+    end
+    session[:picnotes] = my_array
   end
 
   def new
