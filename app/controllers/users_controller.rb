@@ -56,10 +56,13 @@ class UsersController < ApplicationController
     default_meta_tags
     @user = User.find params[:id]
     @notes = @user.notes.where(archived: false)
-
+    @count = 0
     my_array = []
     @notes.each do |favorite|
-      my_array.push favorite.title_slug
+      @count = @count + 1
+      if @count < 15
+        my_array.push favorite.title_slug
+      end
     end
     session[:picnotes] = my_array
   end
