@@ -72,7 +72,7 @@ class NotesController < ApplicationController
     end
     @similar = Note.tagged_with(@note.tags, :any => true)
     @meta_title = @note.title
-    @meta_description = @note.body.slice(0, 160)
+    @meta_description = @note.body.slice(0, 120) + "..."
     @meta_keywords = @note.body
     @meta_image = @note.image.url
 
