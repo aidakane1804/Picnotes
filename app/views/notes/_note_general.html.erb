@@ -5,7 +5,7 @@
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
       </div>
       <div class="bottom-wrap">
-        <h1><%= note.title %> <% nextNote.title %></h1>
+        <h1><%= note.title %> <% nextNote || "1" %></h1>
         <h2><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user) %>
           <span style="float: right">
           <% if user_signed_in? %>
