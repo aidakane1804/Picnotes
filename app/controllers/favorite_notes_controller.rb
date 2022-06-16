@@ -11,8 +11,11 @@ class FavoriteNotesController < ApplicationController
       @user = current_user
       @favorites = current_user.favorited_notes
     end
+    @count = 0
     my_array = []
     @favorites.each do |favorite|
+      @count = @count + 1
+      if @count < 15
       my_array.push favorite.title_slug
     end
     session[:picnotes] = my_array
