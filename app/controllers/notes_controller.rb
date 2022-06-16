@@ -39,9 +39,9 @@ class NotesController < ApplicationController
         format.html
         format.js
       end
+      my_array = []
+      session[:picnotes] = my_array
     end
-    my_array = []
-    session[:picnotes] = my_array
   end
 
   def show
