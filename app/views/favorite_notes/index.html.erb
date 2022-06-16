@@ -10,7 +10,7 @@
   <div class="notes-container" style='margin-top: 20px;'>
     <% if @favorites.where(archived: false).count > 0 %>
       <% @favorites.where(archived: false).each_with_index  do |note, index| %>
-        <%= render partial: 'notes/note_general', locals: {note: note,nextNote: @favorites[index].title} %>
+        <%= render partial: 'notes/note_general', locals: {note: note,nextNote: @favorites[index]} %>
   <% end %>
     <% else %>
       <% if @user == current_user %>
