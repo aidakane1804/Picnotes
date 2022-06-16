@@ -2,9 +2,9 @@ class FoldersController < ApplicationController
   def index
     if params[:user_id]
       # if params[:user_id] != current_user.id.to_s
-        user = User.find_by(id: params[:user_id])
-        @user = user
-        @folders = Folder.where(user: user)
+      user = User.find_by(id: params[:user_id])
+      @user = user
+      @folders = Folder.where(user: user)
     else
       @user = current_user
       @folders = Folder.where(user: current_user)
@@ -14,12 +14,12 @@ class FoldersController < ApplicationController
   def show
     if params[:user_id]
       # if params[:user_id] != current_user.id.to_s
-        user = User.find_by(id: params[:user_id])
-        @user = user
-        @folder = Folder.find(params[:id])
-      else
-    @user = current_user
-    @folder = Folder.find(params[:id])
+      user = User.find_by(id: params[:user_id])
+      @user = user
+      @folder = Folder.find(params[:id])
+    else
+      @user = current_user
+      @folder = Folder.find(params[:id])
     end
     @notes = @folder.notes.where(archived: false)
 
@@ -28,7 +28,8 @@ class FoldersController < ApplicationController
     @notes.each do |favorite|
       @count = @count + 1
       if @count < 15
-      my_array.push favorite.title_slug
+        my_array.push favorite.title_slug
+      end
     end
     session[:picnotes] = my_array
   end

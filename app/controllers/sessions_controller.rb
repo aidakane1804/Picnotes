@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
     @notes.each do |favorite|
       @count = @count + 1
       if @count < 15
-      my_array.push favorite.title_slug
+        my_array.push favorite.title_slug
+      end
     end
     session[:picnotes] = my_array
   end
@@ -42,6 +43,7 @@ class SessionsController < ApplicationController
   end
 
   private
+
   def session_params
     params.require(:session).permit(:email, :password)
   end
