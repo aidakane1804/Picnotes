@@ -12,9 +12,15 @@
         <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
           <div>
             <%= f.input :file_type, collection: Reference::TYPE %>
-            <%= f.input :title %>
-            <%= f.input :author %>
-            <%= f.input :link %>
+            <div id="generic-content">
+              <%= f.input :title %>
+              <%= f.input :author %>
+              <%= f.input :link %>
+            </div>
+            <div id="image-source-content">
+              <%= f.text :image_source %>
+              <%= f.input :link %>
+            </div>
           </div>
           <div class = 'form-btn-container text-center'>
             <p> Please refresh page after creating Picnote </p>

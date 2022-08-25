@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_211113) do
+ActiveRecord::Schema.define(version: 2022_08_23_082354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,16 @@ ActiveRecord::Schema.define(version: 2022_04_07_211113) do
     t.bigint "note_id", null: false
   end
 
+  create_table "jobs", id: :serial, force: :cascade do |t|
+    t.string "queue", null: false
+    t.text "payload"
+    t.integer "reserved_at"
+    t.integer "available_at"
+    t.integer "created_at"
+    t.integer "column_7"
+    t.integer "attempts"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
@@ -195,6 +205,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_211113) do
     t.bigint "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image_source"
     t.index ["note_id"], name: "index_references_on_note_id"
   end
 

@@ -53,6 +53,7 @@ class NotesController < ApplicationController
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
+    @sources = @references_unordered.where(:file_type => 's')
 
     @reference = Reference.new
     @like = @note.likes.find_by_user_id current_user
@@ -97,6 +98,7 @@ class NotesController < ApplicationController
   def new
     @user = current_user
     @note = Note.new
+    binding.pry
   end
 
   def create

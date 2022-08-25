@@ -8,6 +8,7 @@ class ReferencesController < ApplicationController
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
+    @sources = @references_unordered.where(:file_type => 's')
     # if @reference.save
     #   flash[:notice] = "Note Saved"
     #   redirect_to note_path(@note)
@@ -41,6 +42,7 @@ class ReferencesController < ApplicationController
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
+    @sources = @references_unordered.where(:file_type => 's')
   end
 
   def edit
@@ -70,6 +72,6 @@ class ReferencesController < ApplicationController
   end
 
   def reference_params
-    params.require(:reference).permit(:title, :author, :link, :file_type)
+    params.require(:reference).permit(:title, :author, :link, :file_type, :image_source)
   end
 end
