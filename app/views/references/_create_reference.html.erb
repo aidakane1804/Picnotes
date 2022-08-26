@@ -14,10 +14,26 @@ function openReference(tab){
 
 <div id = 'references' class = 'tabcontent'>
   <div class = 'reference-tabs'>
-    <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Books <%= @textbooks.count%> </button>
-    <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Videos <%= @videos.count%>  </button>
-    <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Articles <%= @papers.count%>  </button>
-    <button class = 'reference-tab Sources' onclick='openReference("Sources")'> Image <%= @sources.count%>  </button>
+    <% if @textbooks.count > 0 %>
+      <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Books <%= @textbooks.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Book <%= @textbooks.count%>  </button>
+    <%end %>
+    <% if @videos.count > 0 %>
+      <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Videos <%= @videos.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Video <%= @videos.count%>  </button>
+    <% end %>
+    <% if @papers.count > 0 %>
+      <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Articles <%= @papers.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Article <%= @papers.count%>  </button>
+    <% end %>
+    <% if @sources.count > 0 %>
+      <button class = 'reference-tab Sources' onclick='openReference("Sources")'> Images <%= @sources.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Sources' onclick='openReference("Sources")'> Image <%= @sources.count%>  </button>
+    <% end %>
     <% if current_user %>
       <% if current_user.username == @note.user.username %>
       <button class = 'reference-tab Add' onclick='openReference("Add")'> Add </button>
