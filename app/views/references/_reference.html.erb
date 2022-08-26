@@ -2,13 +2,13 @@
   <% arr = ["v", "p", "t", "s"]
      arr.each do |f|
   %>
-    <% if reference.file_type.eql?(f) && reference.link.eql?("https://") %>
+    <% if reference.file_type.eql?(f) && reference.link.eql?("https://") && reference.title.present? %>
       <p> Title: <%= reference.title %> </p>
-    <% elsif reference.file_type.eql?(f) && reference.image_source.present?%>
-      <p> <b>Source:</b> <%=  link_to (reference.image_source), reference.link, target: :_blank %> </p>
-<!--      <p> <b>Link:</b> <%#= link_to (reference.link), reference.link, target: :_blank %> </p>-->
-    <% elsif reference.file_type.eql?(f) %>
+    <% elsif reference.file_type.eql?(f) && reference.title.present?%>
       <p> Title: <%= link_to (reference.title), reference.link, target: :_blank %> </p>
+    <% end %>
+    <% if reference.file_type.eql?(f) && reference.image_source.present?%>
+      <p> <b>Source:</b> <%=  link_to (reference.image_source), reference.link, target: :_blank %> </p>
     <% end %>
   <% end %>
 <% end %>
