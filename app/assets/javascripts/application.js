@@ -28,26 +28,6 @@ $(document).on('turbolinks:load', function () {
 });
 
 
-function SourceImage() {
-    $('#image-source-content').hide();
-    $('select#reference_file_type').on('change', function () {
-        var selection = $(this).val();
-        if (selection == 's') {
-            $('#generic-content').hide();
-            $('#image-source-content').show();
-        } else {
-            $('#generic-content').show();
-            $('#image-source-content').hide();
-        }
-    });
-}
-$(window).on('shown.bs.modal', function () {
-    SourceImage();
-});
-$(document).ready(function() {
-    SourceImage();
-});
-
 $(window).scroll(function() {
     var scroll = $(window).scrollTop();
     if (scroll >= 30) {
