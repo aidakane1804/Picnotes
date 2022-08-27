@@ -98,7 +98,6 @@ class NotesController < ApplicationController
   def new
     @user = current_user
     @note = Note.new
-    binding.pry
   end
 
   def create
