@@ -15,12 +15,12 @@
             <div id="generic-content">
               <%= f.input :title %>
               <%= f.input :author %>
-              <%= f.input :link %>
             </div>
             <div id="image-source-content">
-              <%= f.text :image_source %>
-              <%= f.input :link %>
+              <%= f.input :image_source , as: :text, :input_html => { :cols => 5, :rows => 5 } %>
+
             </div>
+            <%= f.input :link %>
           </div>
           <div class = 'form-btn-container text-center'>
             <p> Please refresh page after creating Picnote </p>
