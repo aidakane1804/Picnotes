@@ -11,7 +11,7 @@
           })
       </script>
     <% elsif user_signed_in? && current_user.follow_status == false %>
-      <%= render './modals/follow_modal' %>
+      <%= render './modals/follow_modal'%>
       <script>
           $(window).on('load', function () {
               $('#followModal').modal('show');

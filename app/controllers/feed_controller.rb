@@ -28,5 +28,16 @@ class FeedController < ApplicationController
       end
     end
     session[:picnotes] = my_array
+    if params[:search].present?
+      @searched_users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+      end
+    else
+      @searched_users = User.all
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+      end
+    end
   end
 end

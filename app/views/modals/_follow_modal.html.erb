@@ -10,29 +10,37 @@
       <div class="table-follow-modal">
         <div id="result" style="margin-left: 5px;color: green;"></div>
         <div class = 'modal-body conatiner' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
-
           <table class="table-condensed">
-            <% top_user = top_writer%>
-            <% if !current_user.follow?(top_user) && current_user.id != top_user.id  %>
-              <tr id = <%= top_user.id * top_user.id%>>
-            <td>  <%= top_user.first_name + " " + top_user.last_name %></td>
-            <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= top_user.id %> id=<%= top_user.id %>> follow</button>
-            </td>  </tr>
-            <%end%>
-            <% Note.select(:user_id).distinct.limit(10).includes(:user).where(archived: false).each do |note| %>
-              <% if user_signed_in? %>
-                <% if current_user.id != note.user.id %>
-                  <% if !current_user.follow?(note.user) && !(note.user.id == top_user.id)  %>
-                    <tr id = <%= note.user.id * note.user.id%>>
-                      <td>  <%= note.user.first_name + " " + note.user.last_name %></td>
-                      <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= note.user.id %> id=<%= note.user.id %>> follow</button>
-                      </td>  </tr>
-                  <% else%>
-                    <!--                          <button style="background: white;border: none;color: #3a5998;" class="unfollow" target1= <%#=user.id %> id=<%#=user.id %> > unfollow</button>-->
+            <%= form_tag(feed_index_path, method: "get", remote: true) do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+              <%= submit_tag "Search" %>
+            <% end %>
+            <div id="search-results">
+
+            </div>
+            <div id="original-results">
+              <% top_user = top_writer%>
+              <% if !current_user.follow?(top_user) && current_user.id != top_user.id  %>
+                <tr id = <%= top_user.id * top_user.id%>>
+                  <td>  <%= top_user.first_name + " " + top_user.last_name %></td>
+                  <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= top_user.id %> id=<%= top_user.id %>> follow</button>
+                  </td>  </tr>
+              <%end%>
+              <% User.all.each do |user| %>
+                <% if user_signed_in? %>
+                  <% if current_user.id != user.id %>
+                    <% if !current_user.follow?(user) && !(user.id == top_user.id)  %>
+                      <tr id = <%= user.id * user.id%>>
+                        <td>  <%= user.first_name + " " + user.last_name %></td>
+                        <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= user.id %> id=<%= user.id %>> follow</button>
+                        </td>  </tr>
+                    <% else%>
+                      <!--                          <button style="background: white;border: none;color: #3a5998;" class="unfollow" target1= <%#=user.id %> id=<%#=user.id %> > unfollow</button>-->
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
-            <% end %>
+            </div>
           </table>
         </div>
       </div>

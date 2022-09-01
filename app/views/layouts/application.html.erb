@@ -962,6 +962,10 @@
     });
     $(document).ready(function() {
         SourceImage();
+        $('#newNoteModal').on("hide.bs.modal", function (e) {
+            if(confirm("Are you sure, you want to cancel the Picnote?")) return true;
+            else return false;
+        });
     });
     // $(document).ready(function () {
     //     $('#dropdownMenuLink').click();
