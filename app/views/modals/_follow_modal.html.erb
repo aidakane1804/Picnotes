@@ -11,8 +11,8 @@
         <div id="result" style="margin-left: 5px;color: green;"></div>
         <div class = 'modal-body conatiner' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
           <table class="table-condensed">
-            <%= form_tag(feed_index_path, method: "get", remote: true) do %>
-              <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+            <%= form_tag(user_search_feed_index_path, method: "get", remote: true) do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Enter Name", id:"search-user"%>
               <%= submit_tag "Search" %>
             <% end %>
             <div id="search-results">
@@ -51,6 +51,11 @@
 <style>
   .bold{
     color: #b8e314;
+  }
+  #search-user {
+      border: 1px solid;
+      border-radius: 5px;
+      margin-right: 3px;
   }
 </style>
 

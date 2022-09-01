@@ -53,7 +53,6 @@ Rails.application.routes.draw do
       get 'contact_us_form', to: 'notes#contact_us_form'
       get 'add_note_to_folder', to: 'notes#add_note_to_folder'
 
-
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]
@@ -82,7 +81,11 @@ Rails.application.routes.draw do
   get 'search/index'
 
 
-  resources :feed, only: [:index]
+  resources :feed, only: [:index] do
+    collection do
+      get :user_search
+    end
+  end
 
   resource :session, only: [:index, :new, :create, :destroy, :show] do
     collection do
