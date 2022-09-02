@@ -963,7 +963,7 @@
     $(document).ready(function() {
         SourceImage();
         $('#newNoteModal').on("hide.bs.modal", function (e) {
-            if(confirm("Are you sure, you want to cancel the Picnote?")) return true;
+            if(confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) return true;
             else return false;
         });
     });
