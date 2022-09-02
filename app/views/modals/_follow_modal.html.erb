@@ -13,7 +13,7 @@
           <table class="table-condensed">
             <%= form_tag(user_search_feed_index_path, method: "get", remote: true) do %>
               <%= text_field_tag :search, params[:search], placeholder: "Enter Name", id:"search-user"%>
-              <%= submit_tag "Search" %>
+              <%#= submit_tag "Search" %>
             <% end %>
             <div id="search-results">
 
@@ -60,6 +60,23 @@
 </style>
 
 <script >
+    $(document).ready(function () {
+        $('#search-user').on("input",function() {
+            var search_val = $('#search-user').val();
+            var sTimeOut = setTimeout(function () {
+              $.ajax({
+                  type:"GET",
+                  url:"feed/user_search",
+                  // dataType:"json",
+                  data: {search: search_val},
+                  success:function(result){
+                      // console.log(result)
+                      // alert(result);
+                  }
+              })
+            }, 3000);
+        })
+    })
     $(document).ready(function () {
         $('.follow').click(function (event) {
             var id = $(event.target).attr('target');

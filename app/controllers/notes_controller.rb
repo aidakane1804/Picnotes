@@ -107,7 +107,7 @@ class NotesController < ApplicationController
       @noted = Note.find(@note.id)
       @noted.update_column(:title_slug, @noted.title.parameterize)
       flash[:notice] = "Note Saved"
-      redirect_to user_notes_session_path
+      redirect_to new_note_reference_path(@note)
     else
       flash[:notice] = "Error"
       render :new
