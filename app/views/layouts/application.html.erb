@@ -967,7 +967,7 @@
             else return false;
         });
         $('#reference_note-modal').on("hide.bs.modal", function (e) {
-            var url= <%= user_notes_session_path %>
+            var url= "<%= user_notes_session_path %>"
             document.location.href = url;
         });
     });
