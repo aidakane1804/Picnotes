@@ -63,10 +63,26 @@
       <button class = 'reference-tab Add active' id = 'defaultOpen' onclick='openReference(event, "Add")'> Add </button>
       <% end %>
     <% end %>
-    <button class = 'reference-tab Textbooks' onclick='openReference(event, "Textbooks")'> Books </button>
-    <button class = 'reference-tab Videos' onclick='openReference(event, "Videos")'> Videos </button>
-    <button class = 'reference-tab Papers' onclick='openReference(event, "Papers")'> Articles </button>
-    <button class = 'reference-tab Sources' onclick='openReference(event, "Sources")'> Image </button>
+    <% if @textbooks.count > 0 %>
+      <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Books <%= @textbooks.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Textbooks' onclick='openReference("Textbooks")'> Book <%= @textbooks.count%>  </button>
+    <%end %>
+    <% if @videos.count > 0 %>
+      <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Videos <%= @videos.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Videos' onclick='openReference("Videos")'> Video <%= @videos.count%>  </button>
+    <% end %>
+    <% if @papers.count > 0 %>
+      <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Articles <%= @papers.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Papers' onclick='openReference("Papers")'> Article <%= @papers.count%>  </button>
+    <% end %>
+    <% if @sources.count > 0 %>
+      <button class = 'reference-tab Sources' onclick='openReference("Sources")'> Images <%= @sources.count%>  </button>
+    <% else %>
+      <button class = 'reference-tab Sources' onclick='openReference("Sources")'> Image <%= @sources.count%>  </button>
+    <% end %>
   </div>
 
   <div id = 'reference'>
@@ -110,6 +126,10 @@
 
     <div id = 'Papers' class = 'click-reference' style = 'display: none;'>
       <%= render @papers %>
+    </div>
+
+    <div id = 'Sources' class = 'click-reference' style = 'display: none;'>
+      <%= render @sources %>
     </div>
   </div>
 </div>
