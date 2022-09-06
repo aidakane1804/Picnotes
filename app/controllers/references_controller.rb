@@ -4,6 +4,7 @@ class ReferencesController < ApplicationController
 
   def create
     @reference = @note.references.build(reference_params)
+    @similar = Note.tagged_with(@note.tags, :any => true)
     @references_unordered = Reference.where(note_id: @note.id)
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')

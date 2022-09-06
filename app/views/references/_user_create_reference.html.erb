@@ -33,25 +33,15 @@
   //     evt.currentTarget.className += " active";
   // }
 
-  function openReference(evt, tab) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("click-reference");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
+  function openReference(tab) {
+  var i;
+  var x = document.getElementsByClassName('click-reference');
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = 'none';
+      x[i].style.borderBottom = 'thick #FFF solid';
   }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("reference-tab");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tab).style.display = "block";
-  evt.currentTarget.className += " active";
+  // evt.currentTarget.className += " active";
 }
 
 </script>
@@ -60,7 +50,7 @@
   <div class = 'reference-tabs'>
     <% if current_user %>
       <% if current_user.username == @note.user.username %>
-      <button class = 'reference-tab Add active' id = 'defaultOpen' onclick='openReference(event, "Add")'> Add </button>
+        <button class = 'reference-tab Add active' onclick='openReference("Add")'> Add </button>
       <% end %>
     <% end %>
     <% if @textbooks.count > 0 %>
@@ -116,7 +106,7 @@
       <% end %>
     <% end %>
 
-    <div id = 'Textbooks' class = 'click-reference'>
+    <div id = 'Textbooks' class = 'click-reference' style = 'display: none;'>
       <%= render @textbooks %>
     </div>
 
