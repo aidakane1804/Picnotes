@@ -20,10 +20,6 @@ class SessionsController < ApplicationController
       end
     end
     session[:picnotes] = my_array
-    if params[:is_new] == "true"
-      note = Note.find(params[:note])
-      redirect_to new_note_reference_path(note)
-    end
   end
 
   def new

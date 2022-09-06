@@ -966,11 +966,6 @@
             if(confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) return true;
             else return false;
         });
-        $('#reference_note-modal').on("hide.bs.modal", function (e) {
-            var url= "<%= user_notes_session_path %>";
-            console.log(url);
-            document.location.href = url;
-        });
     });
     // $(document).ready(function () {
     //     $('#dropdownMenuLink').click();
