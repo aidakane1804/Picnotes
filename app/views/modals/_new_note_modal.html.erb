@@ -14,7 +14,7 @@
         <%= simple_form_for Note.new do |f| %>
           <div class = 'modal-body'>
             <%= f.label :title, 'Title (Required)' %>
-            <%= f.input :title, label: false %>
+            <%= f.input :title, label: false, required: true %>
             <div class = 'image-upload-box'>
               <%= f.label :image, 'File Upload' %>
               <div class = 'image-upload text-center'>
@@ -22,8 +22,15 @@
                   <%= image_tag 'file-upload.png', class: 'logo-image', id: 'img_prev' %>
                   <p>Click to Upload Image </p>
                 </label>
-                <%= f.file_field :image, id: 'file-input', :onchange => 'readURL(this)' %>
+                <%= f.file_field :image, id: 'file-input', :onchange => 'readURL(this)'%>
                 <script>
+                  $("#new_note").submit(function(e){
+                      if($('#file-input').val() === '') {
+                          alert("Image can't be blank");
+                          e.preventDefault();
+                          return false
+                      }
+                  });
                   function readURL(input) {
                     if (input.files && input.files[0]) {
                       var reader = new FileReader();
@@ -41,8 +48,8 @@
                   }
                 </script>
               </div>
-              <%= f.label :remote_image_url, 'or Image URL' %>
-              <%= f.input :remote_image_url, label: false %>
+              <%#= f.label :remote_image_url, 'or Image URL' %>
+              <%#= f.input :remote_image_url, label: false %>
             </div>
             <%= f.label :body, 'Notes (Required)' %> <span id = 'body-count'> 0 / 650 </span>
             <%= f.input :body, maxlength: 650, label: false, placeholder: 'No more than 650 characters', :input_html => { :id => 'body-field' } %>
@@ -55,7 +62,7 @@
               });
             </script>
             <%= f.label :tag_list, 'Tags (Required)' %>
-            <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
+            <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false, required: true%>
           </div>
           <div class = 'form-btn-container text-center new-note-btn'>
             <%= f.button :submit, 'Create Picnotes', :class => 'white-btn btn-width' %>

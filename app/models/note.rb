@@ -18,22 +18,22 @@ class Note < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  # validates(:title, {
-  #   presence: {message: 'Must have a Title'}
-  # })
+  validates(:title, {
+    presence: {message: 'Must have a Title'}
+  })
 
   validates(:body, {
     presence: true,
     length: {minimum: 5, maximum: 2000}
   })
 
-  # validates(:image, {
-  #   presence: {message: 'Must have a Image'}
-  #   })
+  validates(:image, {
+    presence: {message: 'Must have a Image'}
+    })
 
-    # validates(:tag_list, {
-    #   presence: {message: 'Must have a tag'}
-    #   })
+    validates(:tag_list, {
+      presence: {message: 'Must have a tag'}
+      })
 
   after_initialize :set_defaults
 
