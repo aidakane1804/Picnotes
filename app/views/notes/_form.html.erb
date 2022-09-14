@@ -34,7 +34,7 @@
   </div>
 
   <%= form.label :body, 'Notes (Required)' %>
-  <%= form.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+  <%= form.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters', :rows => 7 } %>
   <%= form.label :tag_list, 'Tags' %>
   <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false, required: true %>
   <div class = 'form-btn-container text-center'>
