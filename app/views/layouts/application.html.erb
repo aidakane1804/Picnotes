@@ -484,6 +484,93 @@
             display: none;
         }
 
+        .mobile-nav {
+            position: fixed;
+            top: 55px;
+            right: 15px;
+            bottom: 15px;
+            left: 15px;
+            z-index: 9999;
+            overflow-y: auto;
+            background: #fff;
+            transition: ease-in-out 0.2s;
+            opacity: 0;
+            visibility: hidden;
+            border-radius: 10px;
+            padding: 10px 0;
+        }
+
+        .mobile-nav * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .mobile-nav a {
+            display: block;
+            position: relative;
+            color: #364146;
+            padding: 10px 20px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .mobile-nav a:hover, .mobile-nav .active > a, .mobile-nav li:hover > a {
+            color: #009cea;
+            text-decoration: none;
+        }
+
+        .mobile-nav .drop-down > a:after {
+            content: "\ea99";
+            font-family: IcoFont;
+            padding-left: 10px;
+            position: absolute;
+            right: 15px;
+        }
+
+        .mobile-nav .active.drop-down > a:after {
+            content: "\eaa1";
+        }
+
+        .mobile-nav .drop-down > a {
+            padding-right: 35px;
+        }
+
+        .mobile-nav .drop-down ul {
+            display: none;
+            overflow: hidden;
+        }
+
+        .mobile-nav .drop-down li {
+            padding-left: 20px;
+        }
+
+        .mobile-nav-overly {
+            width: 100%;
+            height: 100%;
+            z-index: 9997;
+            top: 0;
+            left: 0;
+            position: fixed;
+            background: rgba(32, 38, 41, 0.6);
+            overflow: hidden;
+            display: none;
+            transition: ease-in-out 0.2s;
+        }
+
+        .mobile-nav-active {
+            overflow: hidden;
+        }
+
+        .mobile-nav-active .mobile-nav {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-active .mobile-nav-toggle i {
+            color: #fff;
+        }
+
         .mobile-nav-toggle {
             position: fixed;
             right: 15px;
@@ -976,6 +1063,89 @@
     var old_url = window.location.pathname;
 
 </script>
+<!-- Template Main JS File -->
+<script>
+
+    !(function ($) {
+        "use strict";
+        // Mobile Navigation
+        if ($('.nav-menu').length) {
+            var $mobile_nav = $('.nav-menu').clone().prop({
+                class: 'mobile-nav d-lg-none'
+            });
+            $('body').append($mobile_nav);
+            $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
+            $('body').append('<div class="mobile-nav-overly"></div>');
+
+            $(document).on('click', '.mobile-nav-toggle', function (e) {
+                $('body').toggleClass('mobile-nav-active');
+                $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+                $('.mobile-nav-overly').toggle();
+            });
+
+            $(document).on('click', '.mobile-nav .drop-down > a', function (e) {
+                e.preventDefault();
+                $(this).next().slideToggle(300);
+                $(this).parent().toggleClass('active');
+            });
+
+            $(document).click(function (e) {
+                var container = $(".mobile-nav, .mobile-nav-toggle");
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    if ($('body').hasClass('mobile-nav-active')) {
+                        $('body').removeClass('mobile-nav-active');
+                        $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+                        $('.mobile-nav-overly').fadeOut();
+                    }
+                }
+            });
+        } else if ($(".mobile-nav, .mobile-nav-toggle").length) {
+            $(".mobile-nav, .mobile-nav-toggle").hide();
+        }
+
+        // Navigation active state on scroll
+        var nav_sections = $('section');
+        var main_nav = $('.nav-menu, #mobile-nav');
+
+        $(window).on('scroll', function () {
+            var cur_pos = $(this).scrollTop() + 80;
+
+            nav_sections.each(function () {
+                var top = $(this).offset().top,
+                    bottom = top + $(this).outerHeight();
+
+                if (cur_pos >= top && cur_pos <= bottom) {
+                    if (cur_pos <= bottom) {
+                        main_nav.find('li').removeClass('active');
+                    }
+                    main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
+                }
+            });
+        });
 
 
+        // Initi AOS
+        AOS.init({
+            duration: 800,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var typed = "";
+            typed = new Typed("#typing", {
+                strings: ["Joachim Murat was one of the most notable Marshals of the Napoleonic Empire. Born on March 25th, 1767, Murat's childhood was humble. He enrolled in a cavalry regiment….."],
+                typeSpeed: 50,
+                startDelay: 0,
+                backSpeed: 0,
+                backDelay: 2000,
+                loop: false,
+                cursorChar: null,
+                contentType: 'html'
+            });
+        });
+
+
+    })(jQuery);
+</script>
 </html>`
