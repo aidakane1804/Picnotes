@@ -77,6 +77,11 @@
         <% end %>
         <li>
       </ul>
+      <ul class="d-xl-none">
+        <li><a href="/guidelines">Guidelines</a></li>
+        <li><a href="/terms-and-conditions">Terms and Conditions</a></li>
+        <li><a href="/notes/contact_us">Contact Us</a></li>
+      </ul>
     </nav><!-- .nav-menu -->
     <div class="header-logins">
       <%= form_tag(notes_path, method: :get, class: "form-inline search_formm") do %>
@@ -110,7 +115,6 @@
           </form>
         <% else %>
           <button type="button" class='btn-login' data-toggle='modal' data-target='#newSessionModal' data-whatever='@mdo'>Login</button>
-
           <button type="button" class='btn-signup' data-toggle='modal' data-target='#newUserModal' data-whatever='@mdo' onclick="changeMetaContent('Sign up','description', 'Connect with Facebook or Sign Up with Email')">Sign
             Up
           </button>
@@ -592,9 +596,9 @@
         }
     }
 
-    .icofont-navigation-menu:before {
-        content: "\e908";
-    }
+    /*.icofont-navigation-menu:before {*/
+    /*    content: "\e908";*/
+    /*}*/
 
     .header-logins form .droptag .tag-btn {
         color: #181D27;
@@ -1074,12 +1078,12 @@
                 class: 'mobile-nav d-lg-none'
             });
             $('body').append($mobile_nav);
-            $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>');
+            $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none" style="display: none"></button>');
             $('body').append('<div class="mobile-nav-overly"></div>');
 
             $(document).on('click', '.mobile-nav-toggle', function (e) {
                 $('body').toggleClass('mobile-nav-active');
-                $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+                $('.mobile-nav-toggle i').toggleClass('icofont-close');
                 $('.mobile-nav-overly').toggle();
             });
 
@@ -1094,7 +1098,7 @@
                 if (!container.is(e.target) && container.has(e.target).length === 0) {
                     if ($('body').hasClass('mobile-nav-active')) {
                         $('body').removeClass('mobile-nav-active');
-                        $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
+                        $('.mobile-nav-toggle i').toggleClass('icofont-close');
                         $('.mobile-nav-overly').fadeOut();
                     }
                 }
