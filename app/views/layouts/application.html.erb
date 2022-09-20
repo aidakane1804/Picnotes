@@ -65,8 +65,8 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="nav-menu navbar-header">
-          <button type="button" class="mobile-nav-toggle navbar-toggle collapsed  d-lg-none" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="width: 9%; height: 5%; margin-top: 10px">
-            <span class="icon-open-menu" style="margin-right: 30%"></span>
+          <button type="button" class="mobile-nav-toggle navbar-toggle collapsed  d-lg-none" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-haspopup="true" style="width: 50px; height: 50px;">
+            <span class="icon-open-menu" style="margin-right: 35%"></span>
           </button>
           <ul class="d-none d-xl-block">
             <li class="active"><a href="/about-us">About Us</a></li>
@@ -87,8 +87,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse custom-style" id="bs-example-navbar-collapse-1">
-          <ul>
+        <div class="collapse navbar-collapse custom-style" id="bs-example-navbar-collapse-1" style="position: relative">
+          <ul style="position: absolute; right: -160px; top: 50px; width: 230px; background-color: whitesmoke">
             <li class="active"><a href="/about-us">About Us</a></li>
             <li><a href="/for-schools">For Schools</a></li>
             <li><a href="/edfluencers">EdFluencers</a></li>
@@ -110,29 +110,6 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-<!--    <nav class="nav-menu d-none d-lg-block">-->
-<!--      <ul>-->
-<!--        <li class="active"><a href="/about-us">About Us</a></li>-->
-<!--        <li><a href="/for-schools">For Schools</a></li>-->
-<!--        <li><a href="/edfluencers">EdFluencers</a></li>-->
-        <%# if user_signed_in? %>
-<!--          <li>-->
-<!--          <a href="#" data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'-->
-<!--             onclick="changeMetaContent('Create Picnotes','description', 'Combine short notes to a cover picture and share with your friends.')">Create-->
-<!--            Picnotes</a></li>-->
-        <%# else %>
-<!--          <li><i class="bx bx-chevron-right"></i>-->
-<!--            <a href="#" data-toggle='modal' data-target='#newSessionModal' data-whatever="@mdo" >Create-->
-<!--              Picnotes</a></li>-->
-        <%# end %>
-<!--        <li>-->
-<!--      </ul>-->
-<!--      <ul class="d-xl-none">-->
-<!--        <li><a href="/guidelines">Guidelines</a></li>-->
-<!--        <li><a href="/terms-and-conditions">Terms and Conditions</a></li>-->
-<!--        <li><a href="/notes/contact_us">Contact Us</a></li>-->
-<!--      </ul>-->
-<!--    </nav>-->
     <div class="header-logins">
       <%= form_tag(notes_path, method: :get, class: "form-inline search_formm") do %>
         <input type="text" style="padding: 25px 100px 25px 50px !important;width: 100% !important" name="search" id="search" class="form-control mr-sm-2">
@@ -230,12 +207,15 @@
     }
 
     .tablate-view-btns {
-        margin-top: 10px;
+        /*margin-top: 10px;*/
     }
 
     @media only screen and (min-width: 1100px) {
         .folder-container {
             margin-right: 12.5px !important;
+        }
+        .tablate-right-nav {
+            margin-top: 10px;
         }
     }
 
@@ -245,7 +225,6 @@
 
     .tablate-right-nav {
         margin-left: 10px;
-        margin-right: 70px;
     }
 
     .notes_col {
@@ -314,7 +293,7 @@
 
     @media screen and (max-width: 1100px) {
         .tablate-right-nav {
-            padding-top: 5px;
+            /*padding-top: 5px;*/
         }
 
         .notes_col {
@@ -375,11 +354,12 @@
 
     @media screen and (max-width: 426px) {
         .tablate-right-nav {
-            margin-right: 50px;
+            /*margin-right: 50px;*/
         }
 
         .btn-login {
             margin: 0px 0px !important;
+            padding-left: 25px;
         }
 
         .tablate-view-btns {
@@ -696,7 +676,8 @@
 
     @media screen and (max-width: 768px) {
         .header-logins form.search-form {
-            display: none;
+            display: inline-block;
+            /*display: none;*/
         }
     }
 
