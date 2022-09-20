@@ -105,7 +105,7 @@ class NotesController < ApplicationController
     @note.user = current_user
     if @note.save
       @noted = Note.find(@note.id)
-      @noted.update_column(:title_slug, @noted.title.parameterize)
+      @noted.update_column(:title_slug, @noted.title.parameterize + "-#{@noted.id}" )
       flash[:notice] = "Note Saved"
       redirect_to new_note_reference_path(@note)
     else
@@ -154,7 +154,7 @@ class NotesController < ApplicationController
     @items = Note.all
 
     @items.each do |item|
-      item.update_column(:title_slug, item.title.parameterize)
+      item.update_column(:title_slug, item.title.parameterize + "-#{item.id}")
     end
   end
 
