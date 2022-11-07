@@ -17,11 +17,11 @@
             <h2><%= @user.first_name %> <%= @user.last_name %></h2>
             <p><%= @user.city %></p>
             <p> <%= @user.about_me %></p>
-            <%# if @user.message %>
-              <%# if @user.message.length > 0 %>
-<!--                <p> <%#= @user.message %> </p>-->
-              <%# end %>
-            <%# end %>
+            <% if @user.message %>
+              <% if @user.message.length > 0 %>
+               <p> <%= @user.message %> </p>
+              <% end %>
+            <% end %>
             <button class="btn profile-btn">
               <% if @user.followers.count > 0 %>
                 <%= link_to 'Followers ' + (@user.followers.count.to_s), followers_user_path(@user), class: 'blue-appearance-btn' %>

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   devise :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
   # devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
+  has_one :first_visit, ->(u) { order(:started_at).where("started_at < ?", u.created_at) }, class_name: 'Ahoy::Visit'
 
   has_many :folders, dependent: :destroy
 
@@ -123,6 +124,10 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def full_name
+    "#{first_name} #{last_name}" rescue nil
   end
 
 

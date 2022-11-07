@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_action :initiate_instance_variables
+  after_action :track_action
+
   include UsersHelper
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
@@ -67,6 +69,11 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  protected
+  def track_action
+    ahoy.track "Ran action", request.path_parameters
+  end
 
   private
 

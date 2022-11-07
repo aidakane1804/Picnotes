@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
+//= require ahoy
 //= require_tree .
 //= require_tree ./channels
 
