@@ -115,4 +115,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # additional gems
-gem "ahoy_matey"
+gem "ahoy_matey" # https://github.com/ankane/ahoy
+gem 'exception_notification' # https://github.com/smartinez87/exception_notification

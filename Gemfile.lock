@@ -120,6 +120,9 @@ GEM
     errbase (0.2.2)
     erubi (1.10.0)
     eventmachine (1.2.7)
+    exception_notification (4.5.0)
+      actionmailer (>= 5.2, < 8)
+      activesupport (>= 5.2, < 8)
     excon (0.82.0)
     execjs (2.8.1)
     faraday (0.17.4)
@@ -574,6 +577,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dropzonejs-rails
+  exception_notification
   fog
   fog-aws
   font-awesome-rails
