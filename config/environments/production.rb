@@ -121,7 +121,7 @@ Rails.application.configure do
   config.assets.digest  = true
   config.assets.precompile = %w{application.js}
   config.middleware.use ExceptionNotification::Rack,
-    ignore_if: ->(env, exception) { exception.message =~ /^An ActionController::InvalidAuthenticityToken occurred in ajax#session_timeout/ },
+    ignore_if: ->(env, exception) { exception.message =~ /^An ActionController::InvalidCrossOriginRequest occurred in notes#show/ },
     ignore_exceptions: ["ActionController::InvalidAuthenticityToken"] + ExceptionNotifier.ignored_exceptions
 
   # Do not dump schema after migrations.
