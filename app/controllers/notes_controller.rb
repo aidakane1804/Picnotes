@@ -45,7 +45,7 @@ class NotesController < ApplicationController
   end
 
   def show
-    redirect_to request.referrer, alert: "Note not found" unless @note.present?
+    redirect_to root_path, alert: "Note not found" unless @note.present?
 
     @tags = @note.tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
