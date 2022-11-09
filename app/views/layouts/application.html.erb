@@ -16,6 +16,7 @@
   <meta property=’og:url’ content='https://www.picnotes.org/'/>
   <meta property='og:image:width' content='2236'/>
   <meta property='og:image:height' content='2179'/>
+  <meta name="turbolinks-visit-control" content="reload">
   <!-- TYPE BELOW IS PROBABLY: 'website' or 'article' or look on https://ogp.me/#types -->
   <meta property="og:type" content='website'/>
 
@@ -1124,7 +1125,35 @@
     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+
+    var fbRoot;
+    function saveFacebookRoot(){
+        const temp = document.querySelector("#fb-root");
+        if(temp){
+            temp.querySelector("[data-turbolinks-no-cache]")?.remove();
+            fbRoot = temp;
+            temp.remove();
+        }
+    }
+    function restoreFacebookRoot(){
+        if(fbRoot != null){
+            const temp = document.querySelector("#fb-root");
+            if(temp){
+                temp.replaceWith(fbRoot);
+            }else {
+                document.querySelector("body").append(fbRoot);
+            }
+        }
+
+        if(typeof FB === "undefined" && FB === null){
+            FB.XFBML.parse();
+        }
+    }
+
+    document.addEventListener("turbolinks:request-start", saveFacebookRoot);
+    document.addEventListener("turbolinks:load", restoreFacebookRoot);
 </script>
+
 
 <script>
     $(document).on('ready page:load', function () {
