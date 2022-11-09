@@ -22,7 +22,7 @@ ExceptionNotification.configure do |config|
   config.add_notifier :email, {
     email_prefix: '[PICNOTES ERROR] ',
     sender_address: %{"Picnotes Notifier" <info@picnotes.org>},
-    exception_recipients: %w{jaysonpresto.iprog21@gmail.com},
+    exception_recipients: %w{jaysonpresto.iprog21@gmail.com aida.kane1804@gmail.com},
     :error_grouping => true,
     :sections => %w[data request session backtrace],
     :background_sections => %w[data backtrace]
