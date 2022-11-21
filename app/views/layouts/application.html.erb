@@ -113,7 +113,7 @@
     </nav>
     <div class="header-logins">
       <%= form_tag(notes_path, method: :get, class: "form-inline search_formm") do %>
-        <input type="text" style="padding: 25px 100px 25px 50px !important;width: 100% !important" name="search" id="search" class="form-control mr-sm-2">
+        <input type="text" style="width: 100% !important" name="search" id="search" class="form-control mr-sm-2">
         <img onclick="$('.search_formm').submit()" class="search-icon" src="/assets/search-icon_new-3a73e3281e063df7f0ea2510efd37652780b344c640b582ec98d84e4ac173d26.png" alt="search...">
       <% end %>
 <!--      <button type="button" class="mobile-nav-toggle d-lg-none"><span class="icon-open-menu"></span></button>-->
@@ -828,7 +828,8 @@
     .header-logins form img {
         position: absolute;
         top: 15px;
-        left: 20px;
+        left: -30px;
+        /* left: 20px; */
     }
 
     .header-logins form {
