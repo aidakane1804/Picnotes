@@ -80,7 +80,7 @@ class User < ApplicationRecord
   validates :email,
             presence: true,
             uniqueness: true,
-            format: VALID_EMAIL_REGEX
+            format: VALID_EMAIL_REGEX,
             presence: true,
             uniqueness: true,
             format: VALID_EMAIL_REGEX
