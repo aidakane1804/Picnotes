@@ -1,54 +1,164 @@
-<div class='profile-dashboard'>
-  <br>
-  <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
-    <p> <%= link_to 'Community Guidelines', community_guideline_notes_path, class: "current profile-links set-font-family" %>
-    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family " %>
-    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: " profile-links set-font-family set-font-family" %>
-  </div>
-</div>
-<br>
-<div class="container-fluid" style=" padding-right: 56px;" data-turbolinks="false">
-  <div class="row">
-    <div class="col-sm-3 about-us-col-sm-3 nav-justified" id="spy">
-      <div class=" nav-fill flex-column set-font-family">
-        <i >
-          <a class="nav-link footer-color current " href="/notes/sharing_your_knowledge">
-            <h5 class="shar bold" style="text-align: center">Sharing your knowledge</h5></a>
-        </i>
-        <!--    <li class="nav-item"><a class="nav-link footer-color pro" id="u" href="#b"><h5 class="prov">Providing resources</h5></a></li>-->
-        <i >
-          <a class="nav-link footer-color" href="/notes/optimizing_your_dashboard">
-            <h5 class="opti" style="text-align: center">Optimizing your dashboard</h5></a>
-        </i>
-        <i>
-          <a class="nav-link footer-color " href="/notes/what_type_of_topics_you_should_share">
-            <h5 class="what" style="text-align: center">What type of topics you should share?</h5></a></i>
-        <i >
-          <a class="nav-link footer-color " href="/notes/communication_and_interaction">
-            <h5 class="comm" style="text-align: center">Communication and Interaction</h5></a>
-        </i>
+<div class="community_guideline_page">
+  <section class="community-banner">
+    <div class="container">
+      <div class="community-quote">
+          <h3>Try to treat others as you would want them to treat you.</h3>
+          <p>- L. Ron Hubbard</p>
       </div>
     </div>
-    <div class="col-sm-9 scrollspy-community set-font-family vertical-line" data-spy="scroll" data-target="#spy">
-      <div class="set-font-family" style="text-align:justify;text-justify: inter-word" id="a">
-        <h4>Sharing your knowledge</h4>
-        <p>
-          Creating Picnotes is very easy. You need to:
-        <p>1. Choose a topic</p>
-        <p>2. Upload a picture</p>
-        <p>3. Share your knowledge (max. 650 characters)</p>
-        <p>4. Provide additional resources</p>
-        <p>5. Submit</p>
-        <p> We created a singular content structure that strongly differs from traditional websites across the web.</p>
-        <%#= image_tag "community-quide.png", class: "img-responsive img-thumbnail ", width: "850", height: "270" %>
-        <h4>Providing resources</h4>
-        <p>
-          The notes, in each Picnotes, provide a general understanding of a topic. We encourage lifelong learners to
-          provide resources that will help other users to further their understanding of the topic. The resources can be
-          books, articles or videos.
-        </p>
+  </section>
+  <section class="pt-5 mt_7 do-shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 class="heading-dos">Dos</h4><%= image_tag "do.png",class: "img-dos"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <%= image_tag "do-banner.png",class: "dos-banner"%>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <ul class="list-dos">
+            <li>Be kind and be polite.</li> 
+            <li>Use your true identity.</li> 
+            <li>Only share content that you wrote. </li>
+            <li>Make sure that images that you upload 
+              are appropriate. </li>
+            <li>If you notice any inaccuracies or mistakes, 
+            politely notify the uploader. </li>
+            <li>Help us moderate by reporting any content 
+            that shouldn't be on Picnotes. </li>
+            <li>Foster meaningful relationships.</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section class="pt-5 ">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h4 class="heading-dont">Don'ts</h4><%= image_tag "dont.png",class: "img-dont"%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <ul class="list-dos text-right">
+            <li>Don't be rude.</li> 
+
+            <li>Don't share offensive content.</li> 
+   
+            <li>Don't harass other users. </li>
+   
+            <li>Don't steal content from Wikipedia. </li>
+   
+            <li>Don't infringe copyright laws. </li>
+             
+            <li>Don't promote self-harm. </li>
+             
+            <li>Don't use profanities or foul language.</li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <%= image_tag "dont-banner.png",class: "dont-banner"%>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-red">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">  
+          <h3 class="heading-share">Don't know what to share?</h3>
+          <p class="text-share">Take advantage of the platform to share educational topics 
+          that are important to you or that might be underrated.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+
+<style>
+    .about_us_notes_path{
+        background: white !important;
+        float: none !important;
+    }
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+</style>

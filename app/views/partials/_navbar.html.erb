@@ -1,0 +1,308 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'About Us', about_us_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= explore_path %>">Explore</a>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'EdFluencers', edfluencers_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= trending_path %>">Trending</a>
+        </li>
+      </ul>
+      <div class="logo-container">
+        <%= link_to root_path do %>
+          <%= image_tag 'logo.png', class: 'nav-logo' %>
+        <% end %>
+      </div>
+      <form id="search-form" action="<%= root_path %>" method="get">
+        <%= text_field_tag :search, params[:search], placeholder: "Search here", id: "search-user", class: "form-control" %>
+        <div class="search-icon" onclick="document.getElementById('search-user').form.submit();">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50">
+            <path d="M 21 3 C 11.622998 3 4 10.623005 4 20 C 4 29.376995 11.622998 37 21 37 C 24.712383 37 28.139151 35.791079 30.9375 33.765625 L 44.085938 46.914062 L 46.914062 44.085938 L 33.886719 31.058594 C 36.443536 28.083 38 24.223631 38 20 C 38 10.623005 30.377002 3 21 3 z M 21 5 C 29.296122 5 36 11.703883 36 20 C 36 28.296117 29.296122 35 21 35 C 12.703878 35 6 28.296117 6 20 C 6 11.703883 12.703878 5 21 5 z"></path>
+          </svg>
+        </div>
+      </form>
+    
+      <div class="auth-buttons">
+        <a class="login-button" href="<%= new_session_path %>">Log in</a>
+        <%= button_to new_user_path, method: :get, class: "sign-up-button" do %>
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+          </svg>
+          Sign up
+        <% end %>
+      </div>
+      <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox"/>
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          <li><a class="menu__item" href="/guidelines">Guidelines</a></li>
+          <li><a class="menu__item" href="/terms-and-conditions">Terms and Conditions</a></li>
+          <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+.animated-icon1, {
+width: 30px;
+height: 20px;
+position: relative;
+margin: 0px;
+-webkit-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-o-transform: rotate(0deg);
+transform: rotate(0deg);
+-webkit-transition: .5s ease-in-out;
+-moz-transition: .5s ease-in-out;
+-o-transition: .5s ease-in-out;
+transition: .5s ease-in-out;
+cursor: pointer;
+}
+
+.animated-icon1 span {
+display: block;
+position: absolute;
+height: 3px;
+width: 100%;
+border-radius: 9px;
+opacity: 1;
+left: 0;
+-webkit-transform: rotate(0deg);
+-moz-transform: rotate(0deg);
+-o-transform: rotate(0deg);
+transform: rotate(0deg);
+-webkit-transition: .25s ease-in-out;
+-moz-transition: .25s ease-in-out;
+-o-transition: .25s ease-in-out;
+transition: .25s ease-in-out;
+}
+
+.animated-icon1 span {
+background: #2d7ef7;
+}
+
+
+.animated-icon1 span:nth-child(1) {
+top: 0px;
+}
+
+
+.animated-icon1.open span:nth-child(1) {
+top: 11px;
+-webkit-transform: rotate(135deg);
+-moz-transform: rotate(135deg);
+-o-transform: rotate(135deg);
+transform: rotate(135deg);
+}
+
+
+.rotated-image {
+  transform: rotate(20deg);
+}
+
+.nav-link {
+  margin-left: 20px;
+  font-family: Aileron;
+  font-weight: 400;
+  line-height: 21.6px;
+  font-size: 18px;
+  color: #3F3F3F;
+}
+
+.nav-logo {
+  width: 100px; /* Adjust as needed */
+}
+
+/* Style for search input */
+#search-form {
+  position: relative;
+  display: flex; /* Use flexbox to align items */
+  align-items: center;
+  margin-top: 8px; /* Adjust this value to shift the search bar down */
+}
+
+.form-control {
+  flex: 1; /* Allow the input to grow and shrink as needed */
+  padding-right: 2.5rem; /* Space for the icon */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #F5F5F5;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.5rem; /* Space between the icon and the input's right edge */
+  top: 50%; /* Center the icon vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Container for positioning */
+.position-relative {
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  #search-form {
+    margin-top: 10px; /* Less margin on smaller screens if needed */
+  }
+
+  .form-control {
+    width: 100%; /* Full width on small screens */
+    padding-right: 3rem; /* Increase padding for larger icon space */
+  }
+}
+@media (max-width: 767.98px) {
+  .search-input {
+    width: calc(100% - 2.5rem); 
+  }
+}
+
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.login-button {
+  font-size: 20px;
+  font-family: monospace;
+  text-decoration: none;
+  color: #BC171D;
+  margin: 0 10px;
+}
+
+.sign-up-button {
+  background-color: #BC171D;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50px;
+  height: 38px;
+  width: 128px;
+}
+
+.hamburger-menu {
+  display: none; /* Hide for large screens */
+}
+
+@media (max-width: 767.98px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .logo-container {
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+  }
+  .search-input {
+    width: calc(100% - 30px);
+  }
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+/* Additional Styles */
+.btn-custom {
+  background-color: #ffffff;
+  color: #BC171D;
+}
+
+.btn-custom:hover {
+  background-color: #BC171D;
+  color: #ffffff;
+}
+
+.card-section {
+  background-color: #BC171D1A;
+  font-family: Arial, sans-serif;
+}
+
+.oval-input {
+  border-radius: 50px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 365px;
+  height: 48px;
+}
+
+</style>
+
+<script>
+$(document).ready(function () {
+  $('#search-user').on("input", function () {
+    var search_val = $(this).val();
+    clearTimeout(window.searchTimeout);
+    window.searchTimeout = setTimeout(function () {
+      $.ajax({
+        type: "GET",
+        url: $('#search-form').attr('action'),
+        data: { search: search_val },
+        success: function (result) {
+          $('#search-result').html(result);
+        },
+        error: function () {
+          console.error('Search failed.');
+        }
+      });
+    }, 300);
+  });
+
+  $('#search-form').on('ajax:success', function (event) {
+    const [data] = event.detail;
+    $('#search-results').html(data.search_results);
+    $('#notes-list').html(data.notes_list);
+  }).on('ajax:error', function (event) {
+    console.error('Search failed:', event.detail);
+  });
+
+  $('.first-button').on('click', function () {
+    $('.animated-icon1').toggleClass('open');
+  });
+});
+
+</script>

@@ -1,99 +1,56 @@
-<script>
 
-  document.getElementById("defaultOpen").click();
-
-  // function openReference(evt, tab){
-  //   var i;
-  //   var x = document.getElementsByClassName('click-reference');
-  //   for (i = 0; i < x.length; i++) {
-  //     x[i].style.display = 'none';
-  //     x[i].style.borderBottom = 'thick #fff solid';
-  //   }
-  //   document.getElementById(tab).style.display = 'block';
-  // }
-
-  // function openTab(evt, tabName) {
-  //     // Declare all variables
-  //     var i, tabcontent, tablinks;
-  //
-  //     // Get all elements with class="tabcontent" and hide them
-  //     tabcontent = document.getElementsByClassName("click-reference");
-  //     for (i = 0; i < tabcontent.length; i++) {
-  //         tabcontent[i].style.display = "none";
-  //     }
-  //
-  //     // Get all elements with class="tablinks" and remove the class "active"
-  //     tablinks = document.getElementsByClassName("tablinks");
-  //     for (i = 0; i < tablinks.length; i++) {
-  //         tablinks[i].className = tablinks[i].className.replace(" active", "");
-  //     }
-  //
-  //     // Show the current tab, and add an "active" class to the button that opened the tab
-  //     document.getElementById(tabName).style.display = "block";
-  //     evt.currentTarget.className += " active";
-  // }
-
-  function openReference(evt, tab) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("click-reference");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("reference-tab");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tab).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-</script>
 
 <div id = 'references' class = 'tabcontent'>
-  <div class = 'reference-tabs'>
-    <% if current_user %>
-      <% if current_user.username == @note.user.username %>
-      <button class = 'reference-tab Add active' id = 'defaultOpen' onclick='openReference(event, "Add")'> Add </button>
-      <% end %>
-    <% end %>
-    <button class = 'reference-tab Textbooks' onclick='openReference(event, "Textbooks")'> Books </button>
-    <button class = 'reference-tab Videos' onclick='openReference(event, "Videos")'> Videos </button>
-    <button class = 'reference-tab Papers' onclick='openReference(event, "Papers")'> Articles </button>
-  </div>
+<div style="display:flex;">
+<h2 style="margin-right:60px;">Resources</h2>
+<div class='reference-tabs'>
+<% if current_user && current_user.username == @note.user.username %>
+  <button class='reference-tab Add active btn btn-danger'  onclick='openReference("Add")'> Add </button>
+<% end %>
+<button class='reference-tab Textbooks btn btn-outline-secondary' style="padding:8px 15px 8px 15px" onclick='openReference("Textbooks")'> Book:<%= @textbooks.count %> </button>
+<button class='reference-tab Videos btn btn-outline-secondary' style="padding: 8px 15px 8px 15px;" onclick='openReference("Videos")'> Video:<%= @videos.count %> </button>
+<button class='reference-tab Papers btn btn-outline-secondary' style="padding: 8px 15px 8px 15px" onclick='openReference("Papers")'> Article:<%= @papers.count %> </button>
+<button class='reference-tab Sources btn btn-outline-secondary' style="padding: 8px 15px 8px 15px" onclick='openReference("Sources")'> Image:<%= @sources.count %> </button>
+</div>
+</div>
+
 
   <div id = 'reference'>
 
-    <% if current_user %>
-      <% if current_user.username == @note.user.username %>
-        <div id = 'Add' class = 'click-reference' style = ''>
-          <div id = 'Added-Reference' style = 'text-align: center; color: #EAB38B;'>
-          </div>
-          <div style = 'background-color: #3b5998;'>
-            <p style = 'margin-bottom: 10px; padding: 5px; font-size: 15px; color: white;'> Now that you have created your Picnote, add any references that you may have used! </p>
-          </div>
-          <%= simple_form_for([@note, @reference], remote: true, :html => {:id => 'reference_form'}) do |f| %>
-            <div>
-              <%= f.input :file_type, collection: Reference::TYPE %>
-              <%= f.input :title %>
-              <%= f.input :author %>
-              <%= f.input :link %>
+  <% if current_user %>
+  <% if current_user.username == @note.user.username %>
+    <div id='Add' class='click-reference' style=''>
+      <%= simple_form_for([@note, @reference], remote: true, html: { id: 'reference_form' }) do |f| %>
+        <div class="row">
+          <div class="col-lg-6 ">
+           <%= f.input :file_type, collection: Reference::TYPE, input_html: { id: 'file_type_select', style: 'width: 270px; height:48px; margin-top:5px;' } %>
+           <div id="generic-content-authur" style="margin-top: 20px;">
+               <%= f.input :author , input_html: {style: 'width: 270px; height:48px; margin-top:5px;' } %>
             </div>
-            <div class = 'form-btn-container text-center'>
-              <%= f.button :submit, :class => 'blue-appearance-btn' %>
+           
+          </div>
+          <div class="col-lg-6">
+          <div id="generic-content">
+          <%= f.input :title , input_html: {style: 'width: 270px; height:48px; margin-top:5px;' } %>
+          </div>
+          <div  style="margin-top: 20px;">
+             <%= f.input :link ,input_html: {style: 'width: 270px; height:48px; margin-top:5px;' } %>
+           </div>
+          </div>
+            <div class="col-lg-12" id="image-source-content" style="display:none; margin-top: 20px;">
+               <%= f.input :image_source, as: :text, input_html: { cols: 1, rows: 2 ,style: 'height:48px; margin-top:5px;' } %>
             </div>
-          <% end %>
+        </div>
+        <div class="form-btn-container text-center">
+          <%= f.button :submit, class: "create-reference-button", id: "reference-submit-button", remote: true %>
         </div>
       <% end %>
-    <% end %>
+      
+    </div>
+  <% end %>
+<% end %>
 
-    <div id = 'Textbooks' class = 'click-reference'>
+    <div id = 'Textbooks' class = 'click-reference' style = 'display: none;'>
       <%= render @textbooks %>
     </div>
 
@@ -104,5 +61,88 @@
     <div id = 'Papers' class = 'click-reference' style = 'display: none;'>
       <%= render @papers %>
     </div>
+
+    <div id = 'Sources' class = 'click-reference' style = 'display: none;'>
+      <%= render @sources %>
+    </div>
   </div>
 </div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var submitButton = document.getElementById('reference-submit-button');
+  
+  if (submitButton) {
+    submitButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      location.reload(); 
+    });
+  }
+});
+
+</script>
+
+
+<style>
+.reference-tabs {
+  display: flex;
+  gap:5px;
+}
+
+.reference-tab-note {
+    flex-basis: 33%;
+    background-color: white;
+    /* border: 119px; */
+    /* border-bottom: thick #8b9dc3 solid; */
+    border-color: gray;
+    border-width: 1px;
+    border-radius: 54px;
+    margin-bottom: -4px;
+    height: 39px;
+    width: 40px;
+}
+.reference-tab {
+  border-radius: 20px; // Make the buttons oval
+  padding: 5px 15px; // Adjust padding as needed
+  font-size: 14px; // Adjust font size as needed
+}
+
+.reference-tab.Add {
+  background-color: #BC171D; // Use the preferred color
+  color: white;
+  height: 35px;
+  border-radius:20px;
+
+}
+ input_fields {
+  border-radius: 50px !important;
+  padding: 27px 10px !important;
+}
+.reference-tab.btn-outline-secondary {
+  border: 1px solid #ddd;
+  color: #555;
+  height: 35px;
+  border-radius:20px;
+}
+
+.reference-tab.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.create-reference-button {
+  background-color: #bd2130;
+  color: white !important;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 25px !important;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+</style>

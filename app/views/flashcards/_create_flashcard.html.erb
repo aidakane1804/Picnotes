@@ -1,0 +1,52 @@
+<% if @flashcards.count > 0 %>
+    <div class="notes-container">
+        <% if @flashcards.count > 0 %>
+          hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+        <% end %>
+          <button class=" add-picnotes btn btn-custom btn-block custom-btn-sm" id="add-flashcard-button">Add New Flashcard</button>
+    </div>
+<% else %>
+  <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+    <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
+  </div>
+  <p style="justify-content: center !important; display: flex;">You have not created any flashcard yet.</p>
+  <span style="justify-content: center !important; display: flex;">See how to create a picnotes.</span>
+  <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes" id="add-flashcard-button">Add New Flashcard</button>
+<% end %>
+
+<style>
+  .add-picnotes {
+    display: flex;
+    height: 40px;
+    width: 20%;
+    color: white !important;
+
+  }
+
+  .mid-picnotes {
+    display: flex;
+    height: 40px;
+    width: 20%;
+    justify-content: center !important;
+    margin-left: 40%;
+    margin-top: 10px;
+    color: white !important;
+
+  }
+</style>
+
+<script>
+    $(document).on("click", "#add-flashcard-button", function() {
+        $.ajax({
+            url: "<%= escape_javascript(new_flashcard_path) %>",
+            type: "GET", 
+            dataType: "html", 
+            success: function(data) {
+                $("#profileDetails").html(data);
+            },
+            error: function() {
+                alert("Failed to load new flashcard form.");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,64 @@
+<table class="table-condensed" style="width: 450px;">
+  <% if @searched_users.any? %>
+    <% @searched_users.each do |user| %>
+      <tr id=<%= user.id * user.id %>>
+        <td style="width: 450px;"><%= user.full_name %></td>
+        <td>
+          <button style="background: white; border: none; color: #BC171D;" class="follow" target=<%= user.id %> id=<%= user.id %>>follow</button>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="2" style="text-align: center;">No results found</td>
+    </tr>
+  <% end %>
+</table>
+
+<script >
+    $(document).ready(function () {
+        $('#original-results').hide();
+        $('.follow').click(function (event) {
+            var id = $(event.target).attr('target');
+            $('#result').html('<p>Request Completing </p>');
+
+            $.ajax({
+                url: '/followunfollow',
+                type: 'post',
+                async: false,
+                data: {
+                    followed_id:id
+                },
+                success: function (request) {
+
+                    $("#"+id).addClass("bold");
+                    $('#result').html('<p> </p>');
+                    $("#"+ id*id).hide();
+                    $("#"+id).hide();
+                    $('#result').html('<p>Request Completed Successfully</p>');
+                },
+                error: function (xhr) {
+                }
+            });
+        })
+    });
+
+    $(document).ready(function () {
+        $('.unfollow').click(function (event) {
+            var id = $(event.target).attr('target1');
+            $.ajax({
+                url: '/unfollow',
+                type: 'post',
+                async: false,
+                data: {
+                    id:id
+                },
+                success: function (request) {
+                    $("#"+id).addClass("bold");
+                },
+                error: function (xhr) {
+                }
+            });
+        })
+    });
+</script>

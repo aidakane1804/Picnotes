@@ -1,0 +1,29 @@
+
+<% if @favorites.count > 0 %>
+
+  <div id='note-content'></div>
+
+  <div class='flex-center'>
+    <div class="notes-container" style='margin-top: 20px;'>
+      <% if @favorites.where(archived: false).count > 0 %>
+        <% @favorites.where(archived: false).each_with_index  do |note, index| %>
+          <%= render partial: 'notes/note_general', locals: {note: note} %>
+    <% end %>
+      <% else %>
+        <% if @user == current_user %>
+          <div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+    <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
+  </div>
+  <p style="justify-content: center !important; display: flex;">You have not liked any picnotes yet.</p ><span style="justify-content: center !important; display: flex;"></span>
+
+<% end %>
+
+<style>
+</style>

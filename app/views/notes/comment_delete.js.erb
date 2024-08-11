@@ -1,0 +1,4 @@
+$("#profileDetails").html('<%=j render :partial => "partials/card_comment_like_note_modal", :locals => { :note => @note, :likes => @likes, :comments=> @comments}  %>');
+$('#comment-modal<%=@note.id%>').modal('show');
+$('.modal-backdrop.fade.show').first().remove();
+$(".comment-icon-ed-tracker<%=@note.id%>").html('<%= link_to   fa_icon('comment') , comment_section_note_path(id: @note.id), remote: true %>')

@@ -1,1 +1,2 @@
-$('.favorites-count').html('<%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %>')
+$('#favorites-count-<%= @note.id%>').html('<%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true,  class: 'orange_love love_iconss',method: :delete %>')
+$('.favorites-count').html('<%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true,  class: 'orange_love love_iconss',method: :delete %>')

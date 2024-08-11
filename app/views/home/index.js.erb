@@ -1,0 +1,7 @@
+$('#page-notes').append('<%= j render partial: 'notes_home', locals: { notes: @notes } %>');
+<% if @notes.next_page %>
+$('.pagination').replaceWith('<%= j will_paginate @notes %>');
+<% else %>
+$(window).off('scroll');
+$('.pagination').remove();
+<% end %>

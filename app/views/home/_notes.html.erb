@@ -1,0 +1,146 @@
+<div class="row">
+    <% @notes.each_slice(4) do |group| %>
+      <% group.each do |note| %>
+        <div class="column">
+          <% if note.image.url.present? %>
+            <div class="grid-image-container">
+              <%= image_tag note.image.url(:thumb), style: 'width: 100%;' %>
+              <div class="hover-overlay">
+              <div >
+              <div class="overlay-content">
+                <p id="truncate-title" class="truncate" style="margin-right: 50%;">
+                  <%= note.title %>
+                </p>
+                <div class="background-overlay" style="position: relative; z-index: 0;"></div>
+              </div>
+              <div class="overlay-content">
+                <p id="truncate-name" class="truncate"  style="margin-right: 50%;">
+                  <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                </p>              
+                <div class="background-overlay" style="position: relative; z-index: 0;"></div>
+              </div>              
+            </div>
+              </div>
+            </div>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+
+  <style>
+
+  overlay-content {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .truncate {
+    width: 100%; /* Adjust based on your container size */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+.truncate {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+  color: white !important;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.hover-overlay {
+  align-items: inherit !important;
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+  align-items: flex-end;
+}
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center;
+  flex-direction: column;
+}
+  .grid-image-container {
+  position: relative;
+  overflow: hidden;
+  margin:5px;
+}
+.grid-image-container img {
+  width: 100%; /* Makes the image fill its container */
+  height: auto;
+}
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+    left: 0;
+    width: 100%;
+    height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+  z-index: 1;
+  border-radius:20px;
+}
+.hover-overlay:hover {
+  opacity: 1;
+}
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hover-text {
+  margin-right: 1rem;
+  font-size: medium;
+  color: white;
+  font-weight: bold;
+}
+.icons {
+  display: flex;
+  gap: 10px;
+}
+.background-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+}
+  </style>
+
+
+

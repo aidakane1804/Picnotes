@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_190025) do
+ActiveRecord::Schema.define(version: 2024_08_05_073635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,90 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "ahoy_events", force: :cascade do |t|
+    t.bigint "visit_id"
+    t.bigint "user_id"
+    t.string "name"
+    t.jsonb "properties"
+    t.datetime "time"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
+    t.index ["properties"], name: "index_ahoy_events_on_properties", opclass: :jsonb_path_ops, using: :gin
+    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
+    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+  end
+
+  create_table "ahoy_visits", force: :cascade do |t|
+    t.string "visit_token"
+    t.string "visitor_token"
+    t.bigint "user_id"
+    t.string "ip"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "referring_domain"
+    t.text "landing_page"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.string "app_version"
+    t.string "os_version"
+    t.string "platform"
+    t.datetime "started_at"
+    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
+    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "card_comment_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "edtracker_id"
+    t.bigint "myedtool_id"
+    t.string "title"
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "note_id"
+    t.index ["edtracker_id"], name: "index_card_comment_likes_on_edtracker_id"
+    t.index ["myedtool_id"], name: "index_card_comment_likes_on_myedtool_id"
+    t.index ["note_id"], name: "index_card_comment_likes_on_note_id"
+    t.index ["user_id"], name: "index_card_comment_likes_on_user_id"
+  end
+
+  create_table "card_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "edtracker_id"
+    t.bigint "myedtool_id"
+    t.bigint "user_id"
+    t.index ["edtracker_id"], name: "index_card_likes_on_edtracker_id"
+    t.index ["myedtool_id"], name: "index_card_likes_on_myedtool_id"
+    t.index ["user_id"], name: "index_card_likes_on_user_id"
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.string "identifier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
   create_table "dislikes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
@@ -48,6 +132,36 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.datetime "updated_at", null: false
     t.index ["note_id"], name: "index_dislikes_on_note_id"
     t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
+  create_table "ed_fluencers", force: :cascade do |t|
+    t.string "title"
+    t.string "first_name"
+    t.string "last_name"
+    t.text "content"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "linkedIn"
+    t.string "website"
+    t.string "image"
+    t.text "article"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+  end
+
+  create_table "edtrackers", force: :cascade do |t|
+    t.string "edtracker_type"
+    t.string "topic"
+    t.string "category"
+    t.text "card_likes"
+    t.string "hashtag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "notes"
+    t.string "link"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_edtrackers_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -58,6 +172,24 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.datetime "updated_at", null: false
     t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "flashcard_sets", force: :cascade do |t|
+    t.string "title"
+    t.text "flashcard"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_flashcard_sets_on_user_id"
+  end
+
+  create_table "flashcards", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "flashcards", default: "{}"
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
   create_table "folders", force: :cascade do |t|
@@ -73,6 +205,16 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.bigint "note_id", null: false
   end
 
+  create_table "jobs", id: :serial, force: :cascade do |t|
+    t.string "queue", null: false
+    t.text "payload"
+    t.integer "reserved_at"
+    t.integer "available_at"
+    t.integer "created_at"
+    t.integer "column_7"
+    t.integer "attempts"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.bigint "note_id"
     t.bigint "user_id"
@@ -82,6 +224,29 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.integer "user_id"
+    t.integer "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "new"
+    t.integer "recevier_id"
+  end
+
+  create_table "myedtools", force: :cascade do |t|
+    t.string "addtitle"
+    t.string "chooseacategory"
+    t.text "notes"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "myedtool_type"
+    t.bigint "user_id"
+    t.string "hashtag"
+    t.index ["user_id"], name: "index_myedtools_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -89,6 +254,8 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.bigint "user_id"
+    t.boolean "archived", default: false
+    t.string "title_slug"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
@@ -100,6 +267,7 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.bigint "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image_source"
     t.index ["note_id"], name: "index_references_on_note_id"
   end
 
@@ -111,6 +279,13 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "chat_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -155,6 +330,9 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.string "name"
     t.text "image"
     t.text "message"
+    t.string "nationality"
+    t.text "about_me"
+    t.boolean "follow_status", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -173,11 +351,19 @@ ActiveRecord::Schema.define(version: 2019_01_28_190025) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   end
 
+  add_foreign_key "card_comment_likes", "edtrackers"
+  add_foreign_key "card_comment_likes", "myedtools"
+  add_foreign_key "card_comment_likes", "notes"
+  add_foreign_key "card_comment_likes", "users"
   add_foreign_key "dislikes", "notes"
   add_foreign_key "dislikes", "users"
+  add_foreign_key "edtrackers", "users"
   add_foreign_key "favorites", "users"
+  add_foreign_key "flashcard_sets", "users"
+  add_foreign_key "flashcards", "users"
   add_foreign_key "likes", "notes"
   add_foreign_key "likes", "users"
+  add_foreign_key "myedtools", "users"
   add_foreign_key "notes", "users"
   add_foreign_key "references", "notes"
 end

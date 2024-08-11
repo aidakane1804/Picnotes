@@ -1,13 +1,15 @@
 class ReferencesController < ApplicationController
-  before_action :find_note, only: [:create]
+  before_action :find_note, only: [:new, :create]
   before_action :find_reference, only: [:destroy]
 
   def create
     @reference = @note.references.build(reference_params)
+    @similar = Note.tagged_with(@note.tags, :any => true)
     @references_unordered = Reference.where(note_id: @note.id)
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
+    @sources = @references_unordered.where(:file_type => 's')
     # if @reference.save
     #   flash[:notice] = "Note Saved"
     #   redirect_to note_path(@note)
@@ -17,6 +19,10 @@ class ReferencesController < ApplicationController
     # end
     respond_to do |format|
       if @reference.save
+        @textbooks_count = @references_unordered.where(:file_type => 't').count
+        @videos_count = @references_unordered.where(:file_type => 'v').count
+        @papers_count = @references_unordered.where(:file_type => 'p').count
+        @sources_count = @references_unordered.where(:file_type => 's').count
         format.html {redirect_to note_path(@note)}
         format.js
       else
@@ -41,6 +47,19 @@ class ReferencesController < ApplicationController
     @textbooks = @references_unordered.where(:file_type => 't')
     @videos = @references_unordered.where(:file_type => 'v')
     @papers = @references_unordered.where(:file_type => 'p')
+    @sources = @references_unordered.where(:file_type => 's')
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def add_picnotes_to_folder
+    @folders = Folder.where(user: current_user)
+    @note = Note.find(params[:note_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
@@ -70,6 +89,6 @@ class ReferencesController < ApplicationController
   end
 
   def reference_params
-    params.require(:reference).permit(:title, :author, :link, :file_type)
+    params.require(:reference).permit(:title, :author, :link, :file_type, :image_source)
   end
 end

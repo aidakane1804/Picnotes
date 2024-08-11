@@ -1,29 +1,180 @@
-<div class = 'modal-header flex-center'>
-  <h1> Sign Up </h1>
-</div>
+<div class="sign-up" style="font-size: 12px;">
+<div class="container" style="padding-top: 50px;">
+<div class="row">
+  <div class="col-md-6">
+    <%= image_tag 'signup-login.png', style: 'width: 90%; height: 90%; margin-bottom: 20px;' %>
+  </div>
+  <div class="col-md-6" style="margin-top:50px;">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <%= image_tag 'logo.png', class: 'form-logo' %>
+        <div class="justify-content-center">
+          <h1 style="font-family: Cako; font-size: 24px; font-weight: 400; line-height: 28.8px; text-align: center; 
+          margin-top: 30px; margin-bottom: 0px; margin-left: 160px;">Sign Up</h1>
+        </div>
+        <div class="modal-body", style="padding: 0px;">
+          <div class="creation_form bg-white rounded", style="padding: 0px;">
+            <%= simple_form_for @user, html: { class: 'signup-form' } do |f| %>
+              <% if @user.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                  <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="form-group row">
+                  <div class="col">
+                  <div class="form-group row" style="margin-top: 5px;">
+                  <label class="col-form-label col-lg-6" style="font-size: 16px; margin-left: -1.5rem;color: #707070;font-family:Aileron;">First Name</label>
+                  <div class="col-sm-12">
+                  <%= f.input :first_name, label: false, input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+                  </div>
+                  <div class="col">
+                  <div class="form-group row" style="margin-top: 5px;">
+                  <label class="col-form-label col-lg-6" style="font-size: 16px; margin-left: -2rem;color:#707070;font-family:Aileron;">Last Name</label>
+                <div class="col-sm-12">
+                  <%= f.input :last_name, label: false, input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+                  </div>
+              </div>
 
-<div class = 'modal-body'>
-  <div class = "creation_form">
-    <%= simple_form_for @user do |f| %>
-      <div class = 'user-name'>
-        <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
-        <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
+              <div class="form-group row" style="margin-top: 5px;">
+                <label class="col-sm-1 col-form-label" style="font-size: 16px;color: #707070;font-family:Aileron;">Email</label>
+                <div class="col-sm-12">
+                  <%= f.input :email, label: false, input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label" style="font-size: 16px;color: #707070;font-family:Aileron;">Password</label>
+                <div class="col-sm-12">
+                  <%= f.input :password, label: false, input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+
+              <div class="form-group row">
+              <label class="col-form-label col-lg-6" style="font-size: 16px; margin-left: -6rem; color: #707070;font-family:Aileron;">Confirm Password</label>
+              <div class="col-sm-12">
+                  <%= f.input :password_confirmation, label: false, input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 30px; width: 100%; padding: 0 2% ;" >
+                <%= f.button :submit, 'Sign Up', class: 'btn sign-up btn-custom btn-block custom-btn-sm', style: 'display: flex;font-family:Aileron;font-size:18px;font-weight:400;height:48px;'%>
+              </div>
+
+              <div class="or-divider">
+                <span>Or</span>
+              </div>
+
+              <div class="row" style="margin-top: 10px;">
+                <div class="col-sm-6" >
+                  <%= link_to user_google_oauth2_omniauth_authorize_path, class: "btn btn-custom-icon btn-block custom-btn-sm" ,style: "color: #BC171D !important;font-size:16px;font-family:Aileron;" do %>
+                    <img src="<%= asset_path('google-new.png') %>" alt="google" style="width: 20px; height: 20px; margin-right: 8px;" /> Google
+                  <% end %>
+                </div>
+                <div class="col-sm-6">
+                  <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-custom-icon btn-block custom-btn-sm", style: "color: #BC171D !important;font-size:16px;font-family:Aileron;" do %>
+                    <img src="<%= asset_path('facebook-new.png') %>" alt="Facebook" style="width: 20px; height: 20px; margin-right: 8px;" /> Facebook
+                  <% end %>
+                </div>
+              
+              </div>
+
+              <div style="margin-top: 30px;font-size:16px;font-family:Aileron;color:#707070;">Don't have an account? <%= link_to "Log in", new_session_path, style: "color: #BC171D;" %></div>
+
+            <% end %>
+          </div>
+        </div>
       </div>
-
-      <%= f.input :username %>
-      <%= f.input :email %>
-      <div class = 'user-name'>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation, label: 'Password Confirmation' %>
-      </div>
-
-      <%= f.file_field :avatar %>
-      <%= f.input :city %>
-
-
-      <div class = 'form-btn-container text-center'>
-        <%= f.button :submit, :class => 'btn-outline-dark form-btn' %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
+</div>
+</div>
+<style>
+
+.or-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.sign-up{
+  color: white !important;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 10px;
+}
+
+.or-divider span {
+  font-size: 12px;
+  font-weight: bold;
+  color: grey;
+  padding: 0 10px;
+  background-color: #fff;
+}
+  .form-control, .btn-custom {
+    border-radius: 50px; /* Oval shape */
+    padding: 8px 20px; /* Adjust padding as needed */
+     /* Updated font size */
+  }
+
+  .fa {
+    margin-right: 8px; /* Adjust spacing between icon and text */
+    color: #BC171D;
+
+  }
+
+  .btn-custom{
+    background-color: #BC171D ;
+    color: white;
+    border-radius: 50px;
+  }
+
+  .btn-custom-icon{
+    background-color: #BC171D1A ;
+    color: #BC171D;
+    border-radius: 50px;
+  }
+
+  .signup-form {
+    padding: 12px; /* Reduced padding inside the form */
+  }
+
+  .modal-header h1 {
+    font-size: 1.5rem; /* Adjust header font size */
+    margin-bottom: 12px; /* Reduced space below header */
+  }
+
+  .creation_form {
+    background-color: #f9f9f9; /* Light background color for the form container */
+    padding: 12px; /* Reduced padding for the form container */
+    border-radius: 15px; /* Rounded corners for the form container */
+    width: 500px; /* Reduced maximum width */
+    margin: 0 auto;
+  }
+
+  .custom-btn-sm {
+    padding: 15px 20px; /* Adjust padding as needed */
+    font-size: 12px; /* Adjust font size */
+    line-height: 1.5; /* Adjust line height for vertical alignment */
+  }
+ .simple_form .form-control {
+    border-radius: 20px !important;
+    padding: 20px 10px !important;
+  }
+    </style>

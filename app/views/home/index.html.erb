@@ -1,0 +1,892 @@
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+  <%= render 'partials/navbar' %>
+<% end %>
+
+<div id="search-result"></div>
+
+
+<div class="container" style="height: 900px">
+  <div class="row mt-5">
+    <div class="col-md-5">
+      <div class="container">
+        <h1 class="main-heading">Unlock Your Learning Potential with <span style="color: #BC171D;">Picnotes</span></h1>
+        <p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: left; margin:10px;">
+        Focuses on empowering learners and visual knowledge creation
+    </p>
+        <%= link_to 'Explore More 🔥', notes_path, class: 'explore-button' %>
+       
+      </div>
+    </div>
+    <div class="col-md-7"> 
+
+    <div class="container-fluid">
+    <style>
+      .column {
+        margin-top: 0 !important;
+      }
+    </style>
+      
+    <div class="container">
+  <div class="image-grid">
+    <%= image_tag 'surbhi.jpg', class: 'rotated-image' %>
+    <%= image_tag 'Uttam.jpg', class: 'rotated-image' %>
+    <%= image_tag 'natasha.png', class: 'rotated-image' %>
+    <%= image_tag 'shawan.png', class: 'rotated-image' %>
+    <%= image_tag 'rahul.png', class: 'rotated-image' %>
+    <%= image_tag 'alexendra.png', class: 'rotated-image' %>
+    <%= image_tag 'faizal-hayat.png', class: 'rotated-image bottom-opacity' %>
+    <%= image_tag 'dexter-chu.png', class: 'rotated-image bottom-opacity' %>
+    <%= image_tag 'alex-fere.png', class: 'rotated-image bottom-opacity' %>
+  </div>
+</div>
+
+  
+  
+</div>
+    </div>
+  </div>
+</div>
+
+<section class="card-section pt-5" style= "height: 764px;">
+  <div class="all-card w-100 h-100">
+    <div class="header-container">
+    <h1 style="font-family: Cako; font-size: 46px; font-weight: 400; line-height: 55.21px; text-align: center;">
+    Create Stunning Picnotes
+    </h1>
+
+<p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: center;">
+    Design Picnotes with Ease and Precision
+</p>
+    </div>
+    <div class="card-group col-lg-8" style="margin-left: 300px;">
+        <div class="card custom-card">
+          <div class="upload-card">
+            <div class="card-header">
+              <button class="btn btn-upload">Upload</button>
+            </div>
+            <div class="image-container" style="position: relative;">
+            <%= image_tag 'Rectangle.png', height: '80px', style: 'position: absolute; bottom: 0; left: 0;' %>
+            <svg width="160" height="156" viewBox="0 0 160 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.08" d="M0 2C0 0.895426 0.895431 0 2 0H158C159.105 0 160 0.895431 160 2V156H0V2Z" fill="#BC171D"/>
+                <path opacity="0.8" d="M12 156L60.4088 93L89.266 133.263L109.526 112.249L148 156H12Z" fill="white"/>
+                <path opacity="0.8" d="M121.425 56.8661C121.34 62.7821 116.476 67.5101 110.56 67.4251C104.644 67.3401 99.9161 62.4761 100.001 56.5601C100.085 50.6441 104.95 45.9161 110.866 46.0011C116.782 46.0851 121.509 50.9491 121.425 56.8661Z" fill="white"/>
+            </svg>
+        </div>
+        
+          
+
+          </div>
+        </div>
+        <div class="card custom-card">
+          <div class="text-card">
+            <h2>Viral Pathogenesis</h2>
+            <p>
+              A virus is a microscopic infectious agent that can only replicate
+              inside the living cells of an organism. Viruses
+            </p>
+          </div>
+        </div>
+        <div class="card custom-card">
+          <div class="upload-card">
+            <div class="card-header">
+              <button class="btn btn-upload">Publish</button>
+            </div>
+            <div class="image-container">
+            <%= image_tag 'Rectangle.png' %>
+            <div>
+            <%= image_tag 'bar1.png', height: '30', width: '150', style: 'margin-left: 10px; margin-bottom:10;' %>
+            <%= image_tag 'bar1.png', height: '20', width: '120', style: 'margin-left: 10px; margin-bottom:10;' %>
+            <%= image_tag 'bar1.png', height: '25', width: '140', style: 'margin-left: 10px; margin-bottom:10;' %>
+            <%= image_tag 'bar1.png', height: '24', width: '100', style: 'margin-left: 10px; margin-bottom:10;' %>
+            <%= image_tag 'bar1.png', height: '20', width: '80', style: 'margin-left: 10px; margin-bottom:10;' %>
+
+          </div>
+            
+          </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="footer-div" style="margin-top: 10px;">
+      <%= image_tag 'text_line.png', style: 'width: 80%;' %>
+  </div>
+  
+</div>
+</section>
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-center pt-5" style="top: 1938px; align-items: center;">
+    <h2 style="justify-content: center;">Our Picnotes</h2>
+  </div>
+  <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
+    Explore some of the picnotes by Expert Creators.
+  </div>
+
+  <div id="page-notes">
+    <%= render partial: 'notes_home', locals: { notes: @notes } %>
+  </div>
+</div>
+
+
+<%= render 'partials/footer' %>
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- FontAwesome for social media icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+
+
+<!-- FontAwesome for social media icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+
+</script>
+
+
+<style>
+
+
+
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+  align-items: flex-end;
+}
+.hover-overlay:hover {
+  opacity: 1;
+}
+
+.hover-text {
+  margin-right: 1rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+
+}
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icons {
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+.icons span {
+  position: relative;
+  z-index: 3;
+  display: flex;
+}
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+  z-index: 1;
+}
+.image-containermyprofile:hover img {
+  transform: scale(1.1);
+}
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 5;
+}
+
+.image-containermyprofile img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+  #page-notes {
+    overflow-y: scroll;
+    max-height: 80vh; 
+    scrollbar-width: none
+  }
+
+  
+  .image-containermyprofile {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-containermyprofile img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .image-containermyprofile:hover img {
+    transform: scale(1.1);
+  }
+
+  .image-containermyprofile:hover .hover-overlay {
+    opacity: 0.5;
+  }
+  .grid-image-container {
+    position: relative;
+    overflow: hidden;
+    margin:5px;
+  }
+  .grid-image-container img {
+    width: 100%; /* Makes the image fill its container */
+    height: auto;
+  }
+
+  .overlay-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .background-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+    z-index: 1;
+  }
+  .hover-text {
+    margin-right: 1rem;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    z-index: 2;
+    margin-top:0px !important;
+  
+  }
+ .icons {
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+  .rotated-image {
+    transform: rotate(20deg);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #BC171D;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #BC171D;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes{
+  padding-left: 30px;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Space between grid items */
+    transform: translateX(20%); /* Shifts the grid to the right, causing it to cut off */
+    bottom: 0;
+      right: 40px;
+  }
+
+  .rotated-image {
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    transform: rotate(10deg); /* Subtle rotation */
+    opacity: 0.8;
+    margin-bottom: 20px;
+    border-radius:20px /* Space between images vertically */
+  }
+
+  .image-grid img:nth-child(3n) {
+    margin-bottom: 0; /* Remove margin-bottom for every third image to prevent extra space */
+  }
+
+  .bottom-opacity {
+    opacity: 0.5; /* Adjust the opacity value as needed */
+  }
+
+
+  
+  .explore-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .button {
+    background-color: #BC171D;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  *{
+  box-sizing: border-box;
+  }
+  .header {
+      text-align: center;
+      padding: 32px;
+      
+  }
+
+
+
+
+  footer-------------------
+  .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; 
+      flex-wrap: wrap;
+      padding: 0 4px;
+      margin: 45px;
+      font-family: Arial;
+    }
+    .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px; 
+  }
+    .text-red{
+    color: #BC171D;
+  }
+
+
+  
+  .column {
+      -ms-flex: 25%; 
+      flex: 20%;
+      max-width: 25%;
+      padding: 0 4px;
+  }
+  .column img {
+      margin-top: 22px;
+      vertical-align: middle;
+      width: 70%;
+      border-radius: 21px;
+  }
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media screen and (max-width: 800px) {
+      .column {
+      -ms-flex: 50%;
+      flex: 50%;
+      max-width: 50%;
+      }
+  }
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+      .column {
+      -ms-flex: 100%;
+      flex: 100%;
+      max-width: 100%;
+      }
+  }
+  .card-section{
+      background-color: #BC171D1A;
+
+  }
+  .image-container {
+    display: flex;
+    margin:30px;
+  }
+  .oval-input {
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 365px;
+    height: 48px;
+  }
+  .login-button {
+    font-size: 20px;
+    font-family: monospace;
+    text-decoration: none;
+    color: #BC171D !important;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    word-spacing: -10px;
+  }
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container{
+    max-width:1754px
+  }
+  .sign-up-btn {
+    background-color: #c91a2d;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+  @media (max-width: 767.98px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .logo-container {
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+  }
+  .sign-up-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .oval-input {
+    width: calc(100% - 30px);
+  }
+  }
+  .picnotes-section {
+    width: 733px;
+    height: 602px;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    gap: 60px;
+    opacity: 1;
+    background-color: #f0f0f0;
+    padding: 60px; 
+  }
+  .explore_button {
+    width: 207px;
+    height: 58px;
+    background-color: #BC171D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50px; /* This will give you a pill shape */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+  }
+
+  .button:hover {
+    opacity: 1;
+  }
+
+  .button span {
+    margin-right: 10px;
+  }
+  .line {
+    position: absolute;
+    width: 860px;
+    height: 2px; /* Adjust height as needed */
+    top: 1605px;
+    left: 530px;
+    background-color: #BC171D; /* Color of the line */
+    border: none; /* No borders */
+    opacity: 0.08; /* Opacity level (adjust as needed) */
+    transform: rotate(-0deg); /* Angle of rotation (adjust as needed) */
+  }
+
+  .card-section {
+    height: 764px;
+    width: 100%;
+  }
+  .d-flex {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    padding-top: 20px;
+  }
+
+  .input-group-text {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    margin-top: 5px;
+
+    
+  }
+  .btn-custom {
+    background-color: #ffffff; /* White background */
+    color: #BC171D; /* Red text color */
+  }
+
+  .btn-custom:hover {
+    background-color: #BC171D; /* Red background on hover */
+    color: #ffffff; /* White text color on hover */
+  }
+  .unlock-container {
+    font-family: "Cako", Arial, sans-serif;
+  }
+  .card-section {
+    font-family: Arial, sans-serif;
+    background-color: #BC171D1A;
+  }
+  .oval-input {
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 365px;
+    height: 48px;
+  }
+  .login-button {
+    font-size: 20px;
+    font-family: monospace;
+    text-decoration: none;
+    color: #BC171D;
+    word-spacing: -10px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sign-up-btn {
+    background-color: #BC171D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    height: 50px;
+    margin-top: 12px;
+  }
+  @media (max-width: 767.98px) {
+  .navbar-nav {
+      text-align: center;
+      position: fixed;
+  }
+  .navbar-toggler {
+      margin-left: auto;
+  }
+  .logo-container {
+      position: static;
+      transform: none;
+      margin: 0 auto 10px;
+  }
+  .sign-up-btn {
+      width: 100%;
+      margin-top: 30px;
+  }
+  .oval-input {
+      width: calc(100% - 30px);
+  }
+  }
+  .picnotes-section {
+    width: 733px;
+    height: 602px;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    gap: 60px;
+    opacity: 1;
+    background-color: #F0F0F0;
+    padding: 60px;
+  }
+  .button {
+    width: 207px;
+    height: 58px;
+    background-color: #FF0000;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 20px; /* This will give you a pill shape */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+  }
+  .button:hover {
+    opacity: 1;
+  }
+  .button span {
+    margin-right: 10px;
+  }
+  .card-section {
+    height: 764px;
+    width: 100%;
+  }
+  h1 {
+    font-size: 48px;
+    color: #000;
+  }
+  h1 span {
+    color: #E74C3C;
+  }
+  p {
+    font-size: 18px;
+    color: #666;
+    margin-top: -20px;
+  }
+  .explore-button {
+    display: inline-block;
+    padding: 20px;
+    background-color: #BC171D;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 18px;
+    width:207px;
+    height:58px;
+    text-align:center;
+    padding-bottom:20px;
+    margin-top:30px
+  }
+  .explore-button:hover {
+    background-color: #BC171D;
+  }
+  .social-login {
+    margin-top: 40px;
+  }
+  .social-login svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+  }
+  .more-button {
+    background-color: #FDCEC8;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .d-flex {
+    display: flex;
+    align-items: center;
+  }
+  .form-control {
+    padding: 10px;
+    border-radius:20px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  body {
+    font-family: "Cako", Arial, sans-serif;
+
+  }
+  .card-header {
+    padding: 10px;
+    text-align: end;
+    background-color: #B8222E;
+  }
+  .btn-upload {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    color: #B8222E;
+  }
+  .custom-card {
+    margin: 30px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 25px;
+    background-color: #fff;
+  }
+  .card-body {
+    padding: 15px;
+    text-align: center;
+    position: relative;
+  }
+  .all-card {
+   background-color: #fde6e900;
+  }
+  .text-card {
+    width: 100%;
+    border: 2px solid #F8D7DA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #FFF5F5;
+    height: 100%;
+  }
+  .text-card h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F8D7DA;
+  }
+  .text-card p {
+    margin: 10px 0;
+    line-height: 1.5;
+    border-bottom: 1px solid #F8D7DA;
+    padding-bottom: 10px;
+  }
+  .card-group col-lg-12{
+    width: 70%;
+    border: 2px solid #F8D7DA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #BC171D;
+    height: 100%;
+  }
+  .upload-card {
+    border: 2px solid #F8D7DA;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #FFF5F5;
+    height: 100%;
+  }
+  .header-container {
+    text-align: center;
+    background-color: #fde6e900;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .header-container h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    color: #4A4A4A;
+  }
+  .header-container p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #6C757D;
+  }
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+  .step {
+      text-align: center;
+      max-width: 300px;
+  }
+  .circle {
+      width: 10px;
+      height: 10px;
+      background-color: #BC171D;
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+  }
+  .step h2 {
+      font-size: 1.5em;
+      color: #000;
+      margin-bottom: 10px;
+  }
+  .step p{
+      color: #333;
+      line-height: 1.5;
+  }
+  .main-heading {
+      font-family: Cako;
+      font-size: 80px;
+      font-weight: 400;
+      line-height: 96.02px;
+      text-align: left;
+  }
+  .fire{
+    width:27px;
+  }
+  .grid-img{
+    width:109%;
+    margin-top:-94px;
+  }
+
+</style>

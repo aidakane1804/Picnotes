@@ -1,0 +1,20 @@
+$('#newFolderModal').modal('hide'); 
+var newFolderOption = $('<option>', {
+  value: '<%= @folder.id %>',
+  text: '<%= @folder.name %>'
+});
+$('#add_picnote_to_folder_form select[name="folder_id"]').append(newFolderOption);
+
+
+var folderCount = $('#add_picnote_to_folder_form select[name="folder_id"] option').length;
+
+if (folderCount > 0) {
+  $('.empty').hide();
+  $('.modal-body').show();
+
+  $('#add_picnote_to_folder_form select[name="folder_id"]').show();
+} else {
+  $('.empty').show();
+  $('.modal-body').hide();
+}
+

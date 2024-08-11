@@ -1,66 +1,159 @@
-
-
-<div class = "modal fade" id = 'newNoteModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newNoteModalLabel' aria-hidden='true'>
-  <div class = 'modal-dialog' role = 'document'>
-    <div class = 'modal-content'>
-      <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'newNoteModalLabel' style = 'color: white;'> Create New Picnotes </h5>
-        <button type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
-          <span aria-hidden = 'true'> &times; </span>
+<head><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<div class="modal fade" id='newNoteModal' tabindex='-1' role='dialog' aria-labelledby='newNoteModalLabel'
+  aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-contentuplod'>
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="newNoteModalLabel"
+          style="margin-left: 43%; margin-right: auto; margin-top: 2rem;font-size:26px;font-weight:400;font-family:Cako;">Create a new Picnotes</h5>
+          
+        <button id="close-button" style="position: absolute; top: 0px;right: 0px; margin-right: 0px;"  type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+           <span aria-hidden="true">×</span>
         </button>
       </div>
-
       <div>
-        <%= simple_form_for Note.new do |f| %>
-          <div class = 'modal-body'>
-            <%= f.label :title, 'Title (Required)' %>
-            <%= f.input :title, label: false %>
-            <div class = 'image-upload-box'>
-              <%= f.label :image, 'File Upload' %>
-              <div class = 'image-upload text-center'>
-                <label for="file-input">
-                  <%= image_tag 'file-upload.png', class: 'logo-image', id: 'img_prev' %>
-                  <p>Click to Upload Image </p>
-                </label>
-                <%= f.file_field :image, id: 'file-input', :onchange => 'readURL(this)' %>
-                <script>
-                  function readURL(input) {
-                    if (input.files && input.files[0]) {
-                      var reader = new FileReader();
+        <%= simple_form_for Note.new, html: { id: 'picnote_form' } do |f| %>
+          <div class="modal-body row">
+            <div class="col-md-6" style=" border-style: dotted;
+              border-width: 2px;
+              border-color: #707070;
+              color: #707070;
+              border-radius: 15px;">
+                <div class='upload-create-note'>
+                  <div class='image-upload text-center' style="margin-top: 17%;">
+                    <label for="file-input">
+                      <div style="text-align: center;">
+                        <%= image_tag 'imgupload.png' , width: '40px' , height: '40px', id: 'img_prev' %>
+                          <p style="color: black; font-weight: 600; font-size: 12px; margin-top: 5px;">
+                            Upload your image here
+                          </p>
+                          <p style="color: #707070; font-weight: 400; font-size: 12px; margin-top: 10px;">Supports:
+                            JPG<br>JPEG Max. size: 2 MB <br> Minimum width 1000px</p>
+                      </div>
+                    </label>
+                    <%= f.file_field :image, id: 'file-input' , :onchange=> 'readURL(this)'%>
+                      <script>
+                      $("#new_note").submit(function(e){
+                        if($('#file-input').val() === '') {
+                            alert("Image can't be blank");
+                            e.preventDefault();
+                            return false
+                        }
+                    });
+                        function readURL(input) {
+                          if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                              $('#img_prev')
+                                .attr('src', e.target.result)
+                                .width(200)
+                                .height(200)
+                                .style.objectFit = 'contain';
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                          }
+                        }
 
-                      reader.onload = function (e) {
-                        $('#img_prev')
-                          .attr('src', e.target.result)
-                          .width(200)
-                          .height(200)
-                          .style.objectFit = 'contain';
-                      };
+                        $(document).ready(function() {
+                          SourceImage();
 
-                      reader.readAsDataURL(input.files[0]);
-                    }
-                  }
-                </script>
+                          $('#newNoteModal').on('hide.bs.modal', function (e) {
+                            if (confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) {
+                              return true;
+                            } else {
+                              return false;
+                            }
+                          });
+                        });
+                      </script>
+                  </div>
+                </div>
               </div>
-              <%= f.label :remote_image_url, 'or Image URL' %>
-              <%= f.input :remote_image_url, label: false %>
+              <!-- Right column for form fields -->
+              <div class="col-md-6">
+                <%= f.label :title, 'Title *' , style: 'color: #707070; font-weight: 400; font-size: 16px;' %>
+                <%= f.input :title, label: false, required: true %>
+                <%= f.label :body, 'Notes *' ,style: 'color: #707070; font-weight: 400; font-size: 16px; margin-top: 4%;' %>
+                <span id='body-count' style="color: #707070; font-weight: 400; font-size: 16px; padding: 0; margin: 0;"> 0/650 </span>
+                <%= f.input :body, maxlength: 650, label: false, placeholder: 'No more than 650 characters' ,input_html: { id: 'body-field' , rows: 7, class: 'custom-textarea' , style: 'padding: 10px 10px 30px 10px; border-radius: 15px !important;' } %>
+                  <script>
+                    $("#body-field").on("keyup", function () {
+                      var length = $(this).val().length;
+                      $("#body-count").html(length + '/650');
+                    });
+                  </script>
+                  <div style="margin-top: 4%; margin-right:70%;">
+                  <%= f.label :tag_list, 'Hashtags *', style: 'color: #707070; font-weight: 400; font-size: 16px; display: block; width: 59%;' %>
+                  <%= f.label :tag_list, 'Please use # for the tags', style: 'color: #999999; font-weight: 400; font-size: 12px; width: 93%; display: block;margin-top: -10px;' %>
+                </div>
+                
+                <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false, required: true %>
+              </div>
             </div>
-            <%= f.label :body, 'Notes (Required)' %> <span id = 'body-count'> 0 / 650 </span>
-            <%= f.input :body, maxlength: 650, label: false, placeholder: 'No more than 650 characters', :input_html => { :id => 'body-field' } %>
-            <script>
-              $("#body-field").on("keyup", function(){
-                var length = $(this).val().length;
-
-                $("#body-count").html(length + '/650');
-              });
-            </script>
-            <%= f.label :tag_list, 'Tags (Required)' %>
-            <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false %>
-          </div>
-          <div class = 'form-btn-container text-center new-note-btn'>
-            <%= f.button :submit, 'Create Picnotes', :class => 'white-btn btn-width' %>
+            <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+              <%= f.button :submit, 'Create Picnotes' , class: 'btn btn-custom btn-block custom-btn-sm' ,id: 'create-picnotes-btn',remote: true,
+                style: 'width: 370px; height: 40px; margin-left: 37%;color: white !important;' %>
+            </div>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ 
+$(document).ready(function() {
+  $('#close-button').on("click", function (e) {
+    if (confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) {
+      location.reload();
+    } else {
+      e.preventDefault();
+    }
+  });
+});
+
+</script>
+
+<style>
+  .modal-contentuplod {
+    right: 360px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: white;
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: 15px;
+    outline: 0;
+    hright: 689px;
+  }
+  .upload-create-note {
+    padding: 10px;
+    margin-top: 15%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  .custom-textarea::placeholder {
+    color: black;
+    /* Change this to the desired color */
+    opacity: 1;
+    /* Ensure the placeholder is fully opaque */
+    transform: translateY(5px);
+    /* Adjust this value to move the placeholder down */
+  }
+  .custom-textarea {
+    padding: 10px 10px 30px 10px;
+    /* Add extra bottom padding to move the text down */
+    border-radius: 15px !important;
+    color: black;
+  }
+</style>
+

@@ -1,11 +1,29 @@
 class FavoriteNotesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_note, only: [:create, :destroy]
 
   def index
-    @user = current_user
-    @favorites = current_user.favorited_notes
-  end
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @user = user
+      @favorites = user.favorited_notes
+    else
+      @user = current_user
+      @favorites = current_user.favorited_notes
+    end
+    @count = 0
+    my_array = []
+    @favorites.each do |favorite|
+      @count += 1
+      my_array.push favorite.title_slug if @count < 15
+    end
+    session[:picnotes] = my_array
 
+    respond_to do |format|
+      format.html # Renders index.html.erb if requested
+      format.js   # Renders index.js.erb if requested
+    end
+  end
   def create
     if Favorite.create(favorited: @note, user: current_user)
       respond_to do |format|

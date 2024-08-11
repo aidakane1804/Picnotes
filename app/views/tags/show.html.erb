@@ -4,16 +4,8 @@
 
 <div class = 'flex-center'>
   <div class = "notes-container">
-    <% @notes.each do |note| %>
-
-    <div class = 'note-container'>
-      <%= link_to(note_path(note), remote: true) do %>
-        <%= image_tag note.image.url(:thumb) if note.image.present? %>
-        <div class = 'note-container-text'>
-          <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 25) %> </p>
-        </div>
-      <% end %>
-    </div>
-    <% end %>
+    <% @notes.where(archived: false).each do |note| %>
+      <%= render partial: 'notes/note_general', locals: {note: note} %>
+  <% end %>
   </div>
 </div>

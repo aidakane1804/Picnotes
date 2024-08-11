@@ -1,0 +1,2 @@
+$('#favorite-count-<%= @note.id%>').html('<%= link_to image_tag('red-heart.png'), remote:true, method: :delete %>')
+$('.favorite-count').html('<%= link_to image_tag('red-heart.png'), remote:true, method: :delete %> <%= @note.favorites.count %>')

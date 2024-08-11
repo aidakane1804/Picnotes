@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<table>
+  <thead>
+    <tr>
+      <th>Edtracker type</th>
+      <th>Topic</th>
+      <th>Category</th>
+      <th>Resources</th>
+      <th>Hashtag</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% edtrackers.reverse.each do |edtracker| %>
+      <tr>
+        <td><%= edtracker.edtracker_type %></td>
+        <td><%= edtracker.topic %></td>
+        <td><%= edtracker.category %></td>
+        <td><%= edtracker.resources %></td>
+        <td><%= edtracker.hashtag %></td>
+        <td><%= link_to 'Show', edtracker %></td>
+        <td><%= link_to 'Edit', edit_edtracker_path(edtracker) %></td>
+        <td><%= link_to 'Destroy', edtracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Edtracker', new_edtracker_path %>

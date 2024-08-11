@@ -11,14 +11,42 @@
 // about supported directives.
 //
 //= require jquery3
-//= require chosen-jquery
+// = require chosen-jquery
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
+//= require ahoy
 //= require_tree .
 //= require_tree ./channels
-$(".scroll").scrollTop($(".scroll")[0].scrollHeight);
+
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+
+
+$(document).on('turbolinks:load', function () {
+    $('.dropdown .dropdown-menu').on('click', 'a.dropdown-item', function () {
+        var searchTest = $(this).text();
+        $('.dropdown a:first').text(searchTest);
+    });
+});
+
+
+$(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if (scroll >= 30) {
+        $(".header").addClass("headerfixed");
+        $(".midsec").addClass("headerfsixed");
+    } else {
+        $(".header").removeClass("headerfixed");
+        $(".midsec").removeClass("headerfsixed");
+    }
+});
+
+if ($(".scroll")[0]){
+  $(".scroll").scrollTop($(".scroll")[0].scrollHeight);
+}  
 $("#modal-window").find(".modal-content").html("<%= j (render 'new') %>");
 $("#modal-window").modal();
 
@@ -43,4 +71,66 @@ function openTab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+}
+
+function ChangeUrl(title, url) {
+
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj,"", '/notes',);
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
+
+function ChangeUrlForEdFluencers(title, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Title: title, Url: url };
+        history.pushState(obj,"", '/ed_fluencers',);
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
+
+function ChangeUrlForUsers(title, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = {Title: title  , Url: url};
+        history.pushState(obj, "", '/users',);
+        history.pushState(obj, obj.Title, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
+
+function changeMetaContent(title, metaName, newMetaContent) {
+    document.title = title;
+    $("meta").each(function() {
+        if($(this).attr("name") === metaName) {
+            $(this).attr("content" , newMetaContent);
+        }
+    });
+}
+
+function ed_tracker_dropdown(Object, id, current_user_id) {
+    var value = Object.value;
+    var id = id;
+    $.ajax({
+        url: "/update_status",
+        type: "POST",
+        dataType: "json",
+        crossDomain: true,
+        data: {
+            status: value,
+            edtracker_id: id,
+            current_user_id: current_user_id
+        },
+        success: function (request) {
+            location.reload();
+        },
+        error: function (xhr) {
+            alert("Please login first!");
+        }
+    });
 }

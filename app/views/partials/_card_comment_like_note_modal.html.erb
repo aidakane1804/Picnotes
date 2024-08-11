@@ -1,0 +1,362 @@
+
+<div class="modal fade show" id="comment-modal<%= note.id %>" tabindex="-1" role="dialog" aria-labelledby="NoteModalLabel" style=" padding-right: 15px;">
+  <div class="modal-dialog custom-mod modal-size" role="document" style="display: flex; justify-content: center;">
+    <div class="modal-content">
+      <div class="modal-header" style="display:block !important;">
+        <div>
+        <h5 class="modal-title" id="newNoteModalLabel" style="margin-left: 36%; margin-right: auto; margin-top: 2rem;font-size:26px;font-weight:400;font-family:Cako;">Comments</h5>
+        
+          <button style="position: absolute; top: 0px;right: 0px; margin-right: 0px;" type="button" onclick="kill_model" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="col-12">
+              
+            <hr style="height: 0.1px;color: #EFEFEF;">
+            <div class="title-hashtag text-left justify-content-between" style="display:flex;">
+                <div class="title-hashtag text-left d-flex-comment" style="display: flex;">
+                    <a class="text-decoration-none" href="#">
+                    <% if note.user.avatar? %>
+                    <%= image_tag note.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                    <% else %>
+                    <%= image_tag(@user.avatar.url || 'myavtar.png', class: 'avatar-image', id: 'avatarPreview', style: 'width: 60px; height: 60px; max-width: 200px; border-radius: 50%; margin-right: 20px; padding-top: 0rem') %>
+                    <% end %>
+                    </a>
+                    <div>
+                        <h4 class="pt-4" style="padding-top: 0.5rem !important;font-size: 1.5rem;font-size:18px; font-family:Aileron; color:#3F3F3F;">
+                            <%
+                            unless note.title[/\Ahttp:\/\//] || note.title[/\Ahttps:\/\//]
+                            end
+                            %>
+                            <a class="blue-appearance-btn" target="_blank"><%= note.title %></a>
+                        </h4>
+
+                        <div class="count-link-commment text-left" style="display: flex;">
+                          <div class="ed_tracker_likes<%= note.id %>">
+                            <p class="m-0" style="font-family: 'Philosopher', sans-serif;">
+                              <%= likes rescue 0 %>
+                                <%= image_tag 'smallheart.png' , style:"width: 16px;height: 16px;" %>
+                            </p>
+                          </div>
+                          <div class="Comment ml-2" style="margin-top:20px; ">
+                            <p class=" edtool-comments-m-0<% note.id %>" style="font-family: 'Philosopher', sans-serif;">
+                              <%= comments rescue 0 %>
+                                <%= image_tag 'smallmsg.png' , style:"width: 16px;height: 16px;"%>
+                            </p>
+                          </div>
+                        </div>
+                    </div>
+
+                    
+    
+                </div>
+                <div class="title-hashtag text-left d-flex-comment" style="padding-top:10px">
+                    <% if note.user == current_user %>
+                      <%= image_tag 'Add-resource-edit.png', alt: 'Edit', class: 'mr-2', style: 'width: 11px; height: 11px;' %>
+                        <button
+                          type="button"
+                          class="blue-appearance-btn"
+                          data-toggle="modal"
+                          data-target="#editNoteModal"
+                          data-whatever="@mdo"
+                          data-dismiss="modal"
+                          style="font-size: 14px; margin-left: -9px;margin-right: 10px;">
+                          Edit
+                        </button>
+
+                    <a href="<%= note_path(note) %>"
+                        method="delete"
+                        class="blue-appearance-btn"
+                        style="margin-right:25px;"
+                        data-confirm="Are you sure?"
+                        data-method="delete">
+                        <%= image_tag 'Add-resource-delete.png', style: 'height: 14px; width: 14px;' %>
+                        Delete
+                    </a>
+    
+                    <% end %>
+                </div>
+    
+            </div>
+
+            <div  style="display: flex;padding-top: 30px;border-radius: 20px;border: 1px solid #DCDCDC;margin: 11px;height: 45px;padding-left: 20px;">
+                <p style="color:#707070;font-family:Aileron; font-size:14px; ">Tags:
+                <% note.tag_list.each do |tag_name| %>
+                <% tag_info = get_tag_info(tag_name) %>
+                <%= link_to tag_name, tag_path(id: tag_info.id), style: "color: #BC171D ;text-decoration: none;
+                background-color: transparent !important;font-family: 'Philosopher', sans-serif;font-family:Aileron; font-size:14px;" %>
+                <% end %>
+                </p>
+              
+            </div>
+            
+            <hr style="height: 0.1px;color: #EFEFEF;">
+            <div class="row">
+                <div>
+                   <% if note.card_comment_likes.any? %>
+                    <% note.card_comment_likes.each do |comment| %>
+                        <div class"d-flex>
+                            <div class="row m-0">
+                                <div style="display:flex;margin-top: 20px;">
+                                    <a class="text-decoration-none ed_tracker_msg_img<%= comment.id %>" href="#">
+                                        <% if comment %>
+                                        <% if comment.user.avatar? %>
+                                        <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                                        <% else %>
+                                        <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                                        <% end %>
+                                        <% else %>
+                                        <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
+                                        <% end %>
+                                    </a>
+                                    <div class="flex-grow-1 pl-2" >
+                                            <div class="flex-grow-1" style="display:flex;">
+                                                  <a class="text-decoration-none" href="#">
+                                                      <h2 class="text-capitalize h5 mb-0" style="font-family: 'Aileron';color:#707070;font-size:14px;"><%= comment.user.username rescue "" %>
+                                                      <%= image_tag 'dot.png', class: 'avatar-image', style: 'width: 5px; height: 5px; margin-left:5px; margin-right:5px; margin-bottom:3px;' %>
+                                                      <%= time_ago_in_words comment.created_at rescue "" %>
+                                                      </h2>
+                                                  </a>
+                                            </div>
+                                      <div class="">
+                                      <p class="edtracker_display_comment<%= note.id %> " style="margin-top:1px ;color:#3F3F3F;font-size:14px;">
+                                          <%= comment.body rescue "" %>
+                                      </p>
+                                    </div>
+                                    <% if note.user == current_user %>
+                                    <div  aria-labelledby="dropdownMenuLink2" x-placement="bottom-start" style="color:#707070;">
+                                        <%= link_to 'Delete', comment_delete_note_path(id: comment.id, note_id: note.id), remote: true, method: :post, style: 'color:#707070;text_align:center; font-size:12px;' %>
+                                    </div>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              
+    
+                              
+                            </div>
+                            <!-- post body -->
+                          
+                          
+                            <!-- post footer begins -->
+                            <footer class="">
+                                <!-- post actions -->
+    
+                                <!-- collapsed comments begins -->
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card border border-right-0 border-left-0 border-bottom-0 mt-1">
+                                        <!-- new comment form -->
+                                        <section class="mt-3">
+                                            <form action="">
+                                                <div class="input-group input-group">
+                                                    <input type="text" class="form-control" placeholder="Write Comment" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                    <div class="input-group-append">
+                                                        <button class="btn" type="button">
+                                                            <i class="fa fa-send"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </section>
+                                        <!-- end of new comment form -->
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    <% end %>
+                    <% end %>
+                </div>
+                <div class="col-lg-12">
+                <form action="<%= create_comment_note_path(note.id) %>" method="post" accept-charset="UTF-8" data-remote="true">
+                  <div class="form-group mt-3 d-flex align-items-center" style="margin-bottom: 1rem; border-radius: 50px; padding: 10px; background-color: #FFFFFF; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);height:54px;">
+                      <a class="text-decoration-none" href="#">
+                          <% if current_user %>
+                              <% if current_user.avatar? %>
+                                  <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                              <% else %>
+                                  <%= image_tag 'myavtar.png', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                              <% end %>
+                          <% else %>
+                              <%= image_tag 'myavtar.png', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                          <% end %>
+                      </a>
+                      <input type="text" class="comments" name="card_comment" placeholder="Type comments..." style="border: none; background: none; outline: none; flex-grow: 1;">
+                      <button type="submit" class="btn btn-modal-submit send" style="background: none; border: none; padding: 0;">
+                          <%= image_tag 'send.png', alt: 'Submit', class: 'img-icon', style: 'width: 20px; height: 20px;' %>
+                      </button>
+                  </div>
+                </form>
+            
+                </div>
+            </div>
+        </div>
+     </div>
+  
+    </div>
+  </div>
+</div>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+
+
+function kill_model{
+  window.location.reload();
+}
+function openEditModal(noteId) {
+    $('#editNoteModal').modal('show');
+}
+</script>
+
+
+
+
+
+<div class="modal fade" id='editNoteModal' tabindex='-1' role='dialog' aria-labelledby='newNoteModalLabel'
+  aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-contentuplod'>
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="newNoteModalLabel"
+          style="margin-left: 47%; margin-right: auto; margin-top: 2rem;font-size:26px;font-weight:400;font-family:Cako;">Edit</h5>
+        <button id="close-button" style="position: absolute; top: 5px;right: 0px; margin-right: 0px;"  type = 'button' class = 'close' data-dismiss = 'modal' style = 'color: white' aria-label = 'Close'>
+           <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div>
+        <%= simple_form_for @note, :html => {:multipart => true} do |f| %>
+          <div class="modal-body row" style="padding: 5rem;">
+            <div class="col-md-6" style=" border-style: dotted;
+              border-width: 2px;
+              border-color: #707070;
+              color: #707070;
+              border-radius: 15px;">
+                <div class='upload-create-note'>
+                  <div class='image-upload text-center' style="margin-top: 17%;">
+                    <label for="file-input">
+                      <div style="text-align: center;">
+                        <%= image_tag @note.image.url, class: 'logo-image', id: 'img_prev' %>
+                        <%= f.file_field :image, :input_html => {:onchange => 'readURL(this)'} %>
+
+                        <p style="color: black; font-weight: 600; font-size: 12px; margin-top: 5px;">
+                        Upload your image here
+                        </p>
+
+                  
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <%= f.label :title, 'Title *' , style: 'color: #707070; font-weight: 400; font-size: 16px;' %>
+                <%= f.input :title, label: false, required: true %>
+                <%= f.label :body, 'Notes *' ,style: 'color: #707070; font-weight: 400; font-size: 16px; margin-top: 8%;' %>
+                <span id='body-count' style="color: #707070; font-weight: 400; font-size: 16px; padding: 0; margin: 0;"> 0/650 </span>
+                <%= f.input :body, maxlength: 650, label: false, placeholder: 'No more than 650 characters' ,input_html: { id: 'body-field' , rows: 7, class: 'custom-textarea' , style: 'padding: 10px 10px 30px 10px; border-radius: 15px !important;' } %>
+                  <script>
+                    $("#body-field").on("keyup", function () {
+                      var length = $(this).val().length;
+                      $("#body-count").html(length + '/650');
+                    });
+                  </script>
+                  <div style="margin-top: 11%; margin-right:70%;">
+                  <%= f.label :tag_list, 'Hashtags *', style: 'color: #707070; font-weight: 400; font-size: 16px; display: block;margin-right: 20px; width:59%;' %>
+                  <%= f.label :tag_list, 'Please use # for the tags', style: 'color: #999999; font-weight: 400; font-size: 12px; width: 91%; display: block;margin-top: -10px;' %>
+                </div>
+                
+                <%= f.input :tag_list, value: f.object.tag_list.to_s, label: false, required: true %>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+              <%= f.button :submit, 'Edit Picnotes' , class: 'btn btn-custom btn-block custom-btn-sm' ,id: 'create-picnotes-btn',remote: true,
+                style: 'width: 370px; height: 40px; margin-left: 37%;color: white !important; background-color: #BC171D; border-radius: 30px;' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ 
+$(document).ready(function() {
+  $('#close-button').on("click", function (e) {
+    if (confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) {
+      location.reload();
+    } else {
+      e.preventDefault();
+    }
+  });
+});
+
+</script>
+
+<style>
+  .modal-contentuplod {
+    right: 360px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: white;
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: 15px;
+    outline: 0;
+    hright: 689px;
+  }
+  .upload-create-note {
+    padding: 10px;
+    margin-top: 15%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  .custom-textarea::placeholder {
+    color: black;
+    /* Change this to the desired color */
+    opacity: 1;
+    /* Ensure the placeholder is fully opaque */
+    transform: translateY(5px);
+    /* Adjust this value to move the placeholder down */
+  }
+  .custom-textarea {
+    padding: 10px 10px 30px 10px;
+    /* Add extra bottom padding to move the text down */
+    border-radius: 15px !important;
+    color: black;
+  }
+</style>
+
+
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        console.log(e.target.result);
+        $('#img_prev')
+          .attr('src', e.target.result)
+          .width(200)
+          .height(200)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

@@ -1,0 +1,198 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo02"
+      aria-controls="navbarTogglerDemo02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to '', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'About Us', about_us_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Explore', explore_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'EdFluencers', edfluencers_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Trending', trending_path, class: 'nav-link', aria: { current: 'page' } %>
+        </li>
+      </ul>
+      <div class="logo-container">
+        <%= link_to notes_path do %>
+          <%= image_tag 'logo.png', class: 'nav-picnotes' %>
+        <% end %>
+      </div>
+      <form id="search-form" action="<%= root_path %>" method="get">
+        <%= text_field_tag :search, params[:search], placeholder: "Search here", id: "search-user", class: "form-control" %>
+        <div class="search-icon" onclick="document.getElementById('search-user').form.submit();">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 50 50">
+            <path d="M 21 3 C 11.622998 3 4 10.623005 4 20 C 4 29.376995 11.622998 37 21 37 C 24.712383 37 28.139151 35.791079 30.9375 33.765625 L 44.085938 46.914062 L 46.914062 44.085938 L 33.886719 31.058594 C 36.443536 28.083 38 24.223631 38 20 C 38 10.623005 30.377002 3 21 3 z M 21 5 C 29.296122 5 36 11.703883 36 20 C 36 28.296117 29.296122 35 21 35 C 12.703878 35 6 28.296117 6 20 C 6 11.703883 12.703878 5 21 5 z"></path>
+          </svg>
+        </div>
+      </form>
+      <button class="Createbutton" id="newNoteModal" data-bs-toggle="modal" data-bs-target="#newNoteModal">+ Create Picnotes</button>
+
+      <div class="profile-nav">
+        <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag(current_user&.avatar&.url || asset_path('myavtar.png'), class: 'profile-image-nav', id: 'profile-image') %>
+        </button>
+        
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="<%= feed_index_path %>">Profile</a>
+          <a class="dropdown-item" href="#" id="editSessionModal" data-bs-toggle="modal" data-bs-target="#editSessionModal">Edit Profile</a>
+          <a href="<%= session_path %>" data-method="delete" class="dropdown-item" rel="nofollow">Sign Out</a>
+        </div>
+      </div>
+
+      <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox"/>
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          <li><a class="menu__item" href="/guidelines">Guidelines</a></li>
+          <li><a class="menu__item" href="/terms-and-conditions">Terms and Conditions</a></li>
+          <li><a class="menu__item" href="/notes/contact_us">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<style>
+
+#search-form {
+  position: relative;
+  display: flex; /* Use flexbox to align items */
+  align-items: center;
+  margin-top: 8px; /* Adjust this value to shift the search bar down */
+  margin-bottom:0px;
+}
+
+.form-control {
+  flex: 1; /* Allow the input to grow and shrink as needed */
+  padding-right: 2.5rem; /* Space for the icon */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  background-color: #F5F5F5;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.5rem; /* Space between the icon and the input's right edge */
+  top: 50%; /* Center the icon vertically */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.search-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.dropdown-toggle {
+  background: transparent; /* Removes the background */
+  border: none; /* Removes the border */
+  padding: 0; /* Removes padding around the button */
+  box-shadow: none; /* Removes any shadow */
+}
+
+.dropdown-toggle:hover {
+  cursor: pointer; /* Ensures the pointer cursor on hover */
+}
+  .Createbutton {
+    background-color: #FFFFFF;
+    border: 2px solid #DC143C;
+    border-radius: 25px;
+    color: #DC143C;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 10px;
+  }
+  .Createbutton:hover {
+    opacity: 0.8;
+  }
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none !important;
+  }
+  .btnNAV {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 50%;
+    color: #BC171D;
+    text-decoration: none;
+    border: none;
+  }
+  .profile-nav {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #ccc;
+    margin-top:10px;
+    margin-right: 50px;
+  }
+  .profile-image-nav {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .profile-nav input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  @media (max-width: 767px) {
+  #search-form {
+    margin-top: 10px; /* Less margin on smaller screens if needed */
+  }
+
+  .form-control {
+    width: 100%; /* Full width on small screens */
+    padding-right: 3rem; /* Increase padding for larger icon space */
+  }
+}
+
+</style>
+
+<script>
+  function validateSearch() {
+    const searchInput = document.getElementById('search-user').value.trim();
+    if (searchInput === '') {
+      alert('Please enter a search term.');
+      return false;
+    }
+    return true;
+  }
+</script>

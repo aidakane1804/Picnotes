@@ -2,6 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html {
+  height: 100%;
+}
+body {
+  min-height: 90vh;
+  position: relative;
+  padding-bottom: 50px;
+}
+
 .add-note-btn{
   width: 100%;
 }
@@ -83,7 +92,9 @@
 }
 
 .note-arrow{
-  flex-basis: 10%;
+  flex-basis: 2%;
+  width:31px;
+  height:31px;
   text-align: center;
 }
 
@@ -106,7 +117,7 @@
 }
 
 .note-container{
-  flex-basis: 200px;
+  flex-basis: 300px;
 }
 
 .mobile-font{
@@ -312,10 +323,9 @@
 
 .reference-tabs{
   display: flex;
-  width: 100%;
+  width: 75%;
   height: 50px;
-  font-size: 10px;
-  border-bottom: thick $color-light-blue solid;
+  font-size: 15px;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -464,5 +474,290 @@
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+  }
+}
+
+.inter-form-bg {
+  background: #fff1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
+}
+.inter-form {
+  margin: 25px;
+  label {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+  }
+  .form-control {
+    border: 1px solid #3b5998 !important;
+  }
+  .upload-file {
+    width: 100%;
+    white-space: normal;
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+  .btn-signup {
+    margin: 10px 0px;
+    min-width: 100px;
+  }
+}
+
+.interview-blog {
+  .blog-box {
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 10px 20px 20px;
+    margin-bottom: 30px;
+    position: relative;
+    height: 200px;
+    box-shadow: 0px 1px 5px #ddd;
+    &:hover {
+      text-decoration: none;
+    }
+    .blog-img {
+      width: 30%;
+      img {
+        min-height: 150px;
+        max-height: 150px;
+        object-fit: cover;
+      }
+    }
+    .blog-text {
+      margin-left: 30px;
+      width: 70%;
+    }
+    .blog-title {
+      font-size: 18px;
+      color: #333;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 0px;
+      text-transform:capitalize;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      span {
+        font-weight: normal;
+        font-size: 13px;
+        margin-left: 0;
+        color: #999;
+        display: block;
+        margin: 3px 0 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        a {
+          color: #333;
+          text-decoration: none;
+          &:hover {
+            color: #007bff;
+          }
+          &:focus {
+            color: #007bff;
+          }
+        }
+      }
+    }
+    .blog-para, .blog-para p {
+      font-size: 15px;
+      color: #666;
+      margin-top: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-inline-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+     
+    }
+  }
+}
+
+.btn-new-interview {
+  margin: 20px 0px;
+  background-color: #bc171d !important;
+  border-color: #bc171d !important;
+  min-width: 100px;
+  &:hover {
+    background: #bc171d;
+    border-color: #bc171d;
+  }
+}
+
+.pdf-box-left {
+  img {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+  }
+  .pdf-box-name {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px;
+    display: block;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+}
+.pdf-right-box {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px;
+  word-break: break-all;
+  overflow-y: auto;
+  max-height: 500px;
+  p {
+    word-break: break-word;
+  }
+  .paragraph{
+    word-break: break-word; 
+  }
+}
+.pdf-modal {
+  .modal-content {
+    border-radius: 20px;
+  }
+}
+@media (min-width: 991px) {
+   #show_interview_model .modal-dialog.modal-lg {
+    max-width: 1000px;
+    width: 100%;
+  }
+}
+
+
+.social_icons {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  i {
+    width: 30px;
+    height: 30px;
+    background: #6c757c;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 15px;
+    line-height: 30px;
+    transition: background 0.3s linear;
+    &:hover {
+      background: #bc171d;
+    }
+  }
+}
+.website_link {
+  background: #6c757c;
+  color: #fff;
+  padding: 10px;
+  display: block;
+  border-radius: 4px;
+  text-align: center;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.cke_ed_fluencer_article{
+  width: 80%;
+}
+
+.footer-main {
+  position:absolute;
+  width: 100%;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  background: #fff;
+  padding: 10px;
+  box-shadow:0px 2px 5px #ccc;
+
+  .footer-inner  {
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        li {
+          a {
+            padding: 0 10px;
+            color: #666;
+            font-size: 15px;
+            text-decoration:none;
+            &:hover {
+              text-decoration:none;
+            }
+          }
+        }
+      }
+      .copy-right {
+        text-align: center;
+        margin: 5px 0 0;
+        color: #666;
+        font-size: 14px;
+      }
+  }
+}
+
+@media (max-width:767px) {
+  body {
+    padding-bottom: 80%;
+  }
+  .footer-main .footer-inner ul {
+    flex-direction:column;
+  }
+  footer-inner {
+    padding: 15px 0px;
+  }
+  .footer-main {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #fff;
+    padding: 15px 0 34px;
+    box-shadow: 0px 2px 5px #ccc;
+    margin-top: 0;
+  }
+  .footer-main .footer-inner ul li a {
+    padding: 5px 10px;
+    display:block;
+  }
+  .footer-main .footer-inner .copy-right {
+    margin: 5px 0 25px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    padding-bottom: 10%;
+  }
+  .footer-main {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: #fff;
+    padding: 10px 0 54px;
+    box-shadow: 0px 2px 5px #ccc;
+  }
+  .footer-main .footer-inner ul li a {
+    padding: 5px 10px;
+    display:block;
   }
 }

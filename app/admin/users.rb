@@ -30,6 +30,20 @@ show do
       row :email
       row :city
   end
+  panel "Visits" do
+    attributes_table_for user.first_visit do
+      row(:landing_page) { |v| link_to(v.landing_page, v.landing_page) if v.landing_page }
+      row(:referrer) { |v| link_to(v.referrer, v.referrer) if v.referrer }
+      row('Time to Signup') {|v| distance_of_time_in_words(v.user.created_at, v.started_at) }
+      row(:location)
+      row(:technology)
+      row(:utm_source)
+      row(:utm_medium)
+      row(:utm_term)
+      row(:utm_content)
+      row(:utm_campaign)
+    end
+  end
 end
 
 controller do

@@ -1,0 +1,319 @@
+<div class="modal fade show" id="comment-modal<%= card.id %>" tabindex="-1" role="dialog" aria-labelledby="NoteModalLabel" style=" padding-right: 15px;">
+  <div class="modal-dialog custom-mod modal-size" role="document" style="display: flex;justify-content: center;">
+    <div class="modal-content" style="width:60%;">
+      <div class="modal-header" style="display:block !important;">
+        <button style="float: right; padding: 0px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal"aria-label="Close" >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 0px;">
+        <div class="col-12">
+          <div class="img-modal" style="text-align: left;">
+            <%= image_tag "#{card.myedtool_type.downcase}.png" , style: 'width: 45px; margin-bottom: 10px;' %>
+          </div>
+
+          <div class="title-hashtag text-left mt-4 d-flex" style="padding-top: 0px;">
+            <a class="text-decoration-none" href="#">
+              <% if card.user.avatar? %>
+                <%= image_tag card.user.avatar.url(:thumb), class: 'avatar-image' ,
+                  style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                  <% else %>
+                    <%= image_tag 'myavtar.png' , style: 'width: 60px; height: 60px;' %>
+                      <% end %>
+            </a>
+            <%
+                unless card.link[/\Ahttp:\/\//] || card.link[/\Ahttps:\/\//]
+                  card.link = "http://#{card.link}"
+                end
+            %>
+              <h4 class="pt-4" style="padding-top: 0.5rem !important; font-size: 1rem;">
+                <a class="blue-appearance-btn" href="<%= card.link %>" target="_blank">
+                  <%= card.addtitle %>
+                </a>
+                <%= image_tag 'link-icon.png', style: 'width: 17px; height: 19px;' %>
+
+              </h4>
+          </div>
+          <div class="count-link-commment text-left" style="display: flex; margin-left: 16%; margin-top: -4%;">
+            <div class="ed_tracker_likes<%= card.id %>">
+              <p class="m-0" style="font-family: 'Philosopher', sans-serif;">
+                <%= likes rescue 0 %>
+                  <%= image_tag 'smallheart.png' , style:"width: 16px;height: 16px;" %>
+              </p>
+            </div>
+            <div class="Comment ml-2" style="margin-top:20px; ">
+              <p class=" edtool-comments-m-0<% card.id %>" style="font-family: 'Philosopher', sans-serif;">
+                <%= comments rescue 0 %>
+                  <%= image_tag 'smallmsg.png' , style:"width: 16px;height: 16px;"%>
+              </p>
+            </div>
+          </div>
+
+          <%if card.user == current_user %>
+          <div class="custom-actions">
+            <%= image_tag 'Add-resource-edit.png', style: 'height: 14px; width: 14px;' %>
+            <a class="blue-appearance-btn" data-dismiss="modal" data-remote="true" href="/fetch_model_form1?id=<%= card.id %>">
+              Edit
+            </a>
+            <%= image_tag 'Add-resource-delete.png', style: 'height: 14px; width: 14px;' %>
+            <%= link_to('Delete', myedtool_path(card), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+          </div>
+          
+          <% end %>
+          <div class="row">
+            <div class="col-lg-9 mt-2">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div style="display: flex; padding-top: 30px; border-radius: 20px; border: 1px solid #DCDCDC; margin: 11px; height: 45px; padding-left: 20px; margin-left: -14%; margin-top: 20px; width: 157%;">
+                    <p style="color:#707070; font-family:Aileron; font-size:14px;">
+                      Tags:
+                      <% card.tag_list.each do |tag_name| %>
+                        <% tag_info = get_tag_info(tag_name) %>
+                        <%= link_to tag_name, tag_path(id: tag_info.id), style: "color: #BC171D; text-decoration: none; background-color: transparent !important; font-family: 'Philosopher', sans-serif; font-family:Aileron; font-size:14px;" %>
+                      <% end %>
+                    </p>
+                  </div>
+
+
+                  
+                  <!-- <form action="/create_ed_tool_comment?id=<%= card.id %>" method="post" accept-charset="UTF-8"
+                    data-remote="true">
+                    <div class="form-group mt-3 d-flex" style="margin-bottom: 1rem;margin-left: -36px;">
+                      <a class="text-decoration-none" href="#">
+                        <%if current_user %>
+                          <% if current_user.avatar? %>
+                            <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image' ,
+                              style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                              <% else %>
+                                <%= image_tag 'avatar.png' , style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                                  <% end %>
+                                    <% else %>
+                                      <%= image_tag 'avatar.png' ,
+                                        style: 'width: 60px; height: 60px; margin-right: 20px;' %>
+                                        <%end %>
+                      </a>
+
+                      <input type="text" class="form-control col-form-control comments" name="card_comment"
+                        placeholder="Type Comments">
+                      <button type="submit" class="btn btn-modal-submit send">
+                        <i class="fa fa-paper-plane" style="color: white !important;"></i></button>
+                    </div>
+                  </form> -->
+                </div>
+              </div>
+              <div class="row">
+              <div>
+                <% if card.card_comment_likes.any? %>
+                  <% card.card_comment_likes.each do |comment| %>
+                      <div class"d-flex>
+                          <!-- post header -->
+                          <div class="row m-0">
+                              <div style="display:flex;margin-top: 20px;">
+                                  <a class="text-decoration-none ed_tool_msg_img<%= comment.id %>" href="#">
+                                      <% if comment %>
+                                      <% if comment.user.avatar? %>
+                                      <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                                      <% else %>
+                                      <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                                      <% end %>
+                                      <% else %>
+                                      <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
+                                      <% end %>
+                                  </a>
+                                  <div class="flex-grow-1 pl-2" >
+                                          <div class="flex-grow-1" style="display:flex;">
+                                                <a class="text-decoration-none" href="#">
+                                                    <h2 class="text-capitalize h5 mb-0" style="font-family: 'Aileron';color:#707070;font-size:14px;"><%= comment.user.username rescue "" %>
+                                                    <%= image_tag 'dot.png', class: 'avatar-image', style: 'width: 5px; height: 5px; margin-left:5px; margin-right:5px; margin-bottom:3px;' %>
+                                                    <%= time_ago_in_words comment.created_at rescue "" %>
+                                                    </h2>
+                                                </a>
+                                          </div>
+                                    <div class="">
+                                    <p class="edtracker_display_comment<%= card.id %> " style="margin-top:1px ;color:#3F3F3F;font-size:14px;">
+                                        <%= comment.body rescue "" %>
+                                    </p>
+                                  </div>
+                                  <% if card.user == current_user %>
+                                  <div  aria-labelledby="dropdownMenuLink2" x-placement="bottom-start" style="color:#707070;">
+                                      <%= link_to 'Delete', comment_delete_edtools_path(id: comment.id, card_id: card.id), remote: true, method: :post, style: 'color:#707070;text_align:center; font-size:12px;' %>
+                                  </div>
+                                  <% end %>
+                                </div>
+                              </div>
+                            
+  
+                            
+                          </div>
+                  <%end %>
+                <% end %>
+                  <div class="col-lg-12">
+                    <form action="/create_ed_tool_comment?id=<%= card.id %>" method="post" accept-charset="UTF-8" data-remote="true">
+                      <div class="form-group mt-3 d-flex align-items-center" style="margin-bottom: 1rem; border-radius: 50px; padding: 10px; background-color: #FFFFFF; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); height: 46px; width: 176%; margin-left: -20%;">
+                        <a class="text-decoration-none" href="#">
+                          <% if current_user %>
+                            <% if current_user.avatar? %>
+                              <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                            <% else %>
+                              <%= image_tag 'myavtar.png', class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                            <% end %>
+                          <% else %>
+                            <%= image_tag 'myavtar.png', class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                          <% end %>
+                        </a>
+                        <input type="text" class="comments" name="card_comment" placeholder="Type comments..." style="border: none; background: none; outline: none; flex-grow: 1; width: 100%;">
+                        <button type="submit" class="btn btn-modal-submit send" style="background: none; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; left: 121%; bottom: 8%; border: none;">
+                          <%= image_tag 'send.png', alt: 'Submit', class: 'img-icon', style: 'width: 20px; height: 20px; color: white;' %>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+            </div>
+            
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  section.card.custom {
+    box-shadow: none !important;
+    width: 100%;
+    text-align: left;
+  }
+
+  .custom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: -16%; /* Adjust this value to move the container up or down */
+}
+.custom-actions a,
+.custom-actions .blue-appearance-btn {
+  margin-left: 10px; /* Adjust spacing between elements if needed */
+}
+
+.custom-actions img {
+  vertical-align: middle; /* Ensures images align nicely with text */
+}
+
+.avatar-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comments {
+  border: none;
+  background: none;
+  outline: none;
+  flex-grow: 1;
+  width: 100%; /* Increase width of the text field */
+}
+
+.btn-modal-submit.send {
+  background: none;
+  border: 2px solid black; /* Black boundary for the button */
+  border-radius: 50%; /* Makes the button round */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-icon {
+  width: 20px;
+  height: 20px;
+  color: white; /* White color for the icon */
+}
+
+
+  .comments {
+    height: 60px;
+  }
+
+  .modal-dialog.custom-mod.modal-size {
+    max-width: 870px;
+    width: 100%;
+  }
+
+  .modal-header {
+    border-bottom: 0;
+  }
+
+
+  img.user-img {
+    border-radius: 50px;
+    margin: 7px 10px 0 0px;
+  }
+
+  .col-form-control {
+    border: 1px solid grey !important;
+    border-radius: 6px !important;
+    padding: 10px !important;
+  }
+
+  button.btn.btn-modal-submit.send {
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    margin: 12px 0 0 7px;
+    padding: 0;
+    position: absolute;
+    right: 23px;
+  }
+
+  section.card.custom {
+    box-shadow: none !important;
+    width: 100%;
+    text-align: left;
+  }
+
+  .comment-card {
+    border-radius: 6px;
+  }
+
+  .card {
+    width: 89%;
+    margin: auto;
+    padding: 29px 0px;
+    border: none;
+    webkit-box-shadow: 11px 11px 10px -1px rgba(244, 244, 244, 1);
+    -moz-box-shadow: 11px 11px 10px -1px rgba(244, 244, 244, 1);
+    box-shadow: 11px 11px 10px -1px rgb(244 244 244);
+  }
+
+  .modal-header .close {
+    color: #000;
+    padding: 0 !important;
+    margin: 0rem 0rem 0rem auto !important;
+    /* background: #000; */
+    border-radius: 100%;
+    width: 24px;
+  }
+
+  /* .btn-modal-submit {
+    background: #fb3c44 !important;
+    color: #fff !important;
+    font-size: 18px !important;
+  } */
+</style>
+
+<script>
+  function kill_model() {
+    $("#comment-modal<%=card.id%>").hide();
+    $(".modal-backdrop.fade.show").hide();
+    location.reload();
+
+
+  }
+
+</script>

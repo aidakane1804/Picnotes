@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project Cost Management Database | Error</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag "tailwind" %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+     <style>
+      #first-level-nav a.text-gray-300:hover,
+      #second-level-nav a.text-gray-300:hover {
+        background-color: #47D7AC !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+      }
+      #first-level-nav a.active,
+      #second-level-nav a.active {
+        background: #F3F4F6;
+        color: #111827 !important;
+        font-weight: 500 !important;
+      }
+      .bg-footer-green{
+        /* background: #346B5C; */
+        background: var(--cloaked-sky-color);
+        color: #F8F8F8;
+      }
+      .bg-purple-900{
+        background: #5840B0 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <% status_code = (@exception.class==ActionPolicy::Unauthorized && 403) || @exception.try(:status) || params[:status_code].to_i %>
+      <%= render 'shared/first_level_header' %>
+      <% render 'shared/second_level_header' %>
+      <div class="flex justify-center items-center h-screen">
+        <div class="max-w-max mx-auto">
+          <main class="sm:flex">
+            <p class="text-4xl font-extrabold text-green sm:text-5xl"> 
+            <%= image_tag 'pcmd_logo_2021.png', class: 'mx-auto h-20 rounded-xl w-auto', alt: 'PCMD' %>
+            </p>
+            <div class="sm:ml-6">
+              <div class="sm:border-l sm:border-gray-200 sm:pl-6">
+                <h1 class="text-4xl font-extrabold text-green tracking-tight sm:text-5xl" >
+                <%= status_code %>
+                </h1>
+                <p class="mt-1 text-base text-gray-500">
+                  <%= t(status_code_to_symbol(status_code)) %>
+                </p>
+              </div>
+              <div class="mt-10 flex space-x-3 sm:border-l sm:border-transparent sm:pl-6" >
+                <a href="/" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" >
+                  Go back home
+                </a>
+                <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Contact support
+                </a>
+              </div>
+            </div>
+          </main>
+        </div>  
+      </div>
+    </div>
+    <%= render 'shared/footer' %>
+  </body>
+</html>

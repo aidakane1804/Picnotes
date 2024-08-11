@@ -1,3 +1,4 @@
+
 <div class = "modal fade" id = 'newSessionModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newSessionModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
@@ -12,9 +13,26 @@
         <div class = 'text-center'>
           <%= image_tag 'logo-clean.png', class: 'intro-image' %>
         </div>
+       <div class="container">
 
+        <a href=  <%=	 user_facebook_omniauth_authorize_path %> , class="fb btn">
+          <i class="fa fa-facebook" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with Facebook
+        </a>
+        <br/>
+        <a href=  <%=  user_google_oauth2_omniauth_authorize_path %> , class="fb btn" style="margin-top: 7px;background: #1a73e8;">
+          <i class="fa fa-google" style="text-align: left ;color:#ffffff;"></i>&nbsp;&nbsp; &nbsp;&nbsp; Connect with Google
+        </a>
+      </div>
         <%= simple_form_for :session, url: session_path do |f| %>
 
+          <%#= link_to' "&nbsp; Continue with Facebook', user_facebook_omniauth_authorize_path, class: ' fa fa-facebook fb btn fab fa fa-facebook', style:"text-align: left ;color:#ffffff;"
+          %>
+
+         <p style="    text-align: center;
+             margin-top: 7px;
+             margin-bottom: 0px;
+             border-bottom-width: 0px;
+             padding-bottom: 0px;"> OR</p>
           <%= f.label 'Email' %>
           <%= f.input :email, label: false %>
 
@@ -25,9 +43,10 @@
           <div class = 'form-btn-container'>
             <%= f.button :submit, 'Sign In', :class => 'blue-appearance-btn' %>
           </div>
-          <%= link_to 'LogIn with Facebook', user_facebook_omniauth_authorize_path, class: 'blue-btn btn-lg'
-           %>&nbsp;&nbsp;
+
+          &nbsp;&nbsp;
         <% end %>
+
 
       </div>
     </div>

@@ -1,94 +1,124 @@
-<div class='profile-dashboard'>
-  <br>
-  <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
-    <p> <%= link_to 'Community Guidelines', community_guideline_notes_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: "current profile-links set-font-family" %>
+<section class="contact-us-page">
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="heading-contact">Contact Us</h4>
+      </div>
+    </div>
+    <div class="row pt-5 mt-5">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <%= image_tag "message.png", alt: "message", class: "message" %>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <form action="/notes/contact_us_form" method="get">
+          <div class="card">
+            <h5 class="text-center heading-drop-line">Drop us a line</h5>
+            <div class="contact-form">
+              <div class="form-group pt-2">
+                <input type="email" class="form-control" placeholder="Email" name="Email">
+              </div>
+              <div class="form-group pt-2">
+                <textarea type="text" class="form-control" rows="3" placeholder="Message" name="Message"></textarea>
+              </div>
+              <div class="form-group pt-2">
+                <% if flash[:notice].present? %>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= flash[:notice] %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <button type="Submit" class="btn-submit mb-5">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-<div class="center">
-
-</div>
+</section>
 
 <style>
-  @import url('http://getbootstrap.com/dist/css/bootstrap.css');
-
-  html, body, .container-table {
-    height: 80%;
+    .about_us_notes_path{
+        background: white !important;
+        float: none !important;
+    }
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
   }
-
-  .container-table {
-    display: table;
-  }
-
-  .vertical-center-row {
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  body {
-    background: #ffffff;
-  }
-
-  h1, p {
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
     text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
   }
 
-  input, textarea {
-    width: 100%;
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
   }
 
-  .form-height {
-    height: 187px;
+  .foot-picnotes {
+    padding-left: 30px;
   }
 
-  textarea.form-control {
-    height: 187px;
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
   }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
 </style>
-
-
-
-<div class="contact-us-form-box">
-  <h1>Contact Us</h1>
-  <form action="/notes/contact_us_form" method="get">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input class="form-control" id="email" type="email" name="Email">
-    </div>
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea class="form-control form-height" id="message" name="Message"></textarea>
-    </div>
-    <input class="btn btn-primary" type="submit" value="Submit"/>
-
-
-    <br><br>
-    <div >
-
-      <p  class="contact-us" style="text-align:justify;text-justify: inter-word">For General
-        Inquiries:<a href="mailto:info@picnotes.org">info@picnotes.org</a></p>
-
-      <p  class="contact-us" style="text-align:justify;text-justify: inter-word"> For
-        Support:<a href="mailto:info@picnotes.org">support@picnotes.org</a></p>
-
-      <p  class="contact-us" style="text-align:justify;text-justify: inter-word"> For
-        Partners:<a href="mailto:info@picnotes.org">partners@picnotes.org</a></p>
-
-      <p  class="contact-us" style="text-align:justify;text-justify: inter-word"> For
-        Press:<a href="mailto:info@picnotes.org">press@picnotes.org</a></p>
-    </div>
-
-  </form>
-</div>
-
-<div class="container container-table">
-  <div class="row vertical-center-row">
-    <div class="text-center col-md-11 col-md-offset-4 footer-color">
-
-
-    </div>
-  </div>
-</div>
-</div>

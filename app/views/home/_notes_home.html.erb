@@ -1,0 +1,252 @@
+
+<%= csrf_meta_tags %>
+
+<div class="container-fluid">
+  <div class="row">
+    <% @notes.sort_by(&:id).reverse.each_slice(4) do |group| %>
+      <% group.each do |note| %>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 notes_col">
+          <% if note.image.url.present? %>
+            <%= link_to note_path(note.slug), remote: true, title: note.title do %>
+              <figure class="image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag note.image.url(:thumb), style: 'width: 100%;' %>
+                  <div class="hover-overlay">
+                    <div class="overlay-content">
+                      <p class="hover-text"><%= note.title %></p>
+                      <div class="background-overlay"></div>
+                    </div>
+                    <div class="icons">
+                      <span style="float: right">
+                        <% if user_signed_in? %>
+                          <% if current_user.favorited_notes.exists?(id: note.id) %>
+                            <span id='favorites-count-<%= note.id %>'>
+                              <%= link_to image_tag('like.png', style: 'width: 35px; height: 35px; background-color: red; border-radius: 50%;'), favorite_note_path(note), remote: true, method: :delete %>
+                            </span>
+                          <% else %>
+                            <span id='favorites-count-<%= note.id %>'>
+                              <%= link_to image_tag('like.png', style: 'width: 35px; height: 35px; background-color: red; border-radius: 50%;'), favorite_notes_path(note_id: note.id), remote: true, method: :post %>
+                            </span>
+                          <% end %>
+                          <span id='add-to-folder-<%= note.id %>'>
+                            <%= link_to "#", data: { toggle: 'modal', target: '#add_note_to_folder' }, remote: true do %>
+                              <%= image_tag 'folder-add.png', style: 'width: 35px; height: 35px; background-color: red; border-radius:50%;' %>
+                            <% end %>
+                          </span>
+                        <% end %>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            <% end %>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="add_note_to_folder" tabindex="-1" role="dialog" aria-labelledby="add_note_to_folder_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add_note_to_folder_label" style="margin-left: 20%;">Add Picnotes to Folder</h5>
+        <button style="margin-top:-50px;margin-right: -70px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <% if @folders.count > 0 %>
+        <div class="modal-body" style="padding:20px !important;">
+          <%= form_tag(note_addfolder_path(notes), remote: true, id: "add_picnote_to_folder_form") do %>
+            <div class="form-group">
+              <div style="display:flex; justify-content:space-between; margin-left:8px;">
+                <%= label_tag :folder_id, "Name", class: "form-label", style: 'margin-bottom: 5px;' %>
+                <%= link_to '#', class: 'btn btn-link', data: { toggle: 'modal', target: '#newFolderModal' } do %>
+                  <%= image_tag 'new-folder.png', alt: 'New Folder', style: 'margin-right: 8px; width:20px; height:20px;' %>
+                  <span style="color:#BC171D;">Create new folder</span>
+                <% end %>
+              </div>
+              <%= select_tag :folder_id, options_for_select(@folders.collect { |folder| [folder.name, folder.id] }), style: 'width: 100%; padding: 10px; border-radius: 69px;' %>
+            </div>
+            <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+              <%= submit_tag 'Add to Folder', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 75%; height: 40px; margin-left: 15%;color:white !important;background-color:#BC171D;border-radius:25px;' %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+          <%= image_tag 'empty-board.png', style: 'width: 10%;' %>
+        </div>
+        <p style="justify-content: center !important; display: flex;">You have not created any folder yet.</p>
+        <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes" data-toggle="modal" data-target="#newFolderModal">Create New Folder</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Create New Folder Modal -->
+<div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="newFolderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 450px; height: 200px; background-color: white; border-radius: 15px;">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left:20%; margin-right: auto; margin-top: 0rem;">Create New Folder</h5>
+        <button style="position: absolute; top: 0px;right: 0px; margin-right: -55px; margin-top:-33px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div>
+        <%= simple_form_for Folder.new, remote: true, id: "new_folder_form" do |form| %>
+          <div class="modal-body">
+            <%= form.label :name, "Name" %>
+            <%= form.input :name, label: false %>
+          </div>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= form.button :submit, 'Save', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 200px; height: 40px; margin-left: 20%;color:white !important;background-color:#BC171D;border-radius:25px;' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+$(document).on('submit', '#add_picnote_to_folder_form', function(e) {
+  e.preventDefault();
+
+  $.ajax({
+    url: $(this).attr('action'),
+    type: $(this).attr('method'),
+    data: $(this).serialize(),
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(response) {
+      // Handle success
+    },
+    error: function(xhr) {
+      // Handle error
+    }
+  });
+});
+
+</script>
+
+
+
+
+
+<style>
+
+.custom-heart-icon {
+  color: red;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-containermyprofile {
+  position: relative;
+  overflow: hidden;
+}
+.card-picknote {
+  width: 330px;
+  border: none;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: #fff;
+  position: relative;
+  height: 268px;
+  margin-left: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.image-containermyprofile img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.image-containermyprofile:hover img {
+  transform: scale(1.1);
+}
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 1;
+}
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+  z-index: 1;
+}
+.hover-text {
+  margin-right: 1rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+
+}
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+  align-items: flex-end;
+}
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icons {
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+.icons span {
+  position: relative;
+  z-index: 3;
+}
+</style>
+
+
+
+

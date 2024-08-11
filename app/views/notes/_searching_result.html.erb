@@ -1,0 +1,612 @@
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+  <%= render 'partials/navbar' %>
+<% end %>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+
+<% if @searchresult %>
+  <div style='text-align: center; margin-top: 30px; width: 100%;'>
+    <p>Results for <%= @searchresult %></p>
+  </div>
+<% end %>
+
+<% @notes = @notes.where(archived: false) %>
+
+<% if @notes.empty? && @users.empty? %>
+  <div style='text-align: center; margin-top: 30px; width: 100%; height: 35%; margin-top: 13%;font-size: 20px;'>
+    <p>No results found</p>
+  </div>
+<% end %>
+
+<div class='flex-center'>
+  <div class="notes-container" id="notes-div">
+    <% @notes.each do |note| %>
+      <div class="note-card">
+        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+            <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <figure class="card-picknote card-product image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                  <div class="hover-overlay">
+                    <div class="overlay-content" style="margin-bottom: -17%;">
+                      <p id="truncate-title" class="truncate" style="margin-bottom: -1px;">
+                        <%= note.title %>
+                      </p>
+                      <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
+                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% @notesTagged.each do |note| %>
+      <div class="note-card">
+        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+            <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <figure class="card-picknote card-product image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                   <div class="hover-overlay">
+                    <div class="overlay-content" style="margin-bottom: -17%;">
+                      <p id="truncate-title" class="truncate"style="margin-bottom: -1px;">
+                        <%= note.title %>
+                      </p>
+                      <p id="truncate-name" class="truncate"  style="margin-bottom: 14%;">
+                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="searchDetails"></div>
+
+<div class="row">
+  <div class="notes-container" style="margin-top: 20px; display: flex; margin-left: 20px;">
+    <% @users.each do |user| %>
+      <div class='note-container' style="align-content: center; text-align: center;">
+        <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url(:thumb) %>
+          <% else %>
+            <%= image_tag 'myavtar.png', style: 'width: 80%;' %>
+          <% end %>
+          <div class='note-container-text' style='text-align: center !important;'>
+            <p class='mobile-font note-btn-font' style='text-transform: capitalize'><%= user.username %></p>
+            <p class='mobile-font note-btn-font'><%= user.first_name %> <%= user.last_name %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'partials/footer' %>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style > 
+.custom-heart-icon {
+  color: red;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-containermyprofile {
+  position: relative;
+  overflow: hidden;
+}
+.card-picknote {
+  width: 330px;
+  border: none;
+  height: 268px;
+  margin-left: auto;
+}
+
+.image-containermyprofile img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.image-containermyprofile:hover img {
+  transform: scale(1.1);
+}
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 1;
+}
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+  z-index: 1;
+}
+.hover-text {
+  margin-bottom:0rem;
+  margin-right: 12rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+  text-decoration: none;
+
+}
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-end; /* Align items to the bottom */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.overlay-content {
+  margin-bottom: -17%;
+  display: flex;
+  flex-direction: column; /* Stack title and name vertically */
+  align-items: flex-start; /* Align items to the left */
+  margin-bottom: 10px; /* Add spacing between elements */
+}
+
+.truncate {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+  color: white !important;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.icons span {
+  position: relative;
+  z-index: 3;
+}
+
+.orange_love .fa {
+  color: #BC171D !important;
+  background-color: white !important;
+  height: 37px !important;
+  width: 40px !important;
+  border-radius: 50% !important;
+  font-size: 22px !important;
+  padding: 9px !important;
+}
+
+.grey_love .fa {
+  color: white !important;
+  background-color: #BC171D !important;
+  height: 37px !important;
+  width: 40px !important;
+  border-radius: 50% !important;
+  font-size: 22px !important;
+  padding: 9px !important;
+
+
+}
+
+.love_iconss {
+  font-size: 30px !important;
+  color: #BC171D !important;
+}
+
+
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+  .notes-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Default 4 columns */
+    gap: 10px; /* Spacing between items */
+    margin-top: 20px;
+  }
+  
+  /* For screens smaller than 1400px */
+  @media (max-width: 1400px) {
+    .notes-container {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+  }
+  
+  /* For screens smaller than 992px */
+  @media (max-width: 992px) {
+    .notes-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+  }
+  
+  /* For screens smaller than 768px */
+  @media (max-width: 768px) {
+    .notes-container {
+      grid-template-columns: 1fr; /* 1 column */
+    }
+  }
+  
+  /* For screens smaller than 576px */
+  @media (max-width: 576px) {
+    .notes-container {
+      grid-template-columns: 1fr; /* 1 column */
+      gap: 15px; /* Reduce gap for smaller screens */
+    }
+  }
+  
+  /* For screens smaller than 480px */
+  @media (max-width: 480px) {
+    .notes-container {
+      grid-template-columns: 1fr; /* 1 column */
+      gap: 10px; /* Further reduce gap for very small screens */
+    }
+  }
+  
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+}
+
+  
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+
+
+
+  .hamburger-menu {
+        right: 30px;
+        z-index: 4;
+        margin-right: 18px;
+        margin-top:9px;
+    }
+
+.hamburger-menu #menu__toggle {
+  opacity: 0;
+  position: absolute;
+  width: 24px;
+  height: 23px;
+  }
+  
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: auto;
+    right: -40px;
+    z-index: 99999;
+  }
+  .hamburger-menu .menu__btn {display: none; right: 0;}
+
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  .hamburger-menu #menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: auto;
+    right: -40px;
+    z-index: 99999;
+  }
+  
+  .hamburger-menu .menu__btn {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 34px;
+      left: auto;
+      width: 24px;
+      height: 23px;
+      cursor: pointer;
+      z-index: -1;
+      margin-right: 30px;
+  }
+  
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #616161;
+    transition-duration: .25s;
+  }
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+
+  .hamburger-menu #menu__toggle:checked ~ .menu__box {
+  visibility: visible;
+  left: auto;
+  right: -40px;
+  z-index: 99999;
+  }
+
+
+.menu__box {
+  display: block;
+  visibility: hidden;
+  top: 68px;
+  left: -100%;
+  margin: 0;
+  padding: 7px 0;
+  list-style: none;
+  background-color: whitesmoke;
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+  transition-duration: .25s;
+  position: absolute;
+  height: 98px;
+  border-radius: 8px;
+  margin-right: 46px;
+}
+.menu__box:before {content: '';height: 20px;width: 20px;background: whitesmoke;position: absolute;z-index: 999;top: -8px;right: 26px;margin: 0 auto;transform: rotate(45deg);}
+.hamburger-menu #menu__toggle:checked ~ .menu__box li {
+  padding: 4px 7px;
+}
+
+
+.menu__item {
+  color: #302f2fb5;
+  text-align: center;
+  padding: 0px 6px;
+  text-decoration: none;
+  font-size: 16px;
+  display: table-footer-group;
+  text-align: left;
+}
+.menu__item:hover {
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+}
+
+@media (min-width: 767px) and (max-width:1200px) {
+    .menu__box {
+        top: 34px;
+    }
+    .navbar {
+        flex-wrap: nowrap !important;
+        padding: 0.2rem 1rem !important;
+    }
+    .tablate-navbar-container {
+        display: block;
+    }
+    .hide-in-tablate {
+        display: none !important;
+    }
+    .tablate-view-header {
+       display: flex;
+        width: 100%;
+    }
+
+
+
+    .navbar-expand-lg .navbar-collapse.hide-in-tablate-view {
+        display: none !important;
+    }
+
+
+    
+    .tablate-right-nav {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .tablate-view-btns button.btn-login {
+        margin-top: 16px;
+    }
+    .tablate-right-nav .hamburger-menu {
+        position: absolute;
+        right: 0;
+        top: 15px;
+    }
+    .hamburger-menu .menu__btn {
+        top: 0px;
+    }
+    .btn-signup {
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+    .navbar-nav a {
+        padding: 15px;
+        font-size: 14px !important;
+    }
+    .navbar-nav .nav-link {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+}
+
+
+
+
+
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+
+<script>
+document.querySelector('#favorite-button').addEventListener('click', function(event) {
+  event.preventDefault();
+  fetch('/favorite_notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ note_id: 1192 })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Handle response
+  });
+});
+
+
+$(document).on('click', '.add-note-to-folder-button', function() {
+  var noteId = $(this).data('note-id');
+  
+  $.ajax({
+    url: '/notes/add_note_to_folder',
+    type: 'GET',
+    data: { note_id: noteId },
+    dataType: 'script',
+    success: function(response) {
+      // Handle successful JavaScript response
+    },
+    error: function(xhr, status, error) {
+      // Handle error
+    }
+  });
+});
+
+
+</script>

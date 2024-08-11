@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+# Heroku Ruby Version Production
+# ruby '2.4.5'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -18,7 +20,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+# continues updating sitemap.xml
+gem 'sitemap_generator'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -36,12 +39,15 @@ gem 'simple_form'
 
 # CarrierWave image-upload
 gem 'carrierwave', '~> 1.0'
+
 # Compressing and resizing photos
 gem 'mini_magick'
 
 # Storing on Amazon
 gem "fog-aws"
 gem 'fog'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 # Tags in notes
 gem 'acts-as-taggable-on'
@@ -56,8 +62,11 @@ gem 'cancancan'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'chosen-rails'
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'rails_12factor'
+end
 gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.11.2'
 
 # Voting (like / dislike)
 gem 'acts_as_votable', '~> 0.12.0'
@@ -65,6 +74,10 @@ gem 'acts_as_votable', '~> 0.12.0'
 # Facebook
 gem 'omniauth-facebook'
 gem 'thin'
+
+# Google Auth
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-google-oauth2', '0.8.2'
 
 # Mailers
 gem 'mail_form'
@@ -100,3 +113,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# additional gems
+gem "ahoy_matey" # https://github.com/ankane/ahoy
+gem 'exception_notification' # https://github.com/smartinez87/exception_notification

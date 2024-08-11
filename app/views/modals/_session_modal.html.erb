@@ -23,7 +23,7 @@
                   margin-bottom: 0;
                 }
               </style>
-              <%= f.input :message, maxlength: 150, label: 'Profile Message', style: 'margin-bottom: 0px;' %>
+              <%= f.input :about_me, label: 'Profile Message', style: 'margin-bottom: 0px;' %>
               <div class = 'form-btn-container'>
                 <%= f.button :submit, 'Update Message', :class => 'blue-appearance-btn', :style => 'padding: 0; margin-bottom: 10px;' %>
               </div>
@@ -51,6 +51,8 @@
         </button>
 
         <%= link_to 'Sign Out', session_path, method: :delete, class: 'blue-appearance-btn' %>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to 'Delete Account', archived_user_users_path, method: :delete, data: {confirm: "Are you sure, you want to delete your account?"} ,class: 'blue-appearance-btn' %>
       </div>
     </div>
   </div>

@@ -1,0 +1,138 @@
+
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+  <%= render 'partials/navbar' %>
+<% end %>
+
+<div class="container ptb">
+  <div id="show_interview_model"></div>
+  <div class="interview-blog">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="heading-edu about">EdFluencers</h4>
+        <p class="text-edu about">Conversations with thoughtful educational leaders and passionate lifelong learners.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <% if @interviews.present? %>
+        <%- @interviews.each do|interview|%>
+         <div class="col-md-6">
+            <div class="panel-box" onclick='ChangeUrlForEdFluencers("", "<%="ed_fluencers/"+interview.id.to_s+"-"+interview.url.parameterize%>")'>
+             <%= link_to ed_fluencer_path(interview), remote: true, class: "blog-box" do %>
+                   <div class="blog-img">
+                     <%=image_tag interview.image.url, size: "500x250", :class => "img-fluid"%>
+                   </div>
+                   <div class="blog-text">
+                     <h4 class="blog-title">
+                       <%=interview.first_name + " "+ interview.last_name%>
+                       <span class="title"><%= interview.title %></span>
+                     </h4>
+                     <span class="blog-para">
+                       <p class="blog-para" style="display: none;">
+                         <%= interview.content.html_safe if interview.content.present? %>
+                       </p>
+                     </span>
+                   </div>
+             <%end%>
+           </div>
+         </div>
+        <%end%>
+      <%else%>
+        <div class="col-md-6">
+          <div class="panel-box">
+            There is no records found!
+          </div>
+        </div>     
+      <%end%>  
+    </div>
+  </div>
+</div>
+
+<%= render 'partials/footer' %>
+
+<style > 
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+</style>
+
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>

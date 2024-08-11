@@ -1,0 +1,647 @@
+
+<%= render './modals/ed_tools_modal' %>
+
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+
+<div>
+  <div class="pt-5">
+    <div class="row-tool">
+      <div class="row">
+     
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_book">
+                  <%= image_tag "new-book.png", style: 'width:45px;margin-bottom:10px;' %>
+                </button>
+              <% else %>
+                <%= image_tag "new-book.png", style: 'width:45px;margin-bottom:10px;margin-right: 10px;' %>
+              <% end %>
+              <h5 class="heading-learning mb-0 text-black">Books</h5>
+            </div>
+           <% @books.each do |book| %>
+            <div class="card-body-tool">
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                     <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                     <span style="color: black; text-decoration: none; word-break: break-word;"><%= book.addtitle %></span>
+                     </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= book.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(book) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: book), remote: true, method: :delete %> <%= book.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(book) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: book.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= book.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(book) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: book.id), remote: true %>
+                    </div>
+                  </div>
+                  
+                  </div>
+                  <div class="col-12 mt-2">
+                    <%= link_to book.link, comment_section_path(id: book.id), remote: true, class: "card-link"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_article">
+                  <%= image_tag "new-article.png", style: "width:35px;margin-bottom:10px" %><br>
+                </button>
+              <% else %>
+                <%= image_tag "new-article.png", style: "width:35px;margin-bottom:10px;margin-right: 10px;" %><br>
+              <% end %>
+              <h5 class="heading-learning color-green mb-0 text-black">Articles</h5>
+            </div>
+            <% @articles.each do |art| %>
+            <div class="card-body-tool">
+            
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
+                      </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(art) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(art) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: art.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= art.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(art) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: art.id), remote: true %>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <%= link_to art.link, comment_section_path(id: art.id), remote: true, class: "card-link"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_blog">
+                  <%= image_tag "new-blog.png", style: "width:35px;margin-bottom:10px" %><br>
+                </button>
+              <% else %>
+                <%= image_tag "new-blog.png", style: "width:35px;margin-bottom:10px;margin-right: 10px;" %><br>
+              <% end %>
+              <h5 class="heading-learning color-green mb-0 text-black">Blogs</h5>
+            </div>
+            <% @blogs.each do |art| %>
+            <div class="card-body-tool">
+            
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
+
+                      </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(art) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(art) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: art.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= art.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(art) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: art.id), remote: true %>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                        <%= link_to art.link, comment_section_path(id: art.id), remote: true, class: "card-link" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_podcast">
+                 <%= image_tag "new-podcast.png", style: "width:35px;margin-bottom:10px" %><br>
+                </button>
+              <% else %>
+                <%= image_tag "new-podcast.png", style: "width:35px;margin-bottom:10px;margin-right: 10px;" %><br>
+              <% end %>
+              <h5 class="heading-learning color-green mb-0 text-black">Podcasts</h5>
+            </div>
+            <% @podcasts.each do |art| %>
+            <div class="card-body-tool">
+            
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
+                      </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(art) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(art) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: art.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= art.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(art) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: art.id), remote: true %>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                        <%= link_to art.link, comment_section_path(id: art.id), remote: true, class: "card-link" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_course">
+                  <%= image_tag "new-course.png", style: "width:35px;margin-bottom:10px" %><br>
+                </button>
+              <% else %>
+               <%= image_tag "new-course.png", style: "width:35px;margin-bottom:10px;margin-right: 10px;" %><br>
+              <% end %>
+              <h5 class="heading-learning color-green mb-0 text-black">Online Courses</h5>
+            </div>
+            <% @courses.each do |art| %>
+            <div class="card-body-tool">
+            
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
+                      </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(art) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(art) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: art.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= art.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(art) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: art.id), remote: true %>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                        <%= link_to art.link, comment_section_path(id: art.id), remote: true, class: "card-link" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+
+
+        <div class="col-lg-4">
+          <div class="card-tool">
+            <div class="card-header-tool">
+              <% if @user == current_user %>
+                <button type="button " class="btn " data-toggle="modal" data-whatever="@mdo" data-target="#edtoolsModal_documentry">
+                  <%= image_tag "new-documentaries.png", style: "width:35px;margin-bottom:10px" %><br>
+                </button>
+              <% else %>
+                <%= image_tag "new-documentaries.png", style: "width:35px;margin-bottom:10px;margin-right: 10px;" %><br>
+              <% end %>
+              <h5 class="heading-learning color-green mb-0 text-black">Documentaries</h5>
+            </div>
+            <% @documentaries.each do |doc| %>
+            <div class="card-body-tool">
+            
+              <div class="bg-highlight">
+                <div class="row">
+                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                    <div class="d-flex-tool align-items-center">
+                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
+                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= doc.addtitle %></span>
+                      </h6>
+                    </div>
+                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center btn-rating<%= doc.id %> mb-0 mr-3">
+                      <% if current_user_liked_card?(doc) %>
+                        <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: doc), remote: true, method: :delete %> <%= doc.card_likes.count %>
+                      <% else %>
+                        <%= link_to image_tag(current_user_liked_card?(doc) ? 'smallheart.png' : 'smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_ed_path(myedtool_id: doc.id), remote: true, method: :post %>
+                      <% end %>
+                    </div>
+                    <div class="d-flex-tool align-items-center btn-rating comment-icon-ed-tool<%= doc.id %> mb-0 mr-3">
+                      <%= link_to image_tag(current_user_comment_on_card?(doc) ? 'smallmsg.png' : 'smallmsg.png', alt: 'Comment', style: 'height: 20px; width: 20px;'), comment_section_path(id: doc.id), remote: true %>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="col-12 mt-2">
+                        <%= link_to doc.link, comment_section_path(id: doc.id), remote: true, class: "card-link" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div id="card">
+</div>
+
+
+<style>
+
+
+.card-tool {
+  background-color: #F8F9FA;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  /* Adjust width for responsive design */
+  width: 100%;
+  max-width: 350px;
+}
+.card-header-tool {
+  /* Add some padding for better spacing */
+  padding-bottom: 10px;
+}
+.card-body-tool {
+  /* Padding for card content */
+  padding: 10px;
+}
+.bg-highlight {
+  /* Ensuring card background highlights */
+  background-color: #FFFFFF;
+  padding: 10px;
+  border-radius: 8px;
+}
+.heading-learning {
+  font-size: 1.25rem; /* Adjust font size for better readability */
+}
+.text-lorem {
+  font-size: 1rem; /* Ensure text size is readable on all devices */
+}
+@media (max-width: 767px) {
+  .card-tool {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  .heading-learning {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+  .text-lorem {
+    font-size: 0.875rem; /* Adjust font size for smaller screens */
+  }
+}
+
+row-tool {
+  display: flex;
+}
+
+.card-header-tool {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.card-body-tool .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.d-flex-tool {
+  display: flex;
+  align-items: center;
+}
+
+.card-link {
+  color: black;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-body-tool {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.item-link img {
+  width: 16px;
+  height: 16px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+
+.column {
+  float: right;
+  width: 14%;
+
+  /* Should be removed. Only for demonstration */
+}
+
+.bg-highlight {
+  padding: 1px 0 64px 0;
+}
+
+.btn-rating {
+  background: transparent;
+  border: none;
+  padding-right: 5px;
+}
+
+.status-box {
+  background: #fff;
+  width: 90%;
+  margin: 19px auto;
+  border-radius: 5px;
+  border-bottom: 5px solid;
+}
+
+.img-plus {
+  width: 35px;
+  margin-bottom: 25px;
+}
+
+.text-lorem {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px
+}
+
+.border-bottom-red {
+  border-bottom: 5px solid #fb3c44;
+}
+
+.heading-learning {
+  text-transform: uppercase;
+  font-size: 18px;
+  color: red;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.btn-status {
+  color: grey;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.color-orange {
+  color: #f1874b;
+}
+
+.color-green {
+  color: #6fb145;
+}
+
+.img-plus {
+  width: 35px;
+  margin-bottom: 25px;
+}
+
+.color-black {
+  color: grey;
+}
+
+.color-grey {
+  color: #bababa;
+}
+
+.bg-highlight {
+  padding: 1px 0 64px 0;
+}
+
+.status-box {
+  background: #fff;
+  width: 90%;
+  margin: 19px auto;
+  border-radius: 5px;
+  border-bottom: 5px solid;
+}
+
+.border-bottom-orange {
+  border-bottom: 5px solid #f1874b;
+}
+
+.border-bottom-red {
+  border-bottom: 5px solid #fb3c44;
+}
+
+.border-bottom-green {
+  border-bottom: 5px solid #6fb145;
+}
+
+
+
+.btn-rating {
+  background: transparent;
+  border: none;
+}
+
+.btn-red-modal {
+  background: transparent;
+}
+
+.bg-modal-red {
+  background: #fb3c44;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.bg-modal-orange {
+  background: #f1874b;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.bg-modal-green {
+  background: #6fb145;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.col-form-control {
+  border: 1px solid grey;
+  border-radius: 0;
+  padding: 10px;
+}
+
+.col-form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #fb3c44;
+  outline: 0;
+}
+
+.bg-orange {
+  background: #f1874b;
+}
+
+.bg-green {
+  background: #6fb145;
+}
+
+
+.text-black {
+  color: #000;
+}
+
+.modal-size {
+  display: block;
+  margin: auto;
+  width: 40%;
+  padding: 46px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .community-quote {
+    width: 63%;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  .community-quote {
+    width: 68%;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .box {
+    border: 2px solid #8093bb;
+    width: 274px;
+    height: 40px;
+    position: relative;
+    left: 57px;
+  }
+
+  .community-quote {
+    width: 72%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .navbar-nav a {
+    font-size: 12px;
+  }
+
+  .btn-request {
+    width: 63%;
+  }
+
+  .heading-create:after {
+    position: absolute;
+    bottom: 5px;
+    left: 126px;
+  }
+
+  .btn-bottom-request {
+    width: 27%;
+  }
+
+  .bg-shadow {
+    padding: 0px 25px;
+  }
+
+  .box {
+    width: 237px;
+    position: relative;
+    left: 20px;
+  }
+
+  .text-pic-edu {
+    font-size: 22px;
+  }
+
+  .heading-k-12 {
+    padding-top: 45%;
+    margin-left: 121px;
+  }
+
+}
+</style>

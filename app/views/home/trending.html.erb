@@ -1,0 +1,902 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<!-- FontAwesome for social media icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap">
+
+
+
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+   <%= render 'partials/navbar' %>
+<% end %>
+
+<div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+    <%= image_tag 'trending.png', alt: 'Trending', style: 'margin-left: 41%; margin-right: auto; margin-top: 2rem; width: 20%; height: auto;' %>
+</div>
+  
+<%
+  notes_with_tags = Note.includes(:tags)
+  tag_counts = notes_with_tags.flat_map { |note| note.tags.map(&:name) }.each_with_object(Hash.new(0)) do |tag_name, counts|
+    counts[tag_name] += 1 
+  end 
+  top_tags = tag_counts.sort_by { |tag_name, count| -count }.first(8).to_h.keys
+%>
+
+<div class="d-flex justify-content-center mt-7" style="margin-left: 8%;">
+  <% top_tags.each do |tag| %>
+    <button class="btn mx-1" style="border-radius: 140px; border: 2px solid #707070; color: #707070;" data-tag="<%= tag %>" onclick="changeColor(this)"><%= tag %></button>  <% end %>
+</div>
+
+<div id="sss" class="container-fluid">
+  <div class="row">
+  </div>
+</div>
+
+<div id="infinite-scrolling">
+  <%= will_paginate @notes, style: "font-size: 0;" unless @notes.blank? rescue '' %>
+</div>
+
+
+
+
+
+<%= render 'partials/footer' %>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+
+
+
+.hamburger-menu {
+    right: 30px;
+    z-index: 4;
+    margin-right: 18px;
+    margin-top:9px;
+}
+
+.hamburger-menu #menu__toggle {
+opacity: 0;
+position: absolute;
+width: 24px;
+height: 23px;
+}
+
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
+transform: rotate(45deg);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
+top: 0;
+transform: rotate(0);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
+top: 0;
+transform: rotate(90deg);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__box {
+visibility: visible;
+left: auto;
+right: -40px;
+z-index: 99999;
+}
+.hamburger-menu .menu__btn {display: none; right: 0;}
+
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
+transform: rotate(45deg);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
+top: 0;
+transform: rotate(0);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
+top: 0;
+transform: rotate(90deg);
+}
+.hamburger-menu #menu__toggle:checked ~ .menu__box {
+visibility: visible;
+left: auto;
+right: -40px;
+z-index: 99999;
+}
+
+.hamburger-menu .menu__btn {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 34px;
+  left: auto;
+  width: 24px;
+  height: 23px;
+  cursor: pointer;
+  z-index: -1;
+  margin-right: 30px;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+display: block;
+position: absolute;
+width: 100%;
+height: 2px;
+background-color: #616161;
+transition-duration: .25s;
+}
+.menu__btn > span::before {
+content: '';
+top: -8px;
+}
+.menu__btn > span::after {
+content: '';
+top: 8px;
+}
+
+.hamburger-menu #menu__toggle:checked ~ .menu__box {
+visibility: visible;
+left: auto;
+right: -40px;
+z-index: 99999;
+}
+
+
+.menu__box {
+display: block;
+visibility: hidden;
+top: 68px;
+left: -100%;
+margin: 0;
+padding: 7px 0;
+list-style: none;
+background-color: whitesmoke;
+box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+transition-duration: .25s;
+position: absolute;
+height: 98px;
+border-radius: 8px;
+margin-right: 46px;
+}
+.menu__box:before {content: '';height: 20px;width: 20px;background: whitesmoke;position: absolute;z-index: 999;top: -8px;right: 26px;margin: 0 auto;transform: rotate(45deg);}
+.hamburger-menu #menu__toggle:checked ~ .menu__box li {
+padding: 4px 7px;
+}
+
+
+.menu__item {
+color: #302f2fb5;
+text-align: center;
+padding: 0px 6px;
+text-decoration: none;
+font-size: 16px;
+display: table-footer-group;
+text-align: left;
+}
+.menu__item:hover {
+font-size: 16px;
+color: #000;
+text-decoration: none;
+}
+
+@media (min-width: 767px) and (max-width:1200px) {
+.menu__box {
+    top: 34px;
+}
+.navbar {
+    flex-wrap: nowrap !important;
+    padding: 0.2rem 1rem !important;
+}
+.tablate-navbar-container {
+    display: block;
+}
+.hide-in-tablate {
+    display: none !important;
+}
+.tablate-view-header {
+   display: flex;
+    width: 100%;
+}
+
+
+
+.navbar-expand-lg .navbar-collapse.hide-in-tablate-view {
+    display: none !important;
+}
+
+
+
+.tablate-right-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.tablate-view-btns button.btn-login {
+    margin-top: 16px;
+}
+.tablate-right-nav .hamburger-menu {
+    position: absolute;
+    right: 0;
+    top: 15px;
+}
+.hamburger-menu .menu__btn {
+    top: 0px;
+}
+.btn-signup {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+.navbar-nav a {
+    padding: 15px;
+    font-size: 14px !important;
+}
+.navbar-nav .nav-link {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+}
+
+
+.text-red{
+    color: #BC171D;
+  }
+  body {
+      font-family: 'Cako', sans-serif;
+  }
+  .rotated-image {
+      transform: rotate(20deg);
+  }
+  .btn {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 80px;
+      background-color: white;
+      color: #BC171D;
+      text-decoration: none;
+      /* Remove underline from links */
+      transition: background-color 0.3s ease;
+  }
+  .icon-container {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: white;
+      text-align: center;
+      border: 1px solid grey;
+      margin: -10px;
+  }
+  .icon-container i {
+      font-size: 1rem;
+      color: #BC171D;
+      line-height: 40px;
+      /* Center the icon vertically */
+  }
+  .foot-picnotes {
+      padding-left: 30px;
+  }
+  .image-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      /* Space between grid items */
+      transform: translateX(20%);
+      /* Shifts the grid to the right, causing it to cut off */
+      bottom: 0;
+      right: 40px;
+  }
+  .rotated-image {
+      width: 100%;
+      /* Adjust width as needed */
+      height: auto;
+      /* Maintain aspect ratio */
+      transform: rotate(10deg);
+      /* Subtle rotation */
+      opacity: 0.8;
+      margin-bottom: 20px;
+      border-radius: 20px
+          /* Space between images vertically */
+  }
+  .image-grid img:nth-child(3n) {
+      margin-bottom: 0;
+      /* Remove margin-bottom for every third image to prevent extra space */
+  }
+  .bottom-opacity {
+      opacity: 0.5;
+      /* Adjust the opacity value as needed */
+  }
+  .list-unstyled li {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+  }
+  .explore-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+  }
+  .button {
+      background-color: #BC171D;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+  }
+  * {
+      box-sizing: border-box;
+  }
+  .header {
+      text-align: center;
+      padding: 32px;
+  }
+  .row {
+      display: -ms-flexbox;
+      /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap;
+      /* IE10 */
+      flex-wrap: wrap;
+      padding: 0 4px;
+      margin: 45px;
+      font-family: Arial;
+  }
+  /* Create four equal columns that sits next to each other */
+  .column {
+      -ms-flex: 25%;
+      /* IE10 */
+      flex: 25%;
+      max-width: 25%;
+      padding: 0 4px;
+  }
+  .column img {
+      margin-top: 22px;
+      vertical-align: middle;
+      width: 70%;
+      border-radius: 21px;
+  }
+  @media screen and (max-width: 800px) {
+          .column {
+              -ms-flex: 50%;
+              flex: 50%;
+              max-width: 50%;
+          }
+      }
+      /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+          .column {
+              -ms-flex: 100%;
+              flex: 100%;
+              max-width: 100%;
+          }
+      }
+      .card-section {
+          background-color: #BC171D1A;
+      }
+      .image-container {
+          display: flex;
+          margin: 30px;
+          /* Vertically center */
+      }
+      .image-containermyprofile {
+          display: flex;
+          margin: 0px;
+      }
+      .oval-input {
+          border-radius: 50px;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+          width: 100%;
+          max-width: 365px;
+          height: 48px;
+      }
+      .login-button {
+          font-size: 20px;
+          font-family: monospace;
+          text-decoration: none;
+          color: #BC171D;
+          margin-top: 20px;
+          margin-bottom: 0px;
+          margin-left: 10px;
+          margin-right: 10px;
+          word-spacing: -10px;
+      }
+      .logo-container {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+      .container {
+          max-width: 1754px
+      }
+      .sign-up-btn {
+          background-color: #C91A2D;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 50px;
+      }
+      @media (max-width: 767.98px) {
+          .navbar-nav {
+              text-align: center;
+          }
+          .logo-container {
+              position: static;
+              transform: none;
+              margin: 0 auto 10px;
+          }
+          .sign-up-btn {
+              width: 100%;
+              margin-top: 10px;
+          }
+          .oval-input {
+              width: calc(100% - 30px);
+          }
+      }
+      .picnotes-section {
+          width: 733px;
+          height: 602px;
+          position: absolute;
+          top: 180px;
+          left: 100px;
+          gap: 60px;
+          opacity: 1;
+          background-color: #F0F0F0;
+          padding: 60px;
+      }
+      .explore_button {
+          width: 207px;
+          height: 58px;
+          background-color: #BC171D;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          border-radius: 50px;
+          /* This will give you a pill shape */
+          transition: opacity 0.3s ease-in-out;
+          opacity: 1;
+          /* Remove opacity: 0 to make the button visible initially */
+      }
+      .button:hover {
+          opacity: 1;
+      }
+      .button span {
+          margin-right: 10px;
+      }
+      .line {
+          position: absolute;
+          width: 860px;
+          height: 2px;
+          /* Adjust height as needed */
+          top: 1605px;
+          left: 530px;
+          background-color: #BC171D;
+          /* Color of the line */
+          border: none;
+          /* No borders */
+          opacity: 0.08;
+          /* Opacity level (adjust as needed) */
+          transform: rotate(-0deg);
+          /* Angle of rotation (adjust as needed) */
+      }
+      .card-section {
+          height: 764px;
+          width: 100%;
+      }
+      .d-flex {
+          display: flex;
+          align-items: center;
+          /* Align items vertically */
+          padding-top: 20px;
+      }
+      .input-group-text {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          border-radius: 50%;
+          margin-top: 5px;
+      }
+  3:58
+  --------------------------------------------------
+  3:58
+  .btn-custom {
+          background-color: #FFFFFF;
+          /* White background */
+          color: #BC171D;
+          /* Red text color */
+      }
+      .btn-custom:hover {
+          background-color: #BC171D;
+          /* Red background on hover */
+          color: #FFFFFF;
+          /* White text color on hover */
+      }
+      .unlock-container {
+          font-family: "Cako", Arial, sans-serif;
+      }
+      .card-section {
+          font-family: Arial, sans-serif;
+          background-color: #BC171D1A;
+      }
+      .oval-input {
+          border-radius: 50px;
+          padding: 10px 15px;
+          border: 1px solid #ccc;
+          width: 100%;
+          max-width: 365px;
+          height: 48px;
+      }
+      .login-button {
+          font-size: 20px;
+          font-family: monospace;
+          text-decoration: none;
+          color: #BC171D;
+          word-spacing: -10px;
+          margin-top: 20px;
+          margin-bottom: 0px;
+          margin-left: 10px;
+          margin-right: 10px;
+      }
+      .logo-container {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+      .sign-up-btn {
+          background-color: #BC171D;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 50px;
+          height: 50px;
+          margin-top: 12px;
+      }
+      @media (max-width: 767.98px) {
+          .navbar-nav {
+              text-align: center;
+              position: fixed;
+          }
+          .navbar-toggler {
+              margin-left: auto;
+          }
+          .logo-container {
+              position: static;
+              transform: none;
+              margin: 0 auto 10px;
+          }
+          .sign-up-btn {
+              width: 100%;
+              margin-top: 30px;
+          }
+          .oval-input {
+              width: calc(100% - 30px);
+          }
+      }
+      .picnotes-section {
+          width: 733px;
+          height: 602px;
+          position: absolute;
+          top: 180px;
+          left: 100px;
+          gap: 60px;
+          opacity: 1;
+          background-color: #F0F0F0;
+          padding: 60px;
+      }
+      .button {
+          width: 207px;
+          height: 58px;
+          background-color: #FF0000;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          border-radius: 20px;
+          /* This will give you a pill shape */
+          transition: opacity 0.3s ease-in-out;
+          opacity: 1;
+          /* Remove opacity: 0 to make the button visible initially */
+      }
+      .button:hover {
+          opacity: 1;
+      }
+      .button span {
+          margin-right: 10px;
+      }
+      .card-section {
+          height: 764px;
+          width: 100%;
+      }
+      h1 {
+          font-size: 48px;
+          color: #000;
+      }
+      h1 span {
+          color: #E74C3C;
+      }
+      p {
+          font-size: 18px;
+          color: #666;
+          margin-top: -20px;
+      }
+      .explore-button {
+          display: inline-block;
+          padding: 20px;
+          background-color: #BC171D;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 50px;
+          font-size: 18px;
+          width: 207px;
+          height: 58px;
+          text-align: center;
+          padding-bottom: 20px;
+          margin-top: 30px
+      }
+      .explore-button:hover {
+          background-color: #BC171D;
+      }
+      .social-login {
+          margin-top: 40px;
+      }
+      .social-login svg {
+          width: 20px;
+          height: 20px;
+          margin: 0 10px;
+      }
+      .more-button {
+          background-color: #FDCEC8;
+          border-radius: 10px;
+          padding: 5px;
+      }
+      .d-flex {
+          display: flex;
+          align-items: center;
+      }
+      .form-control {
+          padding: 10px;
+          border-radius: 20px;
+          border: 1px solid #ccc;
+          outline: none;
+      }
+      .search-icon {
+          background-color: #BC171D;
+          padding: 5px;
+          border-radius: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 10px;
+      }
+      .search-icon svg {
+          fill: #fff;
+          width: 24px;
+          height: 24px;
+      }
+      body {
+          font-family: "Cako", Arial, sans-serif;
+      }
+      .card-header {
+          padding: 10px;
+          text-align: end;
+          background-color: #B8222E;
+      }
+      .btn-upload {
+          border: none;
+          border-radius: 20px;
+          background-color: #FFFFFF;
+          color: #B8222E;
+      }
+      .custom-card {
+          margin: 30px;
+          border: none;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+          overflow: hidden;
+          padding: 25px;
+          background-color: #fff;
+      }
+      .card-body {
+          padding: 15px;
+          text-align: center;
+          position: relative;
+      }
+      .all-card {
+          background-color: #fde6e900;
+      }
+      .text-card {
+          width: 100%;
+          border: 2px solid #F8D7DA;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          font-family: Arial, sans-serif;
+          color: #000;
+          background-color: #FFF5F5;
+          height: 100%;
+      }
+      .text-card h2 {
+          font-size: 1.25rem;
+          margin: 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #F8D7DA;
+      }
+      .text-card p {
+          margin: 10px 0;
+          line-height: 1.5;
+          border-bottom: 1px solid #F8D7DA;
+          padding-bottom: 10px;
+      }
+      .card-group col-lg-12 {
+          width: 70%;
+          border: 2px solid #F8D7DA;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          font-family: Arial, sans-serif;
+          color: #000;
+          background-color: #BC171D;
+          height: 100%;
+      }
+      .upload-card {
+          border: 2px solid #F8D7DA;
+          border-radius: 12px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          font-family: Arial, sans-serif;
+          color: #000;
+          background-color: #FFF5F5;
+          height: 100%;
+      }
+      .header-container {
+          text-align: center;
+          background-color: #fde6e900;
+          padding: 20px;
+          border-radius: 10px;
+          width: 100%;
+      }
+      .header-container h1 {
+          font-size: 2.5rem;
+          margin: 0;
+          font-family: "Times New Roman", Times, serif;
+          color: #4A4A4A;
+      }
+      .header-container p {
+          margin: 10px 0 0;
+          font-size: 1rem;
+          font-family: Arial, sans-serif;
+          color: #6C757D;
+      }
+      .footer-div {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          background-color: #fde6e900;
+      }
+      .step {
+        text-align: center;
+          max-width: 300px;
+      }
+      .circle {
+          width: 10px;
+          height: 10px;
+          background-color: #BC171D;
+          border-radius: 50%;
+          margin: 0 auto 20px auto;
+      }
+      .step h2 {
+          font-size: 1.5em;
+          color: #000;
+          margin-bottom: 10px;
+      }
+      .step p {
+          color: #333;
+          line-height: 1.5;
+      }
+      .main-heading {
+          font-family: Cako;
+          font-size: 80px;
+          font-weight: 400;
+          line-height: 96.02px;
+          text-align: left;
+      }
+      .fire {
+          width: 27px;
+      }
+      .grid-img {
+          width: 109%;
+          margin-top: -94px;
+      }
+  </style>
+  <script>
+    function changeColor(clickedButton) {
+        var buttons = document.querySelectorAll('.btn');
+        buttons.forEach(function (button) {
+            button.style.color = '#707070';
+            button.style.borderColor = '#707070';
+        });
+        clickedButton.style.color = '#BC171D';
+        clickedButton.style.borderColor = '#BC171D';
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const buttons = document.querySelectorAll("button[data-tag]");
+        
+        if (buttons.length > 0) {
+            buttons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    var tag = this.getAttribute("data-tag").trim();
+                    console.log("Clicked tag:", tag); 
+
+                    fetch(`/notes_by_tag?tag=${encodeURIComponent(tag)}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById("sss").innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching notes:', error));
+                });
+            });
+            buttons[0].click();
+        }
+    });
+
+
+
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

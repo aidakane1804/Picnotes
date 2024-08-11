@@ -1,39 +1,115 @@
 <div class = "modal fade" id = 'editSessionModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editSessionModalLabel' aria-hidden='true'>
   <div class = 'modal-dialog' role = 'document'>
     <div class = 'modal-content'>
-      <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'editSessionModalLabel' style = 'color:white;'> Edit Account </h5>
-        <button type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
-          <span aria-hidden = 'true'> &times; </span>
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel"
+          style="margin-left: 40%; margin-right: auto; font-family:Cako;font-weight:400;font-size:26px;line-height:31.21px;color:#3F3F3F;">Edit Profile</h5>
+        <button style="position: absolute; top: 0px;right: 0px; margin-right: -7px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
         </button>
       </div>
-
       <div>
         <%= simple_form_for @user do |f| %>
-
           <div class = 'modal-body'>
-
-            <div class = 'user-name'>
-              <%= f.input :first_name, label: 'First Name', class: 'half-space' %>
-              <%= f.input :last_name, label: 'Last Name', class: 'half-space' %>
+           <div class="d-flex flex-column align-items-center">
+              <%= f.input :avatar, as: :file, label: false, input_html: { id: 'fileInput', style: 'display: none;', onchange: 'previewAvatar(this);' } %>
+              <%= image_tag(@user.avatar.url || 'myavtar.png', class: 'avatar-image', id: 'avatarPreview', style: 'width: 100px; height: 100px; max-width: 200px; border-radius: 50%; padding-top: 0rem') %>
             </div>
-
-            <%= f.input :email %>
-            <div class = 'user-name'>
-              <%= f.input :password %>
-              <%= f.input :password_confirmation, label: 'Password Confirmation' %>
+        
+            <div style="width: 28px; height: 28px; background-color: white; border-radius: 50%; z-index: 1; margin-left: 10.5rem; margin-top: -0.5rem;">
+              <%= link_to '#' do %>
+                <%= image_tag 'image-upload.png', style: 'width: 18px; height: 18px; margin-left:85px;margin-bottom:10px;', onclick: 'document.getElementById("fileInput").click(); return false;' %>
+              <% end %>
             </div>
-
-            <%= f.file_field :avatar %>
-            <%= f.input :city %>
-
+            <div style="display: flex; justify-content: space-between; margin: 30px;">
+              <div style="flex: 1; margin-right: 15px;">
+                <p style="color: #707070; font-size: 16px; font-family:Aileron;">First Name</p>
+                <%= f.input :first_name, required: true, label: false, class: 'half-space', input_html: { style: 'color: #707070; font-size: 14px;' } %>
+              </div>
+              <div style="flex: 1; margin-left: 15px;">
+                <p style="color: #707070; font-size: 16px;font-family:Aileron;">Last Name</p>
+                <%= f.input :last_name, required: true, label: false, class: 'half-space', input_html: { style: 'color: #707070; font-size: 14px;' } %>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin: 30px;">
+              <div style="flex: 1; margin-right: 15px;">
+                <p style="color: #707070; font-size: 16px;font-family:Aileron;">User name</p>
+                <%= f.input :username, required: true, label: false, class: 'half-space', input_html: { style: 'color: #707070; font-size: 14px;' } %>
+              </div>
+              <div style="flex: 1; margin-left: 15px; position: relative;">
+                <p style="color: #707070; font-size: 16px;font-family:Aileron;">City</p>
+                <%= f.select :nationality,
+                options_for_select([
+                  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", 
+                  "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", 
+                  "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", 
+                  "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", 
+                  "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", 
+                  "Congo, Democratic Republic of the", "Congo, Republic of the", "Costa Rica", "Croatia", "Cuba", 
+                  "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", 
+                  "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", 
+                  "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", 
+                  "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+                  "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", 
+                  "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", 
+                  "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", 
+                  "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", 
+                  "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", 
+                  "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", 
+                  "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", 
+                  "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", 
+                  "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", 
+                  "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", 
+                  "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", 
+                  "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", 
+                  "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", 
+                  "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", 
+                  "Tuvalu", "Uganda", "Ukraine", "U nited Arab Emirates", "United Kingdom", "United States", 
+                  "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", 
+                  "Zambia", "Zimbabwe"
+                ], @user.nationality),
+                  { prompt: "" },
+                  { class: 'form-control', style: 'font-size: 15px; height: 2.3rem; padding: 7px !important; padding-right: 30px; position: relative; z-index: 1;', required: true } %>
+                <%= image_tag 'arrow.png', style: 'width: 15px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 2; pointer-events: none;' %>
+              </div>
+            </div>
+            <div style="margin: 30px;">
+            <p style="font-size: 16px;font-family:Aileron;">Email address</p>
+            <%= f.input :email,required: true, label: false, class: 'half-space' %>
+            </div>
+            <div style="margin: 30px;">
+            <p style="font-size: 16px;font-family:Aileron;">Profile message</p>
+            <%= f.text_area :about_me, required: true, style: 'width: 413px; height: 170px; border-radius: 10px; border: 1px solid #ccc !important;' %>
+            </div>
           </div>
-
-          <div class = 'form-btn-container text-center new-note-btn'>
-            <%= f.button :submit, :class => 'white-btn btn-width' %>
+          <div class="form-group" style="margin-top: 0%; margin-bottom: 30px;">
+            <%= f.button :submit, 'Save', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 200px; height: 40px; margin-left: 30%;color:white !important;' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function kill_model() {
+    window.location.reload();
+  }
+</script>
+
+<style>
+  .simple_form .user-name label {
+    color: #707070;
+    font-size: 14px;
+  }
+  .simple_form .form-control {
+    border-radius: 50px !important;
+    padding: 5px 10px !important;
+  }
+</style>
+
+
+
+
+
+

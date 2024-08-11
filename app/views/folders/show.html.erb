@@ -1,23 +1,21 @@
-<%= render './partials/user_dashboard' %>
-
-<div style = 'text-align: center;'>
-  <p> Folder Name: <strong> <%= @folder.name %> </strong> </p>
-  <%= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
-</div>
+<% if current_user == @user && current_user != nil && @user != nil && current_user.id == @folder.user_id %>
+  <div style='text-align: center;'>
+    <h2> Folder Name: <strong> <%= @folder.name %> </strong></h2>
+    <%= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+  </div>
+<% else %>
+  <div style='text-align: center;'>
+    <h1> Folder Name: <strong> <%= @folder.name %> </strong></h1>
+    <%#= link_to('Delete', folder_path(@folder), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
+  </div>
+<% end %>
 
 <div id='note-content'></div>
 
-<div class = 'flex-center'>
-  <div class = "notes-container" style = 'margin-top: 20px;'>
-    <% @folder.notes.each do |note| %>
-      <div class = 'note-container'>
-        <%= link_to(note_path(note), remote: true) do %>
-        <%= image_tag note.image.url(:thumb) if note.image.present? %>
-        <div class = 'note-container-text'>
-          <p class = "mobile-font note-btn-font"> <%= truncate(note.title, length: 40) %> </p>
-        </div>
-        <% end %>
-      </div>
-    <% end %>
+<div class='flex-center'>
+  <div class="notes-container" style='margin-top: 20px;'>
+    <% @notes.each do |note| %>
+      <%= render partial: 'notes/note_general', locals: {note: note} %>
+  <% end %>
   </div>
 </div>

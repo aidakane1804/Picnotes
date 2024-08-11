@@ -1,62 +1,43 @@
-<% if reference.title.length > 0 %>
-  <% unless reference.file_type.eql?('t') %>
-  <p> Title: <%= reference.title %> </p>
-  <% end %>
+<% if reference.title.length > 0 || reference.image_source.length > 0%>
+  <div style="display:flex; margin-top:10px;align-items: center;">
+        <div style="height: 75px;text-align: center;display: flex;align-items: center; border-radius:5px;">
+        </div>
+      <div style="margin-top:10px;">
+              <% arr = ["v", "p", "t", "s"]
+                arr.each do |f|
+              %>
+                    <% if reference.file_type.eql?(f) && reference.link.eql?("https://") && reference.title.present? %>
+                      <p style="margin-bottom: 6px;"> Title: <%= reference.title %> </p>
+                    <% elsif reference.file_type.eql?(f) && reference.title.present?%>
+                      <p style="margin-bottom: 6px;"> Title: <%= link_to (reference.title), reference.link, style:"color:#BC1D17;", target: :_blank %> </p>
+                    <% end %>
+                    <% if reference.file_type.eql?(f) && reference.image_source.present?%>
+                      <p> <b>Source:</b> <%=  link_to (reference.image_source), reference.link, target: :_blank %> </p>
+                    <% end %>
+              <% end %>
+            <% if reference.author.length > 0 %>
+              <p style="margin-top:3px;margin-bottom:10px;"> Author: <%= reference.author %></p> 
+            <% end %>
+            <br>
+            
+      </div>
+      </div>
 <% end %>
 
-<% if reference.author.length > 0 %>
-  <p> Author: <%= reference.author %> </p>
-<% end %>
-<% if reference.link.length > 8 %>  
-  <p>
-    <%= link_to (reference.link).html_safe, (reference.link).html_safe %>
-  </p>
-<% end %>
-<br>
-<% if current_user %>
-  <% if current_user.username == @note.user.username %>
-  <!-- <button
-    type = 'button'
-    class = 'blue-appearance-btn'
-    data-toggle = 'modal'
-    data-target = '#editReferenceModal'
-    data-whatever = '@mdo'
-    data-dismiss="modal">
-    Edit
-  </button> -->
-  <!-- <p>
-    <%= link_to 'Test', edit_reference_path(reference) %>
-  </p>
-  <button
-    type = 'button'
-    class = 'blue-appearance-btn'
-    data-toggle = 'modal'
-    data-target = '#editReferenceModal'
-    data-whatever = '@mdo'
-    data-dismiss="modal">
-    Edit
-  </button> -->
-  <p>
-    <%= link_to(
-      'Delete',
-      reference_path(reference),
-      data: {confirm: 'Are you sure?'},
-      method: :delete,
-      class: 'blue-appearance-btn'
-    ) %>
-  </p>
-  <% end %>
-<% end %>
-<hr/>
+
+
+
 
 
 <script type="text/javascript">
   var links = $('a:contains(\'https://\')')
   var i;
   for (i = 0; i < links.length; i++) {
-    debugger
     if (links[i].text  == ("https://")) {
       links[i].remove();
     }
   }
 </script>
+
+
+

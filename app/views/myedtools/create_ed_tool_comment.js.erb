@@ -1,0 +1,25 @@
+$("#card").html('<%=j render :partial => "partials/card_comment_like_modal", :locals => { :card => @card , :likes => @likes ,:comments => @comments, :hashtag =>@hashtag}  %>');
+$('#comment-modal<%=@card.id%>').modal('show')
+$('.modal-backdrop.fade.show').first().remove();
+$(".comment-icon-ed-tool<%=@card.id%>").html('<%= link_to   fa_icon('comment') , comment_section_path(id: @card.id), remote: true %>')
+
+//$("#card").html('<%#=j render :partial => "partials/card_comment_like_edtracker_modal", :locals => { :card => @card,:likes => @likes, :comments=> @comments}  %>');
+//$('#comment-modal<%#=@card.id%>').modal('show');
+//$('.modal-backdrop.fade.show').first().remove();
+//$(".comment-icon-ed-tracker<%#=@card.id%>").html('<%#= link_to   fa_icon('comment') , comment_section_edtracker_path(id: @card.id), remote: true %>')
+
+
+
+
+//$(".ed_tool_display_comment<%#=@card_id%>").empty();
+//$(".edtool-comments-m-0<%#@card.id %>").html("<%#=@card.card_comment_likes.count %> Comments")
+<%# image_present  =  @card.card_comment_likes.last.user.avatar? rescue  false %>
+
+//$(".comment-icon-ed-tool<%#=@card.id%>").html('<%#= link_to   fa_icon('comment') , comment_section_path(id: @card.id), remote: true %>')
+
+<%#if image_present%>
+//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+<%#else%>
+//$(".ed_tool_msg_img<%#=@card.id %>").html('<%#= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+<%#end %>
+//$(".ed_tool_display_comment<%#=@card_id%>").html("<%#=@my_ed_tool_comment.body %>");

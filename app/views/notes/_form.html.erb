@@ -1,7 +1,7 @@
 <div class = "creation_form">
 <%= simple_form_for @note do |form| %>
   <%= form.label :title, 'Title (Required)' %>
-  <%= form.input :title, label: false %>
+  <%= form.input :title, label: false, required: true %>
   <div class = 'image-upload-box'>
     <%= form.label :image, 'File Upload' %>
     <div class = 'image-upload text-center'>
@@ -28,15 +28,15 @@
         }
       </script>
     </div>
-    <%= form.label :remote_image_url, 'or Image URL' %>
-    <%= form.input :remote_image_url, label: false %>
-    <p style = 'color: red;'> Must include an image either through uploading or by link </p>
+    <%#= form.label :remote_image_url, 'or Image URL' %>
+    <%#= form.input :remote_image_url, label: false %>
+<!--    <p style = 'color: red;'> Must include an image either through uploading or by link </p>-->
   </div>
 
   <%= form.label :body, 'Notes (Required)' %>
-  <%= form.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters'} %>
+  <%= form.input :body, maxlength: 650, label: false, input_html: { value: 'No more 650 characters', :rows => 7 } %>
   <%= form.label :tag_list, 'Tags' %>
-  <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false %>
+  <%= form.input :tag_list, value: form.object.tag_list.to_s, label: false, required: true %>
   <div class = 'form-btn-container text-center'>
     <%= form.button :submit, :class => 'blue-appearance-btn' %>
   </div>

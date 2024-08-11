@@ -1,0 +1,55 @@
+
+<div class="modal fade" id='card_modal<%= card.id %>' tabindex='-1' role='dialog' aria-labelledby='NoteModalLabel' aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <%if  card.edtracker_type == "I want to learn"%>
+      <div class='modal-header new-modal-header' style="background-color: red">
+        <%elsif card.edtracker_type == "I'm currently learning"%>
+        <div class='modal-header new-modal-header' style="background-color: orange">
+      <%else%>
+        <div class='modal-header new-modal-header' style="background-color: forestgreen">
+    <%end %>
+
+        <h3 class='modal-title' id='NoteModalLabel' style='color: white;'><%= card.edtracker_type %></h3>
+        <button type='button' class='close' data-dismiss='modal' style='color: white' aria-label='Close'>
+          <span aria-hidden='true'> &times; </span>
+        </button>
+
+  </div>
+      <div class='modal-body'>
+        <%= simple_form_for card do |f| %>
+          <div class='modal-body'>
+            <%= f.label :topic, 'Topic (Required)' %>
+            <%= f.input :topic, label: false %>
+            <%= f.label :notes, 'Notes ' %>
+            <%= f.input :notes, label: false %>
+            <%#= f.label :resources, 'Resources (Required)' %>
+            <%#= f.input :resources, label: false %>
+            <%= f.label :link, 'Link ' %>
+            <%= f.input :link, label: false %>
+            <%= f.label :tag_list, 'Hashtags (Required)' %>
+            <%= f.input :tag_list, value: f.object.hashtag.to_s, label: false %>
+            <%= hidden_field_tag "edtracker_type", 'I learned' %>
+          </div>
+          <%if card.user == current_user %>
+            <%if  card.edtracker_type == "I want to learn"%>
+              <div class='form-btn-container text-center new-note-btn' style="background-color: red">
+            <%elsif card.edtracker_type == "I'm currently learning"%>
+              <div class='form-btn-container text-center new-note-btn' style="background-color: orange">
+            <%else%>
+              <div class='form-btn-container text-center new-note-btn' style="background-color: forestgreen">
+            <%end %>
+
+              <%= f.button :submit, 'Submit', class: 'white-btn btn-width', style: 'background-color: red !important; color: white !important;' %>
+          </div>
+            <%end %>
+          </div>
+          </div>
+          </div>
+        <% end %>
+
+        </div>
+        </div>
+        </div>
+  </div>
+</div>

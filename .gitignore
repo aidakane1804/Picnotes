@@ -26,3 +26,6 @@ secrets.yml
 server.csr
 server.key
 server.pass.key
+/.generators
+/.rakeTasks
+/.idea/

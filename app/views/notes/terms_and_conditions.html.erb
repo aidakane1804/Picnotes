@@ -1,14 +1,6 @@
-<div class='profile-dashboard'>
-  <br>
-  <div class="profile-menu">
-    <p> <%= link_to 'About Us', about_us_notes_path, class: " profile-links set-font-family" %> </p>
-    <p> <%= link_to 'Community Guidelines', community_guideline_notes_path, class: " profile-links set-font-family" %>
-    <p> <%= link_to 'Terms and Conditions', terms_and_conditions_notes_path, class: "current profile-links set-font-family" %>
-    <p> <%= link_to 'Contact Us', contact_us_notes_path, class: " profile-links set-font-family" %>
-  </div>
-</div>
+<div class="terms_and_conditions_page">
 <div id="sig" style="min-width: 300px; max-width:800px; min-height: 82px; line-height: 18px; margin: auto; padding: 50px; margin-top:50px; font-family: 'Lucida ', Verdana, Arial, Sans-Serif; font-size: 12px; color: #333333;">
-  <span style="font-size:20px; color: black; text-decoration: none;"><strong>Picnotes Learnings Ltd. <br><br>Terms of Use</strong></span></br>
+  <span style="font-size:20px; color: black; text-decoration: none;"><h1><strong>Picnotes Learnings Ltd. <br><br>Terms of Use</strong></h1></span></br>
   <p><span style="font-size:14px;">Effective as of December 13, 2018</span></p>
   </br>
   <p style="font-family: 'Lucida ', Verdana, Arial, Sans-Serif; font-size: 12px; color: #333333; text-decoration: none;">Welcome
@@ -287,3 +279,89 @@
   communications shall be valid.
 
 </div>
+
+</div>
+
+<style>
+    .about_us_notes_path{
+        background: white !important;
+        float: none !important;
+    }
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+</style>
