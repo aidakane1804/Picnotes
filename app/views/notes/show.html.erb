@@ -37,174 +37,697 @@
   })
 
 </script>
-
+<div id="note-show"></div>
 <h1 style = 'display:none;'><%= title @note.title+" | Picnotes | Knowledge Sharing Hub for Lifelong Learners" %></h1>
 <% note = @note %>
-<div >
+<div id="show-model" role="dialog" >
   <div style = "display: flex; align-items: center;">
     <div class = 'note-arrow'>
       <% if @previous_note %>
-        <%= link_to fa_icon('arrow-left 3x'), note_path(@previous_note.title_slug)%>
+        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note'), note_path(@previous_note.title_slug)%>
       <% end %>
     </div>
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg custom-modal-width" style="max-height: 895px; overflow-y: auto;"">
       <div class="modal-content">
-        <div class="modal-header">
-          <div class = 'modal-header-information'>
-            <div class = 'modal-header-information-title'>
-              <h1 class = 'modal-title' id = 'noteModalLabel'> <%= note.title %></h1>
-              <div style = 'display: flex;'>
-                <button id = 'hamburger-menu' class = 'blue-appearance-btn-in-model'>
-                    <%= fa_icon('bars') %>
-                </button>
-                <div id = 'note_menu' class = 'hidden'>
-                  <p> <%= link_to 'Share', "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px; font-size: 18px;'%> </p>
-                  <p> <button class = 'blue-appearance-btn'> Report </button> </p>
-                  <p> <%= render '/components/follow_button', :user => note.user %> </p>
-                </div>
-                <p>
-                  <% if user_signed_in? && can?(:favorite, @note)%>
-                    <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-                      <span class = 'favorites-count'> <%= link_to fa_icon('heart-o'), favorite_notes_path(note_id: @note), remote:true, method: :post %> <%= @note.favorites.count %> </span>
-                    <% else %>
-                      <span class = 'favorites-count'> <%= link_to fa_icon('heart'), favorite_note_path(@note), remote:true, method: :delete %> <%= @note.favorites.count %> </span>
-                    <% end %>
-                  <% else %>
-                    <%= fa_icon('heart') %> <%= @note.favorites.count %>
-                  <% end %> &nbsp;
-
-                      <% if current_user%>
-                      <%#= link_to(user_chats_path(current_user, :other_user =>note.user), method: :post) do %>
-                    <i class='fa fa-envelope' style='font-size:19px;color:grey'></i>
-
-                      <%# end %>
-                  <% end %>
-
-
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class = 'modal-header-information-content'>
-              <div style="padding-left: 10px">
-                <% if current_user == note.user %>
-                <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %> </p>
-                <% else %>
-                <p> <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), class: 'blue-appearance-btn' %> </p>
-                <% end %>
-                <p>
-                  <%#= note.created_at.strftime("%m/%d/%Y") %>
-                  <% if user_signed_in? && can?(:crud, @note) %>
-                    <div style = 'display: flex'>
-                      <button
-                        type = 'button'
-                        class = 'blue-appearance-btn'
-                        data-toggle = 'modal'
-                        data-target = '#editNoteModal'
-                        data-whatever = '@mdo'
-                        data-dismiss="modal">
-                        Edit
-                      </button>
-                      <%= link_to('Delete', note_path(@note), class: 'blue-appearance-btn', data: {confirm: 'Are you sure?'}, method: :delete) %>
-                    </div>
-                  <% end %>
-                </p>
-              </div>
+        <div class="modal-header-note">
+            <div class="note-avatar">
               <% if note.user.avatar? %>
-                <%= image_tag note.user.avatar.url(:thumb), class: 'note-avatar-image' %>
+                <%= image_tag note.user.avatar.url(:thumb), class: 'avatar' %>
               <% else %>
-                <%= image_tag 'avatar.png', class: 'note-avatar-image' %>
+                <%= image_tag 'avatar.png', class: 'avatar' %>
               <% end %>
+              <div class="note-author">
+                <h4>
+                  <% if current_user == note.user %>
+                    <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %></p>
+                  <% else %>
+                    <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), class: 'blue-appearance-btn' %></p>
+                    <p> <%= render '/components/follow_button_details_page', :user => note.user %> </p>
+                  <% end %>
+                </h4>
+                <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn btn-add-folder" data-toggle="modal" data-target="#add_note_to_folder" style="margin-top: -11px;">
+                  <%= image_tag "folder-add-2.png", style: "margin-right:10px; height: 25px; width: 25px;" %> Add to Folder
+              </button>            
+              <% if user_signed_in? && can?(:favorite, @note)%>
+              <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+              <span class="favorites-count" style="padding: 0px;">
+                <%= link_to fa_icon('heart'), favorite_notes_path(note_id: @note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'display: inline-block; margin-bottom: 5px;' %>
+              </span>
+              
+                        
+              <% else %>
+                <span id="favorites-count-<%= @note.id %>" class="favorites-count">
+                  <%= link_to fa_icon('heart'), favorite_note_path(@note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                </span>
+              <% end %>
+            <% else %>
+            <%= fa_icon('heart', class: 'grey_love love_iconss') %> 
+
+            <% end %>
+              <%= link_to "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px;' do %>
+                <%= image_tag "red-folder.png", style: "border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-top: -4%;margin-right: 5px;" %>
+              <% end %>            
+              <%= link_to comment_section_note_path(id: note.id), remote: true, data: { toggle: "modal", target: "#commentModal", previous_modal: "#test-modal" } do %>
+                <%= fa_icon 'comment', class: "comment-icon-ed-tracker#{note.id}", style: "color: #BC171D; border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right: 20px; font-size: 1.5em;" %>
+              <% end %>             
             </div>
           </div>
-          <button type="button" onclick='ChangeUrl("", window.old_url)' class="close" id='close-btn' data-dismiss="modal">&times;</button>
-        </div>
 
 
-          <div class = "note-page-content">
-            <div class = 'note-mobile-image'>
+          <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
               <% if @note.image.present? %>
-              <%= image_tag @note.image.url(:large), class:"note-image" %>
+                <%= image_tag @note.image.url(:large), class: "note-image" %>
               <% end %>
             </div>
-
-              <div class = 'note-page-text'>
-                <div class = 'tab'>
-                  <button class = 'tablinks' onclick = 'openTab(event, "information")' id = 'defaultOpen'> Notes </button>
-                  <button class = 'tablinks' onclick = 'openTab(event, "references")'> Resources </button>
-                  <button class = 'tablinks' onclick = 'openTab(event, "similar")'> Related </button>
-                </div>
-
-                <div class = 'notes-overflow'>
-                  <div id = 'information' class = 'tabcontent'>
-                    <h2 class = "note-page-content-text"> <%= @note.body %> </h2>
-                    <p> <%= render @note.tags %></p>
-                    <% if user_signed_in? %>
-                      <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
-                        <p> Add Picnotes to Folder </p>
-                        <%= form_tag(note_addfolder_path(@note)) do %>
-                          <%= select_tag 'folder_id', options_for_select(@folders.collect{ |folder| [folder.name, folder.id] }) %>
-                          <%=  submit_tag 'Add to Folder', class: 'blue-appearance-btn' %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-
-                  <div id = 'similar' class = 'tabcontent'>
-                    <div class = 'flex-center'>
-                      <div class = "similar-notes-container" style = 'margin-top: 20px;'>
-                        <% @similar.where(archived: false).each do |note| %>
-                          <div class = 'similar-note-container' onclick='ChangeUrl("", "<%="notes/"+note.title_slug%>")'>
-
-                            <%= link_to(note_path(note), remote: true) do %>
-                            <%= image_tag note.image.url(:thumb), class:'similar-note-image' if note.image.present? %>
-                            <div class = 'note-container-text'>
-                              <p class = "mobile-font note-btn-font" style = 'font-size: 10px;'> <%= truncate(note.title, length: 25) %> </p>
-                            </div>
-                            <% end %>
-                          </div>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-
-                  <%= render './references/create_reference' %>
-                </div>
-
-                <div class = 'like-container'>
+            <div class="col-md-6">
+              <h1 class="note-title"><%= note.title %></h1>
+              <p class="note-content"><%= note.body %></p>
+              <div class="tags">
+                <% note.tags.each do |tag| %>
+                  <span style="color: #BC171D; background-color: white;><%= tag.name %></span>
+                <% end %>
+              </div>
+              <div class="actions">
+                <div class="like-container" style="width: 400px; height: 48px;">
                   <% if user_signed_in? && can?(:like, @note) && can?(:dislike, @note) %>
-
-                    <%= link_to like_note_path(@note), remote: true, class: 'white-btn like-tab like-color', method: :put do %>
-                      <%= fa_icon('check') %> <span class = 'upvotes-count'><%= @note.get_upvotes.size %> </span>
-                    <% end %>
-
-                    <%= link_to dislike_note_path(@note), remote: true, class: 'white-btn like-tab dislike-color', method: :put do %>
-                      <%= fa_icon('times') %> <span class = 'downvotes-count'><%= @note.get_downvotes.size %> </span>
-                    <% end %>
-                  <% else %>
-                    <div class = 'like-tab like-color'>
-                      <%= fa_icon('check') %> <%= @note.get_upvotes.size %>
+                    <div class='like-tab like-color-note'>
+                      <%= link_to like_note_path(@note), remote: true, class: 'white-btn like-tab', method: :put do %>
+                        <%= image_tag "like-green.png" %> <span class='upvotes-count', style="color: #17BC6D;"><%= @note.get_upvotes.size %> </span>
+                      <% end %>
                     </div>
-                    <div class = 'like-tab dislike-color'>
-                      <%= fa_icon('times') %> <%= @note.get_downvotes.size %>
+                    <div class='like-tab dislike-color-note'>
+                      <%= link_to dislike_note_path(@note), remote: true, class: 'white-btn like-tab', method: :put do %>
+                        <%= image_tag "dislike-red.png" %> <span class='downvotes-count', style="color: #BC171D;"><%= @note.get_downvotes.size %> </span>
+                      <% end %>
+                    </div>
+
+                  <% else %>
+                    <div class='like-tab like-color-note'>
+                      <%= image_tag "like-green.png" %> <span style="color: #17BC6D;">  <%= @note.get_upvotes.size %></span>
+                    </div>
+                    <div class='like-tab dislike-color-note'>
+                      <%= image_tag "dislike-red.png" %>  <span style="color: #BC171D;"> <%= @note.get_downvotes.size %></span>
                     </div>
                   <% end %>
                 </div>
               </div>
+              <div class="resources">
+                <div style="display:flex;">
+                  <h2 style="margin-right:60px;">Resources</h2>
+                  <div class='reference-tabs'>
+                    <button class='reference-tab-note' onclick='openReference("Textbooks")'> Book: <%= @textbooks.count %> </button>
+                    <button class='reference-tab-note' onclick='openReference("Videos")'> Video: <%= @videos.count %> </button>
+                    <button class='reference-tab-note' onclick='openReference("Papers")'> Article: <%= @papers.count %> </button>
+                    <button class='reference-tab-note' onclick='openReference("Sources")'> Image: <%= @sources.count %> </button>
+                  </div>
+                </div>
+                                
+                <div id='Textbooks' class='click-reference' style='display: block;'>
+                  <%= render @textbooks %>
+                </div>
+                                
+                <div id='Videos' class='click-reference' style='display: none;'>
+                  <%= render @videos %>
+                </div>
+                                
+                <div id='Papers' class='click-reference' style='display: none;'>
+                  <%= render @papers %>
+                </div>
+                                
+                <div id='Sources' class='click-reference' style='display: none;'>
+                  <%= render @sources %>
+                </div>
+              </div>
+            </div>
           </div>
-
+    
+          <div>
+            <div class="row" style="margin-top:30px;">
+              <h4 style="font-family: Cako; font-size: 30px; font-weight: 400; line-height: 36.01px; margin-bottom:30px;">
+                Related Picnotes
+              </h4>
+              <% if @similar.count>0 %>
+                <% @similar.where(archived: false).each_slice(3) do |notes_row| %>
+                  <% notes_row.each do |note| %>
+                    <div class="col-lg-4 mb-4">
+                      <figure class="card-picknote card-product image-containermyprofile">
+                        <div class="image-containermyprofile onclick='ChangeUrl("", "<%="notes/"+note.title_slug%>")'">
+                          <%= link_to(note_path(note)) do %>
+                            <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                            <div class="hover-overlay">
+                              <div class="overlay-content">
+                                <p class="hover-text"><%= note.title %></p>
+                                <div class="background-overlay"></div>
+                              </div>
+                              <div class="icons">
+                                <span style="float: right">
+                                  <% if user_signed_in? %>
+                                    <% unless current_user.favorited_notes.exists?(id: note.id) %>
+                                    <span id='favorites-count-<%= note.id %>'>
+                                    <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconsss', method: :post %>
+                                  </span>
+                                  <% else %>
+                                      <span id='favorites-count-<%= note.id %>'>
+                                        <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconsss', method: :delete %>
+                                      </span>
+                                      <% end %>
+                                    <span id='add-to-folder-<%= note.id %>'>
+                                      <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 35px; height: 35px;background-color: #BC171D ; border-radius:50%; margin-bottom:19%;' %>
+                                      <% end %>
+                                    </span>
+                                  <% end %>
+                                  <% unless user_signed_in? %>
+                                    <span id='add-to-folder-
+                                      <% note.id %>'>
+                                      <%= link_to new_user_path do %>
+                                        <span id='favorites-count-<%= note.id %>'>
+                                          <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
+                                        </span>                  
+                                      <% end %>
+                                    
+                    
+                                    </span>
+                                    <span id='add-to-folder-
+                                  <% note.id %>'>
+                                    <%= link_to new_user_path do %>
+                                      <%= image_tag 'folder-add.png', style: 'width: 35px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
+                                    <% end %>
+                                
+                                  <% end %>
+                                </span>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                      </figure>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>  
+        </div>
       </div>
     </div>
     <div class = 'note-arrow'>
       <% if @next_note %>
-        <%= link_to fa_icon('arrow-right 3x'), note_path(@next_note.title_slug) %>
+        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note'), note_path(@next_note.title_slug) %>
         <% end %>
+    </div>
+  </div> 
+</div>
+
+<div class="modal fade" id="add_note_to_folder" tabindex="-1" role="dialog" aria-labelledby="add_note_to_folder" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add_note_to_folder" style="margin-left: 20%; font-family:Cako;font-size:26px;line-height:31.21px;weight:400">Add Picnotes to Folder</h5>
+        <button style="position: absolute; top: 0px;right: 0px; margin-right: -7px;" style="float: right" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:20px !important; display: none;">
+        <%= form_tag(note_addfolder_path(note), remote: true, id: "add_picnote_to_folder_form") do %>
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; margin-left:25%;">
+              <%= link_to '#', class: 'btn btn-link', data: { toggle: 'modal', target: '#newFolderModal' } do %>
+                <%= image_tag 'new-folder.png', alt: 'New Folder', style: 'margin-right: 2px; width:20px; height:20px;' %>
+                <span style="color:#BC171D;">Create new folder</span>
+              <% end %>
+            </div>
+            <%= select_tag :folder_id, options_for_select(@folders.collect { |folder| [folder.name, folder.id] }), style: 'width: 100%; padding: 10px; border-radius: 69px;', multiple: false %>
+          </div>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= submit_tag 'Add to Folder', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 75%; height: 40px; margin-left: 15%;color:white !important;background-color: #BC171D !important; border-radius: 20px;' %>
+          </div>
+        <% end %>
+      </div>
+      <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+        <%= image_tag 'empty-board.png', style: 'width: 20%;margin-bottom:30px;' %>
+      </div>
+      <p class="empty" style="justify-content: center !important; display: flex;">You have not created any folder yet.</p>
+      <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes empty" data-toggle="modal" data-target="#newFolderModal">Create New Folder</button>
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Create New Folder Modal -->
+<div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="newFolderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 450px; height: 200px; background-color: white; border-radius: 15px;">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left: 25%; margin-right: auto; margin-top: 0rem;font-family:Cako;font-size:26px;line-height:31.21px;weight:400">Create New Folder</h5>
+        <button style="position: absolute; top: 0px;right: 0px; margin-right: -55px; margin-top:-33px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div>
+        <%= simple_form_for Folder.new, remote: true, id: "new_folder_form" do |form| %>
+          <div class="modal-body">
+            <%= form.label :name, "Name" %>
+            <%= form.input :name, label: false %>
+          </div>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= form.button :submit, 'Save', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 200px; height: 40px; margin-left: 20%;color:white !important;background-color: #BC171D !important; border-radius: 20px; ' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render './modals/edit_note_modal' %>
+<%= render './modals/edit_note_reference_modal' %>
+
+
+
 <script>
-  document.getElementById("defaultOpen").click();
+  function kill_model() {
+    window.history.back();
+  }
+
 </script>
+<style>
+.modal-content {
+  padding: 20px;
+  padding-left:50px;
+  padding-right:50px;
+}
+.mid-picnotes{
+  color: white !important;
+  width: 250px;
+  margin-left: 70px;
+  background-color: #BC171D;
+  border-radius: 50px;
+}
+.custom-modal-width {
+  max-width: 80%;
+}
+.image-containermyprofile {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-picknote {
+    width: 330px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    height: 268px;
+    margin-left: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .hover-text {
+  margin-right: 1rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+
+}
+
+.image-containermyprofile {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 1;
+}
+
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+  align-items: flex-end;
+}
+.overlay-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  z-index: -1; /* ensures the background is behind the content */
+}
+
+
+  .icons {
+    display: flex;
+    gap: 10px;
+  }
+  .image-containermyprofile img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .image-containermyprofile:hover img {
+    transform: scale(1.1);
+  }
+
+.reference-tabs {
+  display: flex;
+  gap:5px;
+}
+.reference-tab-note {
+    flex-basis: 33%;
+    background-color: white;
+    /* border: 119px; */
+    /* border-bottom: thick #8b9dc3 solid; */
+    border-color: gray;
+    border-width: 1px;
+    border-radius: 54px;
+    margin-bottom: -4px;
+    height: 39px;
+    width: 40px;
+}
+.reference-tab {
+  border-radius: 20px; // Make the buttons oval
+  padding: 5px 15px; // Adjust padding as needed
+  font-size: 14px; // Adjust font size as needed
+}
+
+.reference-tab.Add {
+  background-color: #BC171D; // Use the preferred color
+  color: white;
+  height: 35px;
+}
+.modal-header-note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.note-avatar .avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.note-author {
+  margin-top: 20px;
+}
+.note-author h4 {
+  margin: 0;
+}
+
+.note-image {
+  width: 100%;
+  height: auto;
+}
+
+.note-title {
+  font-size: 40px;
+  margin-top: 0;
+  font-family:Cako;
+  font-weight:400;
+  line-height:48.01px;
+}
+
+.note-content {
+  margin-top: 5px;
+}
+
+.tags {
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tags span {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.actions .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-like {
+  background-color: green;
+  color: white;
+}
+
+.btn-dislike {
+  background-color: red;
+  color: white;
+}
+
+.btn-add-folder {
+  background-color: #BC171D !important;
+  color: white !important;
+  border-radius: 40px;
+
+}
+
+.resources {
+  margin-top: 30px;
+}
+
+.resources h2 {
+  margin-bottom: 20px;
+}
+
+.resource-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resource-form select,
+.resource-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(33.333% - 10px);
+}
+
+.resource-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #BC171D;
+  color: white;
+  cursor: pointer;
+}
+
+.like-container {
+  display: flex;
+  margin-top: 20px;
+  width:50%
+}
+
+.like-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+.like-color-note {
+  background-color: #17BC6D1A;
+  color: white;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.dislike-color-note {
+  background-color: #BC171D1A;
+  color: white;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.resources {
+  font-family: 'Cako', sans-serif;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  # max-width: 645px;
+  margin: auto;
+  margin-top:30px;
+  height:200px;
+  width: 530px;
+}
+
+.resources h2 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.add-button {
+  background-color:#BC171D;
+  color: white;
+  width: 88px;
+  height: 32px;
+    border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.counter-button {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  width: 88px;
+  height: 32px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: default;
+}
+
+.resource-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  width: 100%;
+ 
+}
+
+.input-group label {
+  display: block;
+}
+
+.input-group input,
+.input-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius:20px ! important;
+  width: 100%;
+  font-size: 16px;
+}
+
+.create-reference-button {
+  background-color: #e60000;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+.create-reference-button:hover {
+  font-weight: bold;
+  font-size: medium;
+}
+
+.input-group input::placeholder,
+.input-group select::placeholder {
+  color: #ccc;
+}
+
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    openReference("Textbooks");
+  });
+
+  function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+  }
+
+  function openReference(tab){
+    var i;
+    var x = document.getElementsByClassName('click-reference');
+    var buttons = document.getElementsByClassName('reference-tab-note');
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = 'none';
+      x[i].style.border = 'thick #FFF solid';
+    }
+    for (i = 0; i < buttons.length; i++) {
+      buttons[i].style.border = 'thin gray solid';
+      buttons[i].style.color = 'gray';
+
+    }
+    document.getElementById(tab).style.display = 'block';
+    document.querySelector(`button[onclick='openReference("${tab}")']`).style.border = 'thin #BC171D solid';
+    document.querySelector(`button[onclick='openReference("${tab}")']`).style.color = '#BC171D';
+
+  }
+  
+</script>
+
+        
+
+
+
+

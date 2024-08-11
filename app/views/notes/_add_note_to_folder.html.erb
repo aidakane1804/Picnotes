@@ -1,25 +1,83 @@
-
-<div class="modal fade " id='add_note_to_folder' tabindex='-1' role='dialog' aria-labelledby='add_note_to_folder' aria-hidden='true'>
-  <div class='modal-dialog' role='document'>
-    <div class='modal-content'>
-      <div class='modal-header new-modal-header'>
-        <h5 class='modal-title' id='add_note_to_folder' style='color: white;'> Add Picnotes to Folder </h5>
-        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-          <span aria-hidden='true'> &times; </span>
+<!-- Add Picnotes to Folder Modal -->
+<div class="modal fade" id="add_note_to_folder" tabindex="-1" role="dialog" aria-labelledby="add_note_to_folder" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 450px; height: 200px; background-color: white; border-radius: 15px;">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="add_note_to_folder_title" style="margin-left: 24%; margin-right: auto; margin-top: 0rem;">Add Picnotes to Folder</h5>
+        <button style="margin-top: -33px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
         </button>
       </div>
-
-      <div class='modal-body'>
-        <% if user_signed_in? %>
-          <div class = 'text-center margin-top-20 margin-bottom-20' style = 'border-top: thin #bbb solid;'>
-            <p></p>
-            <%= form_tag(note_addfolder_path(note)) do %>
-              <%= select_tag 'folder_id', options_for_select(folders.collect{ |folder| [folder.name, folder.id] }) %>
-              <%=  submit_tag 'Add to Folder', class: 'blue-appearance-btn' %>
+      <div class="modal-body" style="padding:20px !important;">
+        <%= form_tag(note_addfolder_path(@note)) do %>
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; margin-left:25%;">
+            <%= link_to '#', class: 'btn btn-link', data: { toggle: 'modal', target: '#newFolderModal' } do %>
+              <%= image_tag 'new-folder.png', alt: 'New Folder', style: 'margin-right: 2px; width:20px; height:20px;' %>
+              <span style="color:#BC171D;">Create new folder</span>
             <% end %>
+            </div>
+            <%= select_tag :folder_id, options_for_select(@folders.collect { |folder| [folder.name, folder.id] }), style: 'width: 100%; padding: 10px; border-radius: 69px;' %>
+          </div>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= submit_tag 'Add to Folder', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 75%; height: 40px; margin-left: 15%;color:white !important; background-color: #BC171D !important;' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Create New Folder Modal -->
+<div class="modal fade" id="newFolderModal" tabindex="-1" role="dialog" aria-labelledby="newFolderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width: 450px; height: 200px; background-color: white; border-radius: 15px;">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left: 33%; margin-right: auto; margin-top: 0rem;">Create New Folder</h5>
+        <button style="margin-top: -50px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div>
+        <%= simple_form_for Folder.new do |form| %>
+          <div class="modal-body">
+            <%= form.label :name, "Name" %>
+            <%= form.input :name, label: false %>
+          </div>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= form.button :submit, 'Save', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 200px; height: 40px; margin-left: 30%;color:white !important;background-color: #BC171D !important;' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  $('#newFolderModal').on('show.bs.modal', function () {
+    $('#add_note_to_folder').modal('hide');
+  });
+
+  $('#newFolderModal').on('hidden.bs.modal', function () {
+    $('#add_note_to_folder').modal('show');
+  });
+});
+
+function kill_model() {
+    window.location.reload();
+  }
+</script>

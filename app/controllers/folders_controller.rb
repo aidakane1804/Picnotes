@@ -1,4 +1,5 @@
 class FoldersController < ApplicationController
+  before_action :authenticate_user!
   def index
     if params[:user_id]
       # if params[:user_id] != current_user.id.to_s
@@ -38,24 +39,28 @@ class FoldersController < ApplicationController
     @user = current_user
     @folder = Folder.new
   end
-
   def create
     @user = current_user
-    @folder = Folder.new folder_params
+    @folder = Folder.new(folder_params)
     @folder.user = @user
-
-    if @folder.save
-      redirect_to folders_path
-    else
-      render :new
+  
+    respond_to do |format|
+      if @folder.save
+        format.html { redirect_to feed_index_path }
+        format.js { render 'create_success', locals: { folder: @folder } }
+      else
+        format.html { render :new }
+        format.js { render 'create_failure', locals: { errors: @folder.errors.full_messages } }
+      end
     end
   end
+  
 
   def destroy
 
     @folder = Folder.find(params[:id])
     @folder.destroy
-    redirect_to folders_path
+    redirect_to feed_index_path
   end
 
   private

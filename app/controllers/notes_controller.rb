@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:index, :show, :new, :create, :upvote, :community_guideline, :migrate_notes, :tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder, :for_schools]
+  before_action :authorize_user!, only: [:add_picnotes_to_folder]
+  before_action :authorize_user!, except: [:index, :trending, :show,:create_comment, :comment_section_note, :comment_delete,:explore, :new, :create, :upvote, :community_guideline, :migrate_notes, :tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder, :for_schools]
 
   def empty
   end
@@ -25,9 +26,16 @@ class NotesController < ApplicationController
         #   @count = @count + 1
         #   if @count < 15
         #     my_array.push favorite.title_slug
-        #   end
+        #   end1
         # end
         # session[:picnotes] = my_array
+
+        search_notes_and_users(params[:search])
+        logger.debug "Users Found: #{@users.inspect}"
+        respond_to do |format|
+          format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+          format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+        end
       end
       @searchresult = params[:search]
     else
@@ -35,13 +43,79 @@ class NotesController < ApplicationController
       @notesTagged = []
       @tagged = []
       @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      Rails.logger.debug "Request format: #{request.format.symbol}"
       respond_to do |format|
         format.html
         format.js
       end
     end
-    my_array = []
-    session[:picnotes] = my_array
+  end
+
+  def comment_section_note
+    @note = Note.find_by_id(params[:id])
+    @comments = @note.card_comment_likes.count
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def comment_delete
+    @note = Note.find(params[:note_id])
+    card_comment = CardCommentLike.find(params[:id])
+    
+    if card_comment.user == current_user || @note.user == current_user
+      card_comment.destroy
+      @comments = @note.card_comment_likes.count
+      respond_to do |format|
+        format.js
+      end
+    else
+      redirect_to root_path, alert: "You are not authorized to delete this comment"
+    end
+  end
+  def card_comment_likes
+    note = Note.find(params[:note_id])
+    CardCommentLike.create(note: note, user: current_user)
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def create_comment
+    @note = Note.find_by_id(params[:id])
+    if !params["card_comment"].empty? && @note
+    @note_comment = CardCommentLike.new(note_id: @note.id, body: params["card_comment"], user_id: current_user.id)
+    @note_comment.save
+    end
+    @comments = @note.card_comment_likes.count
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
+  def card_liked
+    @note = Note.find(params[:note_id])
+    @selected_note = params[:note_id]
+    card_like = @note.card_likes.where(user: current_user).last
+    unless card_like.present?
+      CardLike.create(note: @note, user: current_user)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
+  def card_liked_destroy
+    @note = Note.find(params[:note_id])
+    card_like = @note.card_likes.where(user: current_user).last
+    if card_like.present?
+      card_like.destroy
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   def show
@@ -87,35 +161,55 @@ class NotesController < ApplicationController
     end
   end
 
-  # def show
-  #   @note = Note.find params[:id]
-  #   @boards = Board.where(user: current_user)
-  #   @board = Board.find_by_id(params[:board_id])
-  #   respond_to do |format|
-  #     format.js
-  #     format.html
-  #   end
-  # end
-
   def new
     @user = current_user
     @note = Note.new
   end
 
-  def create
-    @note = Note.new note_params
-    @note.user = current_user
-    if @note.save
-      @noted = Note.find(@note.id)
-      @noted.update_column(:title_slug, @noted.title.parameterize + "-#{@noted.id}" )
-      flash[:notice] = "Note Saved"
-      redirect_to new_note_reference_path(@note)
-    else
-      flash[:notice] = "Error"
-      render :new
-    end
+  def home_pagination
+    
   end
 
+  def explore
+    default_meta_tags
+    if params[:search].present?
+      @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
+      @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+      @tagged = @notesTagged.pluck(:id)
+      @notes = Note.where("title ILIKE ?", "%#{params[:search]}%").where.not(id: @tagged)
+  
+      respond_to do |format|
+        format.html { render partial: 'searching_result', locals: { search_results: @notes } }
+        format.js { render partial: 'searching_result', locals: { search_results: @notes } }
+      end
+    else
+      @notes = Note.order(id: :desc).all
+      @notesTagged = []
+      @tagged = []
+      Rails.logger.debug "Request format: #{request.format.symbol}"
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+  end
+  
+ 
+  def create
+    @note = Note.new(note_params)
+    @note.user = current_user  # Assuming you have a method to get the current_user
+  
+    if @note.save
+      @note.update_column(:title_slug, @note.title.parameterize + "-#{@note.id}" )
+      flash[:notice] = "Note Saved"
+       redirect_to new_note_reference_path(@note)
+      # redirect_to feed_index_path(@note)
+
+    else
+      flash.now[:alert] = @note.errors.full_messages.to_sentence
+    end
+  end
+  
   def edit
     @user = current_user
   end
@@ -126,6 +220,7 @@ class NotesController < ApplicationController
     else
       render :edit
     end
+  
   end
 
   def terms_and_conditions
@@ -143,6 +238,20 @@ class NotesController < ApplicationController
 
   def about_us
     about_us_meta_tags
+    if params[:search].present?
+      search_notes_and_users(params[:search])
+      respond_to do |format|
+        format.html do
+          render partial: 'searching_result', locals: { search_results: @users }
+        end
+        format.js do
+          render partial: 'searching_result', locals: { search_results: @users }
+        end
+      end
+    else
+      # Handle the case where there is no search parameter
+      @notes = Note.all
+    end
   end
 
   def tl
@@ -224,7 +333,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    redirect_to notes_path
+    redirect_to feed_index_path
   end
 
   def upvote
@@ -246,21 +355,44 @@ class NotesController < ApplicationController
   end
 
   def addfolder
+    if params[:folder_id].blank?
+      flash[:alert] = "Please select a folder."
+      redirect_to request.referer
+      return
+    end
     @note = Note.find params[:note_id]
     @folder = Folder.find params[:folder_id]
     is_folder_contain_note = @note.folders.include?(@folder)
     @note.folders.push(@folder) unless is_folder_contain_note
-    redirect_to note_path(@note)
+    respond_to do |format|
+      format.html { redirect_to feed_index_path }
+      format.js { render 'create_success', locals: { folder: @folder, note: @note } }
+
+    end
   end
 
   def add_note_to_folder
+    @note = Note.find_by(id: params[:note_id])
+    if @note.nil?
+      flash[:alert] = "Note not found"
+      redirect_to some_path # Redirect to an appropriate path or render an error view
+      return
+    end
     @folders = Folder.where(user: current_user)
-    @note = Note.find(params[:note_id])
+    respond_to do |format|
+      format.js
+      format.html { render partial: 'add_note_to_folder' }
+    end
+  end
+  
+  
+  def add_picnotes_to_folder
+    @note = Note.find(params[:id])
+    @folders = Folder.all
     respond_to do |format|
       format.js
     end
   end
-
   private
 
   def is_number? string
@@ -284,6 +416,13 @@ class NotesController < ApplicationController
       flash[:alert] = "Access Denied!"
       redirect_to root_path
     end
+  end
+
+  def search_notes_and_users(query)
+    @notesTagged = Note.tagged_with(query, wild: true, any: true)
+    @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{query}%")
+    @tagged = @notesTagged.pluck(:id)
+    @notes = Note.where("title ILIKE ?", "%#{query}%").where.not(id: @tagged)
   end
 
 end

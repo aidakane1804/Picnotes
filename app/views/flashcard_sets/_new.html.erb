@@ -1,0 +1,434 @@
+<%= form_with(model: @flashcard_set, local: true, id: 'flashcard-form') do
+  |form| %> <% if @flashcard_set.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@flashcard_set.errors.count, "error") %> prohibited this
+      flashcard set from being saved:
+    </h2>
+    <ul>
+      <% @flashcard_set.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <div class="field">
+    <%= form.label :title, "Title Name" %>
+    <div class="input-button-container">
+      <%= form.text_field :title, class: "form-control-flashcard", required: true %>
+      <%= button_tag type: 'button', class: 'cancel-button', style: 'text-decoration: none !important;', onclick: "window.location='#{feed_index_path}'" do %>
+        Cancel
+      <% end %>
+  
+      <div class="input-button-container" style=""><%= form.submit "Save",class: 'save-button' %></div>
+    </div>
+   
+  </div>
+  
+  <div>
+    <div class="flashcard-fields-new" id="flashcards-container">
+      <span class="flashcard-label-left">Front</span>
+      <% if @flashcard_set.flashcard.present? %> <%
+      @flashcard_set.flashcard.each_with_index do |(key, flashcard), index| %>
+      <div class="flashcard-fields" id="flashcard_<%= index %>">
+        <label for="flashcard_<%= index %>_question"></label>
+        <input
+          type="text"
+          name="flashcard_set[flashcard][<%= index %>][question]"
+          id="flashcard_<%= index %>_question"
+          value="<%= flashcard[:question] %>"
+          autocomplete="off"
+        />
+  
+        <label for="flashcard_<%= index %>_answer"></label>
+        <input
+          type="text"
+          name="flashcard_set[flashcard][<%= index %>][answer]"
+          id="flashcard_<%= index %>_answer"
+          value="<%= flashcard[:answer] %>"
+          autocomplete="off"
+        />
+      </div>
+      <% end %> <% else %>
+  
+      <span class="flashcard-label-right">Back</span>
+      <div class="flashcard-fields" id="flashcard_0">
+        <div class="flashcard-container">
+          <div class="flashcard">
+            <label for="flashcard_0_question"></label>
+            <textarea
+              name="flashcard_set[flashcard][0][question]"
+              id="flashcard_0_question"
+              rows="4" 
+              cols="50" 
+              autocomplete="off"
+              style="width: 100%; padding: 0.5rem; border-radius: 4px; border: none;
+              background-color: #21C6B3;
+              height: 100%;
+              outline: none;
+              color: white;
+              font-size: 25px;"
+            ></textarea>
+          </div>
+          <div class="flashcard" style="background-color: #bc171d">
+            <label for="flashcard_0_answer" style="color: white;"></label>
+            <textarea
+              name="flashcard_set[flashcard][0][answer]"
+              id="flashcard_0_answer"
+              rows="4"
+              cols="50" 
+              style="background-color: #bc171d; color: white; width: 100%; padding: 0.5rem; border-radius: 4px; border: none;
+              height: 100%;
+              outline: none;
+              color: white;
+              font-size: 25px;"
+              autocomplete="off"
+            ></textarea>
+          </div>
+        </div>
+        
+      </div>
+  
+      <div></div>
+  
+      <% end %>
+    </div>
+  
+    <div id="flashcard-template" style="display: none" class="template">
+      <div class="flashcard-fields" id="flashcard_<%= 'TEMPLATE_INDEX' %>">
+        <div class="flashcard-container">
+          <div class="flashcard">
+            <label for="flashcard_<%= 'TEMPLATE_INDEX' %>_question"></label>
+            <textarea
+              name="flashcard_set[flashcard][<%= 'TEMPLATE_INDEX' %>][question]"
+              id="flashcard_<%= 'TEMPLATE_INDEX' %>_question"
+              rows="4" 
+              cols="50" 
+              autocomplete="off"
+              style="width: 100%; padding: 0.5rem; border: none;
+              background-color: #21C6B3;
+              height: 100%;
+              border-radius: 4px;
+              outline: none;
+              color: white;
+              font-size: 25px;"
+            ></textarea>
+          </div>
+          <div class="flashcard" style="background-color: #bc171d">
+            <label for="flashcard_<%= 'TEMPLATE_INDEX' %>_answer" style="color: white;"></label>
+            <textarea
+              name="flashcard_set[flashcard][<%= 'TEMPLATE_INDEX' %>][answer]"
+              id="flashcard_<%= 'TEMPLATE_INDEX' %>_answer"
+              rows="4" 
+              cols="50" 
+              style="background-color: #bc171d; color: white; width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; border: none;
+              height: 100%;
+              outline: none;
+              color: white;
+              font-size: 25px; "
+              autocomplete="off"
+            ></textarea>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="add-new-button">
+      <div class="button-container">
+        <button type="button" id="add-card">+ Add New Card</button>
+      </div>
+      <div class="button-container">
+        <button type="button" id="remove-card">- Remove Card</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="actions"></div>
+  <% end %>
+  
+  <script>
+    $(document).ready(function () {
+      let flashcardCount = $("#flashcards-container .flashcard-fields").length;
+  
+      function updateIndices() {
+        $("#flashcards-container .flashcard-fields").each(function (index) {
+          $(this).attr("id", "flashcard_" + index);
+          $(this)
+            .find('input[name*="[question]"]')
+            .attr("name", "flashcard_set[flashcard][" + index + "][question]");
+          $(this)
+            .find('input[name*="[answer]"]')
+            .attr("name", "flashcard_set[flashcard][" + index + "][answer]");
+        });
+      }
+  
+      $("#add-card").on("click", function () {
+        flashcardCount++;
+        let newFields = $("#flashcard-template")
+          .html()
+          .replace(/TEMPLATE_INDEX/g, flashcardCount);
+        $("#flashcards-container").append(newFields);
+        updateIndices();
+      });
+  
+      $("#remove-card").on("click", function () {
+        let lastFlashcard = $("#flashcards-container .flashcard-fields").last();
+        if (lastFlashcard.length) {
+          lastFlashcard.remove();
+          flashcardCount--;
+          updateIndices();
+        }
+      });
+  
+      $("#flashcard-form").on("submit", function () {
+        $(this).find(".template").remove();
+      });
+  
+      updateIndices();
+    });
+  </script>
+  
+  <style>
+
+  .form-control-flashcard{
+    width:50%;
+    border-radius: 20px !important;
+  }
+    #remove-card {
+      border: none;
+      width: 100%;
+      background-color: white; /* Sets the background color to white */
+      color: #bc171d; /* Sets the text color */
+      padding: 10px 20px; /* Adds padding inside the button */
+      font-size: 16px; /* Sets the font size */
+      border-radius: 5px; /* Rounds the corners of the button */
+      cursor: pointer; /* Changes the cursor to a pointer on hover */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    }
+    .add-new-button {
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .button-container {
+      width: 100%;
+      margin-top: 0.5%;
+      display: flex;
+      justify-content: center; /* Centers the button horizontally */
+    }
+  
+    #add-card {
+      border: none;
+      width: 100%;
+      background-color: white; /* Sets the background color to white */
+      color: #bc171d; /* Sets the text color */
+      padding: 10px 20px; /* Adds padding inside the button */
+      font-size: 16px; /* Sets the font size */
+      border-radius: 5px; /* Rounds the corners of the button */
+      cursor: pointer; /* Changes the cursor to a pointer on hover */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+    }
+    .answer {
+      background-color: #bc171d;
+    }
+    .flashcard-label-left {
+      color: #707070;
+      font-weight: 600;
+      margin-bottom: 5px;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+    .flashcard-label-right {
+      margin-top: -2%;
+      color: #707070;
+      font-weight: 600;
+      text-align: right;
+      display: block;
+      width: 160%;
+      display: flex;
+      justify-content: center;
+    }
+    .field {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  
+    .field label {
+      margin-top: 1%;
+      color: #707070;
+      display: block;
+      font-weight: 400;
+      margin-bottom: 10px; /* Increase margin-bottom to shift the label down */
+      text-align: left;
+    }
+  
+    .input-button-container {
+      display: flex;
+      align-items: center;
+    }
+  
+    .field input[type="text"] {
+      flex-grow: 0; /* Allow the input field to grow and fill available space */
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin-right: 10px; /* Space between the input and the button */
+      width: 50%;
+    }
+  
+    .cancel-button {
+      padding: 10px 20px;
+      border: 2px solid red; /* Red border */
+      border-radius: 25px; /* Increased border radius */
+      background-color: transparent;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      text-decoration: none !important;
+    }
+  
+    .save-button {
+      margin-left: 5%;
+      padding: 7px 20px;
+      border: 2px solid red; /* Red border */
+      border-radius: 25px; /* Increased border radius */
+      background-color: transparent;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .flashcard-fields-new {
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+  
+    .flashcard-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  
+    .flashcard {
+      margin-top: 2%;
+      background: #21c6b3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 45%;
+      box-sizing: border-box;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .flashcard label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  
+    .flashcard input[type="text"] {
+      color: white;
+      background: #21c6b3;
+      border: none;
+      height: 100%;
+      margin-bottom: 5%;
+      width: 100%;
+      font-size: 25px;
+      outline: none; /* Removes the default focus outline */
+      box-shadow: none; /* Removes any box-shadow applied on focus */
+    }
+  
+    .add-card-new {
+      text-align: center;
+      margin-top: 20px;
+    }
+  
+    .add-new-card {
+      background-color: transparent;
+      color: red;
+      border: 2px solid red;
+      border-radius: 12px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+  
+    .add-new-card:hover {
+      background-color: red;
+      color: white;
+    }
+  
+    /* Ensure responsiveness */
+    @media (max-width: 768px) {
+      .flashcard-container {
+        flex-direction: column;
+      }
+  
+      .flashcard {
+        min-width: 100%;
+      }
+  
+      .flashcard input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+      }
+  
+      .add-new-card {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .flashcard input[type="text"] {
+        font-size: 12px;
+        padding: 6px;
+      }
+  
+      .add-new-card {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+  
+    /* Ensure responsiveness */
+    @media (max-width: 768px) {
+      .field input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+      }
+  
+      .cancel-button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .field input[type="text"] {
+        font-size: 12px;
+        padding: 6px;
+      }
+  
+      .cancel-button {
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+  

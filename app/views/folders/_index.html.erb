@@ -1,0 +1,273 @@
+<% if @user == current_user %>
+  <%= render './modals/new_folder_modal' %>
+<% else %>
+  <%= render './modals/new_folder_modal' %>
+<% end %>
+
+<% if @folders.count > 0 %>
+
+  <div>
+    <% if @user == current_user %>
+      <button class=" add-picnotes btn btn-custom btn-block custom-btn-sm" id="newFolderModal" data-bs-toggle="modal" data-bs-target="#newFolderModal" style="display:flex;margin-bottom:20px; justify-content:center;margin-top:20px; width: 20%">Create New Folder</button>
+
+      
+      <div class="notes-container-grid">
+        <% if @folders.count > 0 %>
+          <div class="folder-container-grid row">
+
+            <% @folders.each do |folder| %>
+            <div class="folder-container col-lg-3">
+              <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
+                <%= link_to(folder_path(folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'blue-appearance-btn delete-btn') do %>
+                  <%= image_tag('deleteIcon.png', alt: 'Delete', class: 'delete-icon') %>
+                <% end %>
+                <div class="folder-title-container">
+                  <h1 class="mobile-font note-btn-font title">
+                    <%= truncate(folder.name, length: 40) %>
+                  </h1>
+                </div>
+              </div>
+              <div class="folder-content" style="margin-bottom: 200px;">
+                <%= link_to(folder_path(folder, user_id: @user)) do %>
+                  <div class="grid-folder mb-1" style="margin-right: 17%; margin-left: -8%;">
+                    <% folder.notes.where(archived: false).each_with_index do |note, i| %>
+                      <% if i < 6 %>
+                        <div class='board-test-image'>
+                          <% if note.image.url.length > 0 %>
+                            <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                          <% else %>
+                            <%= image_tag 'empty.png', class: 'image-size' %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+    <% else %>
+
+
+      <div class="notes-container-grid">
+        <% if @folders.count > 0 %>
+           <div class="folder-container-grid row">
+
+            <% @folders.each do |folder| %>
+            <div class="folder-container col-lg-3">
+              <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
+              </div>
+              <div class="folder-content" style="margin-bottom: 200px;">
+                <%= link_to(folder_path(folder, user_id: @user)) do %>
+                    <h1 class="mobile-font note-btn-font title" style="display: flex;">
+              <%= truncate(folder.name, length: 40) %>
+            </h1>
+                  <div class="grid-folder mb-1" style="margin-right: 0%; margin-left: 0%; margin-top: 6%">
+                    <% folder.notes.where(archived: false).each_with_index do |note, i| %>
+                      <% if i < 6 %>
+                        <div class='board-test-image'>
+                          <% if note.image.url.length > 0 %>
+                            <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                          <% else %>
+                            <%= image_tag 'empty.png', class: 'image-size' %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+
+  </div>
+<% else %>
+  <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+    <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
+  </div>
+  <p style="justify-content: center !important; display: flex;">You have not created any folder yet.</p ><span style="justify-content: center !important; display: flex;">See how to create a folder.</span>
+  <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes" id="newFolderModal" data-bs-toggle="modal" data-bs-target="#newFolderModal" >Create New Folder</button>
+
+<% end %>
+
+
+<style>
+  /* Custom button styles */
+.btn-custom {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* Responsive button width */
+@media (min-width: 576px) { /* Extra small devices (phones, 576px and up) */
+  .btn-custom {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) { /* Small devices (tablets, 768px and up) */
+  .btn-custom {
+    width: 40%;
+  }
+}
+
+@media (min-width: 992px) { /* Medium devices (desktops, 992px and up) */
+  .btn-custom {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1200px) { /* Large devices (large desktops, 1200px and up) */
+  .btn-custom {
+    width: 20%;
+  }
+}
+
+  .folder-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd; /* Optional, for visual debugging */
+  padding: 10px;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  flex-shrink: 0;
+}
+
+.delete-icon {
+  width: 24px; /* Adjust the size as needed */
+}
+
+.folder-title-container {
+  /* flex-grow: 1;
+  padding-left: 10px; */
+}
+
+.grid-folder {
+  margin-right: 8%;
+    margin-top: 20%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.board-test-image {
+  border: 1px solid #ddd; /* Optional, for visual debugging */
+  padding: 5px; /* Adjust as needed */
+}
+
+.image-size {
+  width: 100%; /* Ensure images are responsive */
+}
+
+@media (max-width: 992px) {
+  .grid-folder {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .grid-folder {
+    grid-template-columns: 1fr;
+  }
+}
+
+.add-picnotes {
+  display: flex;
+  height: 40px;
+  width: 15%;
+  margin-left:auto;
+  margin-right:20px;
+  color: white !important;
+}
+.mid-picnotes{
+    display: flex;
+    height: 40px;
+    width: 20%;
+    justify-content: center !important;
+    margin-left: 40%;
+    margin-top: 10px;
+    color: white !important;
+
+  }
+
+.note-container-text-fold{
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2em;
+    height: 2.4em;
+    color: #666;
+    display: flex;
+    width: 70%;
+}
+.folder-container-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: 100% ;
+}
+
+.col-lg-3{
+      max-width: 24% !important;
+}
+
+.folder-container{
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    width: 296px;
+    position: relative;
+    height: 244px;
+}
+
+
+.title {
+    font-family: Cako, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.grid-folder{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.board-test-image img{
+    width: 100%;
+    border-radius: 5px;
+
+}
+</style>
+

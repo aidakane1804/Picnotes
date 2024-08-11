@@ -1,0 +1,26 @@
+<div class='flex-center'>
+  <div class="notes-container" style='margin-top: 20px;'>
+    <% if @followers.present? %>
+      <% @followers.each do |user| %>
+        <div class='text-center' style='border: 1px solid #e0e0e0; border-radius: 10px; padding: 10px; margin-bottom:10px;margin-right: 10px;height:200px; width:195px;'>
+          <%= link_to user_path(user) do %>
+            <% if user.avatar? %>
+              <%= image_tag user.avatar.url(:thumb), class: 'follow-image', style: 'border-radius: 50%; width: 80px; height: 80px;' %>
+            <% else %>
+              <%= image_tag 'myavtar.png', style: 'border-radius: 50%; width: 80px; height: 80px;', class: 'follow-image' %>
+            <% end %>
+            <div class='note-container-text' style='text-align: center !important;'>
+              <h1 class='mobile-font note-btn-font' style='font-family: Aileron; font-size: 14px; font-weight: 600; line-height: 16.8px text-align: center;'> 
+                <%= user.first_name %> <%= user.last_name %> 
+              </h1>
+              <h2 class='mobile-font note-btn-font' style='font-family: Aileron; font-size: 14px; font-weight: 400; line-height: 16.8px text-align: center;'> Picnotes: <%= user.notes.count %> </h2>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No followers found.</p>
+    <% end %>
+  </div>
+</div>
+

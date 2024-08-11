@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_07_141928) do
+ActiveRecord::Schema.define(version: 2024_08_05_073635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,8 +91,10 @@ ActiveRecord::Schema.define(version: 2022_11_07_141928) do
     t.string "title"
     t.text "body"
     t.bigint "user_id"
+    t.bigint "note_id"
     t.index ["edtracker_id"], name: "index_card_comment_likes_on_edtracker_id"
     t.index ["myedtool_id"], name: "index_card_comment_likes_on_myedtool_id"
+    t.index ["note_id"], name: "index_card_comment_likes_on_note_id"
     t.index ["user_id"], name: "index_card_comment_likes_on_user_id"
   end
 
@@ -170,6 +172,24 @@ ActiveRecord::Schema.define(version: 2022_11_07_141928) do
     t.datetime "updated_at", null: false
     t.index ["favorited_type", "favorited_id"], name: "index_favorites_on_favorited_type_and_favorited_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "flashcard_sets", force: :cascade do |t|
+    t.string "title"
+    t.text "flashcard"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_flashcard_sets_on_user_id"
+  end
+
+  create_table "flashcards", force: :cascade do |t|
+    t.string "title"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "flashcards", default: "{}"
+    t.index ["user_id"], name: "index_flashcards_on_user_id"
   end
 
   create_table "folders", force: :cascade do |t|
@@ -333,11 +353,14 @@ ActiveRecord::Schema.define(version: 2022_11_07_141928) do
 
   add_foreign_key "card_comment_likes", "edtrackers"
   add_foreign_key "card_comment_likes", "myedtools"
+  add_foreign_key "card_comment_likes", "notes"
   add_foreign_key "card_comment_likes", "users"
   add_foreign_key "dislikes", "notes"
   add_foreign_key "dislikes", "users"
   add_foreign_key "edtrackers", "users"
   add_foreign_key "favorites", "users"
+  add_foreign_key "flashcard_sets", "users"
+  add_foreign_key "flashcards", "users"
   add_foreign_key "likes", "notes"
   add_foreign_key "likes", "users"
   add_foreign_key "myedtools", "users"

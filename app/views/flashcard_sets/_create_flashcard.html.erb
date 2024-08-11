@@ -1,0 +1,491 @@
+<% if @flashcard_sets.count > 0 %>
+  <div>
+    <% if @user == current_user %>
+      <button class="add-picnotes btn btn-custom btn-block custom-btn-sm" id="add-flashcard-button" style="display:flex;margin-bottom:20px; justify-content:center;margin-top:20px; width: 20%">Add New Flashcard</button>
+      
+      <div class="notes-container-grid">
+        <div class="folder-container-grid row">
+          <% @flashcard_sets.each do |flashcard_set| %>
+            <div class="folder-container col-lg-3">
+              <div style=" width: 6%;cursor: pointer;">
+                <%= link_to(flashcard_set_path(flashcard_set), method: :delete, data: { confirm: 'Are you sure?' }, class: 'blue-appearance-btn') do %>
+                  <%= image_tag('deleteIcon.png', alt: 'Delete', style: 'margin-left: 200px;') %>
+                <% end %>
+              </div>
+              <div style="padding: 0px;">
+                <div class="left-align">
+                  <h1 class="mobile-font note-btn-font title">
+                    <%= truncate(flashcard_set.title, length: 40) %>
+                  </h1>
+                </div>
+              </div>
+              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link' do %>
+
+              <div class="grid-folder">
+                <% flashcard_set.flashcard.each_with_index do |(key, flashcard), index| %>
+                  <% if index < 6 %>
+                    <main class="container container-flashcard" style="width: 93%; margin-top: 0%; height: 113%;">
+                      <div id="styled-card" class="styled-card">
+                        <section class="card-content" style="background-color: #00B9CF;">
+                          <div class='board-test-image' style="height: 100%;">
+                            <p id="description" class="styled-description">
+                              <%= flashcard[:question] %>
+                            </p>
+                          </div>
+                        </section>
+                      </div>
+                      <section class="card-bar red-bar" style="width: 80%;"></section>
+                      <section class="card-bar blue-bar" style="width: 83%;"></section>
+                    </main>
+                  <% end %>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="notes-container-grid">
+        <div class="folder-container-grid row">
+          <% @flashcard_sets.each do |flashcard_set| %>
+            <div class="folder-container col-lg-3">
+
+              <div style="padding: 0px;">
+                <div class="left-align">
+                  <h1 class="mobile-font note-btn-font title">
+                    <%= truncate(flashcard_set.title, length: 40) %>
+                  </h1>
+                </div>
+              </div>
+              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link' do %>
+
+              <div class="grid-folder">
+                <% flashcard_set.flashcard.each_with_index do |(key, flashcard), index| %>
+                  <% if index < 6 %>
+                    <main class="container container-flashcard" style="width: 93%; margin-top: 0%; height: 113%;">
+                      <div id="styled-card" class="styled-card">
+                        <section class="card-content" style="background-color: #00B9CF;">
+                          <div class='board-test-image' style="height: 100%;">
+                            <p id="description" class="styled-description">
+                              <%= flashcard[:question] %>
+                            </p>
+                          </div>
+                        </section>
+                      </div>
+                      <section class="card-bar red-bar" style="width: 80%;"></section>
+                      <section class="card-bar blue-bar" style="width: 83%;"></section>
+                    </main>
+                  <% end %>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+    <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
+  </div>
+  <p style="justify-content: center !important; display: flex;">You have not created any flashcard yet.</p>
+  <span style="justify-content: center !important; display: flex;">See how to create a picnotes.</span>
+  <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes" id="add-flashcard-button">Add New Flashcard</button>
+<% end %>
+
+
+<style>
+
+.btn-custom {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* Responsive button width */
+@media (min-width: 576px) { /* Extra small devices (phones, 576px and up) */
+  .btn-custom {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) { /* Small devices (tablets, 768px and up) */
+  .btn-custom {
+    width: 40%;
+  }
+}
+
+@media (min-width: 992px) { /* Medium devices (desktops, 992px and up) */
+  .btn-custom {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1200px) { /* Large devices (large desktops, 1200px and up) */
+  .btn-custom {
+    width: 20%;
+  }
+}
+.left-align {
+  text-align: left;
+  padding-left: 0; /* Remove padding if you want the content flush with the left edge */
+  margin-left: 0; /* Ensure no margin is causing extra space on the left */
+}
+
+@media (max-width: 768px) {
+  .left-align {
+    padding-left: 0; /* Remove padding for smaller screens as well */
+  }
+}
+
+.flashcard-set-link {
+  text-decoration: none !important; /* Removes underline */
+  color: inherit; /* Optional: keeps the text color consistent with parent or specified color */
+}
+
+
+
+.container-flashcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.styled-card {
+  position: relative;
+  width: 18rem; /* Tailwind w-72 */
+  height: 10rem; /* Tailwind h-40 */
+  background-color: rgba(45, 212, 191, 0.3); /* Tailwind bg-teal-300/30 */
+  border-radius: 0.75rem; /* Tailwind rounded-xl */
+  overflow: hidden;
+  margin-bottom: 1rem; /* Add margin between cards */
+}
+
+@media (max-width: 768px) { /* Tablets and smaller screens */
+  .styled-card {
+    width: 16rem; /* Adjusted width for tablets */
+    height: 9rem; /* Adjusted height for tablets */
+  }
+}
+
+@media (max-width: 640px) { /* Small screens (phones in portrait mode) */
+  .styled-card {
+    width: 14rem; /* Adjusted width for small screens */
+    height: 8rem; /* Adjusted height for small screens */
+  }
+}
+
+@media (max-width: 480px) { /* Extra small screens (phones in landscape mode) */
+  .styled-card {
+    width: 12rem; /* Further adjusted width for very small screens */
+    height: 7rem; /* Further adjusted height for very small screens */
+  }
+}
+
+.card-content {
+  padding: 0.75rem; /* Tailwind p-3 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box; 
+  overflow: scroll; /* Hide overflow by default */
+  text-align: center; /* Center text alignment */
+}
+
+.styled-description {
+  text-decoration: none !important; /* Ensure no underline */
+  color: white; /* Text color */
+  font-weight: 600; /* Font weight */
+  text-align: center; /* Center-align text */
+  margin: 0; /* Optional: Remove default margins if needed */
+  display: block; /* Ensure block-level element for alignment */
+}
+
+#description.styled-description {
+  text-decoration: none !important; /* Ensure no underline */
+  color: white; /* Ensure color */
+  font-weight: 600; /* Ensure font weight */
+}
+
+#description.styled-description:hover {
+  text-decoration: none !important; /* Ensure no underline on hover */
+}
+
+
+.card-bar {
+  position: absolute;
+  width: 87%;
+  height: 0.5rem; /* Tailwind h-2 */
+  bottom: 0;
+  border-radius: 0.75rem; /* Tailwind rounded-xl */
+}
+
+.red-bar {
+  background-color: wheat; /* Tailwind bg-red-300/30 */
+  bottom: 0.5rem;
+}
+
+.blue-bar {
+  background-color: rgba(206, 114, 231, 0.3); /* Tailwind bg-blue-300/30 */
+  bottom: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .styled-card {
+    width: 15rem; /* Adjust width for smaller screens */
+    height: 8rem; /* Adjust height for smaller screens */
+  }
+  
+  .card-content {
+    padding: 0.5rem; /* Reduce padding */
+  }
+  
+  .styled-description {
+    font-size: 0.875rem; /* Reduce font size */
+  }
+  
+  .card-bar {
+    height: 0.375rem; /* Reduce bar height */
+  }
+}
+
+@media (max-width: 480px) {
+  .styled-card {
+    width: 12rem; /* Further adjust width for very small screens */
+    height: 6rem; /* Further adjust height for very small screens */
+  }
+  
+  .card-content {
+    padding: 0.25rem; /* Further reduce padding */
+  }
+  
+  .styled-description {
+    font-size: 0.75rem; /* Further reduce font size */
+  }
+  
+  .card-bar {
+    height: 0.25rem; /* Further reduce bar height */
+  }
+}
+
+.folder-container-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: 100%;
+}
+
+.col-lg-3 {
+  max-width: 24% !important;
+}
+
+.folder-container {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%; /* Adjust width for responsiveness */
+  position: relative;
+  height: auto; /* Adjust height to content */
+  overflow: hidden; /* Ensure overflow handling */
+}
+@media (max-width: 992px) {
+  .col-lg-3 {
+    max-width: 50% !important; /* Adjust width for tablets and smaller devices */
+  }
+}
+
+@media (max-width: 768px) {
+  .col-lg-3 {
+    max-width: 100% !important; /* Full width for smaller screens */
+  }
+}
+
+.grid-folder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Responsive styles for flashcards */
+@media (max-width: 768px) {
+  .container-flashcard {
+    width: 100%; /* Adjust width for smaller screens */
+  }
+
+  .styled-card {
+    width: 100%; /* Full width for smaller screens */
+    height: auto; /* Adjust height */
+  }
+}
+
+.title {
+  font-family: Cako, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-align: right;
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 576px) {
+  .title {
+    font-size: 16px; /* Smaller font size for very small screens */
+  }
+}
+.grid-folder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 1200px) {
+  .styled-card {
+    max-width: 16rem; /* Adjust width for larger tablets */
+  }
+}
+
+@media (max-width: 992px) {
+  .styled-card {
+    max-width: 14rem; /* Adjust width for medium devices */
+  }
+}
+
+@media (max-width: 768px) {
+  .styled-card {
+    max-width: 12rem; /* Adjust width for smaller tablets */
+  }
+}
+
+@media (max-width: 576px) {
+  .styled-card {
+    max-width: 10rem; /* Adjust width for mobile devices */
+  }
+}
+
+.add-picnotes {
+  display: flex;
+  height: 40px;
+  width: 15%;
+  margin-left:auto;
+  margin-right:20px;
+  color: white !important;
+}
+.mid-picnotes{
+    display: flex;
+    height: 40px;
+    width: 20%;
+    justify-content: center !important;
+    margin-left: 40%;
+    margin-top: 10px;
+    color: white !important;
+
+  }
+.note-container-text-fold{
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2em;
+    height: 2.4em;
+    color: #666;
+    display: flex;
+    width: 70%;
+}
+.folder-container-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: 100% ;
+}
+
+.col-lg-3{
+      max-width: 24% !important;
+}
+
+.folder-container{
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    width: 296px;
+    position: relative;
+    height: 244px;
+}
+
+
+.title {
+    font-family: Cako, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
+    text-align: right;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.grid-folder{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.board-test-image img{
+    width: 100%;
+    border-radius: 5px;
+    text-decoration: none;
+}
+</style>
+
+<script>
+    $(document).on("click", "#add-flashcard-button", function() {
+        $.ajax({
+            url: "<%= escape_javascript(new_flashcard_set_path) %>",
+            type: "GET", 
+            dataType: "html",                                                   
+            success: function(data) {
+                $("#profileDetails").html(data);
+            },
+            error: function() {
+                alert("Failed to load new flashcard form.");
+            }
+        });                                                                               
+    });
+
+
+    $(document).on("click", ".flashcard-set-link", function(event) {
+    event.preventDefault(); 
+    var url = $(this).attr("href"); 
+    
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "html",
+        success: function(data) {
+            $("#profileDetails").html(data);
+        },
+        error: function() {
+            alert("Failed to load flashcard set details.");
+        }
+    });
+});
+
+</script>

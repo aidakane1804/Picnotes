@@ -1,0 +1,293 @@
+<div style="position: relative; padding: 10px 0;">
+  <%= image_tag 'back.png', alt: 'Image Description', style: 'position: absolute; top: 10px; left: 10px; width: 24px; height: 24px;' %>
+  <a href="<%= feed_index_path %>" style="position: absolute; top: 10px; left: 28px; text-decoration: none; color: black; padding: 0px 16px; border-radius: 4px; border: none;">Back</a>
+</div>
+
+<div class="flashcard-box">
+  <% if current_user == @user && current_user != nil && @user != nil && current_user.id == @flashcard_set.user_id %>
+    <h2 style="color: #3F3F3F; font-weight: 600; font-size: 25px; font-family: Arial, Helvetica, sans-serif;"><strong> <%= @flashcard_set.title %> </strong></h2>
+  <% else %>
+    <h1> Folder Name: <strong> <%= @flashcard_set.title %> </strong></h1>
+  <% end %>
+
+  <div id='note-content'></div>
+
+  <div class='carousel-wrapper'>
+    <div class='carousel-container'>
+      <% @flashcard_set.flashcard.each do |index, flashcard| %>
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="border-radius: 15px !important; background-color: #00B9CF;">
+              <p style="color: white; font-size: 18px;height: 100% !important; padding: 16px;"><%= flashcard["question"] %></p>
+            </div>
+            <div class="flip-card-back" id="flip-answer">
+              <p style="color: white; font-size: 18px; height: 100% !important; padding: 16px;">
+                <%= flashcard["answer"] %>
+              </p>
+            </div>
+          </div>
+        </div>    
+      <% end %>
+    </div>
+  </div>
+
+  <span id="carousel-indicator">1/<%= @flashcard_set.flashcard.size %></span>
+  <div class="carousel-controls">
+    <button class="prev" style="background-color: white; color: red; margin-right:20px;">❮</button>
+    <div class="image-overlay">
+      <%= image_tag 'redcircle.png', class: 'background-image', alt: 'Red Circle' %>
+      <%= image_tag 'shuffle.png', class: 'overlay-image', alt: 'Overlay Image', style: 'width: 26px; height: 26px; cursor: pointer' %>
+    </div>
+    <button class="next" style="background-color: white; color: red;margin-left:20px;">❯</button>
+  </div>
+  
+</div>
+
+<style>
+
+#flip-answer{
+  overflow: auto;
+}
+.flashcard-box {
+  background-color: #F3F3F3;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  min-height: 550px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.5s ease-in-out;
+  width: fit-content; /* Adjust width based on content */
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 350px; /* Width of each card */
+  height: 250px; /* Height of each card */
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+  margin: 0 15px; /* Adjust spacing between cards */
+  flex-shrink: 0;
+  position: relative;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box; 
+  overflow: hidden; /* Hide overflow by default */
+  text-align: center; /* Center text alignment */
+}
+
+.flip-card-front {
+  background-color: #00B9CF;
+  color: white;
+}
+
+.flip-card-back {
+  background-color: #dec2f8;
+  color: white;
+  transform: rotateY(180deg);
+  border-radius: 15px;
+  overflow: auto; 
+  padding: 0; /* Ensure no extra padding */
+  margin: 0; /* Ensure no extra margin */
+}
+
+.flip-card-back p {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  line-height: 1.5; /* Ensure line-height is not causing issues */
+  word-wrap: break-word; /* Ensure long words break correctly */
+}
+
+.carousel-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prev, .next {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2; /* Ensure buttons are above the images */
+    width: 7%;
+}
+
+.image-overlay {
+    position: relative;
+    width: 60px; /* Adjust based on your images' size */
+    height: 60px; /* Adjust based on your images' size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure background image is below */
+}
+
+.overlay-image {
+    position: absolute;
+    z-index: 2; /* Ensure overlay image is above */
+}
+
+.carousel-controls button {
+  background-color: #BC171D;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.carousel-controls button:hover {
+  background-color: #A51419;
+}
+
+#carousel-indicator {
+  font-size: 1.2em;
+}
+
+.prev-card {
+  opacity: 0.5; /* 50% visibility for the previous card */
+}
+
+.next-card {
+  opacity: 0.5; /* 50% visibility for the next card */
+}
+
+@media (max-width: 768px) {
+  .flashcard-box {
+    padding: 15px;
+  }
+
+  h2, h1 {
+    font-size: 1.5em;
+  }
+
+  .btn {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard-box {
+    padding: 10px;
+  }
+
+  h2, h1 {
+    font-size: 1.2em;
+  }
+
+  .btn {
+    font-size: 0.8em;
+    padding: 8px;
+  }
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    const $carouselContainer = $('.carousel-container');
+    const $items = $('.flip-card');
+    const $prevButton = $('.prev');
+    const $nextButton = $('.next');
+    const $shuffleButton = $('.image-overlay'); // Shuffle button
+    const $indicator = $('#carousel-indicator');
+    const itemsPerPage = 1; // Number of visible cards at once
+    const cardWidth = 350; // Width of each card
+    const cardMargin = 15; // Margin between cards
+    const visiblePercentage = 0.5; // 50% visibility of next/prev cards
+    const visibleWidth = cardWidth * visiblePercentage; // Width of visible portion
+    let currentIndex = 0;
+    const totalItems = $items.length;
+
+    function updateCarousel() {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const containerWidth = cardWidth + (2 * visibleWidth); // Total width to accommodate visible items
+
+        // Adjust the transform value for proper visibility
+        const transformValue = -currentIndex * (cardWidth + cardMargin) + visibleWidth;
+        $carouselContainer.css('transform', `translateX(${transformValue}px)`);
+        $indicator.text(`${Math.floor(currentIndex / itemsPerPage) + 1}/${totalPages}`);
+    }
+
+    function goToIndex(index) {
+        // Adjust index to handle circular navigation
+        currentIndex = (index + totalItems) % totalItems;
+        updateCarousel();
+    }
+
+    function shuffleCards() {
+        const $itemsArray = $items.toArray();
+        for (let i = $itemsArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            $carouselContainer.append($itemsArray[j]);
+            $itemsArray.splice(j, 1);
+        }
+        updateCarousel();
+    }
+
+    $prevButton.on('click', function() {
+        goToIndex(currentIndex - 1);
+    });
+
+    $nextButton.on('click', function() {
+        goToIndex(currentIndex + 1);
+    });
+
+    $shuffleButton.on('click', function() {
+        shuffleCards();
+    });
+
+    updateCarousel();
+});
+
+
+</script>
+

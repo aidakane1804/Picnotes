@@ -1,4 +1,4 @@
-<%# if (user_signed_in?) %>
+<% if (user_signed_in?) %>
   <% if @user == current_user %>
     <% about_me = current_user.about_me.empty? rescue nil %>
     <% nationality = current_user.nationality.empty? rescue nil %>
@@ -18,33 +18,960 @@
           })
       </script>
     <% end %>
-    <%= render './partials/user_dashboard' %>
-
   <% else %>
-    <%= render './partials/other_user_dashboard' %>
   <% end %>
-<%# end %>
-<div id='note-content'></div>
-<div class='flex-center'>
-  <div class='notes-container'>
-
-    <% if @notes.count > 0 %>
-      <% @notes.where(archived: false).each do |note| %>
-        <%= render partial: 'notes/note_general', locals: {note: note} %>
-      <% end %>
-    <% else %>
-      <% if @user == current_user %>
-        <div>
-          <div class="no-content-message" id="feed-no-data"></div>
-          <div class="desc-content">
-            <h1 class="black-heading">Follow lifelong learners from across the world</h1>
-            <p class="italic-text">You choose which friends to follow and you'll never miss their Picnotes.</p>
-            <p class="mp-0">
-              <button type='button' style='border: none;background: transparent;' data-toggle='modal' data-target='#newNoteModal' data-whatever='@mdo'> <span class="circular-new">+</span> Get Started</button>
-            </p>
+<% end %>
+<%= render 'partials/navbarfeed' %>
+<div class="top-section">
+    <span class="profile-text" style="color: #3F3F3F; font-weight: 400; font-size: 32px; top: 1rem; left: 5%">
+      My Profile
+    </span>
+  </div>
+  <div style='height: 100vh;'>
+    <div class="main d-flex align-items-center" style='margin-top:120px;'>
+      <div class="container">
+      <div style="position: relative; margin-top:-1.9rem;">
+      <div class="card">
+        <div class="mt-5 text-center">
+          <div class="profile" data-bs-toggle="modal" data-bs-target="#nationalityModal">
+            <%= image_tag(current_user.avatar.url || 'myavtar.png', class: 'profile-image') %>
+            <input type="file" />
+          </div>
+          <div style="width: 28px; height: 28px; background-color: white; border-radius: 50%; z-index: 1; margin-left: 10.5rem; margin-top: -0.5rem;">
+            <%= link_to '#', id: 'editImage', class: 'edit-image-link', 'data-bs-toggle': 'modal', 'data-bs-target': '#editSessionModal' do %>                
+              <%= image_tag 'edit.png' ,id: 'editImage', style: 'width: 18px; height: 18px; position: absolute; top: 127px; right: 130px; object-fit: contain;' %>
+            <% end %>
+          </div>
+          <div class="mt-3 text-center">
+            <h4 class="mb-0" style="color: #3F3F3F; font-weight: 400;"><%= @user.first_name %></h4>
+            <span class="location">
+            <i class="bi bi-map" style="margin-right: 5px;"></i>
+            <%= image_tag('location.png', style: 'width: 18px; margin-bottom: 5px; margin-right: 5px;') %>
+            <%= @user.nationality %>
+            </span>
+            <span style="color: #707070;"><%= @user.about_me %></span>
+            <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+              <div class="stats text-center">
+                <%= image_tag 'follower.png' , size: '24x24' %>
+                <div>
+                  <span style="font-weight: 600; font-size: 1rem;">
+                    <%= @user.followers.count.to_s %>
+                  </span>
+                  <h6 class="mb-0" style="font-weight: 400; color: #707070;">
+                    <% if @user.followers.count > 0 %>
+                      <%= link_to "Followers ", followers_user_path(@user), remote: true, class: "profile-links", id: "my-followers-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } %>
+                    <% else %>
+                      <%= "Followers" %>
+                    <% end %>
+                  </h6>
+                </div>
+              </div>
+              <div class="stats text-center">
+                <%= image_tag 'following.png' , size: '24x24' %>
+                <div>
+                  <span style="font-weight: 600; font-size: 1rem;">
+                    <%= @user.following.count.to_s %>
+                  </span>
+                  <h6 class="mb-0" style="font-weight: 400; color: #707070;">
+                    <% if @user.following.count > 0 %>
+                      <%= link_to 'Following', following_user_path(@user), remote: true, class: "profile-links ", id: "my-followings-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } %>
+                    <% else %>
+                      <%= 'Following' %>
+                    <% end %>
+                  </h6>
+                </div>
+              </div>
+              <div class="stats text-center">
+                <%= image_tag 'note.png' , size: '24x24' %>
+                <div>
+                  <span style="font-weight: 600; font-size: 1rem;">
+                   <%= @user.notes.count.to_s %>
+                  </span>
+                  <h6 class="mb-0" style="font-weight: 400; color: #707070;">
+                    <% if @user.notes.count > 0 %>
+                      <%= link_to 'Picnotes', user_notes_session_path, remote: true, class: "profile-links", id: "picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } %>
+                    <% else %>
+                      <%= 'Picnotes' %>
+                    <% end %>
+                  </h6>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>   
+</div>
+<div class="profileDetails">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: white">
+    <div class="container-fluid">
+      <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+        <%= image_tag 'box.png', size: '18x18' %>
+        <span style="font-family:Aileron;font-weight:400;">My Feed</span>
       <% end %>
-    <% end %>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <%= link_to user_notes_session_path, remote: true, class: "profile-links nav-link", id: "my-picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'note.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">My Picnotes</span>
+              <span class='note-count'><%= "(#{@user.notes.where(archived: false).count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'myfolder.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">
+              <%= @folders.count > 0 ? 'My Folders' : 'My Folder' %>
+              </span>
+              <span class='note-count'><%= "(#{@user.folders.count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'heart.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">
+                <%= @favorites.count > 0 ? 'My Favorites' : 'My Favorite' %>
+              </span>
+              <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to create_flashcard_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-flashcards-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'flashcard.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">My Flashcards</span>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_edtracker_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtracker-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'attach.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">My EdTracker</span>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_myedtool_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtools-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'files.png', size: '24x24' %>
+              <span style="font-family:Aileron;font-weight:400;">My EdTools</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="row" id="profileDetails">
   </div>
 </div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const activeTabId = localStorage.getItem('activeTabId');
+  
+  if (activeTabId) {
+    const activeTab = document.getElementById(activeTabId);
+    if (activeTab) {
+      activeTab.click();
+      activeTab.classList.add('active');
+      activeTab.style.color = '#BC171D';
+    }
+  }
+
+  document.querySelectorAll('.profile-links').forEach(link => {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.profile-links').forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.color = ''; 
+      });
+
+      this.classList.add('active');
+      this.style.color = '#BC171D';
+      localStorage.setItem('activeTabId', this.id);
+    });
+  });
+});
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<style>
+
+.profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Centers the div horizontally */
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile input[type="file"] {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+  body {
+    background-color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+  }
+  .container {
+    height: 77vh;
+    width: 30%;
+    margin: 0 ;
+    padding: 0;
+  }
+  .card {
+    width: 330px;
+    border: none;
+    border-radius: 15px;
+    padding: 8px;
+    background-color: #fff;
+    position: relative;
+    height: 468px;
+    margin-left:auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .upper {
+    height: 100px;
+  }
+  .upper img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .user {
+    position: relative;
+    text-align: center;
+    margin-top: 30px; /* Adjust margin-top as needed */
+  }
+  .profile img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+  }
+  .follow {
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 35px;
+  }
+  .stats span {
+    font-size: 29px;
+  }
+  .location {
+    display: block;
+    margin-top: 10px;
+    color: #707070;
+    font-weight: 400;
+  }
+  .location i {
+    margin-right: 5px;
+    color: #707070;
+  }
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .stats img {
+    margin-bottom: 5px;
+  }
+  .edit-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
+    background-color: #FFFFFF; /* White background for icon */
+    border-radius: 50%; /* Round shape */
+    padding: 5px;
+    cursor: pointer;
+  }
+  .edit-icon img {
+    width: 20px; /* Adjust icon size */
+    height: auto;
+  }
+  .edit-icon:hover {
+    background-color: #E0E0E0; /* Hover background color */
+  }
+
+
+  .navbar{
+     border-bottom: 1px solid #DCDCDC;
+  }
+
+  .navbar .nav-link {
+    color: black !important; 
+}
+.navbar .navbar-brand,
+
+.navbar .navbar-brand:hover {
+    color: black !important; /* Override Bootstrap's default link color */
+}
+
+.navbar .navbar-brand img {
+    margin-right: 10px; /* Adjust margin as needed */
+    width: 30px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align image vertically */
+}
+
+.navbar .nav-item img {
+    margin-right: 5px; /* Adjust margin as needed */
+    width: 20px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align image vertically */
+}
+
+.nav-link .active,
+ .active:focus,
+.nav-link .active:hover {
+    color: #BC171D!important; /* Override Bootstrap's default active state text color */
+}
+
+/* .active{
+  background-color: blue;
+  color: green;
+} */
+
+.main{
+    width: 100%;
+    height: 80vh;
+    gap: 0;
+}
+.profileDetails {
+    width:71%;
+    height: 100vh; 
+    border: 1px solid #dcdcdc;
+    box-shadow: 0px 4px 24px 0px #0000000d;
+    border-radius: 10px;
+    overflow: scroll;
+}
+
+
+# #333333
+
+
+
+.rotated-image {
+  transform: rotate(20deg);
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 50px;
+  background-color: white;
+  color: #BC171D;
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s ease;
+}
+.icon-container {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: white;
+  text-align: center;
+  border: 1px solid grey;
+  margin: -10px;
+}
+
+.icon-container i {
+  font-size: 1rem;
+  color: #BC171D;
+  line-height: 40px; /* Center the icon vertically */
+}
+
+.foot-picnotes{
+ padding-left: 30px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* Space between grid items */
+  transform: translateX(20%); /* Shifts the grid to the right, causing it to cut off */
+  bottom: 0;
+    right: 40px;
+}
+
+.rotated-image {
+  width: 100%; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  transform: rotate(10deg); /* Subtle rotation */
+  opacity: 0.8;
+  margin-bottom: 20px;
+  border-radius:20px /* Space between images vertically */
+}
+
+.image-grid img:nth-child(3n) {
+  margin-bottom: 0; /* Remove margin-bottom for every third image to prevent extra space */
+}
+
+.bottom-opacity {
+  opacity: 0.5; /* Adjust the opacity value as needed */
+}
+
+
+.list-unstyled li {
+  padding-bottom: 10px;
+  margin-bottom: 10px; 
+}
+.explore-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.button {
+background-color: #BC171D;
+color: white;
+border: none;
+border-radius: 50%;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+text-align: center;
+}
+
+*{
+box-sizing: border-box;
+}
+.header {
+    text-align: center;
+    padding: 32px;
+    
+}
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin: 1px;
+    font-family: Arial;
+}
+/* Create four equal columns that sits next to each other */
+.column {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+.column img {
+    margin-top: 22px;
+    vertical-align: middle;
+    width: 70%;
+    border-radius: 21px;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+    }
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+    }
+}
+.card-section{
+    background-color: #BC171D1A;
+
+}
+.image-container {
+  display: flex;
+  margin:30px;
+   /* Vertically center */
+}
+.oval-input {
+border-radius: 50px;
+padding: 10px 15px;
+border: 1px solid #ccc;
+width: 100%;
+max-width: 365px;
+height: 48px;
+}
+.login-button {
+font-size: 20px;
+font-family: monospace;
+text-decoration: none;
+color: #BC171D;
+margin-top: 20px;
+margin-bottom: 0px;
+margin-left: 10px;
+margin-right: 10px;
+word-spacing: -10px;
+}
+
+.logo-container {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.sign-up-btn {
+background-color: #c91a2d;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+cursor: pointer;
+border-radius: 50px;
+}
+@media (max-width: 767.98px) {
+.navbar-nav {
+    text-align: center;
+}
+.navbar-toggler {
+    margin-left: auto;
+}
+.logo-container {
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+}
+.sign-up-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+.oval-input {
+    width: calc(100% - 30px);
+}
+}
+.picnotes-section {
+    width: 733px;
+    height: 602px;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    gap: 60px;
+    opacity: 1;
+    background-color: #f0f0f0;
+    padding: 60px; 
+}
+.explore_button {
+    width: 207px;
+    height: 58px;
+    background-color: #BC171D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50px; /* This will give you a pill shape */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+}
+
+.button:hover {
+opacity: 1;
+}
+
+.button span {
+margin-right: 10px;
+}
+.line {
+    position: absolute;
+    width: 860px;
+    height: 2px; /* Adjust height as needed */
+    top: 1605px;
+    left: 530px;
+    background-color: #BC171D; /* Color of the line */
+    border: none; /* No borders */
+    opacity: 0.08; /* Opacity level (adjust as needed) */
+    transform: rotate(-0deg); /* Angle of rotation (adjust as needed) */
+}
+
+.card-section {
+height: 764px;
+width: 100%;
+}
+.d-flex {
+display: flex;
+align-items: center; /* Align items vertically */
+padding-top: 20px;
+}
+
+.input-group-text {
+  position: absolute;
+  right: 10px; 
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  margin-top: 5px;
+
+  
+}
+.btn-custom {
+  background-color: #BC171D; /* White background */
+  color: white; /* Red text color */
+}
+
+
+
+.card-section {
+font-family: Arial, sans-serif;
+background-color: #BC171D1A;
+}
+.oval-input {
+border-radius: 50px;
+padding: 10px 15px;
+border: 1px solid #ccc;
+width: 100%;
+max-width: 365px;
+height: 48px;
+}
+.logo-container {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+}
+.sign-up-btn {
+background-color: #BC171D;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+cursor: pointer;
+border-radius: 50px;
+height: 50px;
+margin-top: 12px;
+}
+@media (max-width: 767.98px) {
+.navbar-nav {
+    text-align: center;
+    position: fixed;
+}
+.navbar-toggler {
+    margin-left: auto;
+}
+.logo-container {
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+}
+.sign-up-btn {
+    width: 100%;
+    margin-top: 30px;
+}
+.oval-input {
+    width: calc(100% - 30px);
+}
+}
+.picnotes-section {
+width: 733px;
+height: 602px;
+position: absolute;
+top: 180px;
+left: 100px;
+gap: 60px;
+opacity: 1;
+background-color: #F0F0F0;
+padding: 60px;
+}
+.button {
+width: 207px;
+height: 58px;
+background-color: #FF0000;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+border-radius: 20px; /* This will give you a pill shape */
+transition: opacity 0.3s ease-in-out;
+opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+}
+.button:hover {
+opacity: 1;
+}
+.button span {
+margin-right: 10px;
+}
+.card-section {
+height: 764px;
+width: 100%;
+}
+h1 {
+font-size: 48px;
+color: #000;
+}
+h1 span {
+color: #E74C3C;
+}
+p {
+font-size: 18px;
+color: #666;
+margin-top: -20px;
+}
+.explore-button {
+display: inline-block;
+padding: 20px;
+background-color: #BC171D;
+color: #fff;
+text-decoration: none;
+border-radius: 50px;
+font-size: 18px;
+width:207px;
+height:58px;
+text-align:center;
+padding-bottom:20px;
+margin-top:30px
+}
+.explore-button:hover {
+background-color: #BC171D;
+}
+.social-login {
+margin-top: 40px;
+}
+.social-login svg {
+width: 20px;
+height: 20px;
+margin: 0 10px;
+}
+.more-button {
+background-color: #FDCEC8;
+border-radius: 10px;
+padding: 5px;
+}
+.d-flex {
+display: flex;
+align-items: center;
+}
+.form-control {
+padding: 10px;
+border-radius:20px;
+border: 1px solid #ccc;
+outline: none;
+}
+.search-icon {
+background-color: #BC171D;
+padding: 5px;
+border-radius:30px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-left:10px;
+}
+.search-icon svg {
+fill: #fff;
+width: 24px;
+height: 24px;
+}
+body {
+font-family: "Cako", Arial, sans-serif;
+
+}
+.card-header {
+padding: 10px;
+text-align: end;
+background-color: #B8222E;
+}
+.btn-upload {
+border: none;
+border-radius: 20px;
+background-color: #FFFFFF;
+color: #B8222E;
+}
+.custom-card {
+margin: 30px;
+border: none;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+overflow: hidden;
+padding: 25px;
+background-color: #fff;
+}
+.card-body {
+padding: 15px;
+text-align: center;
+position: relative;
+}
+.all-card {
+background-color: #fde6e900;
+}
+.text-card {
+width: 100%;
+border: 2px solid #F8D7DA;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+padding: 20px;
+font-family: Arial, sans-serif;
+color: #000;
+background-color: #FFF5F5;
+height: 100%;
+}
+.text-card h2 {
+font-size: 1.25rem;
+margin: 0;
+padding-bottom: 10px;
+border-bottom: 1px solid #F8D7DA;
+}
+.text-card p {
+margin: 10px 0;
+line-height: 1.5;
+border-bottom: 1px solid #F8D7DA;
+padding-bottom: 10px;
+}
+.card-group col-lg-12{
+    width: 70%;
+    border: 2px solid #F8D7DA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #BC171D;
+    height: 100%;
+}
+.upload-card {
+    border: 2px solid #F8D7DA;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #FFF5F5;
+    height: 100%;
+}
+
+.footer-div {
+display: flex;
+justify-content: space-around;
+align-items: center;
+background-color: #fde6e900;
+}
+.step {
+    text-align: center;
+    max-width: 300px;
+}
+.circle {
+    width: 10px;
+    height: 10px;
+    background-color: #BC171D;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+}
+.step h2 {
+    font-size: 1.5em;
+    color: #000;
+    margin-bottom: 10px;
+}
+.step p{
+    color: #333;
+    line-height: 1.5;
+}
+.main-heading {
+    font-family: Cako;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 96.02px;
+    text-align: left;
+}
+.fire{
+width:27px;
+}
+.grid-img{
+width:109%;
+margin-top:-94px;
+}
+.container {
+    height: 120%;
+    width: 27%;
+    margin: 0;
+    padding: 0;
+}
+
+.top-section {
+    position: relative; 
+    z-index: 1; 
+  }
+  
+  .profile-text {
+    color: #3F3F3F;
+    font-weight: 400;
+    font-size: 32px;
+    position: relative;
+  }
+
+  @media (max-width: 1216px) {
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .navbar-collapse {
+    justify-content: center;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-item .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.navbar-nav .nav-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+  
+
+</style>

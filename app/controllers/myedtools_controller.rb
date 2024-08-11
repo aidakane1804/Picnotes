@@ -31,10 +31,13 @@ class MyedtoolsController < ApplicationController
     @myedtool.myedtool_type = params['myedtool_type']
     @myedtool.user = current_user
     if @myedtool.save!
-      redirect_to new_myedtool_path(id: current_user.id)
+      # redirect_to new_myedtool_path(id: current_user.id)
+      redirect_to feed_index_path(id: current_user.id)
+
     else
       flash[:error] = 'Could not save record inside Database, Please try again later!'
       redirect_to new_myedtool_path(id: current_user.id)
+
     end
   end
 
@@ -74,7 +77,7 @@ class MyedtoolsController < ApplicationController
       @myedtool.update(myedtool_params)
       @myedtool.save
     end
-    redirect_to new_myedtool_path(id: current_user.id)
+    redirect_to feed_index_path
   end
 
   def fetch_model_form1
@@ -109,7 +112,7 @@ class MyedtoolsController < ApplicationController
   def destroy
     @edTool = Myedtool.find(params[:id])
     @edTool.destroy
-    redirect_to new_myedtool_path(id: current_user.id)
+    redirect_to feed_index_path
   end
 
   def comment_delete_edtools

@@ -1,0 +1,61 @@
+<%= form_with(model: @flashcard, local: true, id: 'flashcard-form') do |form| %>
+  <% if @flashcard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@flashcard.errors.count, "error") %> prohibited this flashcard from being saved:</h2>
+      <ul>
+        <% @flashcard.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div id="flashcards-container">
+    <%= form.fields_for :flashcards do |flashcard_form| %>
+      <div class="flashcard-fields">
+        <%= flashcard_form.label :question, "Question" %>
+        <%= flashcard_form.text_field :question %>
+
+        <%= flashcard_form.label :answer, "Answer" %>
+        <%= flashcard_form.text_field :answer %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+    $(document).ready(function() {
+    let flashcardCount = 1;
+
+    $("#add-flashcard").on("click", function() {
+      flashcardCount++;
+      let newFields = $("#flashcard-template").html().replace(/Question/g, `Question ${flashcardCount}`).replace(/Answer/g, `Answer ${flashcardCount}`);
+      $("#flashcards-fields").append(newFields);
+    });
+
+    $("#show-flashcard-button").on("click", function() {
+      window.location.reload();
+      $.ajax({
+        url: "<%= escape_javascript(create_flashcard_path) %>",
+        type: "GET", 
+        dataType: "html", 
+        success: function(data) {
+          $("#profileDetails").html(data);
+        },
+        error: function() {
+          alert("Failed to load new flashcard form.");
+        }
+      });
+    });
+  });
+</script>
+

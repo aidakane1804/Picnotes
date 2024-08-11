@@ -1,0 +1,127 @@
+<div class="container my-5" style="padding-left: 0px; padding-right: 0px; position: sticky;">
+  <!-- Footer -->
+  <footer class="text-center text-lg-start text-dark" style="margin: 0px; padding: 0px; background-color: white;">
+    <!-- Separator Line -->
+    <hr style="border-top: 2px solid #333; margin-left: -50px margin-right: -50px;">
+    <!-- Grid container -->
+    <div class="container-fluid p-4 pb-0">
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+              <%= link_to notes_path do %>
+                <%= image_tag 'logo.png', class: 'foot-picnotes' %>
+              <% end %>
+            <div style="margin: 20px;">
+              Picnotes combines the appeal of a picture<br> sharing platform to an educational<br> website.
+            </div>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class=" col-lg-1 mb-4">
+            <h6 class="text-uppercase fw-bold" style="margin-bottom: 20px;">Company</h6>
+
+            <ul class="list-unstyled" style="margin-top: 5px;">
+              <li>
+                <%= link_to 'Home', index_path, class: 'text-red text-decoration-none',style: "color: #BC171D !important;" %>
+              </li>
+              <li>
+                <%= link_to 'About Us', about_us_path, class: 'text-dark text-decoration-none' %>
+              </li>
+              <li>
+                <%= link_to 'EdFluencers', edfluencers_path, class: 'text-dark text-decoration-none' %>
+              </li>
+            </ul>
+          </div>
+
+
+          <!--Grid column-->
+          <div class="col-lg" style="margin-left: -50px;">
+            <h6 class="text-uppercase fw-bold" style="margin-bottom: 20px;">Support</h6>
+
+            <ul class="list-unstyled">
+              <li>
+                <%= link_to 'Guidelines', guidelines_path, class: 'text-dark text-decoration-none' %>
+              </li>
+              <li>
+                <%= link_to 'Terms & Conditions', terms_and_conditions_path, class: 'text-dark text-decoration-none' %>
+              </li>
+              <li>
+                <%= link_to 'Privacy Policy', terms_and_conditions_path, class: 'text-dark text-decoration-none' %>
+              </li>
+              <li>
+                <%= link_to 'Contact Us', contact_us_notes_path, class: 'text-dark text-decoration-none' %>
+              </li>
+            </ul>
+          </div>
+
+          <!--Grid column-->
+
+          <div class="col-lg">
+            <h6 class="text-uppercase fw-bold" style="text-align: left; margin: 3% 6%;">Follow us on</h6>
+             <div class='col-lg-4' style="display: flex; width:100%; ">
+              <!-- Xtwitter -->
+                <a
+                    data-mdb-ripple-init
+                    class="btn-link btn-floating btn-lg text-dark m-1"
+                    href="https://twitter.com/PicnotesEd"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+                  >
+                    <div class="icon-container">
+                      <i class="fas fa-times"></i>
+                    </div>
+                  </a>
+
+                  <!-- Facebook -->
+                  <a
+                    data-mdb-ripple-init
+                    class="btn-link btn-floating btn-lg text-dark m-1"
+                    href="https://www.facebook.com/PicnotesEd"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+                    target="_blank"
+                  >
+                    <div class="icon-container">
+                      <i class="fab fa-facebook-f"></i>
+                    </div>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a
+                    data-mdb-ripple-init
+                    class="btn-link btn-floating btn-lg text-dark m-1"
+                    href="https://www.instagram.com/picnotes_knowledgehub/"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+                    target="_blank"
+                  >
+                    <div class="icon-container">
+                      <i class="fab fa-instagram"></i>
+                    </div>
+                  </a>
+
+                  <!-- Linkedin -->
+                  <a
+                    data-mdb-ripple-init
+                    class="btn-link btn-floating btn-lg text-dark m-1"
+                    href="https://www.linkedin.com/company/picnotesed"
+                    role="button"
+                    data-mdb-ripple-color="dark"
+                    target="_blank"
+                  >
+                    <div class="icon-container">
+                      <i class="fab fa-linkedin"></i>
+                    </div>
+                  </a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    <div class="text-center p-3 sticky-bottom" style="background-color: #BC171D; color: white; margin-bottom: -100px; margin-right:-80px;  margin-left:-80px; height: 70 font-size: 20px ">
+      Copyright@2024. All rights reserved
+    </div>
+  </footer>
+</div>

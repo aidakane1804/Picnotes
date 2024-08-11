@@ -1,9 +1,9 @@
 class FavoriteNotesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_note, only: [:create, :destroy]
 
   def index
     if params[:user_id]
-      # if params[:user_id] != current_user.id.to_s
       user = User.find_by(id: params[:user_id])
       @user = user
       @favorites = user.favorited_notes
@@ -14,15 +14,16 @@ class FavoriteNotesController < ApplicationController
     @count = 0
     my_array = []
     @favorites.each do |favorite|
-      @count = @count + 1
-      if @count < 15
-        my_array.push favorite.title_slug
-      end
+      @count += 1
+      my_array.push favorite.title_slug if @count < 15
     end
     session[:picnotes] = my_array
 
+    respond_to do |format|
+      format.html # Renders index.html.erb if requested
+      format.js   # Renders index.js.erb if requested
+    end
   end
-
   def create
     if Favorite.create(favorited: @note, user: current_user)
       respond_to do |format|

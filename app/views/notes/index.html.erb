@@ -1,56 +1,138 @@
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
 <script>
-    $(window).on('load', function () {
-        $('myModal').modal('show');
-        console.log('hi');
-    })
+  $(window).on("load", function () {
+    $("myModal").modal("show");
+    console.log("hi");
+  });
 </script>
 
-<div id='note-content'></div>
 
 <% if user_signed_in? %>
-
+  <%= render 'partials/navbarfeed' %>
 <% else %>
-  <%= render './modals/intro_modal' %>
+  <%= render 'partials/navbar' %>
 <% end %>
+
+<div id="note-content"></div>
+<div class="row" id="noteContent"></div>
 
 
 <% if @searchresult %>
-  <div style='text-align: center; margin-top: 30px; width: 100%;'>
-    <p> Results for <%= @searchresult %> </p>
-  </div>
+<div style="text-align: center; margin-top: 30px; width: 100%">
+  <p>Results for <%= @searchresult %></p>
+</div>
 <% end %>
-<% @notes = @notes.where(archived: false) %>
-<div class='flex-center'>
-  <div class="notes-container" id="notes-div">
-    <%= render @notes %>
-    <%= render @notesTagged %>
+
+<div class="container" style="height: 1000px">
+  <div class="row mt-5">
+    <div class="col-md-5">
+      <div class="container">
+        <h1 class="main-heading">Unlock Your Learning Potential with <span style="color: #BC171D;">Picnotes</span></h1>
+        <p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: left; margin:10px;">
+        Focuses on empowering learners and educators.
+         </p>
+        <%= link_to 'Explore More 🔥', explore_path, class: 'explore-button' %>
+       
+      </div>
+    </div>
+    <div class="col-md-7"> 
+
+      <div class="container-fluid">
+   
+      
+        <div class="container" style="margin-bottom: 26px;">
+          <div class="image-grid">
+            <%= image_tag 'surbhi.jpg', class: 'rotated-image' %>
+            <%= image_tag 'Uttam.jpg', class: 'rotated-image' %>
+            <%= image_tag 'natasha.png', class: 'rotated-image' %>
+            <%= image_tag 'shawan.png', class: 'rotated-image' %>
+            <%= image_tag 'rahul.png', class: 'rotated-image' %>
+            <%= image_tag 'alexendra.png', class: 'rotated-image' %>
+            <%= image_tag 'faizal-hayat.png', class: 'rotated-image bottom-opacity' %>
+            <%= image_tag 'dexter-chu.png', class: 'rotated-image bottom-opacity' %>
+            <%= image_tag 'alex-fere.png', class: 'rotated-image bottom-opacity' %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<section class="card-section pt-5" style= "height: 800px;">
+  <div class="all-card w-100 h-100">
+    <div class="header-container">
+      <h1 style="font-family: Cako; font-size: 46px; font-weight: 400; line-height: 55.21px; text-align: center;">
+      Create Stunning Picnotes
+      </h1>
+      <p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: center;">
+          It's so easy!
+      </p>
+    </div>
+    
+    <div class="image-container-img" style="margin-left: 19%;">
+      <%= image_tag 'pic1.png', style: 'width: 24%;' %>
+      <%= image_tag 'pic2.png', style: 'width: 24%;' %>
+      <%= image_tag 'pic3.png', style: 'width: 24%;' %>
+    </div>    
+    
+    <div class="footer-div" style="margin-top: 10px;">
+      <%= image_tag 'Line.png', style: 'width: 47%; margin-right: 1%; display: block; margin: 0 auto;' %>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 10px;">
+      <span style="flex: 1; text-align: center; margin-left: 13%; color: #3F3F3F; font-size: 25px; font-weight: 600; font-family: Aileron;">Choose Your Image</span>
+      <span style="text-align: center; margin-right: -1%; color: #3F3F3F; font-size: 25px; font-weight: 600; font-family: Aileron;">Write Your Notes</span>
+      <span style="flex: 1; text-align: center; margin-right: 12%; color: #3F3F3F; font-size: 25px; font-weight: 600; font-family: Aileron;">Preview and Publish</span>
+    </div>
+    
+    
+  
+  </div>
+</section>
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-center pt-5" style="top: 1938px; align-items: center;">
+    <h2 style="justify-content: center;">Our Picnotes</h2>
+  </div>
+  <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
+
+  </div>
 
 
-<div id="infinite-scrolling">
-  <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
+  <% @notes = @notes.where(archived: false) %>
+  <div class='flex-center'>
+    <div class="notes-container" id="notes-div">
+      <%= render @notes %>
+      <%= render @notesTagged %>
+    </div>
+  </div>
+  <div id="infinite-scrolling">
+    <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
+  </div>
+
 </div>
 
 
 
-<!--<div style='text-align: center; margin-top: 30px; width: 100%;'>-->
-<!--  <p> User with the name: <%#= @searchresult %> </p>-->
-<!--</div>-->
-
-<div class='flex-center'>
-  <div class="notes-container" style='margin-top: 20px;'>
+<div class="flex-center">
+  <div class="notes-container" style="margin-top: 20px">
     <% @users.each do |user| %>
-      <div class='note-container'>
+      <div class="note-container">
         <%= link_to user_path(user) do %>
           <% if user.avatar? %>
-            <%= image_tag user.avatar.url(:thumb) %>
+            <%= image_tag user.avatar.url(:thumb), style: 'width: 100%;' %>
           <% else %>
-            <%= image_tag 'avatar.png', :style => 'width: 100%;' %>
+            <%= image_tag 'avatar.png', style: 'width: 100%;' %>
           <% end %>
-          <div class='note-container-text' style='text-align: center !important;'>
-            <p class='mobile-font note-btn-font' style='text-transform: capitalize'> <%= user.username %></p>
-            <p class='mobile-font note-btn-font'> <%= user.first_name %> <%= user.last_name %> </p>
+          <div class="note-container-text" style="text-align: center !important">
+            <p class="mobile-font note-btn-font" style="text-transform: capitalize">
+              <%= user.username %>
+            </p>
+            <p class="mobile-font note-btn-font">
+              <%= user.first_name %> <%= user.last_name %>
+            </p>
           </div>
         <% end %>
       </div>
@@ -58,28 +140,741 @@
   </div>
 </div>
 
-<%#----------------------------------------footer-------------------------------------%>
+
+<script
+  src="https://kit.fontawesome.com/a076d05399.js"
+  crossorigin="anonymous"
+></script>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+
+<!-- FontAwesome for social media icons -->
+<script
+  src="https://kit.fontawesome.com/a076d05399.js"
+  crossorigin="anonymous"
+></script>
+
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+  <style > 
+
+  # footer======================
+  .image-container-img {
+  display: flex; /* Align images in a row */
+  justify-content: flex-start; /* Align items to the start of the container */
+}
+
+.image-container-img img {
+  margin-right: 10px; /* Space between images */
+}
+
+.image-container-img img:last-child {
+  margin-right: 0; /* Remove margin from the last image if needed */
+}
 
 
-<!--<div class="container">-->
-<!--  <div class="footer container-fluid">-->
-<!--    <div class="row footer-row ">-->
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
 
-<!--      <div class="col-md-8"></div>-->
-<!--      <div class="col-md-4"></div>-->
-<!--      <div class="col-md-7"></div>-->
-<!--      <%#= link_to 'About Us', about_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;-->
-<!--      <%#= link_to 'Community Guidelines', community_guideline_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>&nbsp;&nbsp;-->
-<!--     <%#= link_to 'Freelance Research', freelance_research_notes_path, class: 'set-font-family', style: 'text-decoration: underline' %>&nbsp;&nbsp;-->
-<!--        <%#= link_to 'Educational Organizations-->
-  ', educational_organizations_notes_path, class: 'set-font-family', style: 'text-decoration: underline' %>&nbsp;&nbsp;
-<     <%#= link_to 'Terms & Conditions', terms_and_conditions_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;text-align: right;' %>&nbsp;&nbsp;-->
-<%#= link_to 'Contact Us', contact_us_notes_path, class: 'set-font-family footer-color', style: 'text-decoration: underline;' %>
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
 
-<!--    </div>-->
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+    margin-bottom: 26px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
 
 
-<!--  </div>-->
-<!--  <br>-->
+  # footer end----------------------
 
-<!--</div>-->
+ 
+
+  .grid-image-container {
+    position: relative;
+    overflow: hidden;
+    margin:5px;
+  }
+  .grid-image-container img {
+    width: 100%; /* Makes the image fill its container */
+    height: auto;
+  }
+
+  .overlay-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  .rotated-image {
+    transform: rotate(20deg);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #BC171D;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #BC171D;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes{
+  padding-left: 30px;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Space between grid items */
+    transform: translateX(20%); /* Shifts the grid to the right, causing it to cut off */
+    bottom: 0;
+      right: 40px;
+  }
+
+  .rotated-image {
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    transform: rotate(10deg); /* Subtle rotation */
+    opacity: 0.8;
+    margin-bottom: 20px;
+    border-radius:20px /* Space between images vertically */
+  }
+
+  .image-grid img:nth-child(3n) {
+    margin-bottom: 0; /* Remove margin-bottom for every third image to prevent extra space */
+  }
+
+  .bottom-opacity {
+    opacity: 0.5; /* Adjust the opacity value as needed */
+  }
+
+
+  
+  .explore-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .button {
+    background-color: #BC171D;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  *{
+  box-sizing: border-box;
+  }
+  .header {
+      text-align: center;
+      padding: 32px;
+      
+  }
+
+
+
+
+  footer-------------------
+  .row {
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; 
+      flex-wrap: wrap;
+      padding: 0 4px;
+      margin: 45px;
+      font-family: Arial;
+    }
+    .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px; 
+  }
+    .text-red{
+    color: #BC171D;
+  }
+
+
+  
+  .column {
+      -ms-flex: 25%; 
+      flex: 20%;
+      max-width: 25%;
+      padding: 0 4px;
+  }
+  .column img {
+      margin-top: 22px;
+      vertical-align: middle;
+      width: 70%;
+      border-radius: 21px;
+  }
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media screen and (max-width: 800px) {
+      .column {
+      -ms-flex: 50%;
+      flex: 50%;
+      max-width: 50%;
+      }
+  }
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+      .column {
+      -ms-flex: 100%;
+      flex: 100%;
+      max-width: 100%;
+      }
+  }
+  .card-section{
+      background-color: #BC171D1A;
+
+  }
+  .image-container {
+    display: flex;
+    margin:30px;
+  }
+  .oval-input {
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 365px;
+    height: 48px;
+  }
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container{
+    max-width:1754px
+  }
+  .sign-up-btn {
+    background-color: #c91a2d;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+  @media (max-width: 767.98px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .logo-container {
+    position: static;
+    transform: none;
+    margin: 0 auto 10px;
+  }
+  .sign-up-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .oval-input {
+    width: calc(100% - 30px);
+  }
+  }
+  .picnotes-section {
+    width: 733px;
+    height: 602px;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    gap: 60px;
+    opacity: 1;
+    background-color: #f0f0f0;
+    padding: 60px; 
+  }
+  .explore_button {
+    width: 207px;
+    height: 58px;
+    background-color: #BC171D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50px; /* This will give you a pill shape */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+  }
+
+  .button:hover {
+    opacity: 1;
+  }
+
+  .button span {
+    margin-right: 10px;
+  }
+  .line {
+    position: absolute;
+    width: 860px;
+    height: 2px; /* Adjust height as needed */
+    top: 1605px;
+    left: 530px;
+    background-color: #BC171D; /* Color of the line */
+    border: none; /* No borders */
+    opacity: 0.08; /* Opacity level (adjust as needed) */
+    transform: rotate(-0deg); /* Angle of rotation (adjust as needed) */
+  }
+
+  .card-section {
+    height: 764px;
+    width: 100%;
+  }
+  .d-flex {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    padding-top: 20px;
+  }
+
+  .input-group-text {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    margin-top: 5px;
+
+    
+  }
+  .btn-custom {
+    background-color: #ffffff; /* White background */
+    color: #BC171D; /* Red text color */
+  }
+
+  .btn-custom:hover {
+    background-color: #BC171D; /* Red background on hover */
+    color: #ffffff; /* White text color on hover */
+  }
+  .unlock-container {
+    font-family: "Cako", Arial, sans-serif;
+  }
+  .card-section {
+    font-family: Arial, sans-serif;
+    background-color: #BC171D1A;
+  }
+  .oval-input {
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 365px;
+    height: 48px;
+  }
+  .login-button {
+    font-size: 20px;
+    font-family: monospace;
+    text-decoration: none;
+    color: #BC171D;
+    word-spacing: -10px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sign-up-btn {
+    background-color: #BC171D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    height: 50px;
+    margin-top: 12px;
+  }
+  @media (max-width: 767.98px) {
+  .navbar-nav {
+      text-align: center;
+      position: fixed;
+  }
+  .navbar-toggler {
+      margin-left: auto;
+  }
+  .logo-container {
+      position: static;
+      transform: none;
+      margin: 0 auto 10px;
+  }
+  .sign-up-btn {
+      width: 100%;
+      margin-top: 30px;
+  }
+  .oval-input {
+      width: calc(100% - 30px);
+  }
+  }
+  .picnotes-section {
+    width: 733px;
+    height: 602px;
+    position: absolute;
+    top: 180px;
+    left: 100px;
+    gap: 60px;
+    opacity: 1;
+    background-color: #F0F0F0;
+    padding: 60px;
+  }
+  .button {
+    width: 207px;
+    height: 58px;
+    background-color: #FF0000;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 20px; /* This will give you a pill shape */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1; /* Remove opacity: 0 to make the button visible initially */
+  }
+  .button:hover {
+    opacity: 1;
+  }
+  .button span {
+    margin-right: 10px;
+  }
+  .card-section {
+    height: 764px;
+    width: 100%;
+  }
+  h1 {
+    font-size: 48px;
+    color: #000;
+  }
+  h1 span {
+    color: #E74C3C;
+  }
+  p {
+    font-size: 18px;
+    color: #666;
+    margin-top: -20px;
+  }
+  .explore-button {
+    display: inline-block;
+    padding: 20px;
+    background-color: #BC171D;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 18px;
+    width:207px;
+    height:58px;
+    text-align:center;
+    padding-bottom:20px;
+    margin-top:30px
+  }
+  .explore-button:hover {
+    background-color: #BC171D;
+  }
+  .social-login {
+    margin-top: 40px;
+  }
+  .social-login svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+  }
+  .more-button {
+    background-color: #FDCEC8;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .d-flex {
+    display: flex;
+    align-items: center;
+  }
+  .form-control {
+    padding: 10px;
+    border-radius:20px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  body {
+    font-family: "Cako", Arial, sans-serif;
+
+  }
+  .card-header {
+    padding: 10px;
+    text-align: end;
+    background-color: #B8222E;
+  }
+  .btn-upload {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    color: #B8222E;
+  }
+  .custom-card {
+    margin: 30px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 25px;
+    background-color: #fff;
+  }
+  .card-body {
+    padding: 15px;
+    text-align: center;
+    position: relative;
+  }
+  .all-card {
+   background-color: #fde6e900;
+  }
+  .text-card {
+    width: 100%;
+    border: 2px solid #F8D7DA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #FFF5F5;
+    height: 100%;
+  }
+  .text-card h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F8D7DA;
+  }
+  .text-card p {
+    margin: 10px 0;
+    line-height: 1.5;
+    border-bottom: 1px solid #F8D7DA;
+    padding-bottom: 10px;
+  }
+  .card-group col-lg-12{
+    width: 70%;
+    border: 2px solid #F8D7DA;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #BC171D;
+    height: 100%;
+  }
+  .upload-card {
+    border: 2px solid #F8D7DA;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-family: Arial, sans-serif;
+    color: #000;
+    background-color: #FFF5F5;
+    height: 100%;
+  }
+  .header-container {
+    text-align: center;
+    background-color: #fde6e900;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .header-container h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-family: "Times New Roman", Times, serif;
+    color: #4A4A4A;
+  }
+  .header-container p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #6C757D;
+  }
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+  .step {
+      text-align: center;
+      max-width: 300px;
+  }
+  .circle {
+      width: 10px;
+      height: 10px;
+      background-color: #BC171D;
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+  }
+  .step h2 {
+      font-size: 1.5em;
+      color: #000;
+      margin-bottom: 10px;
+  }
+  .step p{
+      color: #333;
+      line-height: 1.5;
+  }
+  .main-heading {
+      font-family: Cako;
+      font-size: 80px;
+      font-weight: 400;
+      line-height: 96.02px;
+      text-align: left;
+  }
+  @media (max-width: 1200px) {
+  .main-heading {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-heading {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-heading {
+    font-size: 1.5rem;
+  }
+}
+
+  .fire{
+    width:27px;
+  }
+  .grid-img{
+    width:109%;
+    margin-top:-94px;
+  }
+
+</style>

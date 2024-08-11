@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates :password, length: {minimum: 8}, allow_nil: true
+  
 
   acts_as_voter
 
@@ -9,6 +10,8 @@ class User < ApplicationRecord
   has_one :first_visit, ->(u) { order(:started_at).where("started_at < ?", u.created_at) }, class_name: 'Ahoy::Visit'
 
   has_many :folders, dependent: :destroy
+  has_many :flashcards, dependent: :destroy
+  has_many :flashcard_sets, dependent: :destroy
 
   has_many :notes, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -48,16 +51,16 @@ class User < ApplicationRecord
 
   # ---------------------------------------------------------------------------------------
 
-  validates(:username, {
-      presence: {message: 'must exist'},
-      uniqueness: {message: 'already exist'},
-  })
+  # validates(:username, {
+  #     presence: {message: 'must exist'},
+  #     uniqueness: {message: 'already exist'},
+  # })
 
   validates(:first_name, {
       presence: {message: 'must exist'},
   })
 
-  validates :avatar, :presence => true, :unless => :skip_omni_avatar
+  # validates :avatar, :presence => true, :unless => :skip_omni_avatar
 
   validates(:last_name, {
       presence: {message: 'must exist'},
@@ -125,6 +128,11 @@ class User < ApplicationRecord
 
     user
   end
+  def about_me_minimum_words
+    if about_me.present? && about_me.split(/\s+/).size < 2
+      errors.add(:about_me, 'must contain at least 2 words')
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}" rescue nil
@@ -150,6 +158,10 @@ class User < ApplicationRecord
     end
 
 
+  end
+
+  def password_required?
+    super && provider.blank?
   end
 
 end

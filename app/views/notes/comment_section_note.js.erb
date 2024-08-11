@@ -1,0 +1,34 @@
+$("#profileDetails").html('<%=j render :partial => "partials/card_comment_like_note_modal", :locals => { :note => @note,:likes => @likes, :comments=>@comments}  %>');
+<% image_present  =  @note.card_comment_likes.last.user.avatar? rescue  false %>
+ <% if image_present %>
+$(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag @note.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%else%>
+ $(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%end %>
+$('#comment-modal<%=@note.id%>').modal('show')
+
+$("#noteContent").html('<%=j render :partial => "partials/card_comment_like_note_modal", :locals => { :note => @note,:likes => @likes, :comments=>@comments}  %>');
+<% image_present  =  @note.card_comment_likes.last.user.avatar? rescue  false %>
+ <% if image_present %>
+$(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag @note.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%else%>
+ $(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%end %>
+$('#comment-modal<%=@note.id%>').modal('show')
+
+
+$("#note-show").html('<%=j render :partial => "partials/card_comment_like_note_modal", :locals => { :note => @note,:likes => @likes, :comments=>@comments}  %>');
+<% image_present  =  @note.card_comment_likes.last.user.avatar? rescue  false %>
+ <% if image_present %>
+$(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag @note.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%else%>
+ $(".ed_tracker_msg_img<%=@note.id %>").html('<%= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
+ <%end %>
+$('#comment-modal<%=@note.id%>').modal('show')
+
+$(document).ready(function() {
+  window.kill_model = function() {
+    $('#test-modal').modal('show');
+  };
+});
+

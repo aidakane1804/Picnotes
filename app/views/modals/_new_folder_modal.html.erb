@@ -1,23 +1,28 @@
-<div class = "modal fade" id = 'newFolderModal' tabindex='-1' role = 'dialog' aria-labelledby = 'newFolderModalLabel' aria-hidden='true'>
-  <div class = 'modal-dialog' role = 'document'>
-    <div class = 'modal-content'>
-      <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'newFolderModalLabel' style = 'color: white;'> Create New Folder </h5>
-        <button type = 'button' class = 'close' style = 'color: white;' data-dismiss = 'modal' aria-label = 'Close'>
-          <span aria-hidden = 'true'> &times; </span>
+<div class="modal fade" id='newFolderModal' tabindex='-1' role='dialog' aria-labelledby='newFolderModalLabel' aria-hidden='true'>
+  <div class='modal-dialog' role='document' style='max-width: 450px; height: 200px; background-color: white; border-radius: 15px;'>
+    <div class='modal-content'>
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left: 33%; margin-right: auto; margin-top: 0rem;">Create New Folder</h5>
+        <button style="margin-top: -50px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
         </button>
       </div>
-
       <div>
         <%= simple_form_for Folder.new do |form| %>
           <div class = 'modal-body'>
-            <%= form.input :name %>
+          <%= form.label :name, "Name" %>
+          <%= form.input :name, label: false %>
           </div>
-          <div class = 'form-btn-container text-center new-note-btn'>
-            <%= form.button :submit, 'New Folder', :class => 'white-btn btn-width' %>
+          <div class="form-group" style="margin-top: 30px; margin-bottom: 30px;">
+            <%= form.button :submit, 'Save', class: 'btn btn-custom btn-block custom-btn-sm', style: 'width: 200px; height: 40px; margin-left: 30%; color:white !important;' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<script>
+  function kill_model() {
+    window.location.reload();
+  }
+</script>

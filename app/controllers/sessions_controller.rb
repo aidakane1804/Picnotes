@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  respond_to :html, :js
 
   def index
     @notes = current_user.following_by_type('Notes').order("created_at DESC")
@@ -9,8 +10,8 @@ class SessionsController < ApplicationController
   end
 
   def user_notes
-    @user = current_user
-    @notes = Note.where(user: @user)
+    @user = params[:user_id].present? ? User.find(params[:user_id]) : current_user
+    @notes = Note.where(user: @user).order(id: :asc)
     @count = 0
     my_array = []
     @notes.each do |favorite|
@@ -22,7 +23,18 @@ class SessionsController < ApplicationController
     session[:picnotes] = my_array
   end
 
+  # def user_notes
+  #   @user = current_user
+  #   @notes = Note.where(user: @user).limit(15)  # Limiting to 15 notes directly in the query
+  #   @note_titles = @notes.map(&:title_slug)     # Extracting title_slugs
+
+  #   respond_to do |format|
+  #     format.js   # This will respond to Ajax requests
+  #   end
+  # end
+
   def new
+    
   end
 
   def create
@@ -39,7 +51,10 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: 'Signed Out'
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Signed out successfully.' }
+      format.js   
+    end
   end
 
   private

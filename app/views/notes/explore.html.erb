@@ -1,0 +1,213 @@
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+  <%= render 'partials/navbar' %>
+<% end %>
+<div  class="row" id="noteContent"></div>
+<% @notes = @notes.where(archived: false) %>
+<div class='flex-center'>
+  <div class="notes-container">
+    <%= render @notes %>
+    <%= render @notesTagged %>
+
+  </div>
+</div>
+
+
+<style>
+
+.btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 50px;
+    background-color: white;
+    color: #bc171d;
+    text-decoration: none; /* Remove underline from links */
+    transition: background-color 0.3s ease;
+  }
+  .icon-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    text-align: center;
+    border: 1px solid grey;
+    margin: -10px;
+  }
+
+  .icon-container i {
+    font-size: 1rem;
+    color: #bc171d;
+    line-height: 40px; /* Center the icon vertically */
+  }
+
+  .foot-picnotes {
+    padding-left: 30px;
+  }
+
+  .list-unstyled li {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  .text-red {
+    color: #bc171d;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .container {
+    max-width: 1754px;
+    margin-bottom: 26px;
+  }
+  .search-icon svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }
+  .search-icon {
+    background-color: #BC171D;
+    padding: 5px;
+    border-radius:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px;
+  }
+
+  .form-control {
+    padding: 10px !important;
+    border-radius: 20px !important;
+    border: 1px solid #ccc !important;
+    outline: none;
+  }
+
+  .footer-div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fde6e900;
+  }
+
+  
+.custom-heart-icon {
+  color: red;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-containermyprofile {
+  position: relative;
+  overflow: hidden;
+}
+.card-picknote {
+  width: 330px;
+  border: none;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: #fff;
+  position: relative;
+  height: 268px;
+  margin-left: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-containermyprofile img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.image-containermyprofile:hover img {
+  transform: scale(1.1);
+}
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 1;
+}
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+  z-index: 1;
+}
+  #truncate-title{
+    margin-bottom:-7% !important;
+  }
+.hover-text {
+  margin-bottom:0rem;
+  margin-right: 12rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  text-decoration: none;
+
+}
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-end; /* Align items to the bottom */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.overlay-content {
+  margin-bottom: -17%;
+  display: flex;
+  flex-direction: column; /* Stack title and name vertically */
+  align-items: flex-start; /* Align items to the left */
+  margin-bottom: 10px; /* Add spacing between elements */
+}
+
+
+.icons {
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.icons span {
+  position: relative;
+  z-index: 3;
+}
+
+</style>
+
+<script>
+  function truncateText(id, maxLength) {
+    var element = document.getElementById(id);
+    if (element.textContent.length > maxLength) {
+      element.textContent = element.textContent.slice(0, maxLength) + '...';
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    truncateText('truncate-title', 20); // Adjust maxLength as needed
+    truncateText('truncate-name', 20);  // Adjust maxLength as needed
+  });
+</script>

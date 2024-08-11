@@ -20,6 +20,10 @@
 //= require_tree .
 //= require_tree ./channels
 
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+
 
 $(document).on('turbolinks:load', function () {
     $('.dropdown .dropdown-menu').on('click', 'a.dropdown-item', function () {

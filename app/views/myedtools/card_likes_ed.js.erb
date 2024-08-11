@@ -1,1 +1,1 @@
-$('.btn-rating<%=@myedtool.id%>').html('<%= link_to fa_icon('heart'), card_likes_destroy_ed_path(myedtool_id: @myedtool), remote:true, method: :delete %><%= @myedtool.card_likes.count %>')
+$('.btn-rating<%=@myedtool.id%>').html('<%= link_to image_tag("smallheart.png", alt: "Heart", height: "20px", width: "20px"), card_likes_destroy_ed_path(myedtool_id: @myedtool), remote: true, method: :delete %><%= @myedtool.card_likes.count %>');

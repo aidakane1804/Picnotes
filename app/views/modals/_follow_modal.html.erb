@@ -1,124 +1,172 @@
-<div class = "modal fade" id = 'followModal' tabindex='-1' role = 'dialog' aria-labelledby = 'editSessionModalLabel' aria-hidden='true'>
-  <div class = 'modal-dialog' role = 'document'>
-    <div class = 'modal-content'>
-      <div class = 'modal-header new-modal-header'>
-        <h5 class = 'modal-title' id = 'nationalityModal' style = 'color:white;'>  Follow Lifelong Learners </h5>
-        <button onClick="window.location.reload();" type = 'button' style = 'color: white;'class = 'close' data-dismiss = 'modal' aria-label = 'Close'>
-          <span aria-hidden = 'true'> &times; </span>
+<div class="modal fade" id='followModal' tabindex='-1' role='dialog' aria-labelledby='editSessionModalLabel'
+  aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
+        <h5 class="modal-title" id="editSessionModalLabel"
+          style="margin-left: 26%; margin-right: auto; margin-top: 2rem;">Follow Lifelong Learners</h5>
+        <button style="margin-top: -90px; margin-right: -23px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
         </button>
       </div>
       <div class="table-follow-modal">
-        <div id="result" style="margin-left: 5px;color: green;"></div>
-        <div class = 'modal-body conatiner' style = ' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
-          <table class="table-condensed">
-            <%= form_tag(user_search_feed_index_path, method: "get", remote: true) do %>
-              <%= text_field_tag :search, params[:search], placeholder: "Enter Name", id:"search-user"%>
-              <%#= submit_tag "Search" %>
-            <% end %>
-            <div id="search-results">
+        <div id="result" style="margin-left: 5px;color: green; overflow: auto;"></div>
+        <div class='modal-body conatiner'
+          style=' padding: 10px; border-radius: 0.25em; margin-top: 10px; margin-bottom: 10px;'>
+          <div style="max-height: 370px; overflow: auto; position: relative;">
+            <table class="table-condensed">
 
-            </div>
-            <div id="original-results">
-              <% top_user = top_writer%>
-              <% if !current_user.follow?(top_user) && current_user.id != top_user.id  %>
-                <tr id = <%= top_user.id * top_user.id%>>
-                  <td>  <%= top_user.first_name + " " + top_user.last_name %></td>
-                  <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= top_user.id %> id=<%= top_user.id %>> follow</button>
-                  </td>  </tr>
-              <%end%>
-              <% User.all.each do |user| %>
-                <% if user_signed_in? %>
-                  <% if current_user.id != user.id %>
-                    <% if !current_user.follow?(user) && !(user.id == top_user.id)  %>
-                      <tr id = <%= user.id * user.id%>>
-                        <td>  <%= user.full_name %></td>
-                        <td>   <button style="background: white;border: none;color: #3a5998;" class="follow" target= <%= user.id %> id=<%= user.id %>> follow</button>
-                        </td>  </tr>
-                    <% else%>
-                      <!--                          <button style="background: white;border: none;color: #3a5998;" class="unfollow" target1= <%#=user.id %> id=<%#=user.id %> > unfollow</button>-->
+              <form class="d-flex mx-2 position-relative">
+                <%= form_tag(feed_index_path, method: "get", remote: true, class: "d-flex mx-2 position-relative") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Enter name", id: "search-user", class: "form-control pl-4", style: "height: 1%;" %>
+                <div class="search-icon position-absolute" style="right: 4px; transform: translateY(-50%); cursor: pointer; z-index: 1; top: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+                    <path d="M 21 3 C 11.622998 3 4 10.623005 4 20 C 4 29.376995 11.622998 37 21 37 C 24.712383 37 28.139151 35.791079 30.9375 33.765625 L 44.085938 46.914062 L 46.914062 44.085938 L 33.886719 31.058594 C 36.443536 28.083 38 24.223631 38 20 C 38 10.623005 30.377002 3 21 3 z M 21 5 C 29.296122 5 36 11.703883 36 20 C 36 28.296117 29.296122 35 21 35 C 12.703878 35 6 28.296117 6 20 C 6 11.703883 12.703878 5 21 5 z"></path>
+                  </svg>
+                </div>
+              <% end %>
+              </form>
+
+
+              <div id="search-results"></div>
+              <div>
+                <div id="original-results">
+                  <% top_user = top_writer %>
+                  <% if !current_user.follow?(top_user) && current_user.id != top_user.id %>
+                  <tr id=<%= top_user.id * top_user.id %>>
+                    <td>
+                      <%= image_tag current_user.avatar.url || 'myavtar.png', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                      <%= top_user.first_name + " " + top_user.last_name %>
+                    </td>
+                    <td>
+                      <button style="background: white;border: none;color: #BC171D;" class="follow" target=<%= top_user.id %> id=<%= top_user.id %>> follow</button>
+                    </td>
+                  </tr>
+                  <% end %>
+                  <% User.all.each do |user| %>
+                    <% if user_signed_in? %>
+                    <% if current_user.id != user.id %>
+                    <% if !current_user.follow?(user) && !(user.id == top_user.id) %>
+                    <tr id=<%= user.id * user.id %>>
+                      <td >
+                        <%= image_tag 'myavtar.png', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                        <%= user.full_name %>
+                      </td>
+                      <td>
+                        <button style="background: white;border: none;color: #BC171D;" class="follow" target=<%= user.id %> id=<%= user.id %>> follow</button>
+                      </td>
+                    </tr>
+                    <% end %>
+                    <% end %>
                     <% end %>
                   <% end %>
-                <% end %>
-              <% end %>
-            </div>
-          </table>
+                </div>
+              </div>
+             
+
+            </table>
+          </div>
+
+          <div class="form-group" style="margin-top: 10px;">
+            <%= form_with url: feed_index_path, method: :get, local: true do %>
+              <button type="submit" class="btn btn-custom btn-block custom-btn-sm" style="color:white !important;">Done</button>
+            <% end %>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
+  
 </div>
 
+
+<script>
+  function kill_model() {
+    window.location.reload();
+  }
+</script>
+
 <style>
-  .bold{
-    color: #b8e314;
+  .bold {
+    color: #B8E314;
   }
   #search-user {
-      border: 1px solid;
-      border-radius: 5px;
-      margin-right: 3px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin-right: 3px;
+  }
+</style>
+<script>
+  $(document).ready(function () {
+    $('#search-user').on("input", function () {
+      var search_val = $('#search-user').val();
+      var sTimeOut = setTimeout(function () {
+        $.ajax({
+          type: "GET",
+          url: "feed/user_search",
+          // dataType:"json",
+          data: { search: search_val },
+          success: function (result) {
+            // console.log(result)
+            // alert(result);
+          }
+        })
+      }, 3000);
+    })
+  })
+  $(document).ready(function () {
+    $('.follow').click(function (event) {
+      var id = $(event.target).attr('target');
+      $('#result').html('<p>Request Completing </p>');
+      $.ajax({
+        url: '/followunfollow',
+        type: 'post',
+        async: false,
+        data: {
+          followed_id: id
+        },
+        success: function (request) {
+          $("#" + id).addClass("bold");
+          $('#result').html('<p> </p>');
+          $("#" + id * id).hide();
+          $("#" + id).hide();
+          $('#result').html('<p>Request Completed Successfully</p>');
+        },
+        error: function (xhr) {
+        }
+      });
+    })
+  });
+  $(document).ready(function () {
+    $('.unfollow').click(function (event) {
+      var id = $(event.target).attr('target1');
+      $.ajax({
+        url: '/unfollow',
+        type: 'post',
+        async: false,
+        data: {
+          id: id
+        },
+        success: function (request) {
+          $("#" + id).addClass("bold");
+        },
+        error: function (xhr) {
+        }
+      });
+    })
+  });
+</script>
+<style>
+  .search-iconfollow{
+    right: 15px;
+    top: 0.3%;
+    transform: translateY(-50%);
   }
 </style>
 
-<script >
-    $(document).ready(function () {
-        $('#search-user').on("input",function() {
-            var search_val = $('#search-user').val();
-            var sTimeOut = setTimeout(function () {
-              $.ajax({
-                  type:"GET",
-                  url:"feed/user_search",
-                  // dataType:"json",
-                  data: {search: search_val},
-                  success:function(result){
-                      // console.log(result)
-                      // alert(result);
-                  }
-              })
-            }, 3000);
-        })
-    })
-    $(document).ready(function () {
-        $('.follow').click(function (event) {
-            var id = $(event.target).attr('target');
-            $('#result').html('<p>Request Completing </p>');
 
-            $.ajax({
-                url: '/followunfollow',
-                type: 'post',
-                async: false,
-                data: {
-                    followed_id:id
-                },
-                success: function (request) {
 
-                    $("#"+id).addClass("bold");
-                    $('#result').html('<p> </p>');
-                    $("#"+ id*id).hide();
-                    $("#"+id).hide();
-                    $('#result').html('<p>Request Completed Successfully</p>');
-                },
-                error: function (xhr) {
-                }
-            });
-        })
-    });
 
-    $(document).ready(function () {
-        $('.unfollow').click(function (event) {
-            var id = $(event.target).attr('target1');
-            $.ajax({
-                url: '/unfollow',
-                type: 'post',
-                async: false,
-                data: {
-                    id:id
-                },
-                success: function (request) {
-                    $("#"+id).addClass("bold");
-                },
-                error: function (xhr) {
-                }
-            });
-        })
-    });
-</script>
+
+

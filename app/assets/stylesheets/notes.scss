@@ -92,7 +92,9 @@ body {
 }
 
 .note-arrow{
-  flex-basis: 10%;
+  flex-basis: 2%;
+  width:31px;
+  height:31px;
   text-align: center;
 }
 
@@ -321,10 +323,9 @@ body {
 
 .reference-tabs{
   display: flex;
-  width: 100%;
+  width: 75%;
   height: 50px;
   font-size: 15px;
-  border-bottom: thick $color-light-blue solid;
   justify-content: space-between;
   margin-bottom: 10px;
 }

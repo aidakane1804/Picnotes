@@ -45,7 +45,7 @@
   </section>
   <div class='profile-dashboard'>
     <div class="profile-menu">
-      <h2 style="font-size:19px"> <%= link_to 'My Feed', feed_index_path, class: "#{cp(feed_index_path)} profile-links" %> </h2>
+      <h2 style="font-size:19px"> <%= link_to 'My Feeds', feed_index_path, class: "#{cp(feed_index_path)} profile-links" %> </h2>
       <h2 style="font-size:19px"> <%= link_to 'My Picnotes', user_notes_session_path, class: "#{cp(user_notes_session_path)} profile-links" %>
         <span class='note-count'> <%= @user.notes.where(archived: false).count %> </span></h2>
       <h2 style="font-size:19px"> <%= link_to 'My Folders', folders_path(current_user), class: "#{cp(folders_path(current_user))} profile-links" %>

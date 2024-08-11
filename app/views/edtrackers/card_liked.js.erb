@@ -1,5 +1,5 @@
 
-$('.btn-rating<%=@selected_ed_tracker%>').html('<%= link_to fa_icon('heart'), card_liked_destroy_path(edtracker_id: @edtracker), remote:true, method: :delete %> <%=@edtracker.card_likes.count %>')
+$('.btn-rating<%= @selected_ed_tracker %>').html('<%= link_to (current_user_liked_card?(@edtracker) ? image_tag('smallheart.png', alt: 'Heart', style: "height: 20px; width: 20px; margin-right: 10px;") : image_tag('smallheart_o.png', alt: 'Heart Outline', style: "height: 20px; width: 20px; margin-right: 10px;")), card_liked_destroy_path(edtracker_id: @edtracker), remote: true, method: :delete %> <%= @edtracker.card_likes.count %>')
 $(".ed_tracker_likes<%=@selected_ed_tracker%>").empty();
 $(".ed_tracker_comments<%=@selected_ed_tracker%>").empty();
 $(".ed_tracker_likes<%=@selected_ed_tracker%>").html(<%= @edtracker.card_likes.count %>);

@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     member do
       put 'like', to: 'notes#upvote'
       put 'dislike', to: 'notes#downvote'
+
+
     end
     collection do
       get 'chat_us', to:'chats#index'
@@ -56,10 +58,28 @@ Rails.application.routes.draw do
     end
     resources :references, shallow: true, only: [:new, :create, :edit, :update, :destroy]
     resources :tags, only: [:create, :destroy]
-    resources :likes, shallow: true, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
     resources :dislikes, shallow: true, only: [:create, :destroy]
     post '/addfolder', to: 'notes#addfolder'
+    post '/create_new_folder', to: 'notes#create_new_folder'
+    post 'create_comment', on: :member
+    post 'comment_delete', on: :member
+
   end
+  get 'notes/:id/add_picnotes_to_folder', to: 'notes#add_picnotes_to_folder', as: 'add_picnotes_to_folder'
+  get 'comment_section_note', to:'notes#comment_section_note'
+  post 'card_liked' , to:'notes#card_liked'
+  delete 'card_liked_destroy' , to:'notes#card_liked_destroy'
+  post 'card_comment_likes' , to:'notes#card_comment_likes'
+
+
+
+
+
+
+
+  
+
   get 'terms-and-conditions', to: 'notes#terms_and_conditions'
   get 'guidelines', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
@@ -84,6 +104,7 @@ Rails.application.routes.draw do
   resources :feed, only: [:index] do
     collection do
       get :user_search
+      get :feed_index
     end
   end
 
@@ -107,13 +128,28 @@ Rails.application.routes.draw do
     resources :chats, only: [:index, :show, :create]
     resources :boards
   end
+  resources :flashcard_sets do
+    get 'new_field', on: :collection
+  end
+  get 'create_flashcard', to: 'flashcard_sets#create_flashcard'
 
   resources :favorite_notes, only: [:create, :destroy]
   get '/favorites', to: 'favorite_notes#index', as: 'favorites'
 
+  
+
   root 'notes#index'
+  get 'trending', to: 'home#trending'
   get 'index', to: 'home#index'
+  get 'user_search', to: 'home#user_search'
+  get '/index', to: 'note#home_pagination', as: 'home_pagination'
+  get 'notes_by_tag', to: 'home#notes_by_tag'
+  get 'explore', to: 'notes#explore'
   resources :password_resets, only: [:new, :create, :edit, :update]
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { 
+  omniauth_callbacks: 'users/omniauth_callbacks',
+  sessions: 'users/sessions'
+ }
+
 end

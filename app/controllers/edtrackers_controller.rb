@@ -29,7 +29,7 @@ class EdtrackersController < ApplicationController
     @edtracker.edtracker_type = params['edtracker_type']
     @edtracker.user = current_user
     if @edtracker.save!
-      redirect_to new_edtracker_path(id: current_user.id)
+      redirect_to feed_index_path(id: current_user.id)
     else
       flash[:error] = 'Could not save record inside Database, Please try again later!'
       redirect_to new_edtracker_path(id: current_user.id)
@@ -95,7 +95,7 @@ class EdtrackersController < ApplicationController
     @edtracker.update(edtracker_params)
     @edtracker.save
     end
-    redirect_to new_edtracker_path(id: current_user.id)
+    redirect_to feed_index_path
 
   end
 
@@ -106,6 +106,8 @@ class EdtrackersController < ApplicationController
       @edtracker.edtracker_type = params[:status]
       @edtracker.save
       end
+    else
+      redirect_to feed_index_path
     end
   end
 
@@ -135,7 +137,7 @@ class EdtrackersController < ApplicationController
   def destroy
     @edtracker = Edtracker.find(params[:id])
     @edtracker.destroy
-    redirect_to new_edtracker_path(id: current_user.id)
+    redirect_to feed_index_path(id: current_user.id)
   end
 
   private

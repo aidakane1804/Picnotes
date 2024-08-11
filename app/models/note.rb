@@ -14,6 +14,10 @@ class Note < ApplicationRecord
   belongs_to :user
 
   has_and_belongs_to_many :folders
+  has_many :card_comment_likes, dependent: :destroy
+  has_many :card_likes
+
+
 
 
   mount_uploader :image, ImageUploader
@@ -24,7 +28,7 @@ class Note < ApplicationRecord
 
   validates(:body, {
     presence: true,
-    length: {minimum: 5, maximum: 2000}
+    length: {minimum: 2, maximum: 2000}
   })
 
   validates(:image, {

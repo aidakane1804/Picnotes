@@ -9193,6 +9193,7 @@ input.btn-block[type="button"] {
   /* line 173, ../../.rvm/gems/ruby-2.4.5/gems/bootstrap-4.5.3/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-expand-lg .navbar-nav {
     flex-direction: row;
+    
   }
   /* line 176, ../../.rvm/gems/ruby-2.4.5/gems/bootstrap-4.5.3/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-expand-lg .navbar-nav .dropdown-menu {

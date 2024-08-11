@@ -3,21 +3,14 @@
     <% if !current_user.follow?(user) %>
       <%= form_for(current_user.active_relationships.build) do |f| %>
         <%= hidden_field_tag :followed_id, user.id %>
-        <%= f.submit 'Follow', class: 'blue-appearance-btn' %>
-        <a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida" style="pointer-events: none">
-          <i class="fa fa-envelope" style="font-size:36px; color: grey"></i>
-
-        </a><a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida"></a>
+        <%= f.submit 'Follow', class: 'blue-appearance-btn', style: 'background-color: #BC171D1A; color:#BC171D; border: none; padding: 5px 80px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 20px;height:38px;width:290px;' %>
+        <a rel="nofollow" data-method="post" href="/users/55/chats?other_user=2-aida" style="pointer-events: none; margin-left: 10px;">
+        </a>
       <% end %>
     <% else %>
-      <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
-                   html: { method: :delete }) do |f| %>
-        <%= f.submit 'Unfollow', class: "blue-appearance-btn" %>
-<!--        <a rel="nofollow" data-method="post" href="/users/<%#= current_user.id %>/chats?other_user=2-aida">-->
-<!--          <i class="fa fa-envelope" style="font-size:36px"></i>-->
-<!--        </a>-->
+      <%= form_for(current_user.active_relationships.find_by(followed_id: user.id), html: { method: :delete }) do |f| %>
+        <%= f.submit 'Unfollow', class: 'blue-appearance-btn', style: 'background-color: #BC171D1A; color:#BC171D; border: none; padding: 5px 80px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 20px; height:38px;width:290px;' %>
       <% end %>
     <% end %>
   <% end %>
 <% end %>
-

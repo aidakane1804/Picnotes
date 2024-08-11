@@ -17,6 +17,8 @@
 @import 'bootstrap';
 @import 'font-awesome';
 @import 'bootstrap.min';
+@import 'font-awesome-sprockets';
+
 @font-face {
     font-family: "icomoon";
     src: font-url("icomoon.eot?3cux5j");
@@ -288,7 +290,8 @@ a {
 }
 
 .board-test-image {
-  flex-basis: 50%;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .image-size {
@@ -540,14 +543,14 @@ button.header-blue-btn {
 .blue-appearance-btn {
   background-color: transparent;
   border: 0;
-  color: $color-blue;
+  color: #3F3F3F;
   cursor: pointer;
+  padding: 5px;
 }
 
 .blue-appearance-btn:hover {
-  color: $color-light-blue;
+  color: #3F3F3F;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .voilet-appearance-btn {
@@ -628,7 +631,7 @@ button.header-blue-btn {
 /* ---------------------------------------------------- Profile Links ---------------------------------------------------- */
 
 .profile-links {
-  color: #3b5998;
+  color: #707070;
 }
 
 a.profile-links:active {
@@ -654,7 +657,7 @@ a.profile-links:hover {
 }
 
 .note-count {
-  color: #3b5998;
+  color: #3F3F3F;
 }
 
 .picnotes-font {
@@ -1554,7 +1557,7 @@ button.blue-appearance-btn i.fa.fa-search {
 //   padding-left: 5px;
 // }
 .fa{
-  color: #3b5998;
+  color: black;
 }
 
 .facebook-button{
