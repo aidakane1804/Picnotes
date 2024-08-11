@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   # --------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------
   has_many :messages
   has_many :subscriptions
   has_many :chats, through: :subscriptions
@@ -58,11 +59,13 @@ class User < ApplicationRecord
 
   validates(:first_name, {
       presence: {message: 'must exist'},
+      presence: {message: 'must exist'},
   })
 
   # validates :avatar, :presence => true, :unless => :skip_omni_avatar
 
   validates(:last_name, {
+      presence: {message: 'must exist'},
       presence: {message: 'must exist'},
   })
 
@@ -78,6 +81,10 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true,
             format: VALID_EMAIL_REGEX
+            presence: true,
+            uniqueness: true,
+            format: VALID_EMAIL_REGEX
+
 
 
   # helper methods
