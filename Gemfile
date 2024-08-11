@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 # Heroku Ruby Version Production
-# ruby '2.4.5'
+ruby '2.5.8'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")

@@ -612,5 +612,8 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   will_paginate
 
+RUBY VERSION
+   ruby 2.5.8p224
+
 BUNDLED WITH
    2.2.19
