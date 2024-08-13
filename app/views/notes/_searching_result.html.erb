@@ -39,7 +39,7 @@
                       <p id="truncate-title" class="truncate" style="margin-bottom: -1px;">
                         <%= note.title %>
                       </p>
-                      <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
+                      <p id="truncate-name" class="truncate" >
                         <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
                       </p>
                     </div>
@@ -61,7 +61,7 @@
                   <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
                    <div class="hover-overlay">
                     <div class="overlay-content" style="margin-bottom: -17%;">
-                      <p id="truncate-title" class="truncate"style="margin-bottom: -1px;">
+                      <p id="truncate-title" class="truncate"     style="margin-bottom: -1px;">
                         <%= note.title %>
                       </p>
                       <p id="truncate-name" class="truncate"  style="margin-bottom: 14%;">
@@ -115,6 +115,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style > 
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
 .custom-heart-icon {
   color: red;
   background-color: red;
@@ -386,7 +391,6 @@
 
 .hamburger-menu #menu__toggle {
   opacity: 0;
-  position: absolute;
   width: 24px;
   height: 23px;
   }

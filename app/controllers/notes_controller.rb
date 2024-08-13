@@ -1,9 +1,78 @@
 class NotesController < ApplicationController
   before_action :find_note, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:add_picnotes_to_folder]
-  before_action :authorize_user!, except: [:index, :trending, :show,:create_comment, :comment_section_note, :comment_delete,:explore, :new, :create, :upvote, :community_guideline, :migrate_notes, :tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder, :for_schools]
+  before_action :authorize_user!, except: [:index, :trending,:notes_by_tag, :show,:create_comment, :comment_section_note, :comment_delete,:explore, :new, :create, :upvote, :community_guideline, :migrate_notes, :tl, :about_us, :contact_us, :freelance_research, :educational_organizations, :downvote, :addfolder, :empty, :terms_and_conditions, :what_is_picnotes, :message_from_the_founder, :sharing_your_knowledge, :communication_and_interaction, :optimizing_your_dashboard, :what_type_of_topics_you_should_share, :contact_us_form, :add_note_to_folder, :for_schools]
 
   def empty
+  end
+
+  def trending
+    if params[:search].present?
+      search_notes_and_users(params[:search])
+      logger.debug "Users Found: #{@users.inspect}"
+      respond_to do |format|
+        format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+        format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+      end
+    else
+     @notes = Note.order(created_at: :desc).all
+      respond_to do |format|
+        format.html
+        format.js { render partial: 'note' } 
+      end
+    end
+  end
+
+  def notes_by_tag
+    if params[:tag].present?
+      @tag_name = params[:tag]
+      @tags = @note.tags.order(created_at: :desc)
+      @references_unordered = Reference.where(note_id: @note.id)
+      # @references = @references_unordered.sort_by &:file_type
+      @references = @references_unordered.where(:file_type => 't')
+  
+      @textbooks = @references_unordered.where(:file_type => 't')
+      @videos = @references_unordered.where(:file_type => 'v')
+      @papers = @references_unordered.where(:file_type => 'p')
+      @sources = @references_unordered.where(:file_type => 's')
+  
+      @reference = Reference.new
+      @like = @note.likes.find_by_user_id current_user
+      @dislike = @note.dislikes.find_by_user_id current_user
+      @user = current_user
+      @folders = Folder.where(user: current_user)
+      @note_session = session[:picnotes] || []
+      @note_exist = @note_session.include? @note.title_slug
+      @previous_note = @note.next
+      @next_note = @note.previous
+      if @note_exist
+        @note_index = @note_session.find_index(@note.title_slug)
+        @note_index_next = @note_index + 1
+        @next_note = Note.where(title_slug: @note_session[@note_index_next]).first
+        @note_index_previous = @note_index - 1
+        @previous_note = Note.where(title_slug: @note_session[@note_index_previous]).first
+      end
+      @similar = Note.tagged_with(@note.tags, :any => true)
+      @meta_title = @note.title
+      @meta_description = @note.body.slice(0, 120) + "..."
+      @meta_keywords = @note.body
+      @meta_image = @note.image.url
+  
+      set_meta_tags title: @meta_title, description: @meta_description, keywords: @meta_keywords
+  
+      respond_to do |format|
+        format.js
+        format.html
+      end
+      @notes = Note.includes(:tags).where(tags: { name: @tag_name }).all
+    else
+      @notes = Note.paginate(page: params[:page], per_page: 20)
+    end
+
+    respond_to do |format|
+      format.js { render partial: 'note' }
+      format.html { render partial: 'note' }
+    end
   end
 
   def index
@@ -20,16 +89,6 @@ class NotesController < ApplicationController
         end
         @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
         @notes = @notes.where.not(id: @tagged)
-        # @count = 0
-        # my_array = []
-        # @notes.each do |favorite|
-        #   @count = @count + 1
-        #   if @count < 15
-        #     my_array.push favorite.title_slug
-        #   end1
-        # end
-        # session[:picnotes] = my_array
-
         search_notes_and_users(params[:search])
         logger.debug "Users Found: #{@users.inspect}"
         respond_to do |format|

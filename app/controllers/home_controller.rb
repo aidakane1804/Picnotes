@@ -28,31 +28,56 @@ class HomeController < ActionController::Base
   def trending
     if params[:search].present?
       search_notes_and_users(params[:search])
-      logger.debug "Users Found: #{@users.inspect}"
       respond_to do |format|
         format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
         format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
       end
-    else
-     @notes = Note.order(created_at: :desc).all
-      respond_to do |format|
-        format.html
-        format.js { render partial: 'notes' } 
-      end
     end
   end
+
+  # def index
+  #   if params[:search]
+  #     if params[:search].blank?
+  #       redirect_to search_index_path
+  #     else
+  #       @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
+  #       @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+  #       @tagged = Array.new
+  #       @notesTagged.each do |noteTag|
+  #         @tagged.push(noteTag.id)
+  #       end
+  #       @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
+  #       @notes = @notes.where.not(id: @tagged)
+  #       search_notes_and_users(params[:search])
+  #       logger.debug "Users Found: #{@users.inspect}"
+  #       respond_to do |format|
+  #         format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+  #         format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+  #       end
+  #     end
+  #     @searchresult = params[:search]
+  #   else
+  #     @users = []
+  #     @notesTagged = []
+  #     @tagged = []
+  #     @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 20)
+  #     Rails.logger.debug "Request format: #{request.format.symbol}"
+  #     respond_to do |format|
+  #       format.html
+  #       format.js
+  #     end
+  #   end
+  # end
 
   def notes_by_tag
     if params[:tag].present?
       @tag_name = params[:tag]
       @notes = Note.includes(:tags).where(tags: { name: @tag_name }).all
-    else
-      @notes = Note.paginate(page: params[:page], per_page: 20)
     end
 
     respond_to do |format|
       format.js { render partial: 'notes' }
-      format.html { render partial: 'notes' } # Assuming you want to render the same partial for HTML format
+      format.html { render partial: 'notes' }
     end
   end
 

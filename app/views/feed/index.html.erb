@@ -105,18 +105,21 @@
 <div class="profileDetails">
   <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: white">
     <div class="container-fluid">
-      <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-        <%= image_tag 'box.png', size: '18x18' %>
-        <span style="font-family:Aileron;font-weight:400;">My Feed</span>
-      <% end %>
-
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item"  style="width: 21%;">
+            <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'box.png', size: '18x18' %>
+              <span style="font-family:Aileron;font-weight:400;">My Feed</span>
+            <% end %>
+          </li>
 
-          <li class="nav-item">
+
+          <li class="nav-item"  style="width: 21%;">
             <%= link_to user_notes_session_path, remote: true, class: "profile-links nav-link", id: "my-picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'note.png', size: '24x24' %>
               <span style="font-family:Aileron;font-weight:400;">My Picnotes</span>
@@ -124,42 +127,42 @@
             <% end %>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item"  style="width: 21%;">
             <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'myfolder.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">
+              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">
               <%= @folders.count > 0 ? 'My Folders' : 'My Folder' %>
               </span>
               <span class='note-count'><%= "(#{@user.folders.count})" %></span>
             <% end %>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item"  style="width: 21%;">
             <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'heart.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">
+              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">
                 <%= @favorites.count > 0 ? 'My Favorites' : 'My Favorite' %>
               </span>
               <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
             <% end %>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" style="width: 21%;">
             <%= link_to create_flashcard_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-flashcards-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'flashcard.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">My Flashcards</span>
+              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My Flashcards</span>
             <% end %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item"  style="width: 21%;">
             <%= link_to new_edtracker_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtracker-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'attach.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">My EdTracker</span>
+              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My EdTracker</span>
             <% end %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item"  style="width: 21%;">
             <%= link_to new_myedtool_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtools-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'files.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">My EdTools</span>
+              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My EdTools</span>
             <% end %>
           </li>
         </ul>
@@ -965,11 +968,6 @@ margin-top:-94px;
     justify-content: center;
     align-items: center;
   }
-}
-
-.navbar-nav .nav-item {
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
   

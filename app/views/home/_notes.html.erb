@@ -1,34 +1,72 @@
 <div class="row">
-    <% @notes.each_slice(4) do |group| %>
-      <% group.each do |note| %>
-        <div class="column">
-          <% if note.image.url.present? %>
-            <div class="grid-image-container">
-              <%= image_tag note.image.url(:thumb), style: 'width: 100%;' %>
-              <div class="hover-overlay">
-              <div >
-              <div class="overlay-content">
-                <p id="truncate-title" class="truncate" style="margin-right: 50%;">
-                  <%= note.title %>
-                </p>
-                <div class="background-overlay" style="position: relative; z-index: 0;"></div>
-              </div>
-              <div class="overlay-content">
-                <p id="truncate-name" class="truncate"  style="margin-right: 50%;">
-                  <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
-                </p>              
-                <div class="background-overlay" style="position: relative; z-index: 0;"></div>
-              </div>              
-            </div>
-              </div>
-            </div>
-          <% else %>
-            <p>No image available</p>
-          <% end %>
-        </div>
-      <% end %>
+  <% @notes.each_slice(4) do |group| %>
+    <% group.each do |note| %>
+      <div class="column">
+        <% if note.image.url.present? %>
+          <div class="grid-image-container">
+            <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <figure class="image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag(note.image.url(:thumb), alt: note.title, class: "image") if note.image.present? %>
+                  <div class="hover-overlay">
+                    <div class="overlay-content">
+                      <p id="truncate-title" class="truncate" style="font-size: 14px;">
+                        <%= note.title %>
+                      </p>
+                      <p id="truncate-name" class="truncate">
+                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                      </p>
+                    </div>
+
+                    <div class="icons" style="margin-left: 52%;">
+                      <span style="display: flex;">
+                        <% if user_signed_in? %>
+                          <% unless current_user.favorited_notes.exists?(id: note.id) %>
+                            <span id='favorites-count-<%= note.id %>' style="margin-top: 60%;">
+                              <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'color: red !important;' %>
+                            </span>
+                          <% else %>
+                            <span id='favorites-count-<%= note.id %>'>
+                              <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                            </span>
+                          <% end %>
+                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
+                            <% end %>
+                          </span>
+                        <% else %>
+                          <span id='add-to-folder-<%= note.id %>'>
+                            <%= link_to new_user_path do %>
+                              <span id='favorites-count-<%= note.id %>'>
+                                <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
+                              </span>
+                            <% end %>
+                          </span>
+                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center; ">
+                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                              <%= image_tag 'folder-add.png',  style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
+                            <% end %>
+                          </span>
+                        <% end %>
+                      </span>
+                    </div>
+                  </div>
+                 
+
+                </div>
+              </figure>
+            <% end %>
+          </div>
+
+          
+        <% else %>
+          <p>No image available</p>
+        <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
+</div>
 
 
 
@@ -107,11 +145,11 @@
   transition: opacity 0.3s ease;
   padding: 1rem;
   box-sizing: border-box;
-   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
   z-index: 1;
   border-radius:20px;
 }
 .hover-overlay:hover {
+  background:none;
   opacity: 1;
 }
 .overlay-content {
@@ -129,18 +167,162 @@
 .icons {
   display: flex;
   gap: 10px;
+  z-index: 3;
 }
-.background-overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
+
+.icons span {
+  position: relative;
+  z-index: 3;
 }
-  </style>
+.custom-heart-icon {
+  color: red;
+  background-color: red;
+  border: 2px solid red;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 24px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-containermyprofile {
+  position: relative;
+  overflow: hidden;
+}
+.card-picknote {
+  width: 330px;
+  border: none;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: #fff;
+  position: relative;
+  height: 268px;
+  margin-left: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-containermyprofile img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+.image-containermyprofile:hover img {
+  transform: scale(1.1);
+}
+.image-containermyprofile:hover .hover-overlay {
+  opacity: 1;
+}
+.hover-text {
+  margin-bottom:0rem;
+  margin-right: 12rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+  text-decoration: none;
+
+}
+.hover-overlay {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-end; /* Align items to the bottom */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.overlay-content {
+  margin-bottom: -15%;
+  display: flex;
+  flex-direction: column; /* Stack title and name vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+.truncate {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+  color: white !important;
+  font-weight: bold;
+  font-size: 11px;
+  text-decoration: none;
+}
+/* Style for the row container */
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  margin: -5px; /* Adjust based on your spacing needs */
+}
+
+/* Style for each column */
+.column {
+  flex: 1 1 25%; /* Each column takes up 25% of the row */
+  padding: 5px; /* Add spacing between columns */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.grid-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure images fill their container */
+.grid-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Adjust for responsiveness if needed */
+@media (max-width: 1200px) {
+  .column {
+    flex: 1 1 33.33%; /* Three columns for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .column {
+    flex: 1 1 50%; /* Two columns for even smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .column {
+    flex: 1 1 100%; /* Single column for small screens */
+  }
+}
+
+
+</style>
+
+<script>
+  function truncateText(id, maxLength) {
+  var element = document.getElementById(id);
+  if (element && element.textContent.length > maxLength) {
+    element.textContent = element.textContent.slice(0, maxLength) + '...';
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  truncateText('truncate-title', 10); 
+  truncateText('truncate-name', 10);
+});
+
+</script>
+
 
 
 

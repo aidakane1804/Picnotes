@@ -13,7 +13,7 @@
                       <p id="truncate-title" class="truncate">
                         <%= note.title %>
                       </p>
-                      <p id="truncate-name" class="truncate">
+                      <p id="truncate-name" class="truncate" style="font-size: 12px;">
                         <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
                       </p>
                     </div>
@@ -31,7 +31,7 @@
                           <% end %>
                           <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 42px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
+                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
                             <% end %>
                           </span>
                         <% else %>
@@ -44,7 +44,7 @@
                           </span>
                           <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 42px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
+                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px;background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
                             <% end %>
                           </span>
                         <% end %>
@@ -184,8 +184,8 @@
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    truncateText('truncate-title', 20); // Adjust maxLength as needed
-    truncateText('truncate-name', 20);  // Adjust maxLength as needed
+    truncateText('truncate-title', 10); // Adjust maxLength as needed
+    truncateText('truncate-name', 10);  // Adjust maxLength as needed
   });
 </script>
 

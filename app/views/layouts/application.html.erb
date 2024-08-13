@@ -316,7 +316,7 @@
     }
 
     .love_iconss {
-        font-size: 30px !important;
+        font-size: 20px !important;
         color: #BC171D !important;
     }
 
@@ -327,22 +327,22 @@
     .orange_love .fa {
         color: #BC171D !important;
         background-color: white !important;
-        height: 37px !important;
-        width: 40px !important;
+        height: 27px !important;
+        width: 30px !important;
         border-radius: 50% !important;
-        font-size: 22px !important;
-        padding: 8px !important;
+        font-size: 18px !important;
+        padding: 5px !important;
         border: 1px solid gray;
     }
 
     .grey_love .fa {
         color: white !important;
         background-color: #BC171D !important;
-        height: 37px !important;
-        width: 40px !important;
+        height: 27px !important;
+        width: 30px !important;
         border-radius: 50% !important;
-        font-size: 22px !important;
-        padding: 9px !important;
+        font-size: 18px !important;
+        padding: 6px !important;
 
 
     }
@@ -470,9 +470,6 @@
     }
 
     @media screen and (max-width: 992px) {
-        .hamburger-menu {
-            display: none;
-        }
 
         .mobile-nav {
             position: fixed;
@@ -884,10 +881,10 @@
 
             <ul class="list-unstyled" style="margin-top: 5px;">
               <li>
-                <%= link_to 'Home', index_path, class: 'text-red text-decoration-none',style: "color: #BC171D !important;" %>
+                <%= link_to 'Home', root_path, class: 'text-red text-decoration-none',style: "color: #BC171D !important;" %>
               </li>
               <li>
-                <%= link_to 'About Us', about_us_path, class: 'text-dark text-decoration-none' %>
+                <%= link_to 'About Us', about_us_path, class: 'text-dark text-decoration-none'%>
               </li>
               <li>
               <%= link_to 'EdFluencers', edfluencers_path, class: 'text-dark text-decoration-none' %>
@@ -978,8 +975,8 @@
 
         </div>
       </div>
-    <div class="text-center p-3 sticky-bottom" style="background-color: #BC171D; color: white; margin-bottom: -100px; margin-right:-80px;  margin-left:-80px; height: 70 font-size: 20px ">
-      Copyright@2024. All rights reserved
+    <div class="text-center p-3 sticky-bottom" style="background-color: #BC171D; color: white; margin-bottom: -100px; margin-right:-80px;  margin-left:-80px; height: 9%; font-size: 20px ">
+    Copyright: © 2024 Picnotes Learnings Ltd. All Rights Reserved.     
     </div>
   </footer>
 </div>
@@ -988,6 +985,12 @@
 
 </body>
 <style>
+    
+    html, body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
     body {
         padding-bottom: 0px !important;
     }
