@@ -31,7 +31,7 @@
                           <% end %>
                           <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
+                              <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px; background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
                             <% end %>
                           </span>
                         <% else %>
@@ -44,7 +44,7 @@
                           </span>
                           <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px;background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
+                              <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px;background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
                             <% end %>
                           </span>
                         <% end %>
