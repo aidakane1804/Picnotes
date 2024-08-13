@@ -1,109 +1,111 @@
-<% if user_signed_in? %>
-  <%= render 'partials/navbarfeed' %>
-<% else %>
-  <%= render 'partials/navbar' %>
-<% end %>
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-/>
+  <body>
+  <% if user_signed_in? %>
+    <%= render 'partials/navbarfeed' %>
+  <% else %>
+    <%= render 'partials/navbar' %>
+  <% end %>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+  />
 
-<% if @searchresult %>
-  <div style='text-align: center; margin-top: 30px; width: 100%;'>
-    <p>Results for <%= @searchresult %></p>
-  </div>
-<% end %>
+  <% if @searchresult %>
+    <div style='text-align: center; margin-top: 30px; width: 100%;'>
+      <p>Results for <%= @searchresult %></p>
+    </div>
+  <% end %>
 
-<% @notes = @notes.where(archived: false) %>
+  <% @notes = @notes.where(archived: false) %>
 
-<% if @notes.empty? && @users.empty? %>
-  <div style='text-align: center; margin-top: 30px; width: 100%; height: 35%; margin-top: 13%;font-size: 20px;'>
-    <p>No results found</p>
-  </div>
-<% end %>
+  <% if @notes.empty? && @users.empty? %>
+    <div style='text-align: center; margin-top: 30px; width: 100%; height: 35%; margin-top: 13%;font-size: 20px;'>
+      <p>No results found</p>
+    </div>
+  <% end %>
 
-<div class='flex-center'>
-  <div class="notes-container" id="notes-div">
-    <% @notes.each do |note| %>
-      <div class="note-card">
-        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
-            <%= link_to(note_path(note.slug), { remote: true }) do %>
-              <figure class="card-picknote card-product image-containermyprofile">
-                <div class="image-containermyprofile">
-                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
-                  <div class="hover-overlay">
-                    <div class="overlay-content" style="margin-bottom: -17%;">
-                      <p id="truncate-title" class="truncate" style="margin-bottom: -1px;">
-                        <%= note.title %>
-                      </p>
-                      <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
-                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
-                      </p>
-                    </div>
-                   
-                  </div>
-                </div>
-              </figure>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <% @notesTagged.each do |note| %>
-      <div class="note-card">
-        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
-            <%= link_to(note_path(note.slug), { remote: true }) do %>
-              <figure class="card-picknote card-product image-containermyprofile">
-                <div class="image-containermyprofile">
-                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
-                   <div class="hover-overlay">
-                    <div class="overlay-content" style="margin-bottom: -17%;">
-                      <p id="truncate-title" class="truncate"     style="margin-bottom: -1px;">
-                        <%= note.title %>
-                      </p>
-                      <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
-                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
-                      </p>
+  <div class='flex-center'>
+    <div class="notes-container" id="notes-div">
+      <% @notes.each do |note| %>
+        <div class="note-card">
+          <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+              <%= link_to(note_path(note.slug), { remote: true }) do %>
+                <figure class="card-picknote card-product image-containermyprofile">
+                  <div class="image-containermyprofile">
+                    <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                    <div class="hover-overlay">
+                      <div class="overlay-content" style="margin-bottom: -17%;">
+                        <p id="truncate-title" class="truncate" style="margin-bottom: -1px;">
+                          <%= note.title %>
+                        </p>
+                        <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
+                          <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                        </p>
+                      </div>
+                    
                     </div>
                   </div>
-                </div>
-              </figure>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div id="searchDetails"></div>
-
-<div class="row">
-  <div class="notes-container" style="margin-top: 20px; display: flex; margin-left: 20px;">
-    <% @users.each do |user| %>
-      <div class='note-container' style="align-content: center; text-align: center;">
-        <%= link_to user_path(user) do %>
-          <% if user.avatar? %>
-            <%= image_tag user.avatar.url(:thumb) %>
-          <% else %>
-            <%= image_tag 'myavtar.png', style: 'width: 80%;' %>
+                </figure>
+              <% end %>
+            </div>
           <% end %>
-          <div class='note-container-text' style='text-align: center !important;'>
-            <p class='mobile-font note-btn-font' style='text-transform: capitalize'><%= user.username %></p>
-            <p class='mobile-font note-btn-font'><%= user.first_name %> <%= user.last_name %></p>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+      <% @notesTagged.each do |note| %>
+        <div class="note-card">
+          <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+              <%= link_to(note_path(note.slug), { remote: true }) do %>
+                <figure class="card-picknote card-product image-containermyprofile">
+                  <div class="image-containermyprofile">
+                    <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                    <div class="hover-overlay">
+                      <div class="overlay-content" style="margin-bottom: -17%;">
+                        <p id="truncate-title" class="truncate"     style="margin-bottom: -1px;">
+                          <%= note.title %>
+                        </p>
+                        <p id="truncate-name" class="truncate" style="margin-bottom: 14%;">
+                          <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+  <div id="searchDetails"></div>
+
+  <div class="row">
+    <div class="notes-container" style="margin-top: 20px; display: flex; margin-left: 20px;">
+      <% @users.each do |user| %>
+        <div class='note-container' style="align-content: center; text-align: center;">
+          <%= link_to user_path(user) do %>
+            <% if user.avatar? %>
+              <%= image_tag user.avatar.url(:thumb) %>
+            <% else %>
+              <%= image_tag 'myavtar.png', style: 'width: 80%;' %>
+            <% end %>
+            <div class='note-container-text' style='text-align: center !important;'>
+              <p class='mobile-font note-btn-font' style='text-transform: capitalize'><%= user.username %></p>
+              <p class='mobile-font note-btn-font'><%= user.first_name %> <%= user.last_name %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'partials/footer' %>
 </div>
-
-<%= render 'partials/footer' %>
-
+</body>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- jQuery -->
@@ -116,6 +118,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style > 
+
 .custom-heart-icon {
   color: red;
   background-color: red;

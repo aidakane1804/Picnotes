@@ -44,62 +44,86 @@
   <div style = "display: flex; align-items: center;">
     <div class='note-arrow'>
       <% if @previous_note %>
-        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -13rem;'), note_path(@previous_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
+        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -5rem'), note_path(@previous_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
       <% end %>
     </div>
 
-    <div class="modal-dialog modal-lg" style="max-height: 895px; max-width: 1300px;">
+    <div class="modal-dialog modal-lg" style="max-height: 895px; max-width: 1056px; margin-top: 6% !important;">
       <div class="modal-content">
         <div class="modal-header-note">
-          <div class="note-avatar">
+          <div class="note-avatar" style="width: 60%;" >
             <% if note.user.avatar? %>
               <%= image_tag note.user.avatar.url(:thumb), class: 'avatar', style: 'margin-right: 15px;' %>
             <% else %>
               <%= image_tag 'myavtar.png', class: 'avatar' %>
             <% end %>
             <div class="note-author">
-              <h4>
+              <h6>
                 <% if current_user == note.user %>
                   <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", feed_index_path, class: 'blue-appearance-btn' %></p>
                 <% else %>
                   <p><%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), class: 'blue-appearance-btn' %></p>
                   <p> <%= render '/components/follow_button_details_page', :user => note.user %> </p>
                 <% end %>
-              </h4>
+              </h6>
               <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
           </div>
-          <div style="margin-left:43%;">
-          <button class="btn btn-add-folder" data-toggle="modal" data-target="#add_note_to_folder" style="margin-bottom: 3% ">
-          <%= image_tag "folder-add-2.png", style: "margin-right:10px; height: 25px; width: 25px;" %> Add to Folder
-         </button> 
-         </div>
-          <div>   
-            <% if user_signed_in? && can?(:favorite, @note)%>
-              <% unless current_user.favorited_notes.exists?(id: @note.id) %>
-              <span class="favorites-count" style="padding: 0px;">
-                <%= link_to fa_icon('heart'), favorite_notes_path(note_id: @note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'display: inline-block; margin-bottom: 5px;' %>
-              </span>
-              
-                        
+          <div style="width: 40%; display: flex; padding: 0px 1%;">
+            <div style="width: 50%;">
+              <% if user_signed_in? %>
+                <button class="btn btn-add-folder" data-toggle="modal" data-target="#add_note_to_folder" style="margin-bottom: 3%;">
+                  <%= image_tag "folder-add-2.png", style: "margin-right:10px; height: 25px; width: 25px;" %> Add to Folder
+                </button>
               <% else %>
-                <span id="favorites-count-<%= @note.id %>" class="favorites-count">
-                  <%= link_to fa_icon('heart'), favorite_note_path(@note), remote: true, class: 'orange_love love_iconss', method: :delete %>
-                </span>
+                <%= link_to new_user_path, class: "btn btn-add-folder", style: "margin-bottom: 3%;" do %>
+                  <%= image_tag "folder-add-2.png", style: "margin-right:10px; height: 25px; width: 25px;" %> Add to Folder
+                <% end %>
               <% end %>
-            <% else %>
-            <%= fa_icon('heart', class: 'grey_love love_iconssss') %> 
-
-            <% end %>
-            <%= link_to "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px;' do %>
-              <%= image_tag "red-folder.png", style: "border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right:8px; margin-bottom: 3%" %>
-            <% end %>            
-            <%= link_to comment_section_note_path(id: note.id), data: { toggle: "modal", target: "#comment-modal#{note.id}", previous_modal: "#test-modal" } do %>
-            <%= fa_icon 'comment', class: "comment-icon-ed-tracker#{note.id}", style: "color: #BC171D; border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right: 20px; font-size: 1.5em;" %>
-          <% end %>   
+            </div>
+            
+            <div style="width: 50%; margin-top: 2%;">
+              <% if user_signed_in? && can?(:favorite, @note) %>
+                <% unless current_user.favorited_notes.exists?(id: @note.id) %>
+                  <span class="favorites-count" style="padding: 0px;">
+                    <%= link_to fa_icon('heart'), favorite_notes_path(note_id: @note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'display: inline-block; margin-bottom: 5px;' %>
+                  </span>
+                <% else %>
+                  <span id="favorites-count-<%= @note.id %>" class="favorites-count">
+                    <%= link_to fa_icon('heart'), favorite_note_path(@note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                  </span>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_path do %>
+                <%= fa_icon('heart', class: 'grey_love love_iconssss', style: 'height: 29.5px; font-size: 17px !important;') %>
+                <% end %>
+              <% end %>
+          
+              <% if user_signed_in? %>
+                <%= link_to "http://www.twitter.com/share?url=http://www.picnotes.org/notes/#{note.id}", target: :_blank, class: 'blue-appearance-btn', style: 'margin-left: 7px;' do %>
+                  <%= image_tag "red-folder.png", style: "border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right:8px; margin-bottom: 5%;height: 28px;" %>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_path, class: 'blue-appearance-btn', style: 'margin-left: 7px;' do %>
+                  <%= image_tag "red-folder.png", style: "border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right:8px; margin-bottom: 5%;height: 28px;" %>
+                <% end %>
+              <% end %>
+          
+              <% if user_signed_in? %>
+                <%= link_to comment_section_note_path(id: note.id), data: { toggle: "modal", target: "#comment-modal#{note.id}", previous_modal: "#test-modal" } do %>
+                  <%= fa_icon 'comment', class: "comment-icon-ed-tracker#{note.id}", style: "color: #BC171D; border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right: 20px; font-size: 18px;" %>
+                <% end %>
+              <% else %>
+                <%= link_to new_user_path do %>
+                  <%= fa_icon 'comment', class: "comment-icon-ed-tracker#{note.id}", style: "color: #BC171D; border: 1px solid #707070; border-radius: 50%; padding: 5px; margin-right: 20px; font-size: 18px;" %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
+          
+          
         </div>
               
         <div class="modal-body" style="padding: 1rem 0px !important;">
@@ -112,7 +136,7 @@
             <div class="col-md-6">
               <h1 class="note-title"><%= note.title %></h1>
               <p class="note-content"><%= note.body %></p>
-              <div class="tags" style="margin-left: 6%;">
+              <div class="tags">
                 <% note.tags.each do |tag| %>
                   <span style="color: #BC171D; background-color: white;><%= tag.name %></span>
                 <% end %>
@@ -145,10 +169,10 @@
                 <div style="display:flex;">
                   <h2 style="margin-right:60px;">Resources</h2>
                   <div class='reference-tabs'>
-                    <button class='reference-tab-note' onclick='openReference("Textbooks")'> Book: <%= @textbooks.count %> </button>
-                    <button class='reference-tab-note' onclick='openReference("Videos")'> Video: <%= @videos.count %> </button>
-                    <button class='reference-tab-note' onclick='openReference("Papers")'> Article: <%= @papers.count %> </button>
-                    <button class='reference-tab-note' onclick='openReference("Sources")'> Image: <%= @sources.count %> </button>
+                    <button class='reference-tab-note' style='font-size: 13px;' onclick='openReference("Textbooks")'> Book: <%= @textbooks.count %> </button>
+                    <button class='reference-tab-note' style='font-size: 13px;' onclick='openReference("Videos")'> Video: <%= @videos.count %> </button>
+                    <button class='reference-tab-note' style='font-size: 13px;'  onclick='openReference("Papers")'> Article: <%= @papers.count %> </button>
+                    <button class='reference-tab-note' style='font-size: 13px;' onclick='openReference("Sources")'> Image: <%= @sources.count %> </button>
                   </div>
                 </div>
                                 
@@ -185,48 +209,49 @@
                           <%= link_to(note_path(note), remote: true) do %>
                             <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
                             <div class="hover-overlay">
-                              <div class="overlay-content">
-                                <p class="hover-text"><%= note.title %></p>
-                                <div class="background-overlay"></div>
+                              <div class="overlay-content" style="margin-bottom: -17%;">
+                              
+                                <p id="truncate-title" class="truncate">
+                                  <%= note.title %>
+                                </p>
+                                <p id="truncate-name" class="truncate" style="font-size: 12px;">
+                                  <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                                </p>
                               </div>
-                              <div class="icons">
-                                <span style="float: right">
+                              <div class="icons" style="display: flex; justify-content: flex-end;">
+                                <span style="display: flex;">
                                   <% if user_signed_in? %>
                                     <% unless current_user.favorited_notes.exists?(id: note.id) %>
-                                    <span id='favorites-count-<%= note.id %>'>
-                                    <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconsss', method: :post %>
-                                  </span>
-                                  <% else %>
                                       <span id='favorites-count-<%= note.id %>'>
-                                        <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconsss', method: :delete %>
+                                        <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'color: red !important;' %>
                                       </span>
-                                      <% end %>
-                                    <span id='add-to-folder-<%= note.id %>'>
+                                    <% else %>
+                                      <span id='favorites-count-<%= note.id %>'>
+                                        <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                                      </span>
+                                    <% end %>
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                                       <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                                        <%= image_tag 'folder-add.png', style: 'width: 40px; height: 35px;background-color: #BC171D ; border-radius:50%; margin-bottom:19%;' %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%;' %>
                                       <% end %>
                                     </span>
-                                  <% end %>
-                                  <% unless user_signed_in? %>
-                                    <span id='add-to-folder-
-                                      <% note.id %>'>
+                                  <% else %>
+                                    <span id='add-to-folder-<%= note.id %>'>
                                       <%= link_to new_user_path do %>
                                         <span id='favorites-count-<%= note.id %>'>
                                           <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
-                                        </span>                  
+                                        </span>
                                       <% end %>
-                                    
-
                                     </span>
-                                    <span id='add-to-folder-
-                                  <% note.id %>'>
-                                    <%= link_to new_user_path do %>
-                                      <%= image_tag 'folder-add.png', style: 'width: 35px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
-                                    <% end %>
-                                
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                                      <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%;' %>
+                                      <% end %>
+                                    </span>
                                   <% end %>
-                                  </span>
-                                </div>
+                                </span>
+                              </div>
+                            </div>
                            <% end %>
                         </div>
                       </figure>
@@ -241,7 +266,7 @@
     </div>
     <div class='note-arrow'>
       <% if @next_note %>
-        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -13rem;'), note_path(@next_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
+        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -5rem;'), note_path(@next_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
       <% end %>
     </div>
   </div> 
@@ -530,6 +555,18 @@
     window.location.reload();
   }
 
+  function truncateText(id, maxLength) {
+    var element = document.getElementById(id);
+    if (element.textContent.length > maxLength) {
+      element.textContent = element.textContent.slice(0, maxLength) + '...';
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    truncateText('truncate-title', 20); // Adjust maxLength as needed
+    truncateText('truncate-name', 20);  // Adjust maxLength as needed
+  });
+
 
   $(document).ready(function() {
     function openPreviousModal() {
@@ -550,14 +587,14 @@
 <style>
 .love_iconssss{
   padding: 7px;
-        border-radius: 50%;
-        font-size: 22px !important;
-        color: #BC171D !important;
-        border: 1px solid grey;
+  border-radius: 50%;
+  font-size: 22px !important;
+  color: #BC171D !important;
+  border: 1px solid grey;
 }
 
 .modal-content {
-  padding: 20px;
+  padding: 3px;
   padding-left:50px;
   padding-right:50px;
   
@@ -605,7 +642,17 @@
 .image-containermyprofile:hover .hover-overlay {
   opacity: 1;
 }
+.hover-text {
+  margin-bottom:0rem;
+  margin-right: 12rem;
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  margin-top:0px !important;
+  text-decoration: none;
 
+}
 .hover-overlay {
   position: absolute;
   top: 70%;
@@ -613,37 +660,43 @@
   width: 100%;
   height: 30%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: flex-end; /* Align items to the bottom */
   opacity: 0;
   transition: opacity 0.3s ease;
   padding: 1rem;
   box-sizing: border-box;
   z-index: 2;
-  align-items: flex-end;
 }
+
 .overlay-content {
-  width: 100%;
+  margin-bottom: -17%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Stack title and name vertically */
+  align-items: flex-start; /* Align items to the left */
+  margin-bottom: 10px; /* Add spacing between elements */
 }
 
-.background-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 90%);
-  z-index: 1;
+.truncate {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+  color: white !important;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
 }
-
 
 .icons {
   display: flex;
   gap: 10px;
+  z-index: 3;
+}
+
+.icons span {
+  position: relative;
   z-index: 3;
 }
   .image-containermyprofile img {
@@ -685,7 +738,6 @@
 }
 .modal-header-note {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -795,7 +847,6 @@
   display: flex;
   margin-top: 20px;
   width:50%;
-  margin-left:-6%
 }
 
 .like-tab {
@@ -824,7 +875,7 @@
   border: 1px solid #e0e0e0;
   padding: 20px;
   border-radius: 10px;
-  width: 600px !important;
+  width: 500px !important;
   margin: auto;
   margin-top:30px;
 }

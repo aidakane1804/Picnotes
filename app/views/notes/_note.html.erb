@@ -4,8 +4,8 @@
       <div class="image-containermyprofile">
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
          <div class="hover-overlay">
-                    <div class="overlay-content" style="margin-bottom: -17%;">
-                      <p id="truncate-title" class="truncate">
+                    <div class="overlay-content" style="margin-bottom: -25%;">
+                      <p id="truncate-title" class="truncate" style="font-size: 13px;">
                         <%= note.title %>
                       </p>
                       <p id="truncate-name" class="truncate">
@@ -26,7 +26,7 @@
                           <% end %>
                           <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 42px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
+                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
                             <% end %>
                           </span>
                         <% else %>
@@ -37,9 +37,9 @@
                               </span>
                             <% end %>
                           </span>
-                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center; ">
                             <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 42px; height: 35px; background-color: #BC171D; border-radius: 50%;' %>
+                              <%= image_tag 'folder-add.png',  style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
                             <% end %>
                           </span>
                         <% end %>
@@ -149,7 +149,7 @@
   max-width: 20ch;
   color: white !important;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 11px;
   text-decoration: none;
 }
 
@@ -168,14 +168,15 @@
 
 <script>
   function truncateText(id, maxLength) {
-    var element = document.getElementById(id);
-    if (element.textContent.length > maxLength) {
-      element.textContent = element.textContent.slice(0, maxLength) + '...';
-    }
+  var element = document.getElementById(id);
+  if (element && element.textContent.length > maxLength) {
+    element.textContent = element.textContent.slice(0, maxLength) + '...';
   }
+}
 
-  document.addEventListener("DOMContentLoaded", function() {
-    truncateText('truncate-title', 20); // Adjust maxLength as needed
-    truncateText('truncate-name', 20);  // Adjust maxLength as needed
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  truncateText('truncate-title', 10); 
+  truncateText('truncate-name', 10);
+});
+
 </script>
