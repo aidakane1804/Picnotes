@@ -4,7 +4,8 @@
       <div class="image-containermyprofile">
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
          <div class="hover-overlay">
-                    <div class="overlay-content" style="margin-bottom: -25%;">
+                     <div class="overlay-content" style="margin-bottom: -17%;">
+                      <p id="truncate-title" class="truncate">
                       <p id="truncate-title" class="truncate" style="font-size: 13px;">
                         <%= note.title %>
                       </p>
@@ -13,38 +14,38 @@
                       </p>
                     </div>
                     <div class="icons" style="display: flex; justify-content: flex-end;">
-                      <span style="display: flex;">
-                        <% if user_signed_in? %>
-                          <% unless current_user.favorited_notes.exists?(id: note.id) %>
-                            <span id='favorites-count-<%= note.id %>'>
-                              <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'color: red !important;' %>
-                            </span>
-                          <% else %>
-                            <span id='favorites-count-<%= note.id %>'>
-                              <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
-                            </span>
-                          <% end %>
-                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
-                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
-                            <% end %>
-                          </span>
-                        <% else %>
-                          <span id='add-to-folder-<%= note.id %>'>
-                            <%= link_to new_user_path do %>
-                              <span id='favorites-count-<%= note.id %>'>
-                                <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
-                              </span>
-                            <% end %>
-                          </span>
-                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center; ">
-                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png',  style: 'width: 30px; height: 25px; margin-bottom:7%; background-color: #BC171D; border-radius: 50%;' %>
-                            <% end %>
-                          </span>
-                        <% end %>
-                      </span>
-                    </div>
+                                <span style="display: flex;">
+                                  <% if user_signed_in? %>
+                                    <% unless current_user.favorited_notes.exists?(id: note.id) %>
+                                      <span id='favorites-count-<%= note.id %>'>
+                                        <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'color: red !important;' %>
+                                      </span>
+                                    <% else %>
+                                      <span id='favorites-count-<%= note.id %>'>
+                                        <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
+                                      </span>
+                                    <% end %>
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                                      <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                                        <%= image_tag 'folder-add.png', style: ' height: 38px !important; width: 39px !important; background-color: #BC171D; border-radius: 50%;' %>
+                                      <% end %>
+                                    </span>
+                                  <% else %>
+                                    <span id='add-to-folder-<%= note.id %>'>
+                                      <%= link_to new_user_path do %>
+                                        <span id='favorites-count-<%= note.id %>'>
+                                          <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
+                                        </span>
+                                      <% end %>
+                                    </span>
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                                      <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
+                                        <%= image_tag 'folder-add.png', style: 'height: 38px !important; width: 39px !important; background-color: #BC171D; border-radius: 50%;' %>
+                                      <% end %>
+                                    </span>
+                                  <% end %>
+                                </span>
+                              </div>
                   </div>
       </div>
     </figure>
