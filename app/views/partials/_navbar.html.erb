@@ -39,8 +39,8 @@
         </li>
       </ul>
       <div class="logo-container">
-        <%= link_to root_path do %> <%= image_tag 'logo.png', class: 'nav-logo',
-        style: 'margin-left: 0.5%;' %> <% end %>
+        <%= link_to root_path do %> <%= image_tag 'logo-clean.png', class: 'nav-logo',
+        style: "margin-left: 0.5%; width: 100%; height: 5rem;" %> <% end %>
       </div>
       <form id="search-form" action="<%= root_path %>" method="get">
         <%= text_field_tag :search, params[:search], placeholder: "Search here",

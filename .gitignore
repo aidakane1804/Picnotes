@@ -29,3 +29,5 @@ server.pass.key
 /.generators
 /.rakeTasks
 /.idea/
+.DS_Store
+**/.DS_Store
