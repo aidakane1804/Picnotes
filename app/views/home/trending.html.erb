@@ -61,69 +61,6 @@
 
 <style>
 
-.hamburger-menu {
-    right: 30px;
-    z-index: 4;
-    margin-right: 18px;
-    margin-top:9px;
-}
-
-.hamburger-menu #menu__toggle {
-opacity: 0;
-position: absolute;
-width: 24px;
-height: 23px;
-}
-
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
-transform: rotate(45deg);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
-top: 0;
-transform: rotate(0);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
-top: 0;
-transform: rotate(90deg);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__box {
-visibility: visible;
-left: auto;
-right: -40px;
-z-index: 99999;
-}
-.hamburger-menu .menu__btn {display: none; right: 0;}
-
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span {
-transform: rotate(45deg);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::before {
-top: 0;
-transform: rotate(0);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__btn > span::after {
-top: 0;
-transform: rotate(90deg);
-}
-.hamburger-menu #menu__toggle:checked ~ .menu__box {
-visibility: visible;
-left: auto;
-right: -40px;
-z-index: 99999;
-}
-
-.hamburger-menu .menu__btn {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 34px;
-  left: auto;
-  width: 24px;
-  height: 23px;
-  cursor: pointer;
-  z-index: -1;
-  margin-right: 30px;
-}
 
 .menu__btn > span,
 .menu__btn > span::before,
@@ -575,9 +512,11 @@ text-decoration: none;
               text-align: center;
               position: fixed;
           }
+          /*
           .navbar-toggler {
               margin-left: auto;
           }
+          */
           .logo-container {
               position: static;
               transform: none;
