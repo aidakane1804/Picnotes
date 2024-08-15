@@ -559,6 +559,7 @@ GEM
 
 PLATFORMS
   -darwin-21
+  -darwin-23
   x86_64-linux
 
 DEPENDENCIES

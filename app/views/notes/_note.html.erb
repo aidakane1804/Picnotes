@@ -4,9 +4,8 @@
       <div class="image-containermyprofile">
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
          <div class="hover-overlay">
-                     <div class="overlay-content" style="margin-bottom: -17%;">
+                     <div class="overlay-content" style="margin-bottom: -13%;">
                       <p id="truncate-title" class="truncate">
-                      <p id="truncate-title" class="truncate" style="font-size: 13px;">
                         <%= note.title %>
                       </p>
                       <p id="truncate-name" class="truncate">
@@ -25,9 +24,9 @@
                                         <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
                                       </span>
                                     <% end %>
-                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 2%;">
                                       <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                                        <%= image_tag 'folder-add.png', style: ' height: 38px !important; width: 39px !important; background-color: #BC171D; border-radius: 50%;' %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 35px !important; background-color: #BC171D; border-radius: 50%;' %>
                                       <% end %>
                                     </span>
                                   <% else %>
@@ -38,9 +37,9 @@
                                         </span>
                                       <% end %>
                                     </span>
-                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
+                                    <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 2%;">
                                       <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                                        <%= image_tag 'folder-add.png', style: 'height: 38px !important; width: 39px !important; background-color: #BC171D; border-radius: 50%;' %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 35px !important; background-color: #BC171D; border-radius: 50%;' %>
                                       <% end %>
                                     </span>
                                   <% end %>
@@ -120,16 +119,16 @@
 }
 .hover-overlay {
   position: absolute;
-  top: 70%;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 30%;
+  height: 20%;
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  justify-content: flex-end; /* Align items to the bottom */
+  justify-content: center; /* Align items to the bottom */
   opacity: 0;
   transition: opacity 0.3s ease;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   box-sizing: border-box;
   z-index: 2;
 }
@@ -156,7 +155,7 @@
 
 .icons {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   z-index: 3;
 }
 
