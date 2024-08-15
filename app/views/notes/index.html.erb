@@ -30,7 +30,7 @@
 <div class="container" style="height: 723px">
   <div class="row mt-5">
     <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5 banner-caption">
       <div class="container">
         <h1 class="main-heading">Unlock Your Learning Potential with <span style="color: #BC171D;">Picnotes</span></h1>
         <p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: left; margin:10px;">
@@ -390,17 +390,20 @@
   .image-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Space between grid items */
-    transform: translateX(20%); /* Shifts the grid to the right, causing it to cut off */
+    gap: 10px; /* Space between grid items */
+    /* Shifts the grid to the right, causing it to cut off 
+      transform: translateX(20%); 
+    */
+    transform: translateX(10%); 
     bottom: 0;
-      right: 40px;
+    right: 40px;
   }
 
   .rotated-image {
     width: 100%; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
     transform: rotate(10deg); /* Subtle rotation */
-    opacity: 0.8;
+    opacity: 0.8; 
     margin-bottom: 20px;
     border-radius:20px /* Space between images vertically */
   }
@@ -410,7 +413,7 @@
   }
 
   .bottom-opacity {
-    opacity: 0.5; /* Adjust the opacity value as needed */
+    opacity: 0.4 !important; /* Adjust the opacity value as needed */
   }
 
 
@@ -939,6 +942,11 @@
   .grid-img{
     width:109%;
     margin-top:-94px;
+  }
+
+  .banner-caption {
+    display: flex;
+    align-items: center;
   }
 
 </style>
