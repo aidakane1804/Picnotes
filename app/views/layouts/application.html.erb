@@ -879,6 +879,13 @@
         100% { transform: rotate(360deg); }
     }
 </style>
+
+<% if user_signed_in? %>
+  <%= render 'partials/navbarfeed' %>
+<% else %>
+  <%= render 'partials/navbar' %>
+<% end %>
+
 <div class="tablate-navbar-container">
 </div>
 

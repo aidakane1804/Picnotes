@@ -10,13 +10,6 @@
   });
 </script>
 
-
-<% if user_signed_in? %>
-  <%= render 'partials/navbarfeed' %>
-<% else %>
-  <%= render 'partials/navbar' %>
-<% end %>
-
 <div id="note-content"></div>
 <div class="row" id="noteContent"></div>
 
@@ -634,15 +627,7 @@
     max-width: 365px;
     height: 48px;
   }
-  .login-button {
-   margin-top: 8%;
-    font-size: 20px;
-    font-family: Aileron;
-    text-decoration: none;  
-    color: #BC171D;
-    margin-bottom: 0px;
-    margin-left: 0%;
-  }
+  
   .logo-container {
     position: absolute;
     left: 50%;
