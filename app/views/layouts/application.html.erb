@@ -61,6 +61,10 @@
 </head>
 
 <body>
+<div id="loader">
+    <!-- You can use a simple spinner or an image -->
+    <div class="spinner"></div>
+</div>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.3&appId=1103942603139314&autoLogAppEvents=1"></script>
@@ -835,6 +839,45 @@
         transition: 0.3s;
         font-size: 16px;
     }
+
+    /* Style the loader container */
+    #loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #fff; /* Background color while loading */
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Example spinner */
+    .spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #bc171d;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    #loader {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+    #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 <div class="tablate-navbar-container">
 </div>
@@ -1178,97 +1221,16 @@
             else return false;
         });
     });
-    // $(document).ready(function () {
-    //     $('#dropdownMenuLink').click();
-    //     $('#dropdownMenuButton').click();
-    // });
-    // global variable for ChangeUrl method  case 1
+    
     var old_url;
     var old_url = window.location.pathname;
 
+    window.onload = function() {
+     window.scrollTo(0, 0);
+     setTimeout(function() {
+        document.getElementById('loader').classList.add('hidden');
+     }, 1000);
+    // document.getElementById('loader').classList.add('hidden');
+    };
 </script>
-<!-- Template Main JS File -->
-<!--<script>-->
-
-<!--  $(document).ready(function() {-->
-<!--      if ($('.nav-menu').length) {-->
-<!--          var $mobile_nav = $('.nav-menu').clone().prop({-->
-<!--              class: 'mobile-nav d-lg-none'-->
-<!--          });-->
-<!--          $('body').append($mobile_nav);-->
-<!--          $('body').prepend('<button type="button" class="mobile-nav-toggle d-lg-none" style="display: none"></button>');-->
-<!--          $('body').append('<div class="mobile-nav-overly"></div>');-->
-
-<!--          $(document).on('click', '.mobile-nav-toggle', function (e) {-->
-<!--              e.preventDefault();-->
-<!--              debugger;-->
-<!--              $('body').toggleClass('mobile-nav-active');-->
-<!--              // $('.mobile-nav-toggle i').toggleClass('icofont-close');-->
-<!--              $('.mobile-nav-overly').toggle();-->
-<!--          });-->
-
-<!--          $(document).on('click', '.mobile-nav .drop-down > a', function (e) {-->
-<!--              e.preventDefault();-->
-<!--              $(this).next().slideToggle(300);-->
-<!--              $(this).parent().toggleClass('active');-->
-<!--          });-->
-
-<!--          $(document).on('click',function (e) {-->
-<!--              var container = $(".mobile-nav, .mobile-nav-toggle");-->
-<!--              if (!container.is(e.target) && container.has(e.target).length === 0) {-->
-<!--                  if ($('body').hasClass('mobile-nav-active')) {-->
-<!--                      $('body').removeClass('mobile-nav-active');-->
-<!--                      $('.mobile-nav-toggle i').toggleClass('icofont-close');-->
-<!--                      $('.mobile-nav-overly').fadeOut();-->
-<!--                  }-->
-<!--              }-->
-<!--          });-->
-<!--      } else if ($(".mobile-nav, .mobile-nav-toggle").length) {-->
-<!--          $(".mobile-nav, .mobile-nav-toggle").hide();-->
-<!--      }-->
-
-<!--      // Navigation active state on scroll-->
-<!--      var nav_sections = $('section');-->
-<!--      var main_nav = $('.nav-menu, #mobile-nav');-->
-
-<!--      $(window).on('scroll', function () {-->
-<!--          var cur_pos = $(this).scrollTop() + 80;-->
-
-<!--          nav_sections.each(function () {-->
-<!--              var top = $(this).offset().top,-->
-<!--                  bottom = top + $(this).outerHeight();-->
-
-<!--              if (cur_pos >= top && cur_pos <= bottom) {-->
-<!--                  if (cur_pos <= bottom) {-->
-<!--                      main_nav.find('li').removeClass('active');-->
-<!--                  }-->
-<!--                  main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');-->
-<!--              }-->
-<!--          });-->
-<!--      });-->
-
-
-<!--      // Initi AOS-->
-<!--      // AOS.init({-->
-<!--      //     duration: 800,-->
-<!--      //     easing: "ease-in-out",-->
-<!--      //     once: true,-->
-<!--      //     mirror: false-->
-<!--      // });-->
-<!--      document.addEventListener('DOMContentLoaded', function () {-->
-<!--          var typed = "";-->
-<!--          typed = new Typed("#typing", {-->
-<!--              strings: ["Joachim Murat was one of the most notable Marshals of the Napoleonic Empire. Born on March 25th, 1767, Murat's childhood was humble. He enrolled in a cavalry regiment….."],-->
-<!--              typeSpeed: 50,-->
-<!--              startDelay: 0,-->
-<!--              backSpeed: 0,-->
-<!--              backDelay: 2000,-->
-<!--              loop: false,-->
-<!--              cursorChar: null,-->
-<!--              contentType: 'html'-->
-<!--          });-->
-<!--      });-->
-<!--  });-->
-
-<!--</script>-->
 </html>
