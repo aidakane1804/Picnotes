@@ -1,8 +1,4 @@
-<% if user_signed_in? %>
-  <%= render 'partials/navbarfeed' %>
-<% else %>
-  <%= render 'partials/navbar' %>
-<% end %>
+
 <div  class="row" id="noteContent"></div>
 <% @notes = @notes.where(archived: false) %>
 <div class='flex-center'>

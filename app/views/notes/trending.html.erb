@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap">
 
 
-
-<% if user_signed_in? %>
-  <%= render 'partials/navbarfeed' %>
-<% else %>
-   <%= render 'partials/navbar' %>
-<% end %>
-
 <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
     <%= image_tag 'trending.png', alt: 'Trending', style: 'margin-left: 41%; margin-right: auto; margin-top: 2rem; width: 20%; height: auto;' %>
 </div>
@@ -406,6 +399,7 @@ text-decoration: none;
           max-width: 365px;
           height: 48px;
       }
+      /*
       .login-button {
           font-size: 20px;
           font-family: monospace;
@@ -417,6 +411,7 @@ text-decoration: none;
           margin-right: 10px;
           word-spacing: -10px;
       }
+      */
       .logo-container {
           position: absolute;
           left: 50%;
@@ -553,6 +548,7 @@ text-decoration: none;
           max-width: 365px;
           height: 48px;
       }
+      /*
       .login-button {
           font-size: 20px;
           font-family: monospace;
@@ -564,6 +560,7 @@ text-decoration: none;
           margin-left: 10px;
           margin-right: 10px;
       }
+      */
       .logo-container {
           position: absolute;
           left: 50%;
