@@ -22,7 +22,8 @@
 
 <div class="d-flex justify-content-center mt-7" style="margin-left: 8%;">
   <% top_tags.each do |tag| %>
-    <button class="btn mx-1" style="border-radius: 140px; border: 2px solid #707070; color: #707070;" data-tag="<%= tag %>" onclick="changeColor(this)"><%= tag %></button>  <% end %>
+    <button class="btn mx-1" style="border-radius: 140px; border: 2px solid #707070; color: #707070;" data-tag="<%= tag %>" onclick="changeColor(this)"><%= tag %></button>  
+    <% end %>
 </div>
 
 <div id="sss" class="container-fluid">
@@ -292,11 +293,13 @@ text-decoration: none;
       max-width: 25%;
       padding: 0 4px;
   }
+  /*
   .column img {
       margin-top: 22px;
       vertical-align: middle;
       width: 70%;
   }
+  */
   @media screen and (max-width: 800px) {
           .column {
               -ms-flex: 50%;
@@ -322,7 +325,7 @@ text-decoration: none;
       }
       .image-containermyprofile {
           height: 99%;
-          width: 120%;
+          width: 100%;
           margin: 0px;
           box-shadow:none;
       }
@@ -452,9 +455,7 @@ text-decoration: none;
           border-radius: 50%;
           margin-top: 5px;
       }
-  3:58
-  --------------------------------------------------
-  3:58
+
   .btn-custom {
           background-color: #FFFFFF;
           /* White background */
