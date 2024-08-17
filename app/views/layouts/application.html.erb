@@ -878,6 +878,23 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+
+    .banner-caption {
+        display: flex;
+        align-items: center;
+    }
+
+    .hover-overlay{
+        background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    #truncate-title{
+        font-size: 1.3rem !important;
+    }
+
+    #truncate-name {
+        font-size: 0.8rem !important;
+    }
 </style>
 
 <% if user_signed_in? %>
@@ -1134,9 +1151,11 @@
 </style>
 
 <style>
+/*
  .hamburger-menu{
   display: none !important;
  }
+ */
 </style>
 
 <!-- Messenger Chat Plugin Code -->
@@ -1233,11 +1252,12 @@
     var old_url = window.location.pathname;
 
     window.onload = function() {
-     window.scrollTo(0, 0);
+     setTimeout(function(){
+        window.scrollTo(0, 0);
+     }, 500);
      setTimeout(function() {
         document.getElementById('loader').classList.add('hidden');
-     }, 1000);
-    // document.getElementById('loader').classList.add('hidden');
+     }, 1500);
     };
 </script>
 </html>
