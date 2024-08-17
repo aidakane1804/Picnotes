@@ -900,7 +900,7 @@
 <% if user_signed_in? %>
   <%= render 'partials/navbarfeed' %>
 <% else %>
-  <%= render 'partials/navbar' %>
+  <%= render 'partials/navbar' if !["sessions", "password_resets", "users"].include?(controller_name) %>
 <% end %>
 
 <div class="tablate-navbar-container">
