@@ -66,7 +66,7 @@
                   <p> <%= render '/components/follow_button_details_page', :user => note.user %> </p>
                 <% end %>
               </h6>
-              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model(this)" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
@@ -551,8 +551,18 @@
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-  function kill_model() {
-    window.location.reload();
+  function kill_model(closeBtn) {
+   /*
+    var escEvent = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        keyCode: 27,
+        code: 'Escape',
+        which: 27,
+        bubbles: true
+    });
+
+    document.dispatchEvent(escEvent);
+   */
   }
 
   function truncateText(id, maxLength) {

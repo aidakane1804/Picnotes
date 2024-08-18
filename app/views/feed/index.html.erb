@@ -42,7 +42,7 @@
             <% end %>
           </div>
           <div class="mt-3 text-center">
-            <h4 class="mb-0" style="color: #3F3F3F; font-weight: 400;"><%= @user.first_name %></h4>
+            <h4 class="mb-0" style="color: #3F3F3F; font-weight: 400;"><%= @user.full_name %></h4>
             <span class="location">
             <i class="bi bi-map" style="margin-right: 5px;"></i>
             <%= image_tag('location.png', style: 'width: 18px; margin-bottom: 5px; margin-right: 5px;') %>
@@ -198,6 +198,23 @@ document.addEventListener('DOMContentLoaded', function() {
       this.style.color = '#BC171D';
       localStorage.setItem('activeTabId', this.id);
     });
+  });
+});
+
+document.addEventListener('turbolinks:load', function() {
+  // Show loader when an AJAX request starts
+  document.addEventListener('ajax:beforeSend', function() {
+    document.getElementById('loader').classList.remove('hidden');
+  });
+
+  // Hide loader when the AJAX request completes
+  document.addEventListener('ajax:complete', function() {
+    document.getElementById('loader').classList.add('hidden');
+  });
+
+  // Hide loader if there's an error
+  document.addEventListener('ajax:error', function() {
+    document.getElementById('loader').classList.remove('hidden');
   });
 });
 

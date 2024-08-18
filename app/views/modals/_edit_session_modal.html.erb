@@ -4,9 +4,10 @@
       <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
         <h5 class="modal-title" id="editSessionModalLabel"
           style="margin-left: 40%; margin-right: auto; font-family:Cako;font-weight:400;font-size:26px;line-height:31.21px;color:#3F3F3F;">Edit Profile</h5>
-        <button style="position: absolute; top: 0px;right: 0px; margin-right: -7px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+        <button style="position: absolute; top: 0px;right: 0px; margin-right: -7px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
+        
       </div>
       <div>
         <%= simple_form_for @user do |f| %>
@@ -91,12 +92,6 @@
   </div>
 </div>
 
-<script>
-  function kill_model() {
-    window.location.reload();
-  }
-</script>
-
 <style>
   .simple_form .user-name label {
     color: #707070;
@@ -107,9 +102,3 @@
     padding: 5px 10px !important;
   }
 </style>
-
-
-
-
-
-
