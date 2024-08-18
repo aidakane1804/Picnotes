@@ -43,11 +43,11 @@
                   </div>
                 </div>
                 <div class="col-12 mt-2">
-                  <%= link_to card.link, comment_section_path(id: card.id), remote: true, class: "card-link" %>
+                  <% link_to card.topic, comment_section_path(id: card.id), remote: true, class: "card-link" %>
                 </div>
                 <% if @user == current_user %>
                   <div class="container-sel d-flex align-items-center">
-                    <div class="arrow-disabled"><<</div>
+                    <div class="arrow-disabled"><</div>
                     <div class="btn-status dropdown-toggle">
                       <% if card.user == current_user %>
                         <%= image_tag 'iwanttolearn.png', class: "img-circles" %>
@@ -58,7 +58,7 @@
                         </select>
                       <% end %>
                     </div>
-                    <div class="arrow" onclick="ed_tracker_dropdown(this, <%= card.id %>, <%= current_user.id rescue '0' %>, 'I\'m currently learning')">>></div>
+                    <div class="arrow" onclick="ed_tracker_dropdown(this, <%= card.id %>, <%= current_user.id rescue '0' %>, 'I\'m currently learning')">></div>
                   </div>
                 <% end %>
               </div>
@@ -109,11 +109,11 @@
                       </div>
                   </div>
                       <div class="col-12 mt-2">
-                        <%= link_to card.link, comment_section_path(id: card.id), remote: true, class: "card-link" %>
+                        <% link_to card.topic, comment_section_path(id: card.id), remote: true, class: "card-link" %>
                       </div>
               <% if @user==current_user %>
                 <div class="container-sel">
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I want to learn')"><<</div>
+                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I want to learn')"><</div>
                   <div class="btn-status dropdown-toggle">
                     <% if card.user == current_user %>
                     <%= image_tag 'iamlearning.png',  class: "img-circles"%>
@@ -128,7 +128,7 @@
                     </select>
                     <% end %>
                   </div>
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I learned')" >>></div>
+                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I learned')" >></div>
                 </div>
               <% end %>
             </div>
@@ -178,11 +178,11 @@
                       </div>
                   </div>
                       <div class="col-12 mt-2">
-                        <%= link_to card.link, comment_section_path(id: card.id), remote: true, class: "card-link" %>
+                        <% link_to card.topic, comment_section_path(id: card.id), remote: true, class: "card-link" %>
                       </div>
               <% if @user==current_user %>
                 <div class="container-sel">
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I\'m currently learning')"><<</div>                  <div class="btn-status dropdown-toggle">
+                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I\'m currently learning')"><</div>                  <div class="btn-status dropdown-toggle">
                     <% if card.user == current_user %>
                     <%= image_tag 'ilearned.png',  class: "img-circles"%>
                     <select
@@ -198,7 +198,7 @@
                     </select>
                     <% end %>
                   </div>
-                  <div class="arrow-disabled">>></div>                
+                  <div class="arrow-disabled">></div>                
                 </div>
               <% end %>
             </div>
@@ -254,7 +254,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f8f8f8;
+      /* background-color: #f8f8f8; */
+      background-color: #eee;
       padding: 10px 20px;
       cursor: pointer;
     }
@@ -276,12 +277,26 @@
       outline: none;
     }
     .arrow {
+      /*
       margin: 0 10px;
       font-size: 20px;
       color: black;
       cursor: pointer;
       background-color: #f8f8f8;
       padding: 8px;
+      */
+      margin: 0 10px;
+      font-size: 20px;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 8px;
+      width: 40px; /* Ensure width and height are equal */
+      height: 40px;
+      line-height: 24px; /* Centers the font vertically */
+      text-align: center; /* Centers the font horizontally */
+      border-radius: 50%; /* Makes it a perfect circle */
+      display: inline-block; /* Ensure it's treated as an inline element */
     }
 
     .arrow-disabled{
@@ -289,7 +304,7 @@
       font-size: 20px;
       color: #707070;
       cursor: pointer;
-      background-color: #f8f8f8;
+    /* background-color: #f8f8f8; */
       padding: 8px;
     }
 
