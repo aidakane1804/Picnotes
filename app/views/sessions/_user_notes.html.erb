@@ -1,8 +1,7 @@
-
 <% if @user == current_user %>
 
   <% if @notes.count > 0 %>
-        <button class="btn btn-custom btn-block custom-btn-sm add-picnotes" id="newNoteModal" data-bs-toggle="modal" data-bs-target="#newNoteModal" style="display: flex; margin-bottom:20px; justify-content:center;margin-top:20px; width:15%;">Add New Picnotes</button>
+        <button class="btn btn-custom btn-block custom-btn-sm add-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal" style="display: flex; margin-bottom:20px; justify-content:center;margin-top:20px; width:15%;">Add New Picnotes</button>
     <div class='flex-center'>
     
       <div class='notes-container'>
@@ -21,7 +20,7 @@
     </div>
     <p style="justify-content: center !important; display: flex;">You have not created any Picnotes yet.</p>
     <span style="justify-content: center !important; display: flex;">See how to create a Picnotes.</span>
-    <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes" id="newNoteModal" data-bs-toggle="modal" data-bs-target="#newNoteModal">Add New Picnotes</button>
+    <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal">Add New Picnotes</button>
   <% end %>
 <% else %>
   <% if @notes.count > 0 %>
@@ -38,6 +37,12 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+  $('.add-picnotes').on('click', function(){
+    $('#newNoteModal').addClass("show");
+  });
+</script>
 
 <style>
   .add-picnotes {
