@@ -13,7 +13,7 @@
         <div class="folder-container-grid row">
 
           <% @folders.each do |folder| %>
-          <div class="folder-container col-lg-3">
+          <div class="folder-container col-lg-3 col-md-4">
             <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
               <%= link_to(folder_path(folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'blue-appearance-btn delete-btn') do %>
                 <%= image_tag('deleteIcon.png', alt: 'Delete', class: 'delete-icon') %>
@@ -28,7 +28,7 @@
             <div class="row">
               <% folder.notes.where(archived: false).each_with_index do |note, i| %>
                 <% if i < 8 %>
-                <div class="col-lg-3 folder-note <%= 'last-note' if i == 7 %>">
+                <div class="col-lg-3 col-md-3 folder-note <%= 'last-note' if i == 7 %>">
                   <% if note.image.url.length > 0 %>
                     
                     <%= link_to(folder_path(folder, user_id: @user)) do %>

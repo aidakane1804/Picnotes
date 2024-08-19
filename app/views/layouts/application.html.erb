@@ -1260,10 +1260,6 @@
     });
     $(document).ready(function() {
         SourceImage();
-        $('#newNoteModal').on("hide.bs.modal", function (e) {
-            if(confirm("You didn't share your Picnotes. Are you sure you want to leave without posting?")) return true;
-            else return false;
-        });
     });
     
     var old_url;
