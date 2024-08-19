@@ -1,2 +1,3 @@
 $("#card").html('<%=j render :partial => "partials/card_comment_like_modal", :locals => { :card => @card , :likes => @likes ,:comments => @comments, :hashtag =>@hashtag}  %>');
 $('#comment-modal<%=@card.id%>').modal('show')
+$('#loader').addClass('hidden');

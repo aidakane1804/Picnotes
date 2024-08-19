@@ -3,3 +3,4 @@ $('.btn-rating<%= @selected_ed_tracker %>').html('<%= link_to (current_user_like
 $(".ed_tracker_likes<%=@selected_ed_tracker%>").empty();
 $(".ed_tracker_comments<%=@selected_ed_tracker%>").empty();
 $(".ed_tracker_likes<%=@selected_ed_tracker%>").html(<%= @edtracker.card_likes.count %>);
+$('#loader').addClass('hidden');

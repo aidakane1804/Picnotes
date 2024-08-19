@@ -1,1 +1,2 @@
 $('.btn-rating<%= @edtracker.id%>').html('<%= link_to fa_icon('heart-o'), card_liked_path(@edtracker), remote:true, method: :post %>')
+$('#loader').addClass('hidden');

@@ -26,14 +26,14 @@
             <div class="card-body-tool">
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                      <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                      <span style="color: black; text-decoration: none; word-break: break-word;">
                      <%= link_to book.addtitle, comment_section_path(id: book.id), remote: true, class: "card-link"  %>
                      </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= book.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(book) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: book), remote: true, method: :delete %> <%= book.card_likes.count %>
@@ -75,7 +75,7 @@
             
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                       <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                       <span style="color: black; text-decoration: none; word-break: break-word;"><% art.addtitle %>
@@ -83,7 +83,7 @@
                       </span>
                       </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(art) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
@@ -125,7 +125,7 @@
             
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                       <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                       <span style="color: black; text-decoration: none; word-break: break-word;">
@@ -134,7 +134,7 @@
 
                       </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(art) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
@@ -178,13 +178,13 @@
             
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                       <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                       <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
                       </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(art) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
@@ -227,13 +227,13 @@
             
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                       <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                       <span style="color: black; text-decoration: none; word-break: break-word;"><%= art.addtitle %></span>
                       </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= art.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(art) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: art), remote: true, method: :delete %> <%= art.card_likes.count %>
@@ -276,13 +276,13 @@
             
               <div class="bg-highlight">
                 <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="">
                     <div class="d-flex-tool align-items-center">
                       <h6 class="text-lorem mb-0" style="font-family: 'Philosopher', sans-serif">
                       <span style="color: black; text-decoration: none; word-break: break-word;"><%= doc.addtitle %></span>
                       </h6>
                     </div>
-                    <div class="d-flex-tool align-items-center">
+                    <div class="d-flex-tool align-items-center mt-4">
                     <div class="d-flex-tool align-items-center btn-rating<%= doc.id %> mb-0 mr-3">
                       <% if current_user_liked_card?(doc) %>
                         <%= link_to image_tag('smallheart.png', alt: 'Heart', style: 'height: 20px; width: 20px;'), card_likes_destroy_ed_path(myedtool_id: doc), remote: true, method: :delete %> <%= doc.card_likes.count %>
@@ -339,7 +339,7 @@
 .bg-highlight {
   /* Ensuring card background highlights */
   background-color: #FFFFFF;
-  padding: 10px;
+ /* padding: 10px; */
   border-radius: 8px;
 }
 .heading-learning {
@@ -434,7 +434,7 @@ row-tool {
 }
 
 .bg-highlight {
-  padding: 1px 0 64px 0;
+  /* padding: 1px 0 64px 0; */
 }
 
 .btn-rating {
@@ -502,7 +502,7 @@ row-tool {
 }
 
 .bg-highlight {
-  padding: 1px 0 64px 0;
+  /* padding: 1px 0 64px 0;*/
 }
 
 .status-box {

@@ -1,3 +1,4 @@
 $('#show_interview_model').html("<%= escape_javascript render(:partial => 'ed_fluencers/interview') %>");
 ChangeUrlForEdFluencers("", "<%="ed_fluencers/"+@interview.id.to_s+"-"+@interview.url.parameterize%>");
 $('.bd-example-modal-lg').modal('show');
+$('#loader').addClass('hidden');
