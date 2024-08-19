@@ -1,4 +1,4 @@
 $("#profileDetails").append('<%=j render :partial => "partials/edtracker_show_popup", :locals => { :card => @card}  %>');
 $('#card_modal<%=@card.id%>').modal('show')
-
+$('#loader').addClass('hidden');
 

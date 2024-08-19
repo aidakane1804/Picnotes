@@ -7,49 +7,88 @@
 <% if @folders.count > 0 %>
 
   <div>
-    <button class=" add-picnotes btn btn-custom btn-block custom-btn-sm" id="newFolderModal" data-bs-toggle="modal" data-bs-target="#newFolderModal" style="display:flex;margin-bottom:20px; justify-content:center;margin-top:20px; width: 20%">Create New Folder</button>
-    <div class="notes-container-grid">
-      <% if @folders.count > 0 %>
-        <div class="folder-container-grid row">
+    <% if @user == current_user %>
+      <button class=" add-picnotes btn btn-custom btn-block custom-btn-sm" id="newFolderModal" data-bs-toggle="modal" data-bs-target="#newFolderModal" style="display:flex;margin-bottom:20px; justify-content:center;margin-top:20px; width: 20%">Create New Folder</button>
 
-          <% @folders.each do |folder| %>
-          <div class="folder-container col-lg-3">
-            <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
-              <%= link_to(folder_path(folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'blue-appearance-btn delete-btn') do %>
-                <%= image_tag('deleteIcon.png', alt: 'Delete', class: 'delete-icon') %>
-              <% end %>
-              <div class="folder-title-container">
-                <h1 class="mobile-font note-btn-font title">
-                  <%= truncate(folder.name, length: 40) %>
-                </h1>
+      
+      <div class="notes-container-grid">
+        <% if @folders.count > 0 %>
+          <div class="folder-container-grid row">
+
+            <% @folders.each do |folder| %>
+            <div class="folder-container col-lg-3">
+              <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
+                <%= link_to(folder_path(folder), method: :delete, data: { confirm: 'Are you sure?' }, class: 'blue-appearance-btn delete-btn') do %>
+                  <%= image_tag('deleteIcon.png', alt: 'Delete', class: 'delete-icon') %>
+                <% end %>
+                <div class="folder-title-container">
+                  <h1 class="mobile-font note-btn-font title">
+                    <%= truncate(folder.name, length: 40) %>
+                  </h1>
+                </div>
               </div>
-            </div>
-
-            <div class="row">
-              <% folder.notes.where(archived: false).each_with_index do |note, i| %>
-                <% if i < 8 %>
-                <div class="col-lg-3 folder-note <%= 'last-note' if i == 7 %>">
-                  <% if note.image.url.length > 0 %>
-                    
-                    <%= link_to(folder_path(folder, user_id: @user)) do %>
-                      <%= image_tag note.image.url(:board_thumb), class: "image-size " %>
-                      <% if i == 7 %>
-                        <span>+<%= folder.notes.size - i %></span>
+              <div class="folder-content" style="margin-bottom: 200px;">
+                <%= link_to(folder_path(folder, user_id: @user)) do %>
+                  <div class="grid-folder mb-1" style="margin-right: 17%; margin-left: -8%;">
+                    <% folder.notes.where(archived: false).each_with_index do |note, i| %>
+                      <% if i < 6 %>
+                        <div class='board-test-image'>
+                          <% if note.image.url.length > 0 %>
+                            <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                          <% else %>
+                            <%= image_tag 'empty.png', class: 'image-size' %>
+                          <% end %>
+                        </div>
                       <% end %>
                     <% end %>
-                  <% else %>
-                    <%= image_tag 'empty.png', class: 'image-size' %>
-                  <% end %>
-                </div>
+                  </div>
                 <% end %>
-              <% end %>
+              </div>
             </div>
-            
+            <% end %>
           </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+
+    <% else %>
+
+
+      <div class="notes-container-grid">
+        <% if @folders.count > 0 %>
+           <div class="folder-container-grid row">
+
+            <% @folders.each do |folder| %>
+            <div class="folder-container col-lg-3">
+              <div class="folder-header d-flex justify-content-between align-items-center" style="padding-top: 10px;">
+              </div>
+              <div class="folder-content" style="margin-bottom: 200px;">
+                <%= link_to(folder_path(folder, user_id: @user)) do %>
+                    <h1 class="mobile-font note-btn-font title" style="display: flex;">
+              <%= truncate(folder.name, length: 40) %>
+            </h1>
+                  <div class="grid-folder mb-1" style="margin-right: 0%; margin-left: 0%; margin-top: 6%">
+                    <% folder.notes.where(archived: false).each_with_index do |note, i| %>
+                      <% if i < 6 %>
+                        <div class='board-test-image'>
+                          <% if note.image.url.length > 0 %>
+                            <%= image_tag note.image.url(:board_thumb), class: 'image-size' %>
+                          <% else %>
+                            <%= image_tag 'empty.png', class: 'image-size' %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+
   </div>
 <% else %>
   <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
@@ -229,35 +268,6 @@
     width: 100%;
     border-radius: 5px;
 
-}
-
-.folder-note{
-  padding: 0 !important;
-}
-
-.folder-note img {
-  padding: 3px !important;
-  border-radius: 15px;
-}
-
-.last-note:last-child span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  text-align: center;
-  z-index: 1;
-}
-
-.last-note:last-child img {
-  opacity: 0.9;
-  filter: blur(0.5px);
 }
 </style>
 

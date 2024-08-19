@@ -1,4 +1,4 @@
-$("#profileDetails").html('<%=j render :partial => "partials/card_comment_like_edtracker_modal", :locals => { :card => @card,:likes => @likes, :comments=>@comments}  %>');
+$("#profileDetails").append('<%=j render :partial => "partials/card_comment_like_edtracker_modal", :locals => { :card => @card,:likes => @likes, :comments=>@comments}  %>');
 <% image_present  =  @card.card_comment_likes.last.user.avatar? rescue  false %>
  <% if image_present %>
 $(".ed_tracker_msg_img<%=@card.id %>").html('<%= image_tag @card.card_comment_likes.last.user.avatar.url(:thumb) , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
@@ -6,3 +6,4 @@ $(".ed_tracker_msg_img<%=@card.id %>").html('<%= image_tag @card.card_comment_li
  $(".ed_tracker_msg_img<%=@card.id %>").html('<%= image_tag  "avatar.png" , class: 'avatar-image', style: 'width: 50px; height: 50px;' %>')
  <%end %>
 $('#comment-modal<%=@card.id%>').modal('show')
+$('#loader').addClass('hidden');

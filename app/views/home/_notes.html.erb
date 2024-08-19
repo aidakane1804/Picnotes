@@ -18,7 +18,7 @@
                                   </p>
                                 </div>
                                 <div class="icons" style="display: flex; justify-content: flex-end;">
-                                            <span style="display: flex;">
+                                               <span style="display: flex; gap: 4px;">
                                               <% if user_signed_in? %>
                                                 <% unless current_user.favorited_notes.exists?(id: note.id) %>
                                                   <span id='favorites-count-<%= note.id %>'>

@@ -22,10 +22,13 @@
           <% if @want_to_learn.any? %> <% @want_to_learn.each do |card| %>
             <div class="card-body-tool">
               <div class="row">
-                <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                <div class="d-flex-tool justify-content-between align-items-center edtracker-header">
                   <div class="d-flex-tool align-items-center flex-grow-1" style="width: 20%; margin-right: 3%; ">
                      <h6 class="text-lorem mb-0" style="font-family: 'Aileron', sans-serif; margin: 0; overflow: visible; font-size: 15px;">
                        <span style="color: black; text-decoration: none; word-break: break-word;"><%= card.topic %></span>
+                        <a class="blue-appearance-btn" style="margin-right:25px; font-size:"  href="<%= card.link %>" target="_blank">
+                          <%= image_tag 'link-icon.png'%>
+                        </a>
                      </h6>
                    </div>
                   <div class="d-flex-tool align-items-center">
@@ -58,7 +61,7 @@
                         </select>
                       <% end %>
                     </div>
-                    <div class="arrow" onclick="ed_tracker_dropdown(this, <%= card.id %>, <%= current_user.id rescue '0' %>, 'I\'m currently learning')">></div>
+                    <div class="arrow arrow-wtl" onclick="ed_tracker_dropdown(this, <%= card.id %>, <%= current_user.id rescue '0' %>, 'I\'m currently learning')">></div>
                   </div>
                 <% end %>
               </div>
@@ -88,10 +91,13 @@
           <% if @curr_learning.any? %> <% @curr_learning.each do |card| %>
           <div class="card-body-tool">
             <div class="row">
-                  <div class="col-12 d-flex-tool justify-content-between align-items-center">
+                  <div class="d-flex-tool justify-content-between align-items-center edtracker-header">
                    <div class="d-flex-tool align-items-center flex-grow-1" style="width: 20%; margin-right: 3%; ">
                       <h6 class="text-lorem mb-0" style="font-family: 'Aileron', sans-serif; margin: 0; overflow: visible; font-size: 15px;">
                         <span style="color: black; text-decoration: none; word-break: break-word;"><%= card.topic %></span>
+                         <a class="blue-appearance-btn" style="margin-right:25px; font-size:"  href="<%= card.link %>" target="_blank">
+                          <%= image_tag 'link-icon.png'%>
+                        </a>
                       </h6>
                     </div>
                       <div class="d-flex-tool align-items-center">
@@ -112,8 +118,8 @@
                         <% link_to card.topic, comment_section_path(id: card.id), remote: true, class: "card-link" %>
                       </div>
               <% if @user==current_user %>
-                <div class="container-sel">
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I want to learn')"><</div>
+                <div class="container-sel d-flex align-items-center">
+                  <div class="arrow arrow-cl" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I want to learn')"><</div>
                   <div class="btn-status dropdown-toggle">
                     <% if card.user == current_user %>
                     <%= image_tag 'iamlearning.png',  class: "img-circles"%>
@@ -128,7 +134,7 @@
                     </select>
                     <% end %>
                   </div>
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I learned')" >></div>
+                  <div class="arrow arrow-cl" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I learned')" >></div>
                 </div>
               <% end %>
             </div>
@@ -157,10 +163,13 @@
           <% if @learned.any? %> <% @learned.each do |card| %>
           <div class="card-body-tool">
             <div class="row">
-              <div class="col-12 d-flex-tool justify-content-between align-items-center">
+              <div class="d-flex-tool justify-content-between align-items-center edtracker-header">
                 <div class="d-flex-tool align-items-center flex-grow-1" style="width: 20%; margin-right: 3%; ">
                    <h6 class="text-lorem mb-0" style="font-family: 'Aileron', sans-serif; margin: 0; overflow: visible; font-size: 15px;">
                      <span style="color: black; text-decoration: none; word-break: break-word;"><%= card.topic %></span>
+                      <a class="blue-appearance-btn" style="margin-right:25px; font-size:"  href="<%= card.link %>" target="_blank">
+                        <%= image_tag 'link-icon.png'%>
+                      </a>
                    </h6>
                  </div>
                       <div class="d-flex-tool align-items-center">
@@ -181,8 +190,8 @@
                         <% link_to card.topic, comment_section_path(id: card.id), remote: true, class: "card-link" %>
                       </div>
               <% if @user==current_user %>
-                <div class="container-sel">
-                  <div class="arrow" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I\'m currently learning')"><</div>                  <div class="btn-status dropdown-toggle">
+                <div class="container-sel d-flex align-items-center">
+                  <div class="arrow arrow-l" onclick="ed_tracker_dropdown(this, <%=card.id %>, <%= current_user.id rescue "0"%>, 'I\'m currently learning')"><</div>                  <div class="btn-status dropdown-toggle">
                     <% if card.user == current_user %>
                     <%= image_tag 'ilearned.png',  class: "img-circles"%>
                     <select
@@ -243,6 +252,7 @@
       justify-content: center;
       background-color: white;
       margin-top: 5px;
+      padding: 0; 
     }
     .card-link {
       color: black;
@@ -256,7 +266,8 @@
       justify-content: center;
       /* background-color: #f8f8f8; */
       background-color: #eee;
-      padding: 10px 20px;
+      /* padding: 10px 20px; */
+      padding-right: 7px;
       cursor: pointer;
     }
     .d-flex-tool{
@@ -285,18 +296,39 @@
       background-color: #f8f8f8;
       padding: 8px;
       */
+      /*
       margin: 0 10px;
       font-size: 20px;
       color: black;
       cursor: pointer;
       font-weight: bold;
       padding: 8px;
-      width: 40px; /* Ensure width and height are equal */
+      width: 40px; 
       height: 40px;
-      line-height: 24px; /* Centers the font vertically */
-      text-align: center; /* Centers the font horizontally */
-      border-radius: 50%; /* Makes it a perfect circle */
-      display: inline-block; /* Ensure it's treated as an inline element */
+      line-height: 24px;
+      text-align: center;
+      display: inline-block; 
+      */
+     
+      margin: 0 10px;
+      font-size: 20px;
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 8px;
+      width: 40px;
+    }
+
+    .arrow-wtl {
+      color: #e63946 !important;
+    }
+
+    .arrow-cl {
+      color: #FD9800 !important;
+    }
+
+    .arrow-l {
+      color: #53C537 !important;
     }
 
     .arrow-disabled{
@@ -334,10 +366,10 @@
       background-color: #F8F9FA;
       border: 1px solid #E0E0E0;
       border-radius: 8px;
-      padding: 16px;
+      padding: 8px;
       margin-bottom: 20px;
       width: 100%; /* Make width responsive */
-      max-width: 350px; /* Maintain the maximum width */
+      
       box-sizing: border-box; /* Include padding and border in the element’s total width and height */
     }
     .card-header-tool button {
@@ -399,7 +431,7 @@
     }
     .card-header-tool {
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 0px;
       background-color: white;
       padding: 10px;
       border: 1px solid #E0E0E0;
@@ -415,7 +447,7 @@
     }
 
     .card-body-tool {
-      padding: 1rem;
+      padding: 0.8rem;
       border: 1px solid #ddd;
       border-radius: 4px;
       background-color: #fff;
@@ -640,6 +672,10 @@
       /*color: black !important;*/
       text-decoration: none;
       background-color: transparent;
+    }
+
+    .edtracker-header{
+      padding: 0;
     }
   </style>
 </div>

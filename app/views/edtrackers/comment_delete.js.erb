@@ -2,3 +2,4 @@ $("#profileDetails").html('<%=j render :partial => "partials/card_comment_like_e
 $('#comment-modal<%=@card.id%>').modal('show');
 $('.modal-backdrop.fade.show').first().remove();
 $(".comment-icon-ed-tracker<%=@card.id%>").html('<%= link_to   fa_icon('comment') , comment_section_edtracker_path(id: @card.id), remote: true %>')
+$('#loader').addClass('hidden');

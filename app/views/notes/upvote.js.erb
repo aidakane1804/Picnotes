@@ -1,3 +1,4 @@
 $('.upvotes-count').html('<%= @note.get_upvotes.size %>')
 
 $('.downvotes-count').html('<%= @note.get_downvotes.size %>')
+$('#loader').addClass('hidden');

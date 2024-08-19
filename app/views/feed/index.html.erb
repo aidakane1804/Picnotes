@@ -108,60 +108,60 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-lg-0">
           
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'box.png', size: '18x18' %>
-              <span style="font-family:Aileron;font-weight:400;">My Feed</span>
+              <span style="font-weight:400;">My Feed</span>
             <% end %>
           </li>
 
 
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to user_notes_session_path, remote: true, class: "profile-links nav-link", id: "my-picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'note.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400;">My Picnotes</span>
+              <span style="font-weight:400;">My Picnotes</span>
               <span class='note-count'><%= "(#{@user.notes.where(archived: false).count})" %></span>
             <% end %>
           </li>
 
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'myfolder.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">
+              <span style="font-weight:400; font-size: 14px;">
               <%= @folders.count > 0 ? 'My Folders' : 'My Folder' %>
               </span>
               <span class='note-count'><%= "(#{@user.folders.count})" %></span>
             <% end %>
           </li>
 
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'heart.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">
+              <span style="font-weight:400; font-size: 14px;">
                 <%= @favorites.count > 0 ? 'My Favorites' : 'My Favorite' %>
               </span>
               <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
             <% end %>
           </li>
 
-          <li class="nav-item" style="width: 21%;">
+          <li class="nav-item" >
             <%= link_to create_flashcard_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-flashcards-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'flashcard.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My Flashcards</span>
+              <span style="font-weight:400; font-size: 14px;">My Flashcards</span>
             <% end %>
           </li>
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to new_edtracker_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtracker-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'attach.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My EdTracker</span>
+              <span style="font-weight:400; font-size: 14px;">My EdTracker</span>
             <% end %>
           </li>
-          <li class="nav-item"  style="width: 21%;">
+          <li class="nav-item"  >
             <%= link_to new_myedtool_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtools-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'files.png', size: '24x24' %>
-              <span style="font-family:Aileron;font-weight:400; font-size: 14px;">My EdTools</span>
+              <span style="font-weight:400; font-size: 14px;">My EdTools</span>
             <% end %>
           </li>
         </ul>
@@ -201,22 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.addEventListener('turbolinks:load', function() {
-  // Show loader when an AJAX request starts
-  document.addEventListener('ajax:beforeSend', function() {
-    document.getElementById('loader').classList.remove('hidden');
-  });
-
-  // Hide loader when the AJAX request completes
-  document.addEventListener('ajax:complete', function() {
-    document.getElementById('loader').classList.add('hidden');
-  });
-
-  // Hide loader if there's an error
-  document.addEventListener('ajax:error', function() {
-    document.getElementById('loader').classList.remove('hidden');
-  });
-});
 
 </script>
 
@@ -254,12 +238,6 @@ document.addEventListener('turbolinks:load', function() {
   left: 0;
   cursor: pointer;
 }
-
-  body {
-    background-color: #fff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-  }
   .container {
     height: 77vh;
     width: 30%;
@@ -399,11 +377,6 @@ document.addEventListener('turbolinks:load', function() {
     overflow: scroll;
 }
 
-
-# #333333
-
-
-
 .rotated-image {
   transform: rotate(20deg);
 }
@@ -501,7 +474,6 @@ box-sizing: border-box;
     -ms-flex-wrap: wrap; /* IE10 */
     flex-wrap: wrap;
     margin: 1px;
-    font-family: Arial;
 }
 /* Create four equal columns that sits next to each other */
 .column {
@@ -552,7 +524,6 @@ height: 48px;
 
 .login-button {
 font-size: 20px;
-font-family: monospace;
 text-decoration: none;
 color: #BC171D;
 margin-top: 20px;
@@ -678,7 +649,6 @@ padding-top: 20px;
 
 
 .card-section {
-font-family: Arial, sans-serif;
 background-color: #BC171D1A;
 }
 .oval-input {
@@ -834,10 +804,7 @@ fill: #fff;
 width: 24px;
 height: 24px;
 }
-body {
-font-family: "Cako", Arial, sans-serif;
 
-}
 .card-header {
 padding: 10px;
 text-align: end;
@@ -872,7 +839,6 @@ border: 2px solid #F8D7DA;
 border-radius: 10px;
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 padding: 20px;
-font-family: Arial, sans-serif;
 color: #000;
 background-color: #FFF5F5;
 height: 100%;
@@ -895,7 +861,6 @@ padding-bottom: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    font-family: Arial, sans-serif;
     color: #000;
     background-color: #BC171D;
     height: 100%;
@@ -905,7 +870,6 @@ padding-bottom: 10px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    font-family: Arial, sans-serif;
     color: #000;
     background-color: #FFF5F5;
     height: 100%;
@@ -938,7 +902,6 @@ background-color: #fde6e900;
     line-height: 1.5;
 }
 .main-heading {
-    font-family: Cako;
     font-size: 80px;
     font-weight: 400;
     line-height: 96.02px;

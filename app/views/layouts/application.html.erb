@@ -1275,7 +1275,7 @@
      }, 500);
      setTimeout(function() {
         document.getElementById('loader').classList.add('hidden');
-     }, 1500);
+     }, 1000);
     };
 </script>
 
@@ -1291,5 +1291,59 @@
    $('body').css('padding-right', ''); // Reset any padding added to the body
   });
  });
+</script>
+
+<script>
+$('.profile-links').on('click', function(){
+ document.getElementById('loader').classList.remove('hidden');
+});
+
+function add_loader(){
+  document.addEventListener('turbolinks:load', function() {
+  // Show loader when an AJAX request starts
+  document.addEventListener('ajax:beforeSend', function() {
+   document.getElementById('loader').classList.remove('hidden');
+  });
+
+  // Hide loader when the AJAX request completes
+  document.addEventListener('ajax:complete', function() {
+   document.getElementById('loader').classList.add('hidden');
+  });
+
+  // Hide loader when the AJAX request completes successfully
+  document.addEventListener('ajax:success', function() {
+    document.getElementById('loader').classList.add('hidden');
+  });
+
+  // Hide loader if there's an error
+  document.addEventListener('ajax:error', function() {
+   document.getElementById('loader').classList.add('hidden');
+   
+  });
+ });
+}
+/*
+ document.addEventListener('turbolinks:load', function() {
+  // Show loader when an AJAX request starts
+  document.addEventListener('ajax:beforeSend', function() {
+   document.getElementById('loader').classList.remove('hidden');
+  });
+
+  // Hide loader when the AJAX request completes
+  document.addEventListener('ajax:complete', function() {
+   document.getElementById('loader').classList.add('hidden');
+  });
+
+  // Hide loader when the AJAX request completes successfully
+  document.addEventListener('ajax:success', function() {
+    document.getElementById('loader').classList.add('hidden');
+  });
+
+  // Hide loader if there's an error
+  document.addEventListener('ajax:error', function() {
+   document.getElementById('loader').classList.add('hidden');
+  });
+ });
+*/
 </script>
 </html>
