@@ -1,3 +1,4 @@
+<div id="picnote-modal">
 <script>
   document.getElementById("defaultOpen").click();
 
@@ -36,10 +37,7 @@
     $('#note_menu').toggle('.hidden')
   })
 </script>
-
-
-<h1 style = 'display:none;'><%= note.title %></h1>
-
+<!-- <%= note.title %> -->
 <div id="test-modal" class="modal fade" role="dialog" data-backdrop="">
   <div style = "display: flex; align-items: center;">
     <div class='note-arrow'>
@@ -66,7 +64,7 @@
                   <p> <%= render '/components/follow_button_details_page', :user => note.user %> </p>
                 <% end %>
               </h6>
-              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model" class="close" data-dismiss="modal" aria-label="Close">
+              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
@@ -97,7 +95,7 @@
                 <% end %>
               <% else %>
                 <%= link_to new_user_path do %>
-                <%= fa_icon('heart', class: 'grey_love love_iconssss', style: 'height: 29.5px; font-size: 17px !important;') %>
+                <%= fa_icon('heart', class: 'grey_love love_iconssss', style: 'display: inline-block; margin-bottom: 5px;') %>
                 <% end %>
               <% end %>
           
@@ -197,7 +195,7 @@
     
           <div>
             <div class="row" style="margin-top:30px;">
-              <h4 style="font-family: Cako; font-size: 30px; font-weight: 400; line-height: 36.01px; margin-bottom:30px;">
+              <h4 style="font-size: 30px; font-weight: 400; line-height: 36.01px; margin-bottom:30px;">
                 Related Picnotes
               </h4>
               <% if @similar.count>0 %>
@@ -208,7 +206,7 @@
                         <div class="image-containermyprofile onclick='ChangeUrl("", "<%="notes/"+note.title_slug%>")'">
                           <%= link_to(note_path(note), remote: true) do %>
                             <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
-                            <div class="hover-overlay">
+                            <div class="hover-overlay related-picnote">
                               <div class="overlay-content" style="margin-bottom: -17%;">
                               
                                 <p id="truncate-title" class="truncate">
@@ -232,7 +230,7 @@
                                     <% end %>
                                     <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                                       <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                                        <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%;' %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px; background-color: #BC171D; border-radius: 50%;  margin-bottom: 18%;' %>
                                       <% end %>
                                     </span>
                                   <% else %>
@@ -245,7 +243,7 @@
                                     </span>
                                     <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
                                       <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                                        <%= image_tag 'folder-add.png', style: 'width: 30px; height: 26px; background-color: #BC171D; border-radius: 50%;' %>
+                                        <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px; background-color: #BC171D; border-radius: 50%;  margin-bottom: 18%;' %>
                                       <% end %>
                                     </span>
                                   <% end %>
@@ -279,9 +277,9 @@
       <!-- Modal Header -->
       <div class="modal-header" style="margin-left: 30%; border: none;">
         <div>
-          <h5 class="modal-title" id="newNoteModalLabel" style="margin-left: 4%; margin-right: auto;font-size:26px;font-weight:400;font-family:Cako;">Comments</h5>
+          <h5 class="modal-title" id="newNoteModalLabel" style="margin-left: 4%; margin-right: auto;font-size:26px;font-weight:400;">Comments</h5>
           
-            <button style="position: absolute; top: 0px;right: 0px; margin-right: 0px;" type="button" onclick="kill_model" class="close" data-dismiss="modal" aria-label="Close">
+            <button style="position: absolute; top: 0px;right: 0px; margin-right: 0px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -301,7 +299,7 @@
                     <% end %>
                     </a>
                     <div>
-                        <h4 class="pt-4" style="padding-top: 0.5rem !important;font-size: 1.5rem;font-size:18px; font-family:Aileron; color:#3F3F3F;">
+                        <h4 class="pt-4" style="padding-top: 0.5rem !important;font-size: 1.5rem;font-size:18px; color:#3F3F3F;">
                             <%
                             unless note.title[/\Ahttp:\/\//] || note.title[/\Ahttps:\/\//]
                             end
@@ -311,13 +309,13 @@
 
                         <div class="count-link-commment text-left" style="display: flex;">
                           <div class="ed_tracker_likes<%= note.id %>">
-                            <p class="m-0" style="font-family: 'Philosopher', sans-serif;">
+                            <p class="m-0">
                               <%= likes rescue 0 %>
                                 <%= image_tag 'smallheart.png' , style:"width: 16px;height: 16px;" %>
                             </p>
                           </div>
                           <div class="Comment ml-2" style="margin-top:20px; ">
-                            <p class=" edtool-comments-m-0<% note.id %>" style="font-family: 'Philosopher', sans-serif;">
+                            <p class=" edtool-comments-m-0<% note.id %>">
                               <%= comments rescue 0 %>
                                 <%= image_tag 'smallmsg.png' , style:"width: 16px;height: 16px;"%>
                             </p>
@@ -358,11 +356,11 @@
             </div>
 
             <div  style="display: flex;padding-top: 30px;border-radius: 20px;border: 1px solid #DCDCDC;margin: 11px;height: 56px;padding-left: 20px;">
-                <p style="color:#707070;font-family:Aileron; font-size:14px; ">Tags:
+                <p style="color:#707070;font-size:14px; ">Tags:
                 <% note.tag_list.each do |tag_name| %>
                 <% tag_info = get_tag_info(tag_name) %>
                 <%= link_to tag_name, tag_path(id: tag_info.id), style: "color: #BC171D ;text-decoration: none;
-                background-color: transparent !important;font-family: 'Philosopher', sans-serif;font-family:Aileron; font-size:14px;" %>
+                background-color: transparent !important;font-size:14px;" %>
                 <% end %>
                 </p>
               
@@ -390,7 +388,7 @@
                                     <div class="flex-grow-1 pl-2" >
                                             <div class="flex-grow-1" style="display:flex;">
                                                   <a class="text-decoration-none" href="#">
-                                                      <h2 class="text-capitalize h5 mb-0" style="font-family: 'Aileron';color:#707070;font-size:14px;"><%= comment.user.username rescue "" %>
+                                                      <h2 class="text-capitalize h5 mb-0" style="color:#707070;font-size:14px;"><%= comment.user.username rescue "" %>
                                                       <%= image_tag 'dot.png', class: 'avatar-image', style: 'width: 5px; height: 5px; margin-left:5px; margin-right:5px; margin-bottom:3px;' %>
                                                       <%= time_ago_in_words comment.created_at rescue "" %>
                                                       </h2>
@@ -477,7 +475,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="add_note_to_folder" style="margin-left: 20%; font-family:Cako;font-size:26px;line-height:31.21px;weight:400">Add Picnotes to Folder</h5>
+        <h5 class="modal-title" id="add_note_to_folder" style="margin-left: 20%;font-size:26px;line-height:31.21px;weight:400">Add Picnotes to Folder</h5>
         <button style="position: absolute; top: 0px;right: 0px; margin-right: -7px;" style="float: right" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -515,7 +513,7 @@
   <div class="modal-dialog" role="document" style="max-width: 450px; height: 200px; background-color: white; border-radius: 15px;">
     <div class="modal-content">
       <div class="modal-header d-flex justify-content-center position-relative" style="border-bottom: none;">
-        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left: 25%; margin-right: auto; margin-top: 0rem;font-family:Cako;font-size:26px;line-height:31.21px;weight:400">Create New Folder</h5>
+        <h5 class="modal-title" id="editSessionModalLabel" style="margin-left: 25%; margin-right: auto; margin-top: 0rem;font-size:26px;line-height:31.21px;weight:400">Create New Folder</h5>
         <button style="position: absolute; top: 0px;right: 0px; margin-right: -55px; margin-top:-33px" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -552,7 +550,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
   function kill_model() {
-    location.reload();
+    $('#test-modal').removeClass("show");
+    $('#picnote-modal').remove();
+    $('.modal-backdrop').remove(); // Remove any remaining backdrop
+    $('body').removeClass('modal-open'); // Remove the 'modal-open' class from the body
+    $('body').css('padding-right', ''); // Reset any padding added to the body
   }
 
   function truncateText(id, maxLength) {
@@ -669,6 +671,10 @@
   z-index: 2;
 }
 
+.related-picnote{
+ height: 35% !important;
+}
+
 .overlay-content {
   margin-bottom: -17%;
   display: flex;
@@ -766,7 +772,6 @@
 .note-title {
   font-size: 40px;
   margin-top: 0;
-  font-family:Cako;
   font-weight:400;
   line-height:48.01px;
 }
@@ -854,6 +859,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
+  gap: 2px;
 }
 
 .like-color-note {
@@ -871,7 +877,6 @@
 }
 
 .resources {
-  font-family: 'Cako', sans-serif;
   border: 1px solid #e0e0e0;
   padding: 20px;
   border-radius: 10px;
@@ -1011,18 +1016,4 @@
   }
   
 </script>
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
