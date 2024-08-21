@@ -1,7 +1,14 @@
-if($('#picnote-modal').length){
+if($('#picnote-modal').length)
   $('#picnote-modal').remove();
-} 
-$('#profileDetails').append("<%= j render 'note_modal', note: @note %>");
-$('#test-modal').modal('show');
-$('#noteContent').html("<%= j render 'note_modal', note: @note %>");
+
+setTimeout(function(){
+  $('#profileDetails').append("<%= j render 'note_modal', note: @note %>");
+  $('#noteContent').html("<%= j render 'note_modal', note: @note %>");
+}, 300);
+
+setTimeout(function(){
+ if($('#test-modal').length)
+  $('#test-modal').modal('show');
+}, 500);
+
 $('#loader').addClass('hidden');
