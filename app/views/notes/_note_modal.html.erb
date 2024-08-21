@@ -42,7 +42,8 @@
   <div style = "display: flex; align-items: center;">
     <div class='note-arrow'>
       <% if @previous_note %>
-        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -5rem'), note_path(@previous_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
+       <!-- data: {toggle: 'modal', dismiss: 'modal'}, -->
+        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -5rem'), note_path(@previous_note.title_slug), remote: true %>
       <% end %>
     </div>
 
@@ -69,7 +70,7 @@
               </button>
             </div>
           </div>
-          <div style="width: 40%; display: flex; padding: 0px 1%;">
+          <div style="width: 40%;display: flex;padding: 0px 1%;align-items: center;gap: 6px;">
             <div style="width: 50%;">
               <% if user_signed_in? %>
                 <button class="btn btn-add-folder" data-toggle="modal" data-target="#add_note_to_folder" style="margin-top: 2%;">
@@ -82,8 +83,8 @@
               <% end %>
             </div>
             
-            <div style="width: 50%; margin-top: 2%; margin-left: 4%;">
-              <% if user_signed_in? && can?(:favorite, @note) %>
+            <div style="width: 50%;margin-top: 2%;margin-left: 4%;gap: 8px;display: flex;align-items: center;">
+              <% if user_signed_in? %>
                 <% unless current_user.favorited_notes.exists?(id: @note.id) %>
                   <span class="favorites-count" style="padding: 0px;">
                     <%= link_to fa_icon('heart'), favorite_notes_path(note_id: @note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'display: inline-block; margin-bottom: 5px;' %>
@@ -163,7 +164,11 @@
                   <% end %>
                 </div>
               </div>
-              <div class="resources">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+               <div class="resources">
                 <div style="display:flex;">
                   <h2 style="margin-right:60px;">Resources</h2>
                   <div class='reference-tabs'>
@@ -192,7 +197,6 @@
               </div>
             </div>
           </div>
-    
           <div>
             <div class="row" style="margin-top:30px;">
               <h4 style="font-size: 30px; font-weight: 400; line-height: 36.01px; margin-bottom:30px;">
@@ -264,7 +268,7 @@
     </div>
     <div class='note-arrow'>
       <% if @next_note %>
-        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -5rem;'), note_path(@next_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
+        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -5rem;'), note_path(@next_note.title_slug), remote: true %>
       <% end %>
     </div>
   </div> 
@@ -279,7 +283,7 @@
         <div>
           <h5 class="modal-title" id="newNoteModalLabel" style="margin-left: 4%; margin-right: auto;font-size:26px;font-weight:400;">Comments</h5>
           
-            <button style="position: absolute; top: 0px;right: 0px; margin-right: 0px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+            <button style="position: absolute; top: 0px;right: 0px; margin-right: 0px;" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -376,11 +380,11 @@
                                 <div style="display:flex;margin-top: 20px;">
                                     <a class="text-decoration-none ed_tracker_msg_img<%= comment.id %>" href="#">
                                         <% if comment %>
-                                        <% if comment.user.avatar? %>
-                                        <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
-                                        <% else %>
-                                        <%= image_tag comment.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
-                                        <% end %>
+                                          <% if comment.user.avatar? %>
+                                            <%= image_tag comment&.user&.avatar&.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
+                                          <% else %>
+                                            <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
+                                          <% end %>
                                         <% else %>
                                         <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
                                         <% end %>
@@ -481,7 +485,7 @@
         </button>
       </div>
 
-        <div class="modal-body" style="padding:20px !important; display: none;">
+        <div class="modal-body" style="padding:20px !important;">
           <%= form_tag(note_addfolder_path(note), remote: true, id: "add_picnote_to_folder_form") do %>
             <div class="form-group">
               <div style="display:flex; justify-content:space-between; margin-left:25%;">
@@ -497,11 +501,13 @@
             </div>
           <% end %>
         </div>
-        <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
-          <%= image_tag 'empty-board.png', style: 'width: 20%;margin-bottom:30px;' %>
-        </div>
-        <p class="empty" style="justify-content: center !important; display: flex;">You have not created any folder yet.</p>
-        <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes empty" data-toggle="modal" data-target="#newFolderModal">Create New Folder</button>
+        <% if @folders.size == 0%>
+          <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+            <%= image_tag 'empty-board.png', style: 'width: 20%;margin-bottom:30px;' %>
+          </div>
+          <p class="empty" style="justify-content: center !important; display: flex;">You have not created any folder yet.</p>
+          <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes empty" data-toggle="modal" data-target="#newFolderModal">Create New Folder</button>
+        <% end %>
     </div>
   </div>
 </div>
@@ -766,7 +772,7 @@
 
 .note-image {
   width: 600px;
-  height: 600px;
+  /* height: 600px; */
 }
 
 .note-title {
@@ -880,9 +886,11 @@
   border: 1px solid #e0e0e0;
   padding: 20px;
   border-radius: 10px;
+  /*
   width: 500px !important;
   margin: auto;
   margin-top:30px;
+  */
 }
 
 .resources h2 {

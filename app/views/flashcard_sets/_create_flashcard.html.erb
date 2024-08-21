@@ -470,12 +470,12 @@
         });                                                                               
     });
 
-
-    $(document).on("click", ".flashcard-set-link", function(event) {
-    event.preventDefault(); 
-    var url = $(this).attr("href"); 
-    
-    $.ajax({
+   
+  $(document).on("click", ".flashcard-set-link", function(event) {
+      event.preventDefault(); 
+      var url = $(this).attr("href"); 
+      
+      $.ajax({
         url: url,
         type: "GET",
         dataType: "html",
@@ -485,7 +485,7 @@
         error: function() {
             alert("Failed to load flashcard set details.");
         }
-    });
-});
+      });
+  });
 
 </script>

@@ -1,12 +1,10 @@
 
-$('#profileDetails').html("<%= j render 'add_note_to_folder', note: @note, folders: @folders %>");
-$('#add_note_to_folder').modal('show');
-
+$('#profileDetails').append("<%= j render 'add_note_to_folder', note: @note, folders: @folders %>");
 $('#noteContent').html("<%= j render 'add_note_to_folder', note: @note, folders: @folders %>");
-$('#add_note_to_folder').modal('show');
-
-
 $('#searchDetails').html("<%= j render 'add_note_to_folder', note: @note, folders: @folders %>");
-$('#add_note_to_folder').modal('show');
+
+setTimeout(function(){
+ $('#add_note_to_folder').modal('show');
+}, 500);
 
 $('#loader').addClass('hidden');

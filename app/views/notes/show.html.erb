@@ -241,7 +241,7 @@
     </div>
     <div class = 'note-arrow'>
       <% if @next_note %>
-        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note'), note_path(@next_note.title_slug) %>
+        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note'), note_path(@next_note.title_slug), data: {toggle: 'modal', dismiss: 'modal'}, remote: true %>
         <% end %>
     </div>
   </div> 
