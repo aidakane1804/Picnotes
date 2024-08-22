@@ -146,7 +146,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 20ch;
+  max-width: 40ch;
   color: white !important;
   font-weight: bold;
   font-size: 11px;
@@ -169,14 +169,16 @@
 <script>
   function truncateText(id, maxLength) {
   var element = document.getElementById(id);
+  /*
   if (element && element.textContent.length > maxLength) {
     element.textContent = element.textContent.slice(0, maxLength) + '...';
   }
+  */
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  truncateText('truncate-title', 10); 
-  truncateText('truncate-name', 10);
+  truncateText('truncate-title', 30); 
+  truncateText('truncate-name', 20);
 });
 
 </script>

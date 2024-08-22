@@ -130,7 +130,7 @@
             <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'myfolder.png', size: '24x24' %>
               <span style="font-weight:400; font-size: 14px;">
-              <%= @folders.count > 0 ? 'Folders' : 'Folder' %>
+              <%= @folders.size > 0 ? 'Folders' : 'Folder' %>
               </span>
               <span class='note-count'><%= "(#{@user.folders.count})" %></span>
             <% end %>
@@ -140,7 +140,7 @@
             <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
               <%= image_tag 'heart.png', size: '24x24' %>
               <span style="font-weight:400; font-size: 14px;">
-                <%= @favorites.count > 0 ? 'Favorites' : 'Favorite' %>
+                <%= @favorites.size > 0 ? 'Favorites' : 'Favorite' %>
               </span>
               <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
             <% end %>

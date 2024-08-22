@@ -133,14 +133,16 @@
 
  function truncateText(id, maxLength) {
     var element = document.getElementById(id);
+    /*
     if (element.textContent.length > maxLength) {
       element.textContent = element.textContent.slice(0, maxLength) + '...';
     }
+    */
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    truncateText('truncate-title', 10); 
-    truncateText('truncate-name', 10); 
+    truncateText('truncate-title', 20); 
+    truncateText('truncate-name', 20); 
   });
 </script>
 
