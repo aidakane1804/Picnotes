@@ -26,6 +26,7 @@ class HomeController < ApplicationController
   end
                       
   def trending
+    @folders = @favorites = []
     if params[:search].present?
       search_notes_and_users(params[:search])
       respond_to do |format|

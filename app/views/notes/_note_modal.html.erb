@@ -51,8 +51,8 @@
       <div class="modal-content">
         <div class="modal-header-note" style="margin-top: 2%; margin-left:3%;">
           <div class="note-avatar" style="width: 60%;" >
-            <% if note.user.avatar? %>
-              <%= image_tag note.user.avatar.url(:thumb), class: 'avatar' %>
+            <% if note&.user&.avatar? %>
+              <%= image_tag note&.user&.avatar.url(:thumb), class: 'avatar' %>
             <% else %>
               <%= image_tag 'myavtar.png', class: 'avatar' %>
             <% end %>
@@ -296,10 +296,10 @@
             <div class="title-hashtag text-left justify-content-between" style="display:flex;">
                 <div class="title-hashtag text-left d-flex-comment" style="display: flex;">
                     <a class="text-decoration-none" href="#">
-                    <% if note.user.avatar? %>
-                    <%= image_tag note.user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
+                    <% if note&.user&.avatar? %>
+                    <%= image_tag note&.user&.avatar&.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;margin-right: 20px;' %>
                     <% else %>
-                    <%= image_tag(@user.avatar.url || 'myavtar.png', class: 'avatar-image', id: 'avatarPreview', style: 'width: 60px; height: 60px; max-width: 200px; border-radius: 50%; margin-right: 20px; padding-top: 0rem') %>
+                    <%= image_tag(@user&.avatar&.url || 'myavtar.png', class: 'avatar-image', id: 'avatarPreview', style: 'width: 60px; height: 60px; max-width: 200px; border-radius: 50%; margin-right: 20px; padding-top: 0rem') %>
                     <% end %>
                     </a>
                     <div>
@@ -380,7 +380,7 @@
                                 <div style="display:flex;margin-top: 20px;">
                                     <a class="text-decoration-none ed_tracker_msg_img<%= comment.id %>" href="#">
                                         <% if comment %>
-                                          <% if comment.user.avatar? %>
+                                          <% if comment&.user&.avatar? %>
                                             <%= image_tag comment&.user&.avatar&.url(:thumb), class: 'avatar-image', style: 'width: 50px; height: 50px;' %>
                                           <% else %>
                                             <%= image_tag 'avatar.png', class: '', style: "width: 60px; height: 60px;margin-right: 20px;" %>
@@ -450,8 +450,8 @@
                   <div class="form-group mt-3 d-flex align-items-center" style="margin-bottom: 1rem; border-radius: 50px; padding: 10px; background-color: #FFFFFF; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);height:54px;">
                       <a class="text-decoration-none" href="#">
                           <% if current_user %>
-                              <% if current_user.avatar? %>
-                                  <%= image_tag current_user.avatar.url(:thumb), class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
+                              <% if current_user&.avatar? %>
+                                  <%= image_tag current_user&.avatar&.url(:thumb), class: 'avatar-image', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
                               <% else %>
                                   <%= image_tag 'myavtar.png', style: 'width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;' %>
                               <% end %>

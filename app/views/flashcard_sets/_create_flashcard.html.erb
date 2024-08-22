@@ -19,7 +19,7 @@
                   </h1>
                 </div>
               </div>
-              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link' do %>
+              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link', remote: true do %>
 
               <div class="grid-folder">
                 <% flashcard_set.flashcard.each_with_index do |(key, flashcard), index| %>
@@ -58,7 +58,7 @@
                   </h1>
                 </div>
               </div>
-              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link' do %>
+              <%= link_to flashcard_set_path(flashcard_set, user_id: @user), class: 'flashcard-set-link', remote: true do %>
 
               <div class="grid-folder">
                 <% flashcard_set.flashcard.each_with_index do |(key, flashcard), index| %>
@@ -470,7 +470,7 @@
         });                                                                               
     });
 
-   
+  /*
   $(document).on("click", ".flashcard-set-link", function(event) {
       event.preventDefault(); 
       var url = $(this).attr("href"); 
@@ -487,5 +487,6 @@
         }
       });
   });
+  */
 
 </script>
