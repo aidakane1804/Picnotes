@@ -102,9 +102,9 @@ class EdtrackersController < ApplicationController
   def update_status
     @edtracker = Edtracker.find(params[:edtracker_id])
     if @edtracker && params[:current_user_id]
-      if @edtracker.user_id.to_s == params[:current_user_id]
-      @edtracker.edtracker_type = params[:status]
-      @edtracker.save
+      if @edtracker.user_id.to_s == params[:current_user_id].to_s
+        @edtracker.edtracker_type = params[:status]
+        @edtracker.save
       end
     else
       redirect_to feed_index_path
