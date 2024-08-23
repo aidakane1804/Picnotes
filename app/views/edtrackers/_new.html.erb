@@ -221,6 +221,7 @@
   </div>
 
   <script>
+    /*
     function ed_tracker_dropdown(Object, id, current_user_id) {
       var value = Object.value;
       var id = id;
@@ -243,6 +244,7 @@
         },
       });
     }
+    */
   </script>
 
   <style>
@@ -682,6 +684,7 @@
 
 
 <script>
+  /*
     function ed_tracker_dropdown(Object, id, current_user_id, status) {
         var value = Object.value;
         var id = id;
@@ -704,5 +707,29 @@
             }
         });
     }
+  */
 
+  function ed_tracker_dropdown(Object, id, current_user_id, status) {
+    var value = Object.value;
+    var id = id;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/update_status", true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          location.reload();
+        }
+    };
+
+    var data = JSON.stringify({
+        status: value,
+        edtracker_id: id,
+        current_user_id: current_user_id,
+        status: status
+    });
+
+    xhr.send(data);
+ }
 </script>
