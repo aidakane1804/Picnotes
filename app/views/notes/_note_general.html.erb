@@ -52,7 +52,17 @@
   <% end %>
 </div>
 
+
 <style>
+  .profileDetails {
+    width:71%;
+    height: 100vh; 
+    border: 1px solid #dcdcdc;
+    box-shadow: 0px 4px 24px 0px #0000000d;
+    border-radius: 10px;
+    overflow: scroll;
+ }
+ 
 .grey_loves .fa {
   color: #BC171D !important;
   background-color: white !important;
@@ -183,9 +193,11 @@
 <script>
   function truncateText(id, maxLength) {
     var element = document.getElementById(id);
+    /*
     if (element.textContent.length > maxLength) {
       element.textContent = element.textContent.slice(0, maxLength) + '...';
     }
+    */
   }
 
   document.addEventListener("DOMContentLoaded", function() {

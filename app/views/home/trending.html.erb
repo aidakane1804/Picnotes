@@ -19,6 +19,8 @@
   end 
   top_tags = tag_counts.sort_by { |tag_name, count| -count }.first(8).to_h.keys
 %>
+<div id="note-content"></div>
+<div class="row" id="noteContent"></div>
 
 <div class="d-flex justify-content-center mt-7" style="margin-left: 8%;">
   <% top_tags.each do |tag| %>

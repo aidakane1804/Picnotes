@@ -65,7 +65,7 @@
                   <p> <%= render '/components/follow_button_details_page', :user => note.user %> </p>
                 <% end %>
               </h6>
-              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button" onclick="kill_model()" class="close" data-dismiss="modal" aria-label="Close">
+              <button style="position: absolute; top: 0px;right: 0px; margin-right: 10px;" type="button"  class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
@@ -556,11 +556,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
   function kill_model() {
+   
+    /*
     $('#test-modal').removeClass("show");
     $('#picnote-modal').remove();
     $('.modal-backdrop').remove(); // Remove any remaining backdrop
     $('body').removeClass('modal-open'); // Remove the 'modal-open' class from the body
     $('body').css('padding-right', ''); // Reset any padding added to the body
+    */
   }
 
   function truncateText(id, maxLength) {

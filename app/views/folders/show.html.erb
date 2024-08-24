@@ -10,7 +10,8 @@
   </div>
 <% end %>
 
-<div id='note-content'></div>
+<div id="note-content"></div>
+<div class="row" id="noteContent"></div>
 
 <div class='flex-center'>
   <div class="notes-container" style='margin-top: 20px;'>
@@ -20,12 +21,82 @@
   </div>
 </div>
 
+<div class="profileDetails">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: white">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-lg-0">
+          
+          <li class="nav-item"  >
+            <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'box.png', size: '18x18' %>
+              <span style="font-weight:400;">Feed</span>
+            <% end %>
+          </li>
+
+
+          <li class="nav-item"  >
+            <%= link_to user_notes_session_path, remote: true, class: "profile-links nav-link", id: "my-picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'note.png', size: '24x24' %>
+              <span style="font-weight:400;">Picnotes</span>
+              <span class='note-count'><%= "(#{@user.notes.where(archived: false).count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item"  >
+            <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'myfolder.png', size: '24x24' %>
+              <span style="font-weight:400; font-size: 14px;">
+              <%= (@folders.size rescue 0) > 0 ? 'Folders' : 'Folder' %>
+              </span>
+              <span class='note-count'><%= "(#{@user.folders.count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item"  >
+            <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'heart.png', size: '24x24' %>
+              <span style="font-weight:400; font-size: 14px;">
+                <%= (@favorites.size rescue 0) > 0 ? 'Favorites' : 'Favorite' %>
+              </span>
+              <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
+            <% end %>
+          </li>
+
+          <li class="nav-item" >
+            <%= link_to create_flashcard_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-flashcards-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'flashcard.png', size: '24x24' %>
+              <span style="font-weight:400; font-size: 14px;">Flashcards</span>
+            <% end %>
+          </li>
+          <li class="nav-item"  >
+            <%= link_to new_edtracker_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtracker-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'attach.png', size: '24x24' %>
+              <span style="font-weight:400; font-size: 14px;">EdTracker</span>
+            <% end %>
+          </li>
+          <li class="nav-item"  >
+            <%= link_to new_myedtool_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtools-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
+              <%= image_tag 'files.png', size: '24x24' %>
+              <span style="font-weight:400; font-size: 14px;">EdTools</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="row" id="profileDetails">
+  </div>
+</div>
+
+
 <style>
 #folder-picnote{
   margin-bottom:-12% !important;
 }
-#truncate-title{
-  margin-bottom:0%!important;
-}
+
 </style>
 
