@@ -2,17 +2,12 @@ if (document.getElementById('picnote-modal')) {
     document.getElementById('picnote-modal').remove();
 }
 
-setTimeout(function () {
-    document.getElementById('profileDetails').insertAdjacentHTML("beforeend", "<%= j render 'note_modal', note: @note %>");
-    document.getElementById('noteContent').innerHTML = "<%= j render 'note_modal', note: @note %>";
-}, 300);
+document.getElementById('profileDetails').insertAdjacentHTML("beforeend", "<%= j render 'note_modal', note: @note %>");
+document.getElementById('noteContent').innerHTML = "<%= j render 'note_modal', note: @note %>";
 
-setTimeout(function () {
-    var testModal = document.getElementById('test-modal');
-    if (testModal) {
-        var modal = new bootstrap.Modal(testModal);
-        modal.show();
-    }
-}, 500);
-
+var testModal = document.getElementById('test-modal');
+if (testModal) {
+    var modal = new bootstrap.Modal(testModal);
+    modal.show();
+}
 document.getElementById('loader').classList.add('hidden');

@@ -1276,17 +1276,18 @@
 </script>
 
 <script>
- $(document).on('click', '.close', function() {
+ $(document).on('click', '.close', function() {  
   var $modal = $(this).closest('.modal'); // Find the closest parent modal
   $modal.modal('hide'); // Hide the modal
-
-  // Ensure the backdrop is removed
-  $modal.on('hidden.bs.modal', function () {
-   $('.modal-backdrop').remove(); // Remove any remaining backdrop
-   $('body').removeClass('modal-open'); // Remove the 'modal-open' class from the body
-   $('body').css('padding-right', ''); // Reset any padding added to the body
+  //$('.modal-backdrop').remove(); // Remove any remaining backdrop
+  // Loop through and remove all .modal-backdrop elements
+  $('.modal-backdrop').each(function() {
+    $(this).remove();
   });
+  $('body').removeClass('modal-open'); // Remove the 'modal-open' class from the body
+  $('body').css('padding-right', ''); // Reset any padding added to the body
  });
+
 </script>
 
 <script>
