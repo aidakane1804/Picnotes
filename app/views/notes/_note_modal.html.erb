@@ -43,7 +43,7 @@
     <div class='note-arrow'>
       <% if @previous_note %>
        <!-- data: {toggle: 'modal', dismiss: 'modal'}, -->
-        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -5rem'), note_path(@previous_note.title_slug), remote: true %>
+        <%= link_to image_tag('leftarrownew.png', alt: 'Previous Note', style: 'margin-right: -5rem'), note_path(@previous_note.title_slug, tag: params.dig(:tag), picnotes_type: params.dig(:picnotes_type)), remote: true %>
       <% end %>
     </div>
 
@@ -268,7 +268,7 @@
     </div>
     <div class='note-arrow'>
       <% if @next_note %>
-        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -5rem;'), note_path(@next_note.title_slug), remote: true %>
+        <%= link_to image_tag('rightarroenew.png', alt: 'Next Note', style: 'margin-left: -5rem;'), note_path(@next_note.title_slug, tag: params.dig(:tag), picnotes_type: params.dig(:picnotes_type)), remote: true %>
       <% end %>
     </div>
   </div> 

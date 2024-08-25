@@ -180,7 +180,12 @@ class NotesController < ApplicationController
   def show
     redirect_to root_path, alert: "Note not found" unless @note.present?
 
-    @tags = @note.tags.order(created_at: :desc)
+    @tags = if params[:tag].present?
+      @note.tags.where(name: params[:tag])
+    else
+      @note.tags
+    end
+    @tags = @tags.order(created_at: :desc)
     @references_unordered = Reference.where(note_id: @note.id)
     # @references = @references_unordered.sort_by &:file_type
     @references = @references_unordered.where(:file_type => 't')
@@ -197,15 +202,26 @@ class NotesController < ApplicationController
     @folders = Folder.where(user: current_user)
     @note_session = session[:picnotes] || []
     @note_exist = @note_session.include? @note.title_slug
-    @previous_note = @note.next
-    @next_note = @note.previous
-    if @note_exist
-      @note_index = @note_session.find_index(@note.title_slug)
-      @note_index_next = @note_index + 1
-      @next_note = Note.where(title_slug: @note_session[@note_index_next]).first
-      @note_index_previous = @note_index - 1
-      @previous_note = Note.where(title_slug: @note_session[@note_index_previous]).first
+
+    if params.dig(:tag)
+      @previous_note = @note.previous tag: params.dig(:tag)
+      @next_note = @note.next tag: params.dig(:tag)
+    elsif params.dig(:picnotes_type)
+      @previous_note = @note.previous user: current_user, picnotes_type: params.dig(:picnotes_type)
+      @next_note = @note.next user: current_user, picnotes_type: params.dig(:picnotes_type)
+    else
+      @previous_note = @note.next
+      @next_note = @note.previous
     end
+    
+    # if @note_exist
+    #   @note_index = @note_session.find_index(@note.title_slug)
+    #   @note_index_next = @note_index + 1
+    #   @next_note = Note.where(title_slug: @note_session[@note_index_next]).first
+    #   @note_index_previous = @note_index - 1
+    #   @previous_note = Note.where(title_slug: @note_session[@note_index_previous]).first
+    # end
+
     @similar = Note.tagged_with(@note.tags, :any => true)
     @meta_title = @note.title
     @meta_description = @note.body.slice(0, 120) + "..."

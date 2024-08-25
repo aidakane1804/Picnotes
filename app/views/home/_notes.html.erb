@@ -4,7 +4,7 @@
       <div class="column">
         <% if note.image.url.present? %>
           <div class="grid-image-container">
-              <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <%= link_to(note_path(note.slug, tag: @tag_name), { remote: true }) do %>
                 <figure class="card-picknote card-product image-containermyprofile">
                   <div class="image-containermyprofile">
                     <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>

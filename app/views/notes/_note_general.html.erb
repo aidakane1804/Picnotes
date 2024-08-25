@@ -1,5 +1,6 @@
+<% picnotes_type = local_assigns.dig(:picnotes_type) %>
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 notes_col">
-  <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+  <%= link_to(note_path(note.slug, picnotes_type: picnotes_type), { remote: true, title: note.title }) do %>
     <figure class="card-picknote card-product image-containermyprofile">
       <div class="image-containermyprofile">
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>

@@ -7,8 +7,8 @@
   <div class='flex-center'>
     <div class="notes-container" style='margin-top: 20px;'>
       <% if @favorites.where(archived: false).count > 0 %>
-        <% @favorites.where(archived: false).each_with_index  do |note, index| %>
-          <%= render partial: 'notes/note_general', locals: {note: note} %>
+        <% @favorites.where(archived: false).order(id: :asc).each  do |note| %>
+          <%= render partial: 'notes/note_general', locals: {note: note, picnotes_type: "my-favorites"} %>
     <% end %>
       <% else %>
         <% if @user == current_user %>

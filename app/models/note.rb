@@ -58,12 +58,32 @@ class Note < ApplicationRecord
     self.title_slug
   end
 
-  def previous
-    Note.where("id < ?", id).order(id: :desc).first || Note.last
+  def previous tag: nil, user: nil, picnotes_type: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type)
+
+    notes.where("notes.id < ?", id).order(id: :desc).first || notes.first
   end
 
-  def next
-    Note.where("id > ?", id).order(id: :asc).first || Note.first
+  def next tag: nil, user: nil, picnotes_type: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type)
+
+    notes.where("notes.id > ?", id).order(id: :asc).first || notes.last
+  end
+  
+  def fetch_notes tag: nil, user: nil, picnotes_type: nil
+    if tag
+      Note.includes(:tags).where(tags: { name: tag }).all
+    elsif user
+      if picnotes_type == "my-picnotes"
+        Note.where(user: user).order(id: :asc)
+      elsif picnotes_type == "my-favorites"
+        user.favorited_notes.where(archived: false).order(id: :asc)
+      else
+        Note.all
+      end
+    else
+      Note.all
+    end
   end
 
   private
