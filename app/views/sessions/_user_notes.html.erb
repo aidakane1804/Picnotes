@@ -10,7 +10,7 @@
       <div class='notes-container'>
         <% if @notes.where(archived: false).count > 0 %>
           <% @notes.where(archived: false).each do |note| %>
-            <%= render partial: 'notes/note_general', locals: { note: note } %>
+            <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
           <% end %>
         <% else %>
           
@@ -31,7 +31,7 @@
       <div class='notes-container'>
         <% if @notes.where(archived: false).count > 0 %>
           <% @notes.where(archived: false).each do |note| %>
-            <%= render partial: 'notes/note_general', locals: { note: note } %>
+            <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
           <% end %>
         <% else %>
           
