@@ -29,7 +29,15 @@
         <p style="font-family: Aileron; font-size: 20px; font-weight: 400; line-height: 24px; text-align: left; margin:10px;">
           Focuses on empowering learners and educators.
         </p>
-        <%= link_to 'Explore More 🔥', explore_path, class: 'explore-button' %>
+        <div>
+           <%= link_to 'Start browsing 🔥', explore_path, class: 'explore-button' %>
+           <% if current_user %>
+            <button  data-bs-toggle="modal" data-bs-target="#newNoteModal" class="explore-button share-your-knowledge-button">Share your knowledge</button>
+           <% else %>
+            <%= link_to 'Share your knowledge', new_session_path, class: 'explore-button share-your-knowledge-button' %>
+           <% end %>       
+        </div>
+       
       </div>
     </div>
     <div class="col-md-7"> 
@@ -129,7 +137,7 @@
   </div>
 </div>
 
-<div class="profileDetails">
+<div class="profileDetails" style="display: none;">
   <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: white">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -794,7 +802,7 @@
     padding: 20px;
     background-color: #BC171D;
     color: #fff !important;
-    text-decoration: none;
+    text-decoration: none !important;
     border-radius: 50px;
     font-size: 18px;
     width:207px;
@@ -805,6 +813,10 @@
   }
   .explore-button:hover {
     background-color: #BC171D;
+  }
+  .share-your-knowledge-button{
+    width: 250px;
+    background-color: #0d6efd !important;
   }
   .social-login {
     margin-top: 40px;

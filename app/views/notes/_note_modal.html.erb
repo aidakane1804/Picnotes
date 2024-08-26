@@ -120,9 +120,7 @@
                 <% end %>
               <% end %>
             </div>
-          </div>
-          
-          
+          </div>    
         </div>
               
         <div class="modal-body" style="padding: 1rem 0px !important;">
@@ -133,7 +131,37 @@
               <% end %>
             </div>
             <div class="col-md-6">
-              <h1 class="note-title"><%= note.title %></h1>
+              <h1 class="note-title">
+                <%= note.title %>
+              </h1>
+
+                <div class="title-hashtag text-left d-flex-comment" style="padding-top:10px">
+                  <% if (note.user && note.user.id) == current_user.id %>
+                    <%= image_tag 'Add-resource-edit.png', alt: 'Edit', class: 'mr-2', style: 'width: 11px; height: 11px;' %>
+                      <button
+                        type="button"
+                        class="blue-appearance-btn"
+                        data-toggle="modal"
+                        data-target="#editNoteModal"
+                        data-whatever="@mdo"
+                        data-dismiss="modal"
+                        style="font-size: 14px; margin-left: -9px;margin-right: 10px;">
+                        Edit
+                      </button>
+
+                  <a href="<%= note_path(note) %>"
+                      method="delete"
+                      class="blue-appearance-btn"
+                      style="margin-right:25px;"
+                      data-confirm="Are you sure?"
+                      data-method="delete">
+                      <%= image_tag 'Add-resource-delete.png', style: 'height: 14px; width: 14px;' %>
+                      Delete
+                  </a>
+  
+                  <% end %>
+              </div>
+          
               <p class="note-content"><%= note.body %></p>
               <div class="tags">
                 <% note.tags.each do |tag| %>
@@ -326,37 +354,7 @@
                           </div>
                         </div>
                     </div>
-
-                    
-    
                 </div>
-                <div class="title-hashtag text-left d-flex-comment" style="padding-top:10px">
-                    <% if note.user == current_user %>
-                      <%= image_tag 'Add-resource-edit.png', alt: 'Edit', class: 'mr-2', style: 'width: 11px; height: 11px;' %>
-                        <button
-                          type="button"
-                          class="blue-appearance-btn"
-                          data-toggle="modal"
-                          data-target="#editNoteModal"
-                          data-whatever="@mdo"
-                          data-dismiss="modal"
-                          style="font-size: 14px; margin-left: -9px;margin-right: 10px;">
-                          Edit
-                        </button>
-
-                    <a href="<%= note_path(note) %>"
-                        method="delete"
-                        class="blue-appearance-btn"
-                        style="margin-right:25px;"
-                        data-confirm="Are you sure?"
-                        data-method="delete">
-                        <%= image_tag 'Add-resource-delete.png', style: 'height: 14px; width: 14px;' %>
-                        Delete
-                    </a>
-    
-                    <% end %>
-                </div>
-    
             </div>
 
             <div  style="display: flex;padding-top: 30px;border-radius: 20px;border: 1px solid #DCDCDC;margin: 11px;height: 56px;padding-left: 20px;">
