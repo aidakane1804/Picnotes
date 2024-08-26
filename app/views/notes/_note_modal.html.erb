@@ -134,7 +134,7 @@
               <h1 class="note-title">
                 <%= note.title %>
               </h1>
-
+                <% if current_user %>
                 <div class="title-hashtag text-left d-flex-comment" style="padding-top:10px">
                   <% if (note.user && note.user.id) == current_user.id %>
                     <%= image_tag 'Add-resource-edit.png', alt: 'Edit', class: 'mr-2', style: 'width: 11px; height: 11px;' %>
@@ -160,8 +160,8 @@
                   </a>
   
                   <% end %>
-              </div>
-          
+                </div>
+                <% end %>
               <p class="note-content"><%= note.body %></p>
               <div class="tags">
                 <% note.tags.each do |tag| %>
