@@ -26,7 +26,7 @@
             </div>
 
             <div class="row">
-              <% folder.notes.where(archived: false).each_with_index do |note, i| %>
+              <% folder.notes.where(archived: false).order(id: :asc).each_with_index do |note, i| %>
                 <% if i < 8 %>
                 <div class="col-lg-3 col-md-3 folder-note <%= 'last-note' if i == 7 %>">
                   <% if note.image.url.length > 0 %>

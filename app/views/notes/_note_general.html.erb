@@ -1,6 +1,9 @@
-<% picnotes_type = local_assigns.dig(:picnotes_type) %>
+<% 
+  picnotes_type = local_assigns.dig(:picnotes_type)
+  folderid      = local_assigns.dig(:folderid)
+%>
 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 notes_col">
-  <%= link_to(note_path(note.slug, picnotes_type: picnotes_type), { remote: true, title: note.title }) do %>
+  <%= link_to(note_path(note.slug, picnotes_type: picnotes_type, folderid: folderid), { remote: true, title: note.title }) do %>
     <figure class="card-picknote card-product image-containermyprofile">
       <div class="image-containermyprofile">
         <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
@@ -8,7 +11,7 @@
             <div class="overlay-content" id="folder-picnote" style="margin-bottom: -17%;">
             
               <p id="truncate-title" class="truncate">
-                <%= note.title %>
+               <%= note.title %> 
               </p>
               <p id="truncate-name" class="truncate" style="font-size: 12px;">
                 <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>

@@ -209,6 +209,9 @@ class NotesController < ApplicationController
     elsif params.dig(:picnotes_type)
       @previous_note = @note.previous user: current_user, picnotes_type: params.dig(:picnotes_type)
       @next_note = @note.next user: current_user, picnotes_type: params.dig(:picnotes_type)
+    elsif params.dig(:folderid)
+      @previous_note = @note.previous user: current_user, folderid: params.dig(:folderid)
+      @next_note = @note.next user: current_user, folderid: params.dig(:folderid)
     else
       @previous_note = @note.next
       @next_note = @note.previous

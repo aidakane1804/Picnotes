@@ -58,29 +58,30 @@ class Note < ApplicationRecord
     self.title_slug
   end
 
-  def previous tag: nil, user: nil, picnotes_type: nil
-    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type)
+  def previous tag: nil, user: nil, picnotes_type: nil, folderid: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid)
 
     notes.where("notes.id < ?", id).order(id: :desc).first || notes.first
   end
 
-  def next tag: nil, user: nil, picnotes_type: nil
-    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type)
+  def next tag: nil, user: nil, picnotes_type: nil, folderid: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid)
 
     notes.where("notes.id > ?", id).order(id: :asc).first || notes.last
   end
   
-  def fetch_notes tag: nil, user: nil, picnotes_type: nil
+  def fetch_notes tag: nil, user: nil, picnotes_type: nil, folderid: nil
     if tag
       Note.includes(:tags).where(tags: { name: tag }).all
-    elsif user
+    elsif user && picnotes_type
       if picnotes_type == "my-picnotes"
         Note.where(user: user).order(id: :asc)
       elsif picnotes_type == "my-favorites"
         user.favorited_notes.where(archived: false).order(id: :asc)
-      else
-        Note.all
       end
+    elsif user && folderid
+      folder = Folder.find(folderid)
+      folder.notes.where(archived: false)
     else
       Note.all
     end
