@@ -16,7 +16,7 @@
 <div class='flex-center'>
   <div class="notes-container" style='margin-top: 20px;'>
     <% @notes.each do |note| %>
-      <%= render partial: 'notes/note_general', locals: {note: note} %>
+      <%= render partial: 'notes/note_general', locals: {note: note, folderid: @folder.id} %>
   <% end %>
   </div>
 </div>

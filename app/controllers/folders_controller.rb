@@ -22,7 +22,7 @@ class FoldersController < ApplicationController
       @user = current_user
       @folder = Folder.find(params[:id])
     end
-    @notes = @folder.notes.where(archived: false)
+    @notes = @folder.notes.where(archived: false).order(id: :asc)
 
     @count = 0
     my_array = []
