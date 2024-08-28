@@ -6,15 +6,9 @@
   crossorigin="anonymous"
 />
 
-<% if user_signed_in? %>
-  <%= render 'partials/navbarfeed' %>
-<% else %>
-  <%= render 'partials/navbar' if !["sessions", "password_resets", "users"].include?(controller_name) %>
-<% end %>
-
 <% if @searchresult %>
-  <div style='text-align: center; margin-top: 30px; width: 100%; border-bottom: 1px solid #ddd;'>
-    <h1>Search Results for <%= @searchresult %></h1>
+  <div style='text-align: center; margin-top: 30px; width: 100%;'>
+    <p>Results for <%= @searchresult %></p>
   </div>
 <% end %>
 
@@ -26,41 +20,54 @@
   </div>
 <% end %>
 
-
-<div id="searchDetails"></div>
-
-
-  <div class='flex-center'>
-    <div class="notes-container" id="notes-div">
-      <%= render @notes %>
-      <%= render @notesTagged %>
-    </div>
-  </div>
-  <div id="infinite-scrolling">
-    <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
-  </div>
-
-</div>
-
-
-
-<div class="flex-center">
-  <div class="notes-container" style="margin-top: 20px">
-    <% @users.each do |user| %>
-      <div class="note-container">
-        <%= link_to user_path(user) do %>
-          <% if user.avatar? %>
-            <%= image_tag user.avatar.url(:thumb), style: 'width: 100%;' %>
-          <% else %>
-            <%= image_tag 'avatar.png', style: 'width: 100%;' %>
-          <% end %>
-          <div class="note-container-text" style="text-align: center !important">
-            <p class="mobile-font note-btn-font" style="text-transform: capitalize">
-              <%= user.username %>
-            </p>
-            <p class="mobile-font note-btn-font">
-              <%= user.first_name %> <%= user.last_name %>
-            </p>
+<div class='flex-center'>
+  <div class="notes-container" id="notes-div">
+    <% @notes.each do |note| %>
+      <div class="note-card">
+        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+            <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <figure class="card-picknote card-product image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                  <div class="hover-overlay">
+                    <div class="overlay-content" style="margin-bottom: -17%;">
+                      <p id="truncate-title" class="truncate" style="margin-bottom: -1px;">
+                        <%= note.title %>
+                      </p>
+                      <p id="truncate-name" class="truncate" >
+                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% @notesTagged.each do |note| %>
+      <div class="note-card">
+        <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 notes_col">
+            <%= link_to(note_path(note.slug), { remote: true }) do %>
+              <figure class="card-picknote card-product image-containermyprofile">
+                <div class="image-containermyprofile">
+                  <%= image_tag(note.image.url(:thumb), alt: note.title, :class => "image") if note.image.present? %>
+                   <div class="hover-overlay">
+                    <div class="overlay-content" style="margin-bottom: -17%;">
+                      <p id="truncate-title" class="truncate"     style="margin-bottom: -1px;">
+                        <%= note.title %>
+                      </p>
+                      <p id="truncate-name" class="truncate"  style="margin-bottom: 14%;">
+                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -68,117 +75,27 @@
   </div>
 </div>
 
-<div class="profileDetails" style="display: none;">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" style="background-color: white">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-lg-0">
-          
-          <li class="nav-item"  >
-            <%= link_to feed_index_feed_index_path, remote: true, class: "profile-links nav-link", id: "my-feeds-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'box.png', size: '18x18' %>
-              <span style="font-weight:400;">Feed</span>
-            <% end %>
-          </li>
+<div id="searchDetails"></div>
 
-
-          <li class="nav-item"  >
-            <%= link_to user_notes_session_path, remote: true, class: "profile-links nav-link", id: "my-picnotes-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'note.png', size: '24x24' %>
-              <span style="font-weight:400;">Picnotes</span>
-              <span class='note-count'><%= "(#{@user.notes.where(archived: false).count})" %></span>
-            <% end %>
-          </li>
-
-          <li class="nav-item"  >
-            <%= link_to folders_path(current_user), remote: true, class: "profile-links nav-link", id: "my-folders-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'myfolder.png', size: '24x24' %>
-              <span style="font-weight:400; font-size: 14px;">
-              <%= (@folders.size rescue 0 ) > 0 ? 'Folders' : 'Folder' %>
-              </span>
-              <span class='note-count'><%= "(#{@user.folders.count})" %></span>
-            <% end %>
-          </li>
-
-          <li class="nav-item"  >
-            <%= link_to favorites_path, remote: true, class: "profile-links nav-link", id: "my-favorites-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'heart.png', size: '24x24' %>
-              <span style="font-weight:400; font-size: 14px;">
-                <%= (@favorites.size rescue 0) > 0 ? 'Favorites' : 'Favorite' %>
-              </span>
-              <span class='note-count'><%="(#{ @user.favorited_notes.where(archived: false).count})" %></span>
-            <% end %>
-          </li>
-
-          <li class="nav-item" >
-            <%= link_to create_flashcard_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-flashcards-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'flashcard.png', size: '24x24' %>
-              <span style="font-weight:400; font-size: 14px;">Flashcards</span>
-            <% end %>
-          </li>
-          <li class="nav-item"  >
-            <%= link_to new_edtracker_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtracker-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'attach.png', size: '24x24' %>
-              <span style="font-weight:400; font-size: 14px;">EdTracker</span>
-            <% end %>
-          </li>
-          <li class="nav-item"  >
-            <%= link_to new_myedtool_path(id: current_user), remote: true, class: "profile-links nav-link", id: "my-edtools-link", data: { action: 'click->profile#loadContent', target: 'profile.picnotesLink' } do %>
-              <%= image_tag 'files.png', size: '24x24' %>
-              <span style="font-weight:400; font-size: 14px;">EdTools</span>
-            <% end %>
-          </li>
-        </ul>
+<div class="row">
+  <div class="notes-container" style="margin-top: 20px; display: flex; margin-left: 20px;">
+    <% @users.each do |user| %>
+      <div class='note-container' style="align-content: center; text-align: center;">
+        <%= link_to user_path(user) do %>
+          <% if user.avatar? %>
+            <%= image_tag user.avatar.url(:thumb) %>
+          <% else %>
+            <%= image_tag 'myavtar.png', style: 'width: 80%;' %>
+          <% end %>
+          <div class='note-container-text' style='text-align: center !important;'>
+            <p class='mobile-font note-btn-font' style='text-transform: capitalize'><%= user.username %></p>
+            <p class='mobile-font note-btn-font'><%= user.first_name %> <%= user.last_name %></p>
+          </div>
+        <% end %>
       </div>
-    </div>
-  </nav>
-  <div class="row" id="profileDetails">
+    <% end %>
   </div>
 </div>
-
-
-<script>
-
- function truncateText(id, maxLength) {
-    var element = document.getElementById(id);
-    /*
-    if (element.textContent.length > maxLength) {
-      element.textContent = element.textContent.slice(0, maxLength) + '...';
-    }
-    */
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    //truncateText('truncate-title', 20); 
-    //truncateText('truncate-name', 20); 
-  });
-</script>
-
-
-<script
-  src="https://kit.fontawesome.com/a076d05399.js"
-  crossorigin="anonymous"
-></script>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-/>
-
-<!-- FontAwesome for social media icons -->
-<script
-  src="https://kit.fontawesome.com/a076d05399.js"
-  crossorigin="anonymous"
-></script>
-
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-  crossorigin="anonymous"
-/>
 
 <%= render 'partials/footer' %>
 
@@ -194,9 +111,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style > 
-body{
-  font-family: "Philosopher", "san-serif" !important;
-}
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -274,7 +188,6 @@ body{
   padding: 1rem;
   box-sizing: border-box;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .overlay-content {
@@ -284,7 +197,6 @@ body{
   align-items: flex-start; /* Align items to the left */
   margin-bottom: 10px; /* Add spacing between elements */
 }
-
 
 .truncate {
   display: inline-block;
@@ -296,9 +208,7 @@ body{
   font-weight: bold;
   font-size: 16px;
   text-decoration: none;
-  margin-bottom: 0 !important;
 }
-
 
 .icons {
   display: flex;

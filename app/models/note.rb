@@ -58,19 +58,19 @@ class Note < ApplicationRecord
     self.title_slug
   end
 
-  def previous tag: nil, user: nil, picnotes_type: nil, folderid: nil
-    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid)
+  def previous tag: nil, user: nil, picnotes_type: nil, folderid: nil, search: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid, search: search)
 
     notes.where("notes.id < ?", id).order(id: :desc).first || notes.first
   end
 
-  def next tag: nil, user: nil, picnotes_type: nil, folderid: nil
-    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid)
+  def next tag: nil, user: nil, picnotes_type: nil, folderid: nil, search: nil
+    notes = fetch_notes(tag: tag, user: user, picnotes_type: picnotes_type, folderid: folderid, search: search)
 
     notes.where("notes.id > ?", id).order(id: :asc).first || notes.last
   end
   
-  def fetch_notes tag: nil, user: nil, picnotes_type: nil, folderid: nil
+  def fetch_notes tag: nil, user: nil, picnotes_type: nil, folderid: nil, search: nil
     if tag
       Note.includes(:tags).where(tags: { name: tag }).all
     elsif user && picnotes_type
@@ -82,6 +82,10 @@ class Note < ApplicationRecord
     elsif user && folderid
       folder = Folder.find(folderid)
       folder.notes.where(archived: false)
+    elsif search
+      notesTagged = Note.tagged_with(search, wild: true, any: true)
+      tagged = notesTagged.pluck(:id)
+      Note.where("title ILIKE ?", "%#{search}%").where.not(id: tagged).order(id: :asc)
     else
       Note.all
     end
