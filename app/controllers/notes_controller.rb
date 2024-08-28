@@ -78,25 +78,25 @@ class NotesController < ApplicationController
   def index
     default_meta_tags
     if params[:search]
-      if params[:search].blank?
-        redirect_to search_index_path
-      else
-        @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
-        @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
-        @tagged = Array.new
-        @notesTagged.each do |noteTag|
-          @tagged.push(noteTag.id)
-        end
-        @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
-        @notes = @notes.where.not(id: @tagged)
-        search_notes_and_users(params[:search])
-        logger.debug "Users Found: #{@users.inspect}"
-        respond_to do |format|
-          format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
-          format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
-        end
+      @notesTagged = Note.tagged_with(params[:search], wild: true, any: true)
+      @users = User.where("CONCAT_WS(' ', first_name, last_name, username) ILIKE ?", "%#{params[:search]}%")
+      @tagged = Array.new
+      @notesTagged.each do |noteTag|
+        @tagged.push(noteTag.id)
       end
+      @notes = Note.where("title ILIKE ?", "%#{params[:search]}%")
+      @notes = @notes.where.not(id: @tagged)
+      search_notes_and_users(params[:search])
+      logger.debug "Users Found: #{@users.inspect}"
       @searchresult = params[:search]
+      # respond_to do |format|
+      #   format.html { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+      #   format.js { render partial: 'searching_result', locals: { search_results: render_to_string(partial: 'searching_result', locals: { search_results: @users }) } }
+      # end
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
       @users = []
       @notesTagged = []
@@ -212,6 +212,9 @@ class NotesController < ApplicationController
     elsif params.dig(:folderid)
       @previous_note = @note.previous user: current_user, folderid: params.dig(:folderid)
       @next_note = @note.next user: current_user, folderid: params.dig(:folderid)
+    elsif params.dig(:search)
+      @previous_note = @note.previous search: params.dig(:search)
+      @next_note = @note.next search: params.dig(:search)
     else
       @previous_note = @note.next
       @next_note = @note.previous
