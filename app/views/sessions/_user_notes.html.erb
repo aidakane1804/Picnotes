@@ -1,45 +1,54 @@
+
+<% if params.dig(:page) %>
+   <% if @notes.count > 0 %>
+      <% @notes.each do |note| %>
+        <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
+      <% end %>
+    <% end %>
+<% else %>
 <div id="note-content"></div>
 <div class="row" id="noteContent"></div>
-
-<% if @user == current_user %>
-
-  <% if @notes.count > 0 %>
-        <button class="btn btn-custom btn-block custom-btn-sm add-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal" style="display: flex; margin-bottom:20px; justify-content:center;margin-top:20px; width:15%;">Add New Picnotes</button>
-    <div class='flex-center'>
-    
-      <div class='notes-container'>
-        <% if @notes.where(archived: false).count > 0 %>
-          <% @notes.where(archived: false).each do |note| %>
-            <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
+  <% if @user == current_user %>
+    <% if @notes.count > 0 %>
+      <button class="btn btn-custom btn-block custom-btn-sm add-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal" style="display: flex; margin-bottom:20px; justify-content:center;margin-top:20px; width:15%;">Add New Picnotes</button>
+      <div class='flex-center'>
+        <div id="picnotes" class='notes-container'>
+          <% if @notes.count > 0 %>
+            <% @notes.each do |note| %>
+              <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
+            <% end %>
           <% end %>
-        <% else %>
-          
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
+        <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
+      </div>
+      <p style="justify-content: center !important; display: flex;">You have not created any Picnotes yet.</p>
+      <span style="justify-content: center !important; display: flex;">See how to create a Picnotes.</span>
+      <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal">Add New Picnotes</button>
+    <% end %>
   <% else %>
-    <div class='empty' style='justify-content: center !important; display: flex; margin-top: 16%'>
-      <%= image_tag 'empty-board.png', style: 'width: 20%;' %>
-    </div>
-    <p style="justify-content: center !important; display: flex;">You have not created any Picnotes yet.</p>
-    <span style="justify-content: center !important; display: flex;">See how to create a Picnotes.</span>
-    <button class="btn btn-custom btn-block custom-btn-sm mid-picnotes"  data-bs-toggle="modal" data-bs-target="#newNoteModal">Add New Picnotes</button>
-  <% end %>
-<% else %>
-  <% if @notes.count > 0 %>
-    <div class='flex-center'>
-      <div class='notes-container'>
-        <% if @notes.where(archived: false).count > 0 %>
-          <% @notes.where(archived: false).each do |note| %>
-            <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
+    <% if @notes.count > 0 %>
+      <div class='flex-center'>
+        <div id="picnotes" class='notes-container'>
+          <% if @notes.count > 0 %>
+            <% @notes.each do |note| %>
+              <%= render partial: 'notes/note_general', locals: { note: note, picnotes_type: "my-picnotes" } %>
+            <% end %>
           <% end %>
-        <% else %>
-          
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
+
+  <div id="custom-infinite-scrolling">
+    <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
+  </div>
+
+
 <% end %>
+
 
 <style>
   .add-picnotes {
@@ -64,5 +73,35 @@
     Weight: 400;
     font-size: 16px;
   }
+
+  #picnotes {
+    overflow-y: auto; /* Allows vertical scrolling */
+    max-height: 850px; /* Set a maximum height for the container */
+  } 
 </style>
 
+<script>
+
+  $(document).ready(function () {
+    var $feed = $('#picnotes'); // The container holding your content
+
+    if ($feed.length > 0) {
+      $feed.on('scroll', function () {
+        var more_posts_url = $('.pagination .next_page a').attr('href');
+
+        // Calculate if scrolled to the bottom of #feed
+        if (more_posts_url && $feed.scrollTop() + $feed.innerHeight() >= $feed[0].scrollHeight - 10) {
+          
+          if (!$(".infinite-scroll-loader").length) {
+            $('div.pagination').prepend('<img class="infinite-scroll-loader" style="display: block; margin-left: auto; margin-right: auto;" src="<%= asset_path 'ajax-loader.gif' %>" alt="Loading..." title="Loading..." />');
+
+            // Load more posts via AJAX
+            setTimeout(function () {
+              $.getScript(more_posts_url);
+            }, 2000);
+          }
+        }
+      });
+    }
+  });
+</script>

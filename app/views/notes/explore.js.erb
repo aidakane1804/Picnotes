@@ -1,0 +1,8 @@
+$('#notes-div').append('<%= j render @notes %>');
+<% if @notes.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @notes %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>
+$('#loader').addClass('hidden');

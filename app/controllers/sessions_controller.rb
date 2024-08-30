@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
   def user_notes
     @user = params[:user_id].present? ? User.find(params[:user_id]) : current_user
-    @notes = Note.where(user: @user).order(id: :asc)
+    @notes = Note.where(user: @user, archived: false).order(id: :asc).paginate(page: params[:page], per_page: 12)
     @count = 0
     my_array = []
     @notes.each do |favorite|
@@ -21,6 +21,8 @@ class SessionsController < ApplicationController
       end
     end
     session[:picnotes] = my_array
+
+    respond_to :js
   end
 
   # def user_notes

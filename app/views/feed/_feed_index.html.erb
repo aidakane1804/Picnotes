@@ -1,72 +1,18 @@
 
-<div class="container-fluid">
-  <div id="note-content"></div>
-  <div class="row" id="noteContent"></div>
-  <div class="row">
-    <% @notes.sort_by(&:id).reverse.each_slice(4) do |group| %>
-      <% group.each do |note| %>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 notes_col">
-          <% if note.image.url.present? %>
-            <%= link_to(note_path(note.slug), { remote: true, title: note.title }) do %>
-              <figure class="image-containermyprofile">
-                <div class="image-containermyprofile">
-                  <%= image_tag note.image.url(:thumb), style: 'width: 100%;' %>
-                  <div class="hover-overlay">
-                    <div class="overlay-content" style="margin-bottom: -17%;">
-                      <p id="truncate-title" class="truncate">
-                        <%= note.title %>
-                      </p>
-                      <p id="truncate-name" class="truncate" style="font-size: 12px;">
-                        <%= link_to "#{note.user.first_name} #{note.user.last_name}", user_path(note.user), style: 'color: inherit; text-decoration: none;' %>
-                      </p>
-                    </div>
-                    <div class="icons" style="display: flex; justify-content: flex-end;">
-                      <span style="display: flex; gap: 4px;">
-                        <% if user_signed_in? %>
-                          <% unless current_user.favorited_notes.exists?(id: note.id) %>
-                            <span id='favorites-count-<%= note.id %>'>
-                              <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post, style: 'color: red !important;' %>
-                            </span>
-                          <% else %>
-                            <span id='favorites-count-<%= note.id %>'>
-                              <%= link_to fa_icon('heart'), favorite_note_path(note), remote: true, class: 'orange_love love_iconss', method: :delete %>
-                            </span>
-                          <% end %>
-                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
-                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px; background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
-                            <% end %>
-                          </span>
-                        <% else %>
-                          <span id='add-to-folder-<%= note.id %>'>
-                            <%= link_to new_user_path do %>
-                              <span id='favorites-count-<%= note.id %>'>
-                                <%= link_to fa_icon('heart'), favorite_notes_path(note_id: note), remote: true, class: 'grey_love love_iconss', method: :post %>
-                              </span>
-                            <% end %>
-                          </span>
-                          <span id='add-to-folder-<%= note.id %>' style="display: flex; justify-content: center; align-items: center;  margin-left: 5%;">
-                            <%= link_to "/notes/add_note_to_folder?note_id=#{note.id}", remote: true, method: :get do %>
-                              <%= image_tag 'folder-add.png', style: 'width: 38px; height: 35px;background-color: #BC171D; border-radius: 50%; margin-bottom: 18%;' %>
-                            <% end %>
-                          </span>
-                        <% end %>
-                      </span>
-                    </div>
-                  </div>
-                  
-              </figure>
-            <% end %>
-          <% else %>
-            <p>No image available</p>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
+<% if params.dig(:page) %>
+  <%= render partial: "feed/notes" %>
+<% else %>
+  <div class="container-fluid">
+    <div id="note-content"></div>
+    <div class="row" id="noteContent"></div>
+    <div id="feed" class="row">
+      <%= render partial: "feed/notes" %>
+    </div>
   </div>
-</div>
-
-
+  <div id="custom-infinite-scrolling">
+    <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
+  </div>
+<% end %>
 
 
 <style>
@@ -177,8 +123,37 @@
   z-index: 3;
 }
 
+#feed {
+    overflow-y: auto; /* Allows vertical scrolling */
+    max-height: 830px; /* Set a maximum height for the container */
+}
 </style>
+
 <script>
+
+  $(document).ready(function () {
+    var $feed = $('#feed'); // The container holding your content
+
+    if ($feed.length > 0) {
+      $feed.on('scroll', function () {
+        var more_posts_url = $('.pagination .next_page a').attr('href');
+
+        // Calculate if scrolled to the bottom of #feed
+        if (more_posts_url && $feed.scrollTop() + $feed.innerHeight() >= $feed[0].scrollHeight - 10) {
+          
+          if (!$(".infinite-scroll-loader").length) {
+            $('div.pagination').prepend('<img class="infinite-scroll-loader" style="display: block; margin-left: auto; margin-right: auto;" src="<%= asset_path 'ajax-loader.gif' %>" alt="Loading..." title="Loading..." />');
+
+            // Load more posts via AJAX
+            setTimeout(function () {
+              $.getScript(more_posts_url);
+            }, 1500);
+          }
+        }
+      });
+    }
+  });
+
   function truncateText(id, maxLength) {
     var element = document.getElementById(id);
     if (element.textContent.length > maxLength) {
@@ -191,4 +166,3 @@
     truncateText('truncate-name', 10);  // Adjust maxLength as needed
   });
 </script>
-
