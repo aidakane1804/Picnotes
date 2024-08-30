@@ -1,2 +1,8 @@
-$("#profileDetails").html("<%= j render partial: 'sessions/user_notes' %>");
+<% if params[:page].blank? %>
+ $("#profileDetails").html("<%= j render partial: 'sessions/user_notes' %>");
+<% else %>
+ $("#picnotes").append("<%= j render partial: 'sessions/user_notes' %>");
+ $('.pagination').replaceWith('<%= j will_paginate @notes, style: " font-size: 0;" %>');
+ $('.infinite-scroll-loader').remove();
+<% end %>
 $('#loader').addClass('hidden');

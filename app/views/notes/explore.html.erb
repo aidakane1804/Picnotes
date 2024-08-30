@@ -2,11 +2,14 @@
 <div  class="row" id="noteContent"></div>
 <% @notes = @notes.where(archived: false) %>
 <div class='flex-center'>
-  <div class="notes-container">
+  <div class="notes-container" id="notes-div">
     <%= render @notes %>
     <%= render @notesTagged %>
 
   </div>
+</div>
+<div id="infinite-scrolling">
+  <%= will_paginate @notes, style: " font-size: 0;" unless @notes.blank? rescue '' %>
 </div>
 
 <div class="profileDetails" style="display: none;">

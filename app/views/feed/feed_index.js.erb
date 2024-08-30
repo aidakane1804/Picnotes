@@ -1,2 +1,9 @@
-$("#profileDetails").html("<%= j render partial: 'feed/feed_index' %>");
+<% if params[:page].blank? %>
+ $("#profileDetails").html("<%= j render partial: 'feed/feed_index' %>");
+<% else %>
+ $("#feed").append("<%= j render partial: 'feed/feed_index' %>");
+ $('.pagination').replaceWith('<%= j will_paginate @notes, style: " font-size: 0;" %>');
+ $('.infinite-scroll-loader').remove();
+<% end %>
+  
 $('#loader').addClass('hidden');

@@ -53,7 +53,9 @@ class FeedController < ApplicationController
   
 
   def feed_index
-    @notes = Note.order(id: :desc)
+    @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 12)
+
+    respond_to :js
   end
 
   def reference_note

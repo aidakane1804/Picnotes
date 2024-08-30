@@ -264,7 +264,7 @@ class NotesController < ApplicationController
         format.js { render partial: 'searching_result', locals: { search_results: @notes } }
       end
     else
-      @notes = Note.order(id: :desc).all
+      @notes = Note.order(id: :desc).paginate(page: params[:page], per_page: 12)
       @notesTagged = []
       @tagged = []
       Rails.logger.debug "Request format: #{request.format.symbol}"
