@@ -82,6 +82,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def terms_and_conditions
+    display_pdf 'terms-and-conditions.pdf'
+  end
+
+  def privacy_policy
+     display_pdf 'privacy-policy.pdf'
+  end
 
 
   private
@@ -95,5 +102,9 @@ class HomeController < ApplicationController
 
     def current_user
       @current_user ||= User.find_by(id: session[:user_id])
+    end
+
+    def display_pdf filename
+      send_file Rails.root.join('public', 'documents', filename), type: 'application/pdf', disposition: 'inline'
     end
 end

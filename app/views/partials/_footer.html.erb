@@ -1,8 +1,10 @@
 <div class="container my-5" style="padding-left: 0px; padding-right: 0px; position: sticky;">
   <!-- Footer -->
   <footer class="text-center text-lg-start text-dark" style="margin: 0px; padding: 0px; background-color: white;">
-    <!-- Separator Line -->
+    <!-- 
+    Separator Line 
     <hr style="border-top: 2px solid #333; margin-left: -50px margin-right: -50px;">
+    -->
     <!-- Grid container -->
     <div class="container-fluid p-4 pb-0">
         <div class="row">
@@ -44,10 +46,10 @@
                 <%= link_to 'Guidelines', guidelines_path, class: 'text-dark text-decoration-none' %>
               </li>
               <li>
-                <%= link_to 'Terms & Conditions', terms_and_conditions_path, class: 'text-dark text-decoration-none' %>
+                <%= link_to 'Terms & Conditions', terms_and_conditions_path, class: 'text-dark text-decoration-none', target: "_blank" %>
               </li>
               <li>
-                <%= link_to 'Privacy Policy', terms_and_conditions_path, class: 'text-dark text-decoration-none' %>
+                <%= link_to 'Privacy Policy', privacy_policy_path, class: 'text-dark text-decoration-none', target: "_blank" %>
               </li>
               <li>
                 <%= link_to 'Contact Us', contact_us_notes_path, class: 'text-dark text-decoration-none' %>

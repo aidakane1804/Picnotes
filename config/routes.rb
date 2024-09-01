@@ -80,7 +80,8 @@ Rails.application.routes.draw do
 
   
 
-  get 'terms-and-conditions', to: 'notes#terms_and_conditions'
+  get 'terms-and-conditions', to: 'home#terms_and_conditions'
+  get 'privacy-policy', to: 'home#privacy_policy'
   get 'guidelines', to: 'notes#community_guideline'
   get 'about-us', to: 'notes#about_us'
   get 'tl', to: 'notes#tl'
